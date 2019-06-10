@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tabla de usuarios con AJAX</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet"> 
+	<link rel="stylesheet" href="css/estilos.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	
+</head>
+<body>
+	<div class="contenedor">
+		<header>
+			<h1>Tabla de Usuarios</h1>
+			<div>
+				<button id="btn_cargar_usuarios" class="btn active">Cargar Usuarios</button>
+			</div>
+		</header>
+		<main>
+			<div class="error_box" id="error_box">
+				<p>Se ha producido un error.</p>
+			</div>
+			<table id="tabla" class="tabla">
+				<tr>
+					<th>ID</th>
+					<th>nombreOSC</th>
+					<th>mision</th>
+					<th>vision</th>
+					<th>areasAtencion</th>
+					<th>rfcHomoclave</th>
+					<th>CLUNI</th>
+					<th>email</th>
+					<th>Opciones</th>					
+				</tr>
+			</table>
+			<button style="width: 100%;" id="btn_ver_mas" class="btn_ver_mas">Ver todos</button>
+			<button style="width: 100%;" id="btn_ver_menos" class="btn_ver_mas">Ver menos</button>
+			<div class="loader" id="loader"></div>
+		</main>
+
+	</div>
+
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <br><br>
+<button onclick="ajaxCall()">Mostrar Datos en modal</button>
+
+	<script src="js/main.js"></script>
+</body>
+</html>
