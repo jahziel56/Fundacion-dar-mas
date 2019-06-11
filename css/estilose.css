@@ -116,6 +116,16 @@ input[type=radio].common{
   
 }
 
+.Pre-Registro select,
+.Pre-Registro input[type=date]{
+  margin-left:20px;
+}
+
+input[type=text].P6{
+  width: 16%;
+}
+
+
 .common:focus{
     box-shadow: 0 0 2pt 1pt #2774EA;
 }
@@ -265,7 +275,7 @@ button[type=submit]:hover.common {
 .topnav {
   overflow: hidden;
   background-color: #333;
-  opacity: .9;
+  opacity: .98;
 }
 
 .topnav a {
