@@ -74,15 +74,25 @@ button[type=submit]:hover {
   background-color: #45a049;
 }*/
 /* --------------------------------- signup  ------------------------------ */
+.Pre-Registro{
 
+}
 
+.Pre-Registro label{
+  margin-left: 10px;
+  font-size: 20px;
+}
 
 .signup{
   text-align:center;
   margin: 10px 40px 20px 40px;
 }
 input[type=text].common,
-input[type=password].common{
+input[type=password].common,
+input[type=email].common,
+input[type=url].common,
+input[type=file].common,
+textarea.common{
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -91,6 +101,19 @@ input[type=password].common{
   box-sizing: border-box;
   border-radius: 30px; 
   outline:0px; 
+}
+
+input[type=file].common{
+  background: lightgray;
+  border: none; 
+}
+
+textarea.common{
+  border-radius: 6px;
+}
+
+input[type=radio].common{
+  
 }
 
 .common:focus{
@@ -547,7 +570,7 @@ table a:visited {
 
 /* ----------------------- Style Upload ------------------- */
 
-input[type="file"] {
+/*input[type="file"] {
     display: none;
 }
 .custom-file-upload {
@@ -652,3 +675,43 @@ input[type="file"] {
 .topright:hover {color: red;}
 
 /*     HINT           */
+
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+.accordion {
+  background-color: #CECECE;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ADADAD;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: #F1F1F1;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
