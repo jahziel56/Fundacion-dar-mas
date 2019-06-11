@@ -52,7 +52,7 @@
 				}
 				if (isset($_GET['signup'])) {
 					if (($_GET['signup']) == "success") {
-						echo '<p class"signuperror">Signup successful!</p>';
+						echo '<p class"signuperror">Se a creado la cuenta exitosamente!</p>';
 					}
 				}
 

@@ -5,7 +5,8 @@
 <!-- /* Pagina de registro */ -->
 	<main>
 		<div class="signup">				
-			<h1>Informacion personal</h1>
+			<h1>Pre-Registro de la empresa</h1>
+			<h5>Para la proxima convocatoria</h5>
 			<?php 
 				if (isset($_GET['error'])) {
 					if (($_GET['error']) == "emptyfields") {
