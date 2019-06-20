@@ -65,8 +65,8 @@ ALTER TABLE `persona`
 ALTER TABLE convocatoria ADD FOREIGN KEY (`id_Persona`) REFERENCES persona(id_Persona);
 ALTER TABLE convocatoria ADD FOREIGN KEY (`id_Formulario`) REFERENCES formularioprincipal(FormularioID);
 
-CREATE TABLE FormularioPrincipal (
-	FormularioID 				      INT 			NOT NULL AUTO_INCREMENT,
+CREATE TABLE PreRegistro (
+	RegistroID 				      INT 			NOT NULL AUTO_INCREMENT,
 	nombreOSC 					      VARCHAR(50) 	NOT NULL,
 	objetoSocialOrganizacion 	VARCHAR(50)		NOT NULL,
 	mision 						        VARCHAR(300) 	NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE FormularioPrincipal (
 	organizacionFB 				    VARCHAR(35) 	NOT NULL,
 	twitter 					        VARCHAR(35),
 	instagram 					      VARCHAR(35),
-	PRIMARY KEY (FormularioID)
+	PRIMARY KEY (RegistroID)
 );
 
 CREATE TABLE FormularioArchivos (
@@ -93,10 +93,10 @@ CREATE TABLE FormularioArchivos (
 	nombreArchivo			VARCHAR(255)	NOT NULL,
 	tipoArchivo				VARCHAR(255)	NOT NULL,
 	dataArchivo				MEDIUMBLOB		NOT NULL,
-	FK_FormularioID		INT 			    NOT NULL,
+	FK_RegistroID		INT 			    NOT NULL,
 
 	PRIMARY KEY (FArchivosID),
-	FOREIGN KEY (FK_FormularioID) REFERENCES FormularioPrincipal(FormularioID)
+	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
 CREATE TABLE Metas (
@@ -107,9 +107,9 @@ CREATE TABLE Metas (
 	tipoProductoDos				VARCHAR(150) 	NOT NULL,
 	terceraMeta					  VARCHAR(150)	NOT NULL,
 	tipoProductoTres			VARCHAR(150) 	NOT NULL,
-	FK_FormularioID				INT 			    NOT NULL,
+	FK_RegistroID				INT 			    NOT NULL,
 	PRIMARY KEY (MetasID),
-	FOREIGN KEY (FK_FormularioID) REFERENCES FormularioPrincipal(FormularioID)
+	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
 CREATE TABLE Proyecto(
@@ -138,9 +138,9 @@ CREATE TABLE RecursosComplementarios (
 	poblacion_65_mas			      INT 			    NOT NULL,
 	esquemasRecursosComp		    VARCHAR(2)		NOT NULL,
 	organizacionManejoRecursos	VARCHAR(100)	NOT NULL,
-	FK_FormularioID 			      INT 			    NOT NULL,
+	FK_RegistroID 			      INT 			    NOT NULL,
 	PRIMARY KEY (RecursosID),
-	FOREIGN KEY (FK_FormularioID) REFERENCES FormularioPrincipal(FormularioID)
+	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
 CREATE TABLE DonatariaAutorizada (
@@ -151,9 +151,9 @@ CREATE TABLE DonatariaAutorizada (
 	detenidoAutorizado 		VARCHAR(2)		NOT NULL,
 	razonDetenido 			  VARCHAR(100)	NOT NULL,
 	fechaAutorizada 		  DATE 			    NOT NULL,
-	FK_FormularioID 		  INT 			    NOT NULL,
+	FK_RegistroID 		  INT 			    NOT NULL,
 	PRIMARY KEY (DonatariaID),
-	FOREIGN KEY (FK_FormularioID) REFERENCES FormularioPrincipal(FormularioID)
+	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
 CREATE TABLE RegistroActaConstitutiva (
@@ -168,9 +168,9 @@ CREATE TABLE RegistroActaConstitutiva (
 	volumenActaConsti 		INT 		    NOT NULL,
 	#FILE_ULTIMA_ACTA
 	#FILE_RPP_ULTIMA_ACTA
-	FK_FormularioID			  INT 		    NOT NULL,
+	FK_RegistroID			  INT 		    NOT NULL,
 	PRIMARY KEY (ActaID),
-	FOREIGN KEY (FK_FormularioID) REFERENCES FormularioPrincipal(FormularioID)
+	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
 CREATE TABLE HistorialOrganizacion (
@@ -213,9 +213,9 @@ CREATE TABLE HistorialOrganizacion (
 	#FILE_FACTURA_CANCELADA
 	inscritaDNIAS			          VARCHAR(2)		NOT NULL,
 	#FILE_DNIAS
-	FK_FormularioID			        INT 			    NOT NULL,
+	FK_RegistroID			        INT 			    NOT NULL,
 	PRIMARY KEY (HistorialID),
-	FOREIGN KEY (FK_FormularioID) REFERENCES FormularioPrincipal(FormularioID)
+	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
 CREATE TABLE Domicilios (
@@ -226,9 +226,9 @@ CREATE TABLE Domicilios (
 	codigoPostal 		    VARCHAR(10) 	NOT NULL,
 	localidad 			    VARCHAR(50) 	NOT NULL,
 	municipio 			    VARCHAR(50) 	NOT NULL,
-	FK_FormularioID 	  INT 			    NOT NULL,
+	FK_RegistroID 	  INT 			    NOT NULL,
 	PRIMARY KEY (DomicilioID),
-	FOREIGN KEY (FK_FormularioID) REFERENCES FormularioPrincipal(FormularioID)
+	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
 COMMIT;

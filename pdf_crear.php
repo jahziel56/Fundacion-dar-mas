@@ -1,7 +1,14 @@
 <?php 
 
+    $conexion = new PDO("mysql:host=localhost;dbname=paginacion", "root", "");
+    $id = isset($_GET['id'])? $_GET['id'] : "";
+    $stat = $conexion->prepare("SELECT * FROM preregistro WHERE RegistroID=?");
+	$stat->bindParam(1, $id);
+	$stat->execute();
+	$row = $stat->fetch();
+
     $fundacionRepresentante = 'Adolfo Lopez Mateos';
-    $oscRepresentante = 'Sention Bours';
+    $nombreOSC = $row['nombreOSC'];
     $fechaDia = 25;
     $fechaMes = 'Enero';
     $fechaAnio = 2019;
@@ -21,7 +28,7 @@
     $pdf->Cell(188, 10, 'A quien corresponda: ', 0, 1, 'L');
     $pdf->MultiCell(188, 10, "Por medio de la presente se hace constatar que la organización social sin fines de lucro conocida como:", 0, "L", 0);
     $pdf->SetFont("Arial", "B", 14);
-    $pdf->Cell(188, 10, 'Por un México con arboles', 0, 1, 'C');
+    $pdf->Cell(188, 10, "$nombreOSC", 0, 1, 'C');
     $pdf->SetFont("Arial", "", 12);
     $pdf->MultiCell(188, 10, "ha llegado a un convenio con Fundación Dar Más el día $fechaDia de $fechaMes de $fechaAnio en el cual se le estarán entregando por un periodo de 6 meses la cantidad mensual de:", 0, "L", 0);
     $pdf->SetFont("Arial", "B", 14);
@@ -31,7 +38,7 @@
     
     $pdf->SetY(200);
     $pdf->Cell(188, 10, '__________________________                                        __________________________', 0, 1, 'C');
-    $pdf->Cell(188, 10, "$fundacionRepresentante                                                                 $oscRepresentante", 0, 1, 'C');
+    $pdf->Cell(188, 10, "$fundacionRepresentante                                                                 Representante OSC", 0, 1, 'C');
     $pdf->Cell(188, 10, "Representante Fundación                                                         Representante OSC", 0, 1, 'C');
     
     $pdf->SetY(265);
