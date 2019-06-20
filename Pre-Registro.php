@@ -137,6 +137,29 @@
 			          placeholder="Correo de contacto de la organización: type EMAIL"
 			          value="" required>
 
+					
+					<script>
+						function selection(){
+							var selected=document.getElementById("dominioEmail").value;
+							if(selected=="otro"){
+								document.getElementById("dominio").removeAttribute("hidden");
+							}else{
+								//elsewhere actions
+							}
+						}
+					</script>
+
+					<input type="text" class="common" id="dominio" name='dominio' hidden="hidden" placeholder="Dominio de correo">
+					<select class="common" id="dominioEmail"name="dominioEmail" value="" onchange="selection()" required>
+						<option id="hotmail">@hotmail.com</option>
+						<option id="outlook">@outlook.com</option>
+						<option id="gmail">@gmail.com</option>
+						<option id="yahoo">@yahoo.com</option>
+						<option id="otro">Otro</option>
+					</select>
+					<br>
+					<br>
+
 			        <label>Página web</label>
 			        <input type="url" class="common" id="paginaWeb" name="paginaWeb"
 			          placeholder="Página web de la organización: TYPE URL"
@@ -150,12 +173,12 @@
 			        <label>Twitter</label>
 			        <input type="text" class="common" id="organizacionTW" name="organizacionTW"
 			          placeholder="Twitter de la organización:"
-			          value="" required>
+			          value="">
 
 			        <label>Instagram</label>
 					<input type="text" class="common" id="organizacionInsta" name="organizacionInsta"
 			          placeholder="Instagram de la organización:"
-			          value="" required>
+			          value="">
 		        </div>
 
 		        <button class="accordion">HISTORIAL DE LA ORGANIZACION</button>
@@ -233,13 +256,13 @@
 
 			        <label class="common">¿Está autorizada para recibir donativos deducibles de impuestos?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-			    		<input type="radio" class="common" name="autorizadaDeducible" value="Sí" checked> Sí
+			    		<input type="radio" class="common" name="autorizadaDeducible" value="Sí"> Sí
 			        	<input type="radio" class="common" name="autorizadaDeducible" value="No"> No <br><br>	
 			        </div>
 
 			        <label class="common">Su organización se rige o es dirigida por: </label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			       		<input type="radio" class="common" name="digiridaPor" value="Patronato" checked> Patronato <br>
+			       		<input type="radio" class="common" name="digiridaPor" value="Patronato"> Patronato <br>
 			        	<input type="radio" class="common" name="digiridaPor" value="Consejo Directivo"> Consejo directivo <br>
 			        	<input type="radio" class="common" name="digiridaPor" value="Otro"> Patronato <br><br> 	
 			        </div>
@@ -302,7 +325,7 @@
 
 			        <label class="titulos-form">¿Tiene observaciones en su 32 D?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			        	<input type="radio" class="common" name="observaciones32D" value="Sí" checked> Sí
+			        	<input type="radio" class="common" name="observaciones32D" value="Sí"> Sí
 			        	<input type="radio" class="common" name="observaciones32D" value="No"> No <br><br>
 			    	</div>
 
@@ -311,13 +334,13 @@
 
 			        <label class="titulos-form">¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="tiempoYforma" value="Sí" checked> Sí
+				        <input type="radio" class="common" name="tiempoYforma" value="Sí"> Sí
 				        <input type="radio" class="common" name="tiempoYforma" value="No"> No <br><br>
 				    </div>
 
 			        <label class="titulos-form">¿Tiene adeudos fiscales a cargo, por impuestos federales?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			        	<input type="radio" class="common" name="tieneAdeudos" value="Sí" checked> Sí
+			        	<input type="radio" class="common" name="tieneAdeudos" value="Sí"> Sí
 			        	<input type="radio" class="common" name="tieneAdeudos" value="No"> No <br><br>
 			        </div>
 
@@ -336,7 +359,7 @@
 
 			        <label class="titulos-form">¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			        	<input type="radio" class="common" name="inscritaDNIAS" value="Sí" checked> Sí
+			        	<input type="radio" class="common" name="inscritaDNIAS" value="Sí"> Sí
 			        	<input type="radio" class="common" name="inscritaDNIAS" value="No"> No <br><br>
 			        </div>
 
@@ -366,7 +389,7 @@
 
 			        <label class="titulos-form">¿Su organización ha tenido modificaciones a su acta constitutiva?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="existenModis" value="Sí" checked> Sí
+				        <input type="radio" class="common" name="existenModis" value="Sí"> Sí
 				        <input type="radio" class="common" name="existenModis" value="No"> No 
 				    </div>
 
@@ -406,7 +429,7 @@
 
 			        <label class="common">¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="detenidoAutorizado" value="Sí" checked> Sí
+				        <input type="radio" class="common" name="detenidoAutorizado" value="Sí"> Sí
 				        <input type="radio" class="common" name="detenidoAutorizado" value="No"> No <br>
 				    </div>
 
@@ -451,7 +474,7 @@
 
 			        <label class="titulos-form">¿Ha manejado esquemas de recursos complementarios?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="esquemasRecursosComp" value="Sí" checked> Sí
+				        <input type="radio" class="common" name="esquemasRecursosComp" value="Sí"> Sí
 				        <input type="radio" class="common" name="esquemasRecursosComp" value="No"> No
 				    </div><br>
 
@@ -461,7 +484,7 @@
 			          value="" required>
 				</div>
 
-				<button class="common" type="submit" name="pre-submit">Signup</button>
+				<button class="common" type="submit" name="pre-submit">Registrar</button>
 			</form>
 		</div>
 	</main>
