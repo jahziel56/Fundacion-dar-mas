@@ -28,20 +28,6 @@ if (isset($_POST['pre-submit'])) {
 
     /* yyeee */
 
-<<<<<<< HEAD
-=======
-        $sql = "INSERT INTO FormularioPrincipal (nombreOSC, objetoSocialOrganizacion, mision, vision, areasAtencion, rfcHomoclave, CLUNI, telefonoOficina, telefonoCelular, email, paginaWeb, organizacionFB, twitter, instagram, Id_Cuenta) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		$stmt = mysqli_stmt_init($conn);
-		mysqli_stmt_prepare($stmt, $sql);
-		mysqli_stmt_bind_param($stmt, "ssssssssssssssi", $nombreOSC,$objetoSocialOrganizacion,$mision,$vision,$areasAtencion,$rfcHomoclave,$CLUNI,$phoneOficina,$phoneCelular,$emailContacto,$paginaWeb,$organizacionFB,$organizacionTW,$organizacionInsta,$_SESSION['user_Id']);
-		mysqli_stmt_execute($stmt);
-		$result = mysqli_stmt_get_result($stmt);
-		$ultimaID = mysqli_insert_id($conn);
-
-
-
->>>>>>> master
     $calle = $_POST['calle'];
     $numero = $_POST['numero'];
     $colonia = $_POST['colonia'];
@@ -167,10 +153,8 @@ if (isset($_POST['pre-submit'])) {
 		$result = mysqli_stmt_get_result($stmt);
 
 
-		$_SESSION['Type_User'] = 2;
-
-	
-	require '../Pre-Registro_Ver.php';
+        require '../Pre-Registro_Ver.php';
+	exit();
 }
 else{
 	header("Location: ../index.php");
