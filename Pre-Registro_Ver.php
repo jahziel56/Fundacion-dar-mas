@@ -13,13 +13,18 @@
 			width: 100%;
 		}
 	</style>
+
+
+<?php
+/* manda a llamar a header.php */ 
+	require"header.php";
+?>
 	<main>
 			<h1>Pre-Registro de la empresa</h1>
 			<h5>Para la proxima convocatoria</h5>
 
 			<div class="Pre-Registro">
-			<form action="includes/pre.inc.php" method="post">
-
+				<button class="accordion">1</button>
 				<div class="panel">					
 					<label>Nombre de la OSC</label>					
 			        <input type="text" class="common" id="nombreOSC" name="nombreOSC"
@@ -120,6 +125,7 @@
 			          value="<?php echo $organizacionInsta ?>" disabled>
 		        </div>
 
+				<button class="accordion">2</button>
 				<div class="panel">
 			        <label class="common">Fecha de constitución de la OSC</label><br>
 				        <input type="date" class="common" id="fechaConstitucionOSC" name="fechaConstitucionOSC"
@@ -185,15 +191,13 @@
 
 			        <label class="common">¿Está autorizada para recibir donativos deducibles de impuestos?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-			    		<input type="radio" class="common" name="autorizadaDeducible" value="Sí" checked> Sí
-			        	<input type="radio" class="common" name="autorizadaDeducible" value="No"> No <br><br>	
+			        	<input type="radio" class="common" name="autorizadaDeducible" checked> <?php echo $autorizadaDeducible ?> 
+			        	<br><br>	
 			        </div>
 
 			        <label class="common">Su organización se rige o es dirigida por: </label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			       		<input type="radio" class="common" name="digiridaPor" value="Patronato" checked> Patronato <br>
-			        	<input type="radio" class="common" name="digiridaPor" value="Consejo Directivo"> Consejo directivo <br>
-			        	<input type="radio" class="common" name="digiridaPor" value="Otro"> Patronato <br><br> 	
+			        	<input type="radio" class="common" name="digiridaPor" checked> <?php echo $digiridaPor ?> <br><br> 	
 			        </div>
 
 			        <label>Nombre del representante legal</label>
@@ -254,8 +258,8 @@
 
 			        <label class="titulos-form">¿Tiene observaciones en su 32 D?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			        	<input type="radio" class="common" name="observaciones32D" value="Sí" checked> Sí
-			        	<input type="radio" class="common" name="observaciones32D" value="No"> No <br><br>
+			        	<input type="radio" class="common" name="observaciones32D" checked> <?php echo $observaciones32D ?>
+			        	<br><br>
 			    	</div>
 
 			        <label class="common">32D en positivio y con 30 días de expedición como máximo</label>
@@ -263,14 +267,12 @@
 
 			        <label class="titulos-form">¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="tiempoYforma" value="Sí" checked> Sí
-				        <input type="radio" class="common" name="tiempoYforma" value="No"> No <br><br>
+				        <input type="radio" class="common" name="tiempoYforma" checked> <?php echo $tiempoYforma ?><br><br>
 				    </div>
 
 			        <label class="titulos-form">¿Tiene adeudos fiscales a cargo, por impuestos federales?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			        	<input type="radio" class="common" name="tieneAdeudos" value="Sí" checked> Sí
-			        	<input type="radio" class="common" name="tieneAdeudos" value="No"> No <br><br>
+			        	<input type="radio" class="common" name="tieneAdeudos" checked> <?php echo $tieneAdeudos ?><br><br>
 			        </div>
 
 
@@ -288,14 +290,14 @@
 
 			        <label class="titulos-form">¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			        	<input type="radio" class="common" name="inscritaDNIAS" value="Sí" checked> Sí
-			        	<input type="radio" class="common" name="inscritaDNIAS" value="No"> No <br><br>
+			        	<input type="radio" class="common" name="inscritaDNIAS" checked> <?php echo $inscritaDNIAS ?><br><br>
 			        </div>
 
 			        <label class="common">DNIAS</label>
 			        <input type="file" class="common" name="files[]" disabled>
 				</div>
 
+				<button class="accordion">3</button>
 				<div class="panel">
 					<label class="common">Número de libro</label><br>
 			        <input type="text" class="common" id="numeroLibro" name="numeroLibro"
@@ -317,8 +319,7 @@
 
 			        <label class="titulos-form">¿Su organización ha tenido modificaciones a su acta constitutiva?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="existenModis" value="Sí" checked> Sí
-				        <input type="radio" class="common" name="existenModis" value="No"> No 
+				        <input type="radio" class="common" name="existenModis" checked> <?php echo $existenModis ?>
 				    </div>
 
 			        <label class="common">Fecha de la última modificación del acta constitutiva</label><br>
@@ -342,6 +343,7 @@
 			        <input type="file" class="common" name="files[]" disabled><br>
 				</div>
 
+				<button class="accordion">4</button>
 				<div class="panel">
 			        <label class="common">Fecha de publicación en el Diario Oficial de la Federación</label><br>
 			        <input type="date" class="common" id="fechaDiario" name="fechaDiario" value="<?php echo $fechaDiario ?>" disabled><br>
@@ -355,8 +357,7 @@
 
 			        <label class="common">¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="detenidoAutorizado" value="Sí" checked> Sí
-				        <input type="radio" class="common" name="detenidoAutorizado" value="No"> No <br>
+				        <input type="radio" class="common" name="detenidoAutorizado" checked> <?php echo $detenidoAutorizado ?><br>
 				    </div>
 
 				    <label>Detuvo el SAT su autorización?</label>
@@ -369,6 +370,7 @@
 			          value="<?php echo $fechaAutorizada ?>" disabled><br>
 				</div>
 
+				<button class="accordion">5</button>
 				<div class="panel">
 
 					<label class="common">Población que atiende la OSC</label><br>
@@ -398,9 +400,9 @@
 
 			        <label class="titulos-form">¿Ha manejado esquemas de recursos complementarios?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="esquemasRecursosComp" value="Sí" checked> Sí
-				        <input type="radio" class="common" name="esquemasRecursosComp" value="No"> No
+				        <input type="radio" class="common" name="esquemasRecursosComp" checked> <?php echo $esquemasRecursosComp ?>
 				    </div><br>
+
 
 				    <label>Con qué organización ha manejado recursos complementarios</label>
 			        <input type="text" class="common" id="organizacionManejoRecursos" name="organizacionManejoRecursos"
@@ -408,7 +410,6 @@
 			          value="<?php echo $organizacionManejoRecursos ?>" disabled>
 				</div>
 
-			</form>
 		</div>
 	</main>
 
@@ -428,8 +429,3 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 </script>	
-
-<?php  
-/* manda a llamar a footer.php */ 
-	require"footer.php";
-?>
