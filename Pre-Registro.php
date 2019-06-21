@@ -2,6 +2,7 @@
 /* manda a llamar a header.php */ 
 	require"header.php";
 
+
 	$municipiosDeSonora = [
   'Aconchi', 'Agua Prieta', 'Alamos', 'Altar', 'Arivechi', 'Arizpe', 'Atil',
   'Bacadéhuachi', 'Bacanora', 'Bacerac', 'Bacoachi', 'Bácum', 'Banámichi', 'Baviácora',
@@ -15,6 +16,27 @@
   'Soyopa', 'Suaqui Grande', 'Tepache', 'Trincheras', 'Tubutama', 'Ures', 'Villa Hidalgo',
   'Villa Pesqueira', 'Yécora'
 ];
+	if (isset($_SESSION['user_Id'])) {
+		require 'includes/dbh.inc.php';
+
+		$sql = "SELECT * FROM formularioprincipal inner join cuenta on formularioprincipal.Id_Cuenta = cuenta.Id_Cuenta WHERE cuenta.Id_Cuenta=?;";
+		$stmt = mysqli_stmt_init($conn);
+		mysqli_stmt_prepare($stmt, $sql);				
+		mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_Id']);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+		$row = mysqli_fetch_assoc($result);
+
+		if(empty($row)){
+			
+		}else{
+			header("Location: pre_ver.php?id=".$row['FormularioID']."");
+		}
+		
+			
+	}else{
+		echo "No Sesion loged";
+	}
 ?>
 
 	<main>
@@ -150,12 +172,12 @@
 			        <label>Twitter</label>
 			        <input type="text" class="common" id="organizacionTW" name="organizacionTW"
 			          placeholder="Twitter de la organización:"
-			          value="" required>
+			          value="">
 
 			        <label>Instagram</label>
 					<input type="text" class="common" id="organizacionInsta" name="organizacionInsta"
 			          placeholder="Instagram de la organización:"
-			          value="" required>
+			          value="">
 		        </div>
 
 		        <button class="accordion">HISTORIAL DE LA ORGANIZACION</button>
@@ -233,7 +255,7 @@
 
 			        <label class="common">¿Está autorizada para recibir donativos deducibles de impuestos?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-			    		<input type="radio" class="common" name="autorizadaDeducible" value="Sí" checked> Sí
+			    		<input type="radio" class="common" name="autorizadaDeducible" value="Si" checked> Si
 			        	<input type="radio" class="common" name="autorizadaDeducible" value="No"> No <br><br>	
 			        </div>
 
@@ -302,7 +324,7 @@
 
 			        <label class="titulos-form">¿Tiene observaciones en su 32 D?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			        	<input type="radio" class="common" name="observaciones32D" value="Sí" checked> Sí
+			        	<input type="radio" class="common" name="observaciones32D" value="Si" checked> Si
 			        	<input type="radio" class="common" name="observaciones32D" value="No"> No <br><br>
 			    	</div>
 
@@ -311,13 +333,13 @@
 
 			        <label class="titulos-form">¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="tiempoYforma" value="Sí" checked> Sí
+				        <input type="radio" class="common" name="tiempoYforma" value="Si" checked> Si
 				        <input type="radio" class="common" name="tiempoYforma" value="No"> No <br><br>
 				    </div>
 
 			        <label class="titulos-form">¿Tiene adeudos fiscales a cargo, por impuestos federales?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			        	<input type="radio" class="common" name="tieneAdeudos" value="Sí" checked> Sí
+			        	<input type="radio" class="common" name="tieneAdeudos" value="Si" checked> Si
 			        	<input type="radio" class="common" name="tieneAdeudos" value="No"> No <br><br>
 			        </div>
 
@@ -336,7 +358,7 @@
 
 			        <label class="titulos-form">¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
-			        	<input type="radio" class="common" name="inscritaDNIAS" value="Sí" checked> Sí
+			        	<input type="radio" class="common" name="inscritaDNIAS" value="Si" checked> Si
 			        	<input type="radio" class="common" name="inscritaDNIAS" value="No"> No <br><br>
 			        </div>
 
@@ -366,7 +388,7 @@
 
 			        <label class="titulos-form">¿Su organización ha tenido modificaciones a su acta constitutiva?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="existenModis" value="Sí" checked> Sí
+				        <input type="radio" class="common" name="existenModis" value="Si" checked> Si
 				        <input type="radio" class="common" name="existenModis" value="No"> No 
 				    </div>
 
@@ -406,7 +428,7 @@
 
 			        <label class="common">¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="detenidoAutorizado" value="Sí" checked> Sí
+				        <input type="radio" class="common" name="detenidoAutorizado" value="Si" checked> Si
 				        <input type="radio" class="common" name="detenidoAutorizado" value="No"> No <br>
 				    </div>
 
@@ -451,7 +473,7 @@
 
 			        <label class="titulos-form">¿Ha manejado esquemas de recursos complementarios?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="esquemasRecursosComp" value="Sí" checked> Sí
+				        <input type="radio" class="common" name="esquemasRecursosComp" value="Si" checked> Si
 				        <input type="radio" class="common" name="esquemasRecursosComp" value="No"> No
 				    </div><br>
 

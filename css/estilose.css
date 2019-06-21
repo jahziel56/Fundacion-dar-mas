@@ -119,6 +119,7 @@ input[type=radio].common{
 .Pre-Registro select,
 .Pre-Registro input[type=date]{
   margin-left:20px;
+  width: 90%;
 }
 
 input[type=text].P6{

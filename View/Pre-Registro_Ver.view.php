@@ -21,11 +21,10 @@
 ?>
 	<main>
 			<h1>Pre-Registro de la empresa</h1>
-			<h5>Para la proxima convocatoria</h5>
+			<h5></h5>
 
 			<div class="Pre-Registro">
-				<button class="accordion">1</button>
-				<div class="panel">					
+									
 					<label>Nombre de la OSC</label>					
 			        <input type="text" class="common" id="nombreOSC" name="nombreOSC"
 			          placeholder="Nombre de la OSC (tal cómo está escrita en su OSC):" value="<?php echo $nombreOSC ?>" disabled>
@@ -123,12 +122,11 @@
 					<input type="text" class="common" id="organizacionInsta" name="organizacionInsta"
 			          placeholder="Instagram de la organización:"
 			          value="<?php echo $organizacionInsta ?>" disabled>
-		        </div>
+		        
 
-				<button class="accordion">2</button>
-				<div class="panel">
+				
 			        <label class="common">Fecha de constitución de la OSC</label><br>
-				        <input type="date" class="common" id="fechaConstitucionOSC" name="fechaConstitucionOSC"
+				    <input type="date" class="common" id="fechaConstitucionOSC" name="fechaConstitucionOSC"
 				          value="<?php echo $fechaConstitucionOSC ?>" disabled><br><br>
 
 			        <label>Nombre del notario</label>
@@ -295,10 +293,9 @@
 
 			        <label class="common">DNIAS</label>
 			        <input type="file" class="common" name="files[]" disabled>
-				</div>
+				
 
-				<button class="accordion">3</button>
-				<div class="panel">
+				
 					<label class="common">Número de libro</label><br>
 			        <input type="text" class="common" id="numeroLibro" name="numeroLibro"
 			          placeholder="Número de libro:"
@@ -341,10 +338,9 @@
 
 			        <label class="common">RPP ICRESON de la última acta modificatoria actualizada</label><br/>
 			        <input type="file" class="common" name="files[]" disabled><br>
-				</div>
+				
 
-				<button class="accordion">4</button>
-				<div class="panel">
+				
 			        <label class="common">Fecha de publicación en el Diario Oficial de la Federación</label><br>
 			        <input type="date" class="common" id="fechaDiario" name="fechaDiario" value="<?php echo $fechaDiario ?>" disabled><br>
 
@@ -368,10 +364,9 @@
 			        <label class="common">¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?</label><br>
 			        <input type="date" class="common" id="fechaAutorizada" name="fechaAutorizada"
 			          value="<?php echo $fechaAutorizada ?>" disabled><br>
-				</div>
+				
 
-				<button class="accordion">5</button>
-				<div class="panel">
+				
 
 					<label class="common">Población que atiende la OSC</label><br>
 			        <input type="text" class="common P6" id="poblacion_0_4" name="poblacion_0_4"
@@ -408,7 +403,7 @@
 			        <input type="text" class="common" id="organizacionManejoRecursos" name="organizacionManejoRecursos"
 			          placeholder="¿Con qué organización ha manejado recursos complementarios?"
 			          value="<?php echo $organizacionManejoRecursos ?>" disabled>
-				</div>
+				
 
 		</div>
 	</main>

@@ -35,7 +35,7 @@
 					<td><?php echo $a['objetoSocialOrganizacion']?></td>	
 					<td><?php echo $a['areasAtencion']?></td>	
 					<td><?php echo $a['rfcHomoclave']?></td>
-					<td><?php echo "<a class='Hoverr' href='pre_ver.inc.php?id=".$a['FormularioID']."'>Link</a>";?></td>
+					<td><?php echo "<a class='Hoverr' href='pre_ver.php?id=".$a['FormularioID']."'>Link</a>";?></td>
 
 				</tr>				  	   
 			<?php } ?>

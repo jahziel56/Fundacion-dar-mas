@@ -100,7 +100,7 @@ if (isset($_POST['pre-submit'])) {
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt = mysqli_stmt_init($conn);
 		mysqli_stmt_prepare($stmt, $sql);
-		mysqli_stmt_bind_param($stmt, "isssssisssssssssssssiisissssi", $fechaConstitucionOSC, $nombreNotario, $numeroNotario, $municipioNotaria, $noEstrituraPublica,$volumenEstrituraPublica, $fechaEstritura, $municipioRegistroOSC,  $estaResideOSC, $muniResideOSC, $principalesLogros, $metasOrganización,$autorizadaDeducible, $digiridaPor, $nombreRepresentante, $idRepresentante, $nombrePresi, $nombreCoordi, $correoCoordinador, $cargoCoordinador,$numeroEmpleados, $numeroVoluntarios, $principalesAlianzas, $numeroBeneficiados, $observaciones32D, $tiempoYforma, $tieneAdeudos, $inscritaDNIAS,$ultimaID);
+		mysqli_stmt_bind_param($stmt, "ssssssssssssssssssssiisissssi", $fechaConstitucionOSC, $nombreNotario, $numeroNotario, $municipioNotaria, $noEstrituraPublica,$volumenEstrituraPublica, $fechaEstritura, $municipioRegistroOSC,  $estaResideOSC, $muniResideOSC, $principalesLogros, $metasOrganización,$autorizadaDeducible, $digiridaPor, $nombreRepresentante, $idRepresentante, $nombrePresi, $nombreCoordi, $correoCoordinador, $cargoCoordinador,$numeroEmpleados, $numeroVoluntarios, $principalesAlianzas, $numeroBeneficiados, $observaciones32D, $tiempoYforma, $tieneAdeudos, $inscritaDNIAS,$ultimaID);
 		mysqli_stmt_execute($stmt);
 		$result = mysqli_stmt_get_result($stmt);
 
@@ -122,7 +122,7 @@ if (isset($_POST['pre-submit'])) {
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt = mysqli_stmt_init($conn);
 		mysqli_stmt_prepare($stmt, $sql);
-		mysqli_stmt_bind_param($stmt, "iiisiiii", $numeroLibro,$numeroInscripcion,$volumenICRESON,$existenModis,$ultimaModi,$numeroActaConsti,$volumenActaConsti,$ultimaID);
+		mysqli_stmt_bind_param($stmt, "iiissiii", $numeroLibro,$numeroInscripcion,$volumenICRESON,$existenModis,$ultimaModi,$numeroActaConsti,$volumenActaConsti,$ultimaID);
 		mysqli_stmt_execute($stmt);
 		$result = mysqli_stmt_get_result($stmt);
 
@@ -139,7 +139,7 @@ if (isset($_POST['pre-submit'])) {
         VALUES (?, ?, ?, ?, ?, ?)";
 		$stmt = mysqli_stmt_init($conn);
 		mysqli_stmt_prepare($stmt, $sql);
-		mysqli_stmt_bind_param($stmt, "iissii",$fechaDiario,$numeroDiario,$detenidoAutorizado,$razonDetenido,$fechaAutorizada,$ultimaID);
+		mysqli_stmt_bind_param($stmt, "sisssi",$fechaDiario,$numeroDiario,$detenidoAutorizado,$razonDetenido,$fechaAutorizada,$ultimaID);
 		mysqli_stmt_execute($stmt);
 		$result = mysqli_stmt_get_result($stmt);
 
@@ -164,7 +164,8 @@ if (isset($_POST['pre-submit'])) {
 		$result = mysqli_stmt_get_result($stmt);
 
 
-        require '../Pre-Registro_Ver.php';
+       // require '../View/Pre-Registro_Ver.view.php';
+        header("Location: ../index.php");
 	exit();
 }
 else{
