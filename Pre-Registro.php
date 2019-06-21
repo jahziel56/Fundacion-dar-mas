@@ -241,7 +241,7 @@
 			        <div style="font-size: 20px; margin-left:20px;">
 			       		<input type="radio" class="common" name="digiridaPor" value="Patronato" checked> Patronato <br>
 			        	<input type="radio" class="common" name="digiridaPor" value="Consejo Directivo"> Consejo directivo <br>
-			        	<input type="radio" class="common" name="digiridaPor" value="Otro"> Patronato <br><br> 	
+			        	<input type="radio" class="common" name="digiridaPor" value="Otro"> Otro <br><br> 	
 			        </div>
 
 			        <label>Nombre del representante legal</label>

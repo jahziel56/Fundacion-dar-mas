@@ -168,6 +168,6 @@ if (isset($_POST['pre-submit'])) {
 	exit();
 }
 else{
-	header("Location: ../index.php");
+	/*header("Location: ../index.php");*/
 	exit();		
 }

@@ -80,7 +80,7 @@
                             echo '<form action="includes/logout.inc.php" method="post">
                                 <button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"></i></button>
                             </form>';
-                             echo "<a id='perfil_right1' class='' href='revision_area.php'>Convocatorias</a>";
+                             echo "<a id='perfil_right1' class='' href='Convocatorias.php'>Convocatorias</a>";
                         }
 				}else{
 					echo '<a href="signup.php">Crear Cuenta</a>';

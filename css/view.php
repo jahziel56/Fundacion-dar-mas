@@ -1,62 +1,62 @@
-<?php
+<?php  
+	$ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
+
+
 /* METODO: evitar que el usuario ingrese a esta pagina php desde la barra de busqueda */
 /* signup-submit es el boton del formulario que se encuentra en la signup.php */
+	require 'includes/dbh.inc.php';	
 
-if (isset($_POST['pre-submit'])) {
-	/* manda a llamar a la pagina php donde se conecta a la base de datos de esta forma se ahorra codigo y se tiene todo en una funcion mas simple */
-	require 'dbh.inc.php';	
-	session_start();
+    //-------------------- Obtener el id a ver
 
 
+    //$ID_Selected = 14;
 
-    $nombreOSC = $_POST['nombreOSC'];
-    $objetoSocialOrganizacion = $_POST['objetoSocialOrganizacion'];
-    $mision = $_POST['mision'];
-    $vision = $_POST['vision'];
-    $areasAtencion = $_POST['areasAtencion'];
-    $rfcHomoclave = $_POST['rfcHomoclave'];
+    //-------------------- Formulario
+
+    $sql = "SELECT * FROM FormularioPrincipal WHERE FormularioID=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $nombreOSC = $row['nombreOSC'];
+    $objetoSocialOrganizacion = $row['objetoSocialOrganizacion'];
+    $mision = $row['mision'];
+    $vision = $row['vision'];
+    $areasAtencion = $row['areasAtencion'];
+    $rfcHomoclave = $row['rfcHomoclave'];
     #fileRFC
-    $CLUNI = $_POST['CLUNI'];
+    $CLUNI = $row['CLUNI'];
     #fileCLUNI
-    $phoneOficina = $_POST['phoneOficina'];
-    $phoneCelular = $_POST['phoneCelular'];
-    $emailContacto = $_POST['emailContacto'];
-    $paginaWeb = $_POST['paginaWeb'];
-    $organizacionFB = $_POST['organizacionFB'];
-    $organizacionTW = $_POST['organizacionTW'];
-    $organizacionInsta = $_POST['organizacionInsta'];
+    $phoneOficina = $row['telefonoOficina'];
+    $phoneCelular = $row['telefonoCelular'];
+    $emailContacto = $row['email'];
+    $paginaWeb = $row['paginaWeb'];
+    $organizacionFB = $row['organizacionFB'];
+    $organizacionTW = $row['twitter'];
+    $organizacionInsta = $row['instagram'];
 
-    /* yyeee */
+    //-------------------- DOMICILIOS
 
-        $sql = "INSERT INTO FormularioPrincipal (nombreOSC, objetoSocialOrganizacion, mision, vision, areasAtencion, rfcHomoclave, CLUNI, telefonoOficina, telefonoCelular, email, paginaWeb, organizacionFB, twitter, instagram, Id_Cuenta) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		$stmt = mysqli_stmt_init($conn);
-		mysqli_stmt_prepare($stmt, $sql);
-		mysqli_stmt_bind_param($stmt, "ssssssssssssssi", $nombreOSC,$objetoSocialOrganizacion,$mision,$vision,$areasAtencion,$rfcHomoclave,$CLUNI,$phoneOficina,$phoneCelular,$emailContacto,$paginaWeb,$organizacionFB,$organizacionTW,$organizacionInsta,$_SESSION['user_Id']);
-		mysqli_stmt_execute($stmt);
-		$result = mysqli_stmt_get_result($stmt);
-		$ultimaID = mysqli_insert_id($conn);
+    $sql = "SELECT * FROM domicilios WHERE FK_FormularioID=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
 
-
-
-    $calle = $_POST['calle'];
-    $numero = $_POST['numero'];
-    $colonia = $_POST['colonia'];
-    $codigoPostal = $_POST['codigoPostal'];
-    $localidad = $_POST['localidad'];
-    $municipio = $_POST['municipio'];
+    $calle = $row['calle'];
+    $numero = $row['numero'];
+    $colonia = $row['colonia'];
+    $codigoPostal = $row['codigoPostal'];
+    $localidad = $row['localidad'];
+    $municipio = $row['municipio'];
     
-    /* yyeee */
-        $sql = "INSERT INTO domicilios (calle, numero, colonia, codigoPostal, localidad, municipio, FK_FormularioID) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)";        
-		$stmt = mysqli_stmt_init($conn);
-		mysqli_stmt_prepare($stmt, $sql);
-		mysqli_stmt_bind_param($stmt, "ssssssi",$calle,$numero,$colonia,$codigoPostal,$localidad,$municipio,$ultimaID);
-		mysqli_stmt_execute($stmt);
-		$result = mysqli_stmt_get_result($stmt);
 
-
-
+/*
     $fechaConstitucionOSC = $_POST['fechaConstitucionOSC'];
     $nombreNotario = $_POST['nombreNotario'];
     $numeroNotario = $_POST['numeroNotario'];
@@ -117,7 +117,6 @@ if (isset($_POST['pre-submit'])) {
     #fileUltimaActa
     #fileRPPUltimaActa
 
-    /* YEE */
         $sql = "INSERT INTO registroactaconstitutiva (numeroLibro, numeroInscripcion, volumenICRESON, existenModis, ultimaModi, numeroActaConsti, volumenActaConsti, FK_FormularioID) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt = mysqli_stmt_init($conn);
@@ -162,12 +161,11 @@ if (isset($_POST['pre-submit'])) {
 		mysqli_stmt_bind_param($stmt, "iiiiiissi",$poblacion_0_4,$poblacion_5_14,$poblacion_15_29,$poblacion_30_44,$poblacion_45_64,$poblacion_65_mas,$esquemasRecursosComp,$organizacionManejoRecursos,$ultimaID);
 		mysqli_stmt_execute($stmt);
 		$result = mysqli_stmt_get_result($stmt);
+ 
+ */
+
+    require"Pre-Registro_Ver.php";
 
 
-        require '../Pre-Registro_Ver.php';
 	exit();
-}
-else{
-	header("Location: ../index.php");
-	exit();		
-}
+
