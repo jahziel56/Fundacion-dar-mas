@@ -26,7 +26,8 @@
     $pdf->SetFont("Arial", "", 12);
     $pdf->SetY($y+15);
     $pdf->Cell(188, 10, 'A quien corresponda: ', 0, 1, 'L');
-    $pdf->MultiCell(188, 10, utf8_decode("Por medio de la presente se hace constatar que la organización social sin fines de lucro conocida como:"), 0, "L", 0);
+    $pdf->MultiCell(188, 10, utf8_decode("Por medio de la presente se hace constatar que la organización social 
+                                        sin fines de lucro conocida como:"), 0, "L", 0);
     $pdf->SetFont("Arial", "B", 14);
     $pdf->Cell(188, 10, "$nombreOSC", 0, 1, 'C');
     $pdf->SetFont("Arial", "", 12);

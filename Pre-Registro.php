@@ -136,29 +136,6 @@
 					placeholder="Correo de contacto de la organización: type EMAIL"
 					value="" required>
 
-				
-				<script>
-					function selection(){
-						var selected=document.getElementById("dominioEmail").value;
-						if(selected=="otro"){
-							document.getElementById("dominio").removeAttribute("hidden");
-						}else{
-							//elsewhere actions
-						}
-					}
-				</script>
-
-				<input type="text" class="common" id="dominio" name='dominio' hidden="hidden" placeholder="Dominio de correo">
-				<select class="common" id="dominioEmail"name="dominioEmail" value="" onchange="selection()" required>
-					<option id="hotmail">@hotmail.com</option>
-					<option id="outlook">@outlook.com</option>
-					<option id="gmail">@gmail.com</option>
-					<option id="yahoo">@yahoo.com</option>
-					<option id="otro">Otro</option>
-				</select>
-				<br>
-				<br>
-
 				<label>Página web</label>
 				<input type="url" class="common" id="paginaWeb" name="paginaWeb"
 					placeholder="Página web de la organización: TYPE URL"
