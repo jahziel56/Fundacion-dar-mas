@@ -1,6 +1,5 @@
 <footer>
 	
-ss
 
 </footer>
 </body>

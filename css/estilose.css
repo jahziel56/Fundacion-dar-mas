@@ -703,7 +703,7 @@ table a:visited {
   transition: 0.4s;
 }
 
-.active, .accordion:hover {
+.activetoggle, .accordion:hover {
   background-color: #ADADAD;
 }
 
@@ -715,7 +715,7 @@ table a:visited {
   margin-left: 5px;
 }
 
-.active:after {
+.activetoggle:after {
   content: "\2212";
 }
 
