@@ -76,11 +76,14 @@
 							echo "<a data-badge='{$_SESSION['user_Id']}' id='notificacion_right' class='' href='notificaciones.php'>Notificaciones</a>";
 							echo '</ul>';
 						}elseif ($nivel == 3) {
-                            echo "<a id='perfil_right2' class='' href='perfil.php'>Convocatorias</a>"; 
+                            echo "<a id='perfil_right2' class='' href='Panel_De_Control.php'>Panel De Control</a>"; 
+                            echo "<a id='perfil_right2' class='' href='Convocatorias.php'>Convocatorias</a>"; 
                             echo '<form action="includes/logout.inc.php" method="post">
                                 <button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"></i></button>
                             </form>';
-                             echo "<a id='perfil_right1' class='' href='Convocatorias.php'>Convocatorias</a>";
+                            echo "<a id='perfil_right1' class='' href='Panel_De_Control.php'>Panel De Control</a>";
+                            echo "<a id='perfil_right1' class='' href='Convocatorias.php'>Convocatorias</a>";
+
                         }
 				}else{
 					echo '<a href="signup.php">Crear Cuenta</a>';
