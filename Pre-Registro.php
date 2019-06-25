@@ -413,188 +413,39 @@
 			        <input type="file" class="common" name="files[]" required><br>
 				</div>
 
-				<label>Nombre del representante legal</label>
-				<input type="text" class="common" id="nombreRepresentante" name="nombreRepresentante"
-					placeholder="Nombre del representante legal vigente:"
-					value="" required>
+				<button class="accordion">DONATARIA AUTORIZADA</button>
+				<div class="panel">
+					<label class="common">Fecha de publicación en el Diario Oficial de la Federación</label><br>
+					<input type="date" class="common" id="fechaDiario" name="fechaDiario" value="" required><br>
 
-				<label>Número de identificación oficial</label>
-				<input type="text" class="common" id="idRepresentante" name="idRepresentante"
-					placeholder="Número de identificación oficial del representante legal vigente:"
-					value="" required>
+					<label>Número de página</label>
+					<input type="text" class="common" id="numeroDiario" name="numeroDiario"
+						placeholder="Número de página del Diario Oficial de la Federación" value="" required>
 
-				<label class="common">INE del representante legal vigente</label>
-				<input type="file" class="common" name="files[]" required>
+				        <label class="titulos-form">¿Ha manejado esquemas de recursos complementarios?</label><br>
+				        <div style="font-size: 20px; margin-left:20px;">
+					        <input type="radio" class="common" name="esquemasRecursosComp" value="Si" checked> Si
+					        <input type="radio" class="common" name="esquemasRecursosComp" value="No"> No
+					    </div><br>
 
-				<label>Nombre del presidente</label>
-				<input type="text" class="common" id="nombrePresi" name="nombrePresi"
-					placeholder="Nombre del presidente y/o director general:"
-					value="" required>
+					<label class="common">¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
+					<div style="font-size: 20px; margin-left:20px;">
+						<input type="radio" class="common" name="detenidoAutorizado" value="Sí"> Sí
+						<input type="radio" class="common" name="detenidoAutorizado" value="No"> No <br>
+					</div>
 
-				<label>Nombre del coordinador</label>
-				<input type="text" class="common" id="nombreCoordi" name="nombreCoordi"
-					placeholder="Nombre del coordinador que somete a la convocatoria:"
-					value="" required>
+					<label>Detuvo el SAT su autorización?</label>
+					<input type="text" class="common" id="razonDetenido" name="razonDetenido"
+						placeholder="¿Por qué detuvo el SAT su autorización?"
+						value="" required>
 
-				<label class="common">INE del coordinador del proyecto</label>
-				<input type="file" class="common" name="files[]" required>
-
-				<label>Correo electrónico del coordinador</label>
-				<input type="email" class="common" id="correoCoordinador" name="correoCoordinador"
-					placeholder="Correo electrónico personal del coordinador del proyecto"
-					value="" required>
-
-				<label>Cargo del coordinador</label>
-				<input type="text" class="common" id="cargoCoordinador" name="cargoCoordinador"
-					placeholder="Cargo o puesto del coordinador del proyecto"
-					value="" required>
-
-				<label>Número de empleados</label>
-				<input type="text" class="common" id="numeroEmpleados" name="numeroEmpleados"
-					placeholder="Número de empleados de la organización"
-					value="" required>
-
-				<label>Número de voluntarios</label>
-				<input type="text" class="common" id="numeroVoluntarios" name="numeroVoluntarios"
-					placeholder="Número de voluntarios de la organización"
-					value="" required>
-
-				<label>Alianzas con las que cuenta</label>
-				<input type="text" class="common" id="principalesAlianzas" name="principalesAlianzas"
-					placeholder="Mencione las principales alianzas con las que cuenta"
-					value="" required>
-
-				<label>Número de personas que benefició</label>
-				<input type="text" class="common" id="numeroBeneficiados" name="numeroBeneficiados"
-					placeholder="Número de personas que benefició el año pasado"
-					value="" required>
-
-				<label class="titulos-form">¿Tiene observaciones en su 32 D?</label>
-				<div style="font-size: 20px; margin-left:20px;">
-					<input type="radio" class="common" name="observaciones32D" value="Sí"> Sí
-					<input type="radio" class="common" name="observaciones32D" value="No"> No <br><br>
+					<label class="common">¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?</label><br>
+					<input type="date" class="common" id="fechaAutorizada" name="fechaAutorizada"
+						value="" required><br><br>
 				</div>
 
-				<label class="common">32D en positivio y con 30 días de expedición como máximo</label>
-				<input type="file" class="common" name="files[]" required>
-
-				<label class="titulos-form">¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?</label>
-				<div style="font-size: 20px; margin-left:20px;">
-					<input type="radio" class="common" name="tiempoYforma" value="Sí"> Sí
-					<input type="radio" class="common" name="tiempoYforma" value="No"> No <br><br>
-				</div>
-
-				<label class="titulos-form">¿Tiene adeudos fiscales a cargo, por impuestos federales?</label>
-				<div style="font-size: 20px; margin-left:20px;">
-					<input type="radio" class="common" name="tieneAdeudos" value="Sí"> Sí
-					<input type="radio" class="common" name="tieneAdeudos" value="No"> No <br><br>
-				</div>
-
-				<label class="common">F21, preferentemente 2018 o más reciente</label>
-				<input type="file" class="common" name="files[]" required>
-
-				<label class="common">Constancia de Situación Fiscal</label>
-				<input type="file" class="common" name="files[]" required>
-
-			        <label class="common">¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
-			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="detenidoAutorizado" value="Si" checked> Si
-				        <input type="radio" class="common" name="detenidoAutorizado" value="No"> No <br>
-				    </div>
-
-				<label class="common">Factura cancelada</label>
-				<input type="file" class="common" name="files[]" required>
-
-				<label class="titulos-form">¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?</label>
-				<div style="font-size: 20px; margin-left:20px;">
-					<input type="radio" class="common" name="inscritaDNIAS" value="Sí"> Sí
-					<input type="radio" class="common" name="inscritaDNIAS" value="No"> No <br><br>
-				</div>
-
-				<label class="common">DNIAS</label>
-				<input type="file" class="common" name="files[]" required>
-			</div>
-
-			<button class="accordion">ACTA CONSTITUTIVA</button>
-			<div class="panel">
-				<label class="common">Número de libro</label><br>
-				<input type="text" class="common" id="numeroLibro" name="numeroLibro"
-					placeholder="Número de libro:"
-					value="" required>
-
-				<label>Número de inscrpción</label>
-				<input type="text" class="common" id="numeroInscripcion" name="numeroInscripcion"
-					placeholder="Número de inscrpción:"
-					value="" required>
-
-				<label>Volúmen ICRESON</label>
-				<input type="text" class="common" id="volumenICRESON" name="volumenICRESON"
-					placeholder="Volúmen ICRESON:"
-					value="" required>
-
-				<label class="titulos-form">RPP ICRESON</label><br/>
-				<input type="file" class="common" name="files[]" required><br>
-
-				<label class="titulos-form">¿Su organización ha tenido modificaciones a su acta constitutiva?</label><br>
-				<div style="font-size: 20px; margin-left:20px;">
-					<input type="radio" class="common" name="existenModis" value="Sí"> Sí
-					<input type="radio" class="common" name="existenModis" value="No"> No 
-				</div>
-
-				<label class="common">Fecha de la última modificación del acta constitutiva</label><br>
-				<input type="date" class="common" id="ultimaModi" name="ultimaModi"
-					value="" required><br><br>
-
-				<label>Número de acta constitutiva</label>
-				<input type="text" class="common" id="numeroActaConsti" name="numeroActaConsti"
-					placeholder="Número de acta constitutiva:"
-					value="" required>
-
-				<label>Volúmen de acta constitutiva</label>
-				<input type="text" class="common" id="volumenActaConsti" name="volumenActaConsti"
-					placeholder="Volúmen de acta constitutiva:"
-					value="" required>
-
-				<label class="common">Ultima acta modificatoria protocolizada</label><br/>
-				<input type="file" class="common" name="files[]" required><br>
-
-				<label class="common">RPP ICRESON de la última acta modificatoria actualizada</label><br/>
-				<input type="file" class="common" name="files[]" required><br>
-			</div>
-
-			<button class="accordion">DONATARIA AUTORIZADA</button>
-			<div class="panel">
-				<label class="common">Fecha de publicación en el Diario Oficial de la Federación</label><br>
-				<input type="date" class="common" id="fechaDiario" name="fechaDiario" value="" required><br>
-
-				<label>Número de página</label>
-				<input type="text" class="common" id="numeroDiario" name="numeroDiario"
-					placeholder="Número de página del Diario Oficial de la Federación" value="" required>
-
-			        <label class="titulos-form">¿Ha manejado esquemas de recursos complementarios?</label><br>
-			        <div style="font-size: 20px; margin-left:20px;">
-				        <input type="radio" class="common" name="esquemasRecursosComp" value="Si" checked> Si
-				        <input type="radio" class="common" name="esquemasRecursosComp" value="No"> No
-				    </div><br>
-
-				<label class="common">¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
-				<div style="font-size: 20px; margin-left:20px;">
-					<input type="radio" class="common" name="detenidoAutorizado" value="Sí"> Sí
-					<input type="radio" class="common" name="detenidoAutorizado" value="No"> No <br>
-				</div>
-
-				<label>Detuvo el SAT su autorización?</label>
-				<input type="text" class="common" id="razonDetenido" name="razonDetenido"
-					placeholder="¿Por qué detuvo el SAT su autorización?"
-					value="" required>
-
-				<label class="common">¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?</label><br>
-				<input type="date" class="common" id="fechaAutorizada" name="fechaAutorizada"
-					value="" required><br>
-			</div>
-
-			<button class="accordion">RECURSOS COMPLEMENTARIOS</button>
-			<div class="panel">
+				<button class="accordion">RECURSOS COMPLEMENTARIOS</button>
+				<div class="panel">
 
 				<label class="common">Población que atiende la OSC</label><br>
 				<input type="text" class="common P6" id="poblacion_0_4" name="poblacion_0_4"
@@ -631,7 +482,8 @@
 				<input type="text" class="common" id="organizacionManejoRecursos" name="organizacionManejoRecursos"
 					placeholder="¿Con qué organización ha manejado recursos complementarios?"
 					value="" required>
-			</div>
+				</div>
+
 			<button class="common" type="submit" name="pre-submit">Registrar</button>
 		</form>
 	</div>
@@ -643,7 +495,7 @@ var i;
 
 for (i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
+    this.classList.toggle("activetoggle");
     var panel = this.nextElementSibling;
     if (panel.style.maxHeight){
       panel.style.maxHeight = null;
