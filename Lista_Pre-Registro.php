@@ -1,6 +1,6 @@
 <?php  
 	require 'includes/dbh.inc.php';
-	require"header.php";
+	require"classes/header.php";
 
 	$statment = $conn->prepare("SELECT * FROM formularioprincipal");
 	$statment->execute();

@@ -161,7 +161,7 @@
     $esquemasRecursosComp = $row['esquemasRecursosComp'];
     $organizacionManejoRecursos = $row['organizacionManejoRecursos'];
 
-    require"View/Pre-Registro_Ver.view.php";
+    require"classes/Pre_Registro_Ver.php";
 
 
 	exit();

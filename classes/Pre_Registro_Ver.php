@@ -1,20 +1,3 @@
-	<style type="text/css">
-		input{
-			margin-bottom: 30px;
-			width: 100%;
-		}
-
-		input[type=radio].common{
-  			margin-bottom: 0px;
-			width: 10%;
-		}
-		textarea.common{
-			margin-bottom: 30px;
-			width: 100%;
-		}
-	</style>
-
-
 <?php
 /* manda a llamar a header.php */ 
 	require"header.php";
