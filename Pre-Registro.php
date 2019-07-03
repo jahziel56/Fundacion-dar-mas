@@ -77,7 +77,7 @@
 
 			?>	
 
-			<div class="Pre-Registro">
+			<div class="">
 			<form action="includes/pre.inc.php" method="post">
 
 				<button class="accordion">FORMULARIO PRINCIPAL</button>

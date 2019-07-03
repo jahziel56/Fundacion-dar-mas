@@ -6,7 +6,7 @@
 			<h1>Pre-Registro de la empresa</h1>
 			<h5></h5>
 
-			<div class="Pre-Registro">
+			<div class="">
 									
 					<label>Nombre de la OSC</label>					
 			        <input type="text" class="common" id="nombreOSC" name="nombreOSC"
