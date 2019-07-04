@@ -255,6 +255,34 @@ button[type=submit]:hover.common {
   background-color: #45a049;
 }
 
+.Link_Nonstyle{ 
+  color: #323232;
+  text-decoration: none;
+}
+
+.Link_Nonstyle:visited{ 
+  color: #1B1B1B;
+}
+
+.Link_Nonstyle:hover{
+  color: #757575;
+}
+
+button[type=submit].Reset{
+  width: 100%;
+  background-color: #303030;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type=submit]:hover.Reset {
+  background-color: #535353;
+}
+
 /* ---------- Perfil / Notificacion ---------- */
 .perfil{
   background: #5800AF;
@@ -613,11 +641,6 @@ a:visited i{
 a i:hover{
   color: #0B5583;
 }
-
-.fa-eye{
-  padding: 20px;  
-}
-
 /* ----------------------- Style Upload ------------------- */
 
 /*input[type="file"] {

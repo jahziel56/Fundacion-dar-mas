@@ -58,11 +58,12 @@
 
 			?>			
 				<form action="includes/login.inc.php" method="post" class="login">
-					<input class="common" type="text" name="mailuid" placeholder="Username" required>
-					<input class="common" type="password" name="pwd" placeholder="Password" id="myInput" required>
+					<input class="common" type="text" name="mailuid" placeholder="Nombre de usuario" required>
+					<input class="common" type="password" name="pwd" placeholder="Contraseña" id="myInput" required>
 					<button class="common" type="submit" name="login-submit">Login</button>
 				</form>
 
+					<a href="reset_password.php" class="Link_Nonstyle">Olvidaste tu Contraseña?</a>
 
 			</section>
 
@@ -72,14 +73,3 @@
 /* manda a llamar a footer.php */ 
 	require"footer.php";
 ?>
-
-<script>
-function myFunction() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-</script>
