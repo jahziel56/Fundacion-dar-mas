@@ -5,12 +5,15 @@
 	
 
 	<main>
-		<label>Roles</label><br>
-		<button style="background: lightblue" class="Panel_Control"><a href='detalle_notificacion.php'><i class='fa fa-eye fa-2x'></i><br>Ver</a></button>
-		<button style="background: lightblue" class="Panel_Control"><a href='detalle_notificacion.php'><i class='fa fa-plus-circle fa-2x'></i><br>Crear</a></button>
-		<button style="background: lightblue" class="Panel_Control"><a href='Campos_Rol.php'><i class='fa fa-pencil fa-2x'></i><br>Modificar</a></button>
-		<button style="background: lightblue" class="Panel_Control"><a href='detalle_notificacion.php'><i class='fa fa-trash fa-2x'></i><br>Eliminar</a></button>
-		<input type="checkbox" checked><br>
+		<label>Roles</label><br><br>
+
+		<button class="P_B Btn_C_B"><a href='detalle_notificacion.php'><i class='fa fa-eye fa-2x'></i><br> Ver</a></button>
+
+		<button class="P_B Btn_C_G"><a href='detalle_notificacion.php'><i class='fa fa-plus-circle fa-2x'></i><br>Crear</a></button>
+		<button class="P_B Btn_C_Y"><a href='Campos_Rol.php'><i class='fa fa-pencil fa-2x'></i><br>Modificar</a></button>
+		<button class="P_B Btn_C_R"><a href='detalle_notificacion.php'><i class='fa fa-trash fa-2x'></i><br>Eliminar</a></button>
+		<br><br><br>
+		<button class="P_B">Primary</button>
 
 		<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
 		  <symbol id="checkmark" viewBox="0 0 24 24">

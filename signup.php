@@ -39,7 +39,7 @@
 			?>			
 				<form action="includes/signup.inc.php" method="post" class="Signup">
 					<input class="common" type="text" name="uid" placeholder="Nombre de usuario" required>
-					<input class="common" type="text" name="mail" placeholder="Correo Institucional" required>
+					<input class="common" type="email" name="mail" placeholder="Correo Institucional" required>
 					<input class="common" type="password" name="pwd" placeholder="Contraseña" id="myInput" required>
 					<input class="common" type="password" name="pwd-repeat" placeholder="Repita la Contraseña" id="myInput">			
 					<button class="common" type="submit" name="signup-submit">Signup</button>

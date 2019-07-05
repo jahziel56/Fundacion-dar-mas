@@ -241,7 +241,7 @@ button[type=submit]:hover.common {
 #login_right{
   float: right;
   color: #f2f2f2;
-  background: #4CAF50;
+  background: #6700CC;
   text-align: center;
   padding: 14px 16px;
   width: 90px;
@@ -252,7 +252,7 @@ button[type=submit]:hover.common {
 }
 
 #login_right:hover{
-  background-color: #45a049;
+  background-color: #5800AF;
 }
 
 .Link_Nonstyle{ 
@@ -294,7 +294,7 @@ button[type=submit]:hover.Reset {
 }
 
 #perfil_right1:hover{
-  background: #430085;
+  background: #5800AF;
   color: white;
 }
 
@@ -304,7 +304,7 @@ button[type=submit]:hover.Reset {
 }
 
 #perfil_right:hover{
-  background: #430085;
+  background: #5800AF;
   color: white;
 }
 
@@ -314,7 +314,7 @@ button[type=submit]:hover.Reset {
 }
 
 #perfil_right2:hover{
-  background: #430085;
+  background: #5800AF;
   color: white;
 }
 
@@ -323,19 +323,19 @@ button[type=submit]:hover.Reset {
   display: inline-block;
 }
 #notificacion_right:hover{
-  background: #430085;
+  background: #5800AF;
   color: white;
 }
 
 /* --------------------------------- Navbar ------------------------------ */
 .active_nav {
-  background-color: #4CAF50;
+  background-color: #6700CC;
   color: white;
 }
 
 .topnav {
   overflow: hidden;
-  background-color: #333;
+  background-color: #3A0072;
   opacity: .98;
 }
 
@@ -388,7 +388,7 @@ button[type=submit]:hover.Reset {
 }
 
 .topnav a:hover, .dropdown:hover .dropbtn {
-  background-color: #555;
+  background-color: #5800AF;
   color: white;
 }
 
@@ -789,6 +789,8 @@ a i:hover{
   transition: max-height 0.2s ease-out;
 }
 
+
+
 // ---------------------------------------- PANEL DE CONTROL ------------------------------------------ //
 
 button.Panel_Control{
@@ -806,13 +808,10 @@ button:hover.Panel_Control {
   background-color: #45a049;
 }
 
-
-
-
-
 *, *:before, *:after {
   box-sizing: border-box;
 }
+
 .form-container {
   margin: 7px 2%;
   background-color:;
@@ -831,6 +830,7 @@ button:hover.Panel_Control {
   position: absolute;
   width: 1px;
 }
+
 .promoted-checkbox input:checked + label > svg {
   height: 24px;
   animation: draw-checkbox ease-in-out 0.2s forwards;
@@ -854,6 +854,7 @@ button:hover.Panel_Control {
   border-radius: 10px;
   transition: 0.15s all ease-out;
 }
+
 .promoted-checkbox svg {
   stroke: #0080d3;
   stroke-width: 2px;
@@ -864,6 +865,7 @@ button:hover.Panel_Control {
   top: 8px;
   stroke-dasharray: 33;
 }
+
 @keyframes draw-checkbox {
   0% {
     stroke-dashoffset: 33;
@@ -872,3 +874,93 @@ button:hover.Panel_Control {
     stroke-dashoffset: 0;
   }
 }
+
+
+.P_B{
+  color: black;
+  background-color: white;
+  border-color: lightgray;
+  cursor: pointer;
+  border: 1px solid gray;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  align-items: flex-start;
+  border-radius: 4px;
+  float: left;
+
+}
+.P_B:hover{
+  background: lightgray;
+}
+.P_B a i{ 
+  color: white;
+}
+
+.P_B a:visited i{ 
+  color: white;
+}
+
+.P_B a{
+  text-decoration: none;
+  color: white;
+}
+
+
+/* ---- BLUE ---- */
+.Btn_C_B{
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+
+  border-radius: 4px 0px 0px 4px;
+
+}
+
+.Btn_C_B:hover{
+  background: #2e6da4;
+}
+
+
+/* ---- Green ---- */
+.Btn_C_G{
+  color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+
+  border-radius: 0px 0px 0px 0px;
+}
+
+.Btn_C_G:hover{
+  background: #4cae4c;
+}
+
+
+/* ---- Yellow ---- */
+.Btn_C_Y{
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+
+  border-radius: 0px 0px 0px 0px;
+}
+
+.Btn_C_Y:hover{
+  background: #eea236;
+}
+
+
+/* ---- Red ---- */
+.Btn_C_R{
+  color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+
+    border-radius: 0px 4px 4px 0px;
+}
+
+.Btn_C_R:hover{
+  background: #d43f3a;
+}
+
+

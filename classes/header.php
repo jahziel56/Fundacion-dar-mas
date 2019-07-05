@@ -1,6 +1,5 @@
 <?php 
-require"includes/autoloader.inc.php";
-	session_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -59,14 +58,14 @@ require"includes/autoloader.inc.php";
                 <a href="#">promocionales</a>';  
 
 
-              echo '<a href="signup.php">Crear Cuenta</a>';
+              echo '<a href="signup.php">Crear Cuenta <i class="fa fa-user-plus fa-1x"></i> </a>';
                     echo '<a id="login_right" href="login.php" >Login</a>';
             }elseif (isset($_SESSION['Type_User'])) {				
 				$nivel = $_SESSION['Type_User'];
 		  		if ($nivel == 1) {
 		  			echo "<a id='perfil_right2' class='perfil' href='Pre-Registro.php'>Pre-Registro</a>";
 		  			echo '<form action="includes/logout.inc.php" method="post">
-						<button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+						<button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"> Salir</i></button>
 					</form>';
 		  			echo "<a id='perfil_right1' class='perfil' href='Pre-Registro.php'>Pre-Registro</a>";								
 		  		}elseif ($nivel == 2) {
