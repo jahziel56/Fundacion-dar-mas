@@ -1,5 +1,7 @@
 <?php 
 
+    require "../includes/fpdf/fpdf.php";
+
     $conexion = new PDO("mysql:host=localhost;dbname=paginacion", "root", "");
     $id = isset($_GET['id'])? $_GET['id'] : "";
     $stat = $conexion->prepare("SELECT * FROM preregistro WHERE RegistroID=?");
@@ -13,9 +15,9 @@
     $fechaMes = 'Enero';
     $fechaAnio = 2019;
 
-    require "../includes/fpdf/fpdf.php";
+    $dimensiones = [100, 150];
 
-    $pdf = new FPDF();
+    $pdf = new FPDF('P', 'mm', $dimensiones);
     $pdf->AddPage();
     $pdf->SetFont('Arial', 'B', 16);
 
@@ -44,6 +46,10 @@
     
     $pdf->SetY(265);
     $pdf->Cell(188, 10, "Hermosillo, Sonora a $fechaDia de $fechaMes de $fechaAnio.", 0, 1, "R");
+    //$pdf->IncludeJS("print('true');");
     $pdf->Output();
+    echo "<script type='text/javascript'>";
+    echo "window.print();";
+    echo "</script>";
 
 ?>
