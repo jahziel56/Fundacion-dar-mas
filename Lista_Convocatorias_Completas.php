@@ -1,6 +1,6 @@
 <?php  
 	require 'includes/dbh.inc.php';
-	require"header.php";
+	require"classes/header.php";
 
 	$statment = $conn->prepare("SELECT * FROM formularioprincipal");
 	$statment->execute();
@@ -35,7 +35,7 @@
 					<td><?php echo $a['objetoSocialOrganizacion']?></td>	
 					<td><?php echo $a['areasAtencion']?></td>	
 					<td><?php echo $a['rfcHomoclave']?></td>
-					<td><?php echo "<a class='Hoverr' href='pre_ver.php?id=".$a['FormularioID']."'>Link</a>";?></td>
+					<td><?php echo "<a class='Hoverr' href='pre_ver.php?id=".$a['FormularioID']."'><i class='fa fa-eye fa-2x'></a>";?></td>
 
 				</tr>				  	   
 			<?php } ?>

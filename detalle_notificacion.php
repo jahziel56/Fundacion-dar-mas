@@ -1,6 +1,6 @@
 <?php
 /* manda a llamar a header.php */ 
-	require"header.php";
+	require"classes/header.php";
 ?>
 	<main>
 		<div class="conten-alignt-center ">

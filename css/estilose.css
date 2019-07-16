@@ -22,8 +22,12 @@ main{
   	margin-top: 30px;
   	margin-bottom: 20px;
   	box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
-
 }
+
+.div_40{
+  width: 40%;
+}
+
 .error_box {
   background: #c40018;
   color: #fff;
@@ -74,7 +78,22 @@ button[type=submit]:hover {
   background-color: #45a049;
 }*/
 /* --------------------------------- signup  ------------------------------ */
-.Pre-Registro{
+
+.Pre-Registro input[type=text].common,
+.Pre-Registro input[type=password].common,
+.Pre-Registro input[type=email].common,
+.Pre-Registro input[type=url].common,
+.Pre-Registro input[type=file].common,
+.Pre-Registro textarea.common{
+  width: 95%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc; 
+  box-sizing: border-box;
+  border-radius: 30px; 
+  outline:0px; 
+}
 
 }
 
@@ -115,6 +134,23 @@ textarea.common{
 input[type=radio].common{
   
 }
+/* Pre-registro
+  <style type="text/css">
+    input{
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    input[type=radio].common{
+        margin-bottom: 0px;
+      width: 10%;
+    }
+    textarea.common{
+      margin-bottom: 30px;
+      width: 100%;
+    }
+  </style>
+*/
 
 .Pre-Registro select,
 .Pre-Registro input[type=date]{
@@ -209,7 +245,7 @@ button[type=submit]:hover.common {
 #login_right{
   float: right;
   color: #f2f2f2;
-  background: #4CAF50;
+  background: #6700CC;
   text-align: center;
   padding: 14px 16px;
   width: 90px;
@@ -220,7 +256,35 @@ button[type=submit]:hover.common {
 }
 
 #login_right:hover{
-  background-color: #45a049;
+  background-color: #5800AF;
+}
+
+.Link_Nonstyle{ 
+  color: #323232;
+  text-decoration: none;
+}
+
+.Link_Nonstyle:visited{ 
+  color: #1B1B1B;
+}
+
+.Link_Nonstyle:hover{
+  color: #757575;
+}
+
+button[type=submit].Reset{
+  width: 100%;
+  background-color: #303030;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type=submit]:hover.Reset {
+  background-color: #535353;
 }
 
 /* ---------- Perfil / Notificacion ---------- */
@@ -234,7 +298,7 @@ button[type=submit]:hover.common {
 }
 
 #perfil_right1:hover{
-  background: #430085;
+  background: #5800AF;
   color: white;
 }
 
@@ -244,7 +308,7 @@ button[type=submit]:hover.common {
 }
 
 #perfil_right:hover{
-  background: #430085;
+  background: #5800AF;
   color: white;
 }
 
@@ -254,7 +318,7 @@ button[type=submit]:hover.common {
 }
 
 #perfil_right2:hover{
-  background: #430085;
+  background: #5800AF;
   color: white;
 }
 
@@ -263,19 +327,19 @@ button[type=submit]:hover.common {
   display: inline-block;
 }
 #notificacion_right:hover{
-  background: #430085;
+  background: #5800AF;
   color: white;
 }
 
 /* --------------------------------- Navbar ------------------------------ */
 .active_nav {
-  background-color: #4CAF50;
+  background-color: #6700CC;
   color: white;
 }
 
 .topnav {
   overflow: hidden;
-  background-color: #333;
+  background-color: #3A0072;
   opacity: .98;
 }
 
@@ -328,7 +392,7 @@ button[type=submit]:hover.common {
 }
 
 .topnav a:hover, .dropdown:hover .dropbtn {
-  background-color: #555;
+  background-color: #5800AF;
   color: white;
 }
 
@@ -570,14 +634,30 @@ align-self: center;
 }
 
 /* Ojo */
-table a:visited { 
-  color: #0F7ABB;
+a i{ 
+  color: #139AEC;
+}
 
+a:visited i{ 
+  color: #1083C8;
 }
-.fa-eye{
-  border-bottom:1px solid #E9E9E9;
-  padding: 20px;  
+
+a i:hover{
+  color: #0B5583;
 }
+
+.r:visited i { 
+  color: #D80000;
+}
+
+.r i:hover{
+  color: #FF0000;
+}
+
+.r i{
+  color: #D80000;
+}
+
 
 /* ----------------------- Style Upload ------------------- */
 
@@ -726,3 +806,208 @@ table a:visited {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
 }
+
+
+
+// ---------------------------------------- PANEL DE CONTROL ------------------------------------------ //
+
+button.Panel_Control{
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover.Panel_Control {
+  background-color: #45a049;
+}
+
+
+.P_B{
+  color: black;
+  background-color: white;
+  border-color: lightgray;
+  cursor: pointer;
+  border: 1px solid gray;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  align-items: flex-start;
+  border-radius: 4px;
+}
+
+.P_B:hover{
+  background: lightgray;
+}
+.P_B a i{ 
+  color: white;
+}
+
+.P_B a:visited i{ 
+  color: white;
+}
+
+.P_B a{
+  text-decoration: none;
+  color: white;
+}
+
+.b a i{ 
+  color: black;
+}
+
+.b a:visited i{ 
+  color: black;
+}
+
+.b a{
+  text-decoration: none;
+  color: black;
+}
+
+/* ---- BLUE ---- */
+.Btn_C_B{
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  border-radius: 4px 0px 0px 4px;
+
+}
+
+.Btn_C_B:hover{
+  background: #2e6da4;
+}
+
+
+/* ---- Green ---- */
+.Btn_C_G{
+  color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.Btn_C_G:hover{
+  background: #4cae4c;
+}
+
+
+/* ---- Yellow ---- */
+.Btn_C_Y{
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.Btn_C_Y:hover{
+  background: #eea236;
+}
+
+
+/* ---- Red ---- */
+.Btn_C_R{
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.Btn_C_R:hover{
+  background: #d43f3a;
+}
+
+.float-left{
+  float: left;
+}
+
+.float-right{
+  float: right;
+}
+
+
+.correo{
+  width: 45.4%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc; 
+  outline:0px; 
+}
+
+
+/* --------  Modal ---------- */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.7s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+

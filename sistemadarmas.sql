@@ -8,7 +8,7 @@ CREATE TABLE `cuenta` (
 
 INSERT INTO `cuenta` (`Id_Cuenta`, `Username`, `Password`, `Email`, `Type`) VALUES
 (1, '123', '$2y$10$RkvdNvc3eY3tyjn1f5i.uuqlpzEwgaNwRUkQ96iuarFykKhjbtNWq', 'jahziel56@hotmail.com', 2),
-(2, 'jahziel', '$2y$10$/zpfJxfxwfu6Usrm.Ke.Ce/3MpAhdPf9wYz5FFxPVvpirbce9fIOy', 'jahziel56@hotmail.com', 2),
+(2, '222', '$2y$10$/zpfJxfxwfu6Usrm.Ke.Ce/3MpAhdPf9wYz5FFxPVvpirbce9fIOy', 'jahziel56@hotmail.com', 2),
 (3, '111', '$2y$10$9LzSWanAJmDf8KkX/T9bw.HzYYc1sWE8Mlv67NlxEarLT/zIfaoYG', 'q1@gmail.com', 3);
 
 CREATE TABLE `notificacion` (
@@ -66,44 +66,40 @@ ALTER TABLE convocatoria ADD FOREIGN KEY (`id_Persona`) REFERENCES persona(id_Pe
 ALTER TABLE convocatoria ADD FOREIGN KEY (`id_Formulario`) REFERENCES formularioprincipal(FormularioID);
 
 CREATE TABLE PreRegistro (
-	RegistroID 				      		INT 				NOT NULL AUTO_INCREMENT,
-	nombreOSC 					      	VARCHAR(50) 		NOT NULL,
-	objetoSocialOrganizacion 			VARCHAR(50)			NOT NULL,
-	mision 						        VARCHAR(300) 		NOT NULL,
-	vision 						        VARCHAR(300) 		NOT NULL,
-	areasAtencion 				    	VARCHAR(300) 		NOT NULL,
-	rfcHomoclave 				      	VARCHAR(20) 		NOT NULL,
+	RegistroID 				      INT 			NOT NULL AUTO_INCREMENT,
+	nombreOSC 					      VARCHAR(50) 	NOT NULL,
+	objetoSocialOrganizacion 	VARCHAR(50)		NOT NULL,
+	mision 						        VARCHAR(300) 	NOT NULL,
+	vision 						        VARCHAR(300) 	NOT NULL,
+	areasAtencion 				    VARCHAR(300) 	NOT NULL,
+	rfcHomoclave 				      VARCHAR(20) 	NOT NULL,
 	#RFC_ARCHIVO
-	CLUNI 						        VARCHAR(20) 		NOT NULL,
+	CLUNI 						        VARCHAR(20) 	NOT NULL,
 	#CLUNI_ARCHIVO
 	#Domicilio
-	telefonoOficina 			   		VARCHAR(10) 		NOT NULL,
-	telefonoCelular 			    	VARCHAR(10) 		NOT NULL,
-	email 						        VARCHAR(50) 		NOT NULL,
-	paginaWeb 					      	VARCHAR(50) 		NOT NULL,
-	organizacionFB 				    	VARCHAR(35) 		NOT NULL,
+	telefonoOficina 			    VARCHAR(10) 	NOT NULL,
+	telefonoCelular 			    VARCHAR(10) 	NOT NULL,
+	email 						        VARCHAR(50) 	NOT NULL,
+	paginaWeb 					      VARCHAR(50) 	NOT NULL,
+	organizacionFB 				    VARCHAR(35) 	NOT NULL,
 	twitter 					        VARCHAR(35),
-	instagram 					      	VARCHAR(35),
-	estadoActual						VARCHAR(50)			NOT NULL,
-	ultimaEdicion						CURRENT_TIMESTAMP	NOT NULL,
+	instagram 					      VARCHAR(35),
 	PRIMARY KEY (RegistroID)
 );
 
 CREATE TABLE FormularioArchivos (
-	FArchivosID 			int 				NOT NULL AUTO_INCREMENT,
-	nombreSeccion			VARCHAR(255)		NOT NULL,
-	nombreArchivo			VARCHAR(255)		NOT NULL,
-	tipoArchivo				VARCHAR(255)		NOT NULL,
-	dataArchivo				MEDIUMBLOB			NOT NULL,
-	Fecha					CURRENT_TIMESTAMP	NOT NULL,
-	archivoAceptado			BOOLEAN				NOT NULL,
-	FK_RegistroID			INT 				NOT NULL,
+	FArchivosID 			int 			    NOT NULL AUTO_INCREMENT,
+	nombreSeccion			VARCHAR(255)	NOT NULL,
+	nombreArchivo			VARCHAR(255)	NOT NULL,
+	tipoArchivo				VARCHAR(255)	NOT NULL,
+	dataArchivo				MEDIUMBLOB		NOT NULL,
+	FK_RegistroID		INT 			    NOT NULL,
 
 	PRIMARY KEY (FArchivosID),
 	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
-/*CREATE TABLE Metas (
+CREATE TABLE Metas (
 	MetasID						    INT 			    NOT NULL AUTO_INCREMENT,
 	primerMeta					  VARCHAR(150)	NOT NULL,
 	tipoProductoUno				VARCHAR(50)		NOT NULL,
@@ -130,19 +126,19 @@ CREATE TABLE Proyecto(
 	FK_FormularioID				  INT 			    NOT NULL,
 	PRIMARY KEY (ProyectoID),
 	FOREIGN KEY (FK_FormularioID) REFERENCES FormularioPrincipal(FormularioID)
-);*/
+);
 
 CREATE TABLE RecursosComplementarios (
-	RecursosID 					      INT 			    NOT NULL AUTO_INCREMENT,
-	poblacion_0_4				      INT 			    NOT NULL,
+	RecursosID 					        INT 			    NOT NULL AUTO_INCREMENT,
+	poblacion_0_4				        INT 			    NOT NULL,
 	poblacion_5_14				      INT 			    NOT NULL,
 	poblacion_15_29 			      INT 			    NOT NULL,
 	poblacion_30_44 			      INT 			    NOT NULL,
 	poblacion_45_64				      INT 			    NOT NULL,
 	poblacion_65_mas			      INT 			    NOT NULL,
-	esquemasRecursosComp			VARCHAR(2)			NOT NULL,
-	organizacionManejoRecursos		VARCHAR(100)		NOT NULL,
-	FK_RegistroID 			      	INT 			    NOT NULL,
+	esquemasRecursosComp		    VARCHAR(2)		NOT NULL,
+	organizacionManejoRecursos	VARCHAR(100)	NOT NULL,
+	FK_RegistroID 			      INT 			    NOT NULL,
 	PRIMARY KEY (RecursosID),
 	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
@@ -152,72 +148,72 @@ CREATE TABLE DonatariaAutorizada (
 	fechaDiario				    DATE 			    NOT NULL,
 	numeroDiario			    INT 			    NOT NULL,
 	#FILE_PAGINA_DIARIO
-	detenidoAutorizado 			VARCHAR(2)		NOT NULL,
-	razonDetenido 			  	VARCHAR(100)	NOT NULL,
-	fechaAutorizada 		  	DATE 			    NOT NULL,
-	FK_RegistroID 		  		INT 			    NOT NULL,
+	detenidoAutorizado 		VARCHAR(2)		NOT NULL,
+	razonDetenido 			  VARCHAR(100)	NOT NULL,
+	fechaAutorizada 		  DATE 			    NOT NULL,
+	FK_RegistroID 		  INT 			    NOT NULL,
 	PRIMARY KEY (DonatariaID),
 	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
 CREATE TABLE RegistroActaConstitutiva (
-	ActaID 					      	INT 		    NOT NULL AUTO_INCREMENT,
-	numeroLibro				    	INT 		    NOT NULL,
-	numeroInscripcion 				INT 		    NOT NULL,
-	volumenICRESON 			  		INT 		    NOT NULL,
+	ActaID 					      INT 		    NOT NULL AUTO_INCREMENT,
+	numeroLibro				    INT 		    NOT NULL,
+	numeroInscripcion 		INT 		    NOT NULL,
+	volumenICRESON 			  INT 		    NOT NULL,
 	#FILE_RPP_ICRESON
-	existenModis 			    	VARCHAR(2)	NOT NULL,
-	ultimaModi				    	DATE 		    NOT NULL,
-	numeroActaConsti		  		INT 		    NOT NULL,
-	volumenActaConsti 				INT 		    NOT NULL,
+	existenModis 			    VARCHAR(2)	NOT NULL,
+	ultimaModi				    DATE 		    NOT NULL,
+	numeroActaConsti		  INT 		    NOT NULL,
+	volumenActaConsti 		INT 		    NOT NULL,
 	#FILE_ULTIMA_ACTA
 	#FILE_RPP_ULTIMA_ACTA
-	FK_RegistroID			  		INT 		    NOT NULL,
+	FK_RegistroID			  INT 		    NOT NULL,
 	PRIMARY KEY (ActaID),
 	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
 CREATE TABLE HistorialOrganizacion (
-	HistorialID				      	INT 			NOT NULL AUTO_INCREMENT,
-	fechaConstitucionOSC	      	DATE 			NOT NULL,
-	nombreNotario			      	VARCHAR(50)		NOT NULL,
-	numeroNotario			      	VARCHAR(10)		NOT NULL,
-	municipioNotaria		      	VARCHAR(30)		NOT NULL,
-	noEstrituraPublica		      	VARCHAR(10) 	NOT NULL,
-	volumenEstrituraPublica	    	VARCHAR(30)		NOT NULL,
-	fechaEstritura			        DATE 			NOT NULL,
+	HistorialID				          INT 			    NOT NULL AUTO_INCREMENT,
+	fechaConstitucionOSC	      DATE 			    NOT NULL,
+	nombreNotario			          VARCHAR(50)		NOT NULL,
+	numeroNotario			          VARCHAR(10)		NOT NULL,
+	municipioNotaria		        VARCHAR(30)		NOT NULL,
+	noEstrituraPublica		      VARCHAR(10) 	NOT NULL,
+	volumenEstrituraPublica	    VARCHAR(30)		NOT NULL,
+	fechaEstritura			        DATE 			    NOT NULL,
 	#FILE_ACTA_CONSTITUTIVA
 	#FILE_ACTA_PROTOCOLIZADA
-	municipioRegistroOSC	      	VARCHAR(30)		NOT NULL,
-	estaResideOSC			       	VARCHAR(30)		NOT NULL,
-	muniResideOSC			        VARCHAR(30) 	NOT NULL,
+	municipioRegistroOSC	      VARCHAR(30)		NOT NULL,
+	estaResideOSC			          VARCHAR(30)		NOT NULL,
+	muniResideOSC			          VARCHAR(30) 	NOT NULL,
 	principalesLogros		        VARCHAR(300)	NOT NULL,
 	metasOrganizacion		        VARCHAR(300)	NOT NULL,
-	autorizadaDeducible		      	VARCHAR(2)		NOT NULL,
-	dirigidaPor				        VARCHAR(20)		NOT NULL,
-	nombreRepresentante		      	VARCHAR(50)		NOT NULL,
+	autorizadaDeducible		      VARCHAR(2)		NOT NULL,
+	dirigidaPor				          VARCHAR(20)		NOT NULL,
+	nombreRepresentante		      VARCHAR(50)		NOT NULL,
 	idRepresentante			        VARCHAR(10)		NOT NULL,
 	#FILE_INE_REPRESENTANTE
-	nombrePresi				        VARCHAR(50)		NOT NULL,
-	nombreCoordi			        VARCHAR(50)		NOT NULL,
+	nombrePresi				          VARCHAR(50)		NOT NULL,
+	nombreCoordi			          VARCHAR(50)		NOT NULL,
 	#FILE_INE_COORDINADOR
 	correoCoordinador		        VARCHAR(30)		NOT NULL,
 	cargoCoordinador		        VARCHAR(30)		NOT NULL,
-	numeroEmpleados			        INT 			NOT NULL,
-	numeroVoluntarios 		      	INT 			NOT NULL,
-	principalesAlianzas		      	VARCHAR(300)	NOT NULL,
-	numeroBeneficiarios		      	INT 			NOT NULL,
+	numeroEmpleados			        INT 			    NOT NULL,
+	numeroVoluntarios 		      INT 			    NOT NULL,
+	principalesAlianzas		      VARCHAR(300)	NOT NULL,
+	numeroBeneficiarios		      INT 			    NOT NULL,
 	observaciones32D		        VARCHAR(2)		NOT NULL,
 	#FILE_32D
 	tiempoYforma		          	VARCHAR(2)		NOT NULL,
-	tieneAdeudos 			        VARCHAR(2)		NOT NULL,
+	tieneAdeudos 			          VARCHAR(2)		NOT NULL,
 	#FILE_F21
 	#FILE_CONSTANCIA_FISCAL
 	#FILE_COMPROBANTE_BANCO
 	#FILE_FACTURA_CANCELADA
-	inscritaDNIAS			        VARCHAR(2)		NOT NULL,
+	inscritaDNIAS			          VARCHAR(2)		NOT NULL,
 	#FILE_DNIAS
-	FK_RegistroID			        INT 			NOT NULL,
+	FK_RegistroID			        INT 			    NOT NULL,
 	PRIMARY KEY (HistorialID),
 	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
@@ -233,25 +229,6 @@ CREATE TABLE Domicilios (
 	FK_RegistroID 	  INT 			    NOT NULL,
 	PRIMARY KEY (DomicilioID),
 	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
-);
-
-CREATE TABLE Roles (
-	Id_Rol 				INT				NOT NULL AUTO_INCREMENT,
-	Nombre				VARCHAR(50)		NOT NULL,
-	Descripcion 		VARCHAR(255)	NOT NULL,
-	PRIMARY KEY (Id_Rol)
-);
-
-CREATE TABLE Empleado (
-	Id_Empleado			INT				NOT NULL AUTO_INCREMENT,
-	Nombre				VARCHAR(100) 	NOT NULL,
-	Apellido_M			VARCHAR(100)	NOT NULL,
-	correoEmpleado		VARCHAR(255)	NOT NULL,
-	FK_Rol 				INT				NOT NULL,
-	FK_Cuenta			INT				NOT NULL,
-	PRIMARY KEY (Id_Empleado),
-	FOREIGN KEY (FK_Rol) REFERENCES PreRegistro(RegistroID),
-	FOREIGN KEY (FK_Cuenta) REFERENCES Cuenta(Id_Cuenta)
 );
 
 COMMIT;
