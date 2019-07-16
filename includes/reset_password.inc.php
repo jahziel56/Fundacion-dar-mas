@@ -76,7 +76,7 @@ if (isset($_POST['save_reset_password_submit'])) {
 								echo "error";
 								exit();
 							}else{
-								mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
+								mysqli_stmt_bind_param($stmt, "s", $Email);
 								mysqli_stmt_execute($stmt);
 
 								header("Location: ../login.php?reset=success");

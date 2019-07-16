@@ -20,44 +20,11 @@ if (isset($_POST['pre-submit'])) {
     #fileCLUNI
     $phoneOficina = $_POST['phoneOficina'];
     $phoneCelular = $_POST['phoneCelular'];
-
-
-
-    $Correos_1 = $_POST['Correos_1'];
-    $emailContacto = $_POST['emailContacto']; 
-    $emailContacto .='@';
-    $emailContacto .=$Correos_1;
-
-
-
+    $emailContacto = $_POST['emailContacto'];
     $paginaWeb = $_POST['paginaWeb'];
     $organizacionFB = $_POST['organizacionFB'];
     $organizacionTW = $_POST['organizacionTW'];
     $organizacionInsta = $_POST['organizacionInsta'];
-
-    if (empty($organizacionTW)){
-        $organizacionTW = 'Sin Twitter';
-    }
-
-    if (empty($organizacionTW)){
-        $organizacionInsta = 'Sin Instagram';
-    }
-
-
-        $sql = "INSERT INTO FormularioPrincipal (nombreOSC, objetoSocialOrganizacion, mision, vision, areasAtencion, rfcHomoclave, CLUNI, telefonoOficina, telefonoCelular, email, paginaWeb, organizacionFB, twitter, instagram, Id_Cuenta) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_stmt_init($conn);
-        mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_bind_param($stmt, "ssssssssssssssi", $nombreOSC,$objetoSocialOrganizacion,$mision,$vision,$areasAtencion,$rfcHomoclave,$CLUNI,$phoneOficina,$phoneCelular,$emailContacto,$paginaWeb,$organizacionFB,$organizacionTW,$organizacionInsta,$_SESSION['user_Id']);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $ultimaID = mysqli_insert_id($conn);
-
-
-
-
-
-
 
     /* yyeee */
 
@@ -101,12 +68,7 @@ if (isset($_POST['pre-submit'])) {
     $nombrePresi = $_POST['nombrePresi'];
     $nombreCoordi = $_POST['nombreCoordi'];
     #fileINECoordi
-    
-    $Correos_2 = $_POST['Correos_2'];
-    $correoCoordinador = $_POST['correoCoordinador']; 
-    $correoCoordinador .='@';
-    $correoCoordinador .=$Correos_2;
-
+    $correoCoordinador = $_POST['correoCoordinador'];
     $cargoCoordinador = $_POST['cargoCoordinador'];
     $numeroEmpleados = $_POST['numeroEmpleados'];
     $numeroVoluntarios = $_POST['numeroVoluntarios'];
@@ -191,8 +153,8 @@ if (isset($_POST['pre-submit'])) {
 		$result = mysqli_stmt_get_result($stmt);
 
 
-    // require '../View/Pre-Registro_Ver.view.php';
-    header("Location: ../index.php");
+       // require '../View/Pre-Registro_Ver.view.php';
+        header("Location: ../index.php");
 	exit();
 }
 else{

@@ -16,7 +16,8 @@ if (isset($_POST['login-submit'])) {
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
 			header("Location: ../login.php?error=sqlerror");
 			exit();		
-		}else{
+		}
+		else{
 			mysqli_stmt_bind_param($stmt, "s", $mailuid);
 			mysqli_stmt_execute($stmt);
 			$result = mysqli_stmt_get_result($stmt);
@@ -27,35 +28,20 @@ if (isset($_POST['login-submit'])) {
 					exit();		
 				}
 				else if ($pwdCheck == true) {
+					session_start();
+					$_SESSION['user_Id'] = $row['Id_Cuenta'];
+					$_SESSION['user_Username'] = $row['Username'];
+					$_SESSION['Type_User'] = $row['Type'];
 
-					$sql = "SELECT * FROM confirmar_cuenta WHERE cuenta_Id=?;";
-					$stmt = mysqli_stmt_init($conn);
-					if (!mysqli_stmt_prepare($stmt, $sql)) {
-						header("Location: ../login.php?error=sqlerror");
-						exit();		
-					}else{
-						mysqli_stmt_bind_param($stmt, "i", $row['Id_Cuenta']);
-						mysqli_stmt_execute($stmt);
-						$result = mysqli_stmt_get_result($stmt);
-						if ($row2 = mysqli_fetch_assoc($result)) {
-							header("Location: ../login.php?error=Correono");
-							exit();	
-						}else{
-							session_start();
-							$_SESSION['user_Id'] = $row['Id_Cuenta'];
-							$_SESSION['user_Username'] = $row['Username'];
-							$_SESSION['Type_User'] = $row['Type'];
-
-							header("Location: ../index.php?login=success");
-							exit();	
-						}
-					}
-
-				}else{
+					header("Location: ../index.php?login=success");
+					exit();		
+				}
+				else{
 					header("Location: ../login.php?error=Letalwrongpwd");
 					exit();		
 				}
-			}else{
+			}
+			else{
 				header("Location: ../login.php?error=nouser");
 				exit();	
 			}

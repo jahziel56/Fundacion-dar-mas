@@ -10,7 +10,7 @@
 
     //-------------------- Formulario
 
-    $sql = "SELECT * FROM formularioPrincipal WHERE FormularioID=?;";
+    $sql = "SELECT * FROM FormularioPrincipal WHERE FormularioID=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
     mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
@@ -125,7 +125,7 @@
 
     //-------------------- registroactaconstitutiva
 
-    $sql = "SELECT * FROM donatariaAutorizada WHERE FK_FormularioID=?;";
+    $sql = "SELECT * FROM DonatariaAutorizada WHERE FK_FormularioID=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
     mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
@@ -144,7 +144,7 @@
 
     //-------------------- registroactaconstitutiva
 
-    $sql = "SELECT * FROM recursosComplementarios WHERE FK_FormularioID=?;";
+    $sql = "SELECT * FROM RecursosComplementarios WHERE FK_FormularioID=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
     mysqli_stmt_bind_param($stmt, "i", $ID_Selected);

@@ -32,7 +32,7 @@
 				}
 				if (isset($_GET['signup'])) {
 					if (($_GET['signup']) == "success") {
-						echo '<p class"signuperror">Se a enviado una confirmacion a su correo!</p>';
+						echo '<p class"signuperror">Signup successful!</p>';
 					}
 				}
 
