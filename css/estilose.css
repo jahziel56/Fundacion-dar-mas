@@ -22,8 +22,12 @@ main{
   	margin-top: 30px;
   	margin-bottom: 20px;
   	box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
-
 }
+
+.div_40{
+  width: 40%;
+}
+
 .error_box {
   background: #c40018;
   color: #fff;
@@ -81,7 +85,7 @@ button[type=submit]:hover {
 .Pre-Registro input[type=url].common,
 .Pre-Registro input[type=file].common,
 .Pre-Registro textarea.common{
-  width: 85%;
+  width: 95%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -641,6 +645,20 @@ a:visited i{
 a i:hover{
   color: #0B5583;
 }
+
+.r:visited i { 
+  color: #D80000;
+}
+
+.r i:hover{
+  color: #FF0000;
+}
+
+.r i{
+  color: #D80000;
+}
+
+
 /* ----------------------- Style Upload ------------------- */
 
 /*input[type="file"] {
@@ -808,73 +826,6 @@ button:hover.Panel_Control {
   background-color: #45a049;
 }
 
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
-.form-container {
-  margin: 7px 2%;
-  background-color:;
-  border: 1px solid #e6e6e6;
-  width: 11%;
-  float: right;
-}
-/* HTML5 Boilerplate accessible hidden styles */
-.promoted-input-checkbox {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
-
-.promoted-checkbox input:checked + label > svg {
-  height: 24px;
-  animation: draw-checkbox ease-in-out 0.2s forwards;
-}
-.promoted-checkbox label:active::after {
-  background-color: #e6e6e6;
-}
-.promoted-checkbox label {
-  color: #0080d3;
-  line-height: 40px;
-  cursor: pointer;
-  position: relative;
-}
-.promoted-checkbox label:after {
-  content: "";
-  height: 40px;
-  width: 40px;
-  margin-right: 1rem;
-  float: left;
-  border: 2px solid #0080d3;
-  border-radius: 10px;
-  transition: 0.15s all ease-out;
-}
-
-.promoted-checkbox svg {
-  stroke: #0080d3;
-  stroke-width: 2px;
-  height: 0;
-  width: 24px;
-  position: absolute;
-  left: -48px;
-  top: 8px;
-  stroke-dasharray: 33;
-}
-
-@keyframes draw-checkbox {
-  0% {
-    stroke-dashoffset: 33;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
 
 .P_B{
   color: black;
@@ -887,9 +838,8 @@ button:hover.Panel_Control {
   line-height: 1.42857143;
   align-items: flex-start;
   border-radius: 4px;
-  float: left;
-
 }
+
 .P_B:hover{
   background: lightgray;
 }
@@ -906,13 +856,24 @@ button:hover.Panel_Control {
   color: white;
 }
 
+.b a i{ 
+  color: black;
+}
+
+.b a:visited i{ 
+  color: black;
+}
+
+.b a{
+  text-decoration: none;
+  color: black;
+}
 
 /* ---- BLUE ---- */
 .Btn_C_B{
   color: #fff;
   background-color: #337ab7;
   border-color: #2e6da4;
-
   border-radius: 4px 0px 0px 4px;
 
 }
@@ -927,7 +888,6 @@ button:hover.Panel_Control {
   color: #fff;
     background-color: #5cb85c;
     border-color: #4cae4c;
-
   border-radius: 0px 0px 0px 0px;
 }
 
@@ -941,7 +901,6 @@ button:hover.Panel_Control {
   color: #fff;
   background-color: #f0ad4e;
   border-color: #eea236;
-
   border-radius: 0px 0px 0px 0px;
 }
 
@@ -953,14 +912,102 @@ button:hover.Panel_Control {
 /* ---- Red ---- */
 .Btn_C_R{
   color: #fff;
-    background-color: #d9534f;
-    border-color: #d43f3a;
-
-    border-radius: 0px 4px 4px 0px;
+  background-color: #d9534f;
+  border-color: #d43f3a;
 }
 
 .Btn_C_R:hover{
   background: #d43f3a;
+}
+
+.float-left{
+  float: left;
+}
+
+.float-right{
+  float: right;
+}
+
+
+.correo{
+  width: 45.4%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc; 
+  outline:0px; 
+}
+
+
+/* --------  Modal ---------- */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.7s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
 }
 
 

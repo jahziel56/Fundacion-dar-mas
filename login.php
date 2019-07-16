@@ -29,10 +29,19 @@
 					else if (($_GET['error']) == "usermail") {
 						echo '<p class"signuperror">Ya existe una cuenta con ese correo</p>';
 					}
+					else if (($_GET['error']) == "Correono") {
+						echo '<p class"signuperror">Correo no verificado</p> El correo podria estar en la carpeta de no deseados';
+					}
+					else if (($_GET['error']) == "confirmaccount") {
+						echo '<p class"signuperror">Error Token</p>';
+					}
 				}
 				if (isset($_GET['signup'])) {
 					if (($_GET['signup']) == "success") {
 						echo '<p class"signuperror">Se a creado la cuenta exitosamente!</p>';
+					}
+					if (($_GET['signup']) == "confirmmail") {
+						echo '<p class"signuperror">Se a enviado una confirmacion a su correo!</p>';
 					}
 				}
 				if (isset($_GET['reset'])) {

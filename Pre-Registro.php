@@ -41,7 +41,7 @@
 
 	<main>
 			<h1>Pre-Registro de la empresa</h1>
-			<h5>Para la proxima convocatoria</h5>
+			<h5>Para la proxima convocatoria</h5><br>
 			<?php 
 				if (isset($_GET['error'])) {
 					if (($_GET['error']) == "emptyfields") {
@@ -80,8 +80,7 @@
 			<div class="">
 			<form action="includes/pre.inc.php" method="post">
 
-				<button class="accordion">FORMULARIO PRINCIPAL</button>
-				<div class="panel">					
+							
 					<label>Nombre de la OSC</label>					
 			        <input type="text" class="common" id="nombreOSC" name="nombreOSC"
 			          placeholder="Nombre de la OSC (tal cómo está escrita en su OSC):" value="" required>
@@ -155,13 +154,20 @@
 			          value="" required>
 
 			        <label>Correo de organización</label>
-			        <input type="email" class="common" id="emailContacto" name="emailContacto"
-			          placeholder="Correo de contacto de la organización: type EMAIL"
-			          value="" required>
+
+			        <div>
+						<select name="Correos_1" class="float-right correo" style="padding: 11px 20px; border-radius: 0 30px 30px 0;">
+						  <option value="Hotmail.com">Hotmail.com</option>
+						  <option value="Gmail.com">Gmail.com</option>
+						  <option value="Outlook.com">Outlook.com</option>
+						</select>
+						<input type="text" name="correo" value="@" style="width: 14px;" class="float-right correo" disabled>
+						<input type="text" class="float-right correo" style="border-radius: 30px 0 0 30px;" id="emailContacto" name="emailContacto" placeholder="Correo de contacto de la organización:" value="" required>
+					</div>
 
 			        <label>Página web</label>
 			        <input type="url" class="common" id="paginaWeb" name="paginaWeb"
-			          placeholder="Página web de la organización: TYPE URL"
+			          placeholder="Página web de la organización:"
 			          value="" required>
 
 			        <label>Facebook</label>
@@ -178,10 +184,8 @@
 					<input type="text" class="common" id="organizacionInsta" name="organizacionInsta"
 			          placeholder="Instagram de la organización:"
 			          value="">
-		        </div>
 
-		        <button class="accordion">HISTORIAL DE LA ORGANIZACION</button>
-				<div class="panel">
+		        			
 			        <label class="common">Fecha de constitución de la OSC</label><br>
 				        <input type="date" class="common" id="fechaConstitucionOSC" name="fechaConstitucionOSC"
 				          value="" required><br><br>
@@ -293,9 +297,16 @@
 			        <input type="file" class="common" name="files[]" required>
 
 			        <label>Correo electrónico del coordinador</label>
-			        <input type="email" class="common" id="correoCoordinador" name="correoCoordinador"
-			          placeholder="Correo electrónico personal del coordinador del proyecto"
-			          value="" required>
+			        <div>
+						<select name="Correos_2" class="float-right correo" style="padding: 11px 20px; border-radius: 0 30px 30px 0;">
+						  <option value="Hotmail.com">Hotmail.com</option>
+						  <option value="Gmail.com">Gmail.com</option>
+						  <option value="Outlook.com">Outlook.com</option>
+						</select>
+						<input type="text" name="correo" value="@" style="width: 14px;" class="float-right correo" disabled>
+						<input type="text" class="float-right correo" style="border-radius: 30px 0 0 30px;" id="correoCoordinador" name="correoCoordinador"
+			          placeholder="Correo electrónico personal del coordinador del proyecto" value="" required>
+					</div>
 
 			        <label>Cargo del coordinador</label>
 			        <input type="text" class="common" id="cargoCoordinador" name="cargoCoordinador"
@@ -364,10 +375,7 @@
 
 			        <label class="common">DNIAS</label>
 			        <input type="file" class="common" name="files[]" required>
-				</div>
 
-				<button class="accordion">ACTA CONSTITUTIVA</button>
-				<div class="panel">
 					<label class="common">Número de libro</label><br>
 			        <input type="text" class="common" id="numeroLibro" name="numeroLibro"
 			          placeholder="Número de libro:"
@@ -411,26 +419,18 @@
 
 			        <label class="common">RPP ICRESON de la última acta modificatoria actualizada</label><br/>
 			        <input type="file" class="common" name="files[]" required><br>
-				</div>
 
-				<button class="accordion">DONATARIA AUTORIZADA</button>
-				<div class="panel">
-					<label class="common">Fecha de publicación en el Diario Oficial de la Federación</label><br>
+								<label class="common">Fecha de publicación en el Diario Oficial de la Federación</label><br>
 					<input type="date" class="common" id="fechaDiario" name="fechaDiario" value="" required><br>
 
 					<label>Número de página</label>
 					<input type="text" class="common" id="numeroDiario" name="numeroDiario"
 						placeholder="Número de página del Diario Oficial de la Federación" value="" required>
 
-				        <label class="titulos-form">¿Ha manejado esquemas de recursos complementarios?</label><br>
-				        <div style="font-size: 20px; margin-left:20px;">
-					        <input type="radio" class="common" name="esquemasRecursosComp" value="Si" checked> Si
-					        <input type="radio" class="common" name="esquemasRecursosComp" value="No"> No
-					    </div><br>
 
 					<label class="common">¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
 					<div style="font-size: 20px; margin-left:20px;">
-						<input type="radio" class="common" name="detenidoAutorizado" value="Sí"> Sí
+						<input type="radio" class="common" name="detenidoAutorizado" value="Si" checked> Si
 						<input type="radio" class="common" name="detenidoAutorizado" value="No"> No <br>
 					</div>
 
@@ -442,10 +442,8 @@
 					<label class="common">¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?</label><br>
 					<input type="date" class="common" id="fechaAutorizada" name="fechaAutorizada"
 						value="" required><br><br>
-				</div>
 
-				<button class="accordion">RECURSOS COMPLEMENTARIOS</button>
-				<div class="panel">
+						
 
 				<label class="common">Población que atiende la OSC</label><br>
 				<input type="text" class="common P6" id="poblacion_0_4" name="poblacion_0_4"
@@ -474,7 +472,7 @@
 
 				<label class="titulos-form">¿Ha manejado esquemas de recursos complementarios?</label><br>
 				<div style="font-size: 20px; margin-left:20px;">
-					<input type="radio" class="common" name="esquemasRecursosComp" value="Sí"> Sí
+					<input type="radio" class="common" name="esquemasRecursosComp" value="Si" checked> Sí
 					<input type="radio" class="common" name="esquemasRecursosComp" value="No"> No
 				</div><br>
 
@@ -482,29 +480,13 @@
 				<input type="text" class="common" id="organizacionManejoRecursos" name="organizacionManejoRecursos"
 					placeholder="¿Con qué organización ha manejado recursos complementarios?"
 					value="" required>
-				</div>
+				
 
 			<button class="common" type="submit" name="pre-submit">Registrar</button>
 		</form>
 	</div>
 </main>
 
-<script>
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("activetoggle");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
-  });
-}
-</script>	
 
 <?php  
 /* manda a llamar a footer.php */ 

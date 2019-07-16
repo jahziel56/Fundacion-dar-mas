@@ -71,7 +71,7 @@ session_start();
 		  		}elseif ($nivel == 2) {
 					echo "<a id='perfil_right2' class='perfil' href='perfil.php'>{$_SESSION['user_Username']}</a>";
 					echo '<form action="includes/logout.inc.php" method="post">
-						<button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+						<button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"> Salir</i></button>
 					</form>';
 					echo "<a id='perfil_right1' class='perfil' href='perfil.php'>{$_SESSION['user_Username']}</a>";
 					echo '<ul class="notification-badges">';
@@ -81,7 +81,7 @@ session_start();
                     echo "<a id='perfil_right2' class='' href='Panel_De_Control.php'>Panel De Control</a>"; 
                     echo "<a id='perfil_right2' class='' href='Convocatorias.php'>Convocatorias</a>"; 
                     echo '<form action="includes/logout.inc.php" method="post">
-                        <button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+                        <button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"> Salir</i></button>
                     </form>';
                     echo "<a id='perfil_right1' class='' href='Panel_De_Control.php'>Panel De Control</a>";
                     echo "<a id='perfil_right1' class='' href='Convocatorias.php'>Convocatorias</a>";

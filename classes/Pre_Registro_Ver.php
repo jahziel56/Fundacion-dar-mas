@@ -1,7 +1,25 @@
 <?php
 /* manda a llamar a header.php */ 
 	require"header.php";
+
+
+if (empty($_GET["id"])){
+    echo "<main><div style='background: #B22222; color: white; text-align:center'>";
+    echo "Rol no selecionado<br></div><br>";
+    echo "<a class='P_B' href='http:Convocatorias.php' style='text-decoration: none; display: block;'>Regresar</a></main>";
+    header("Location: Convocatorias.php");
+    exit();
+}else{
+	if(empty($nombreOSC)){
+		$id = $_GET['id'];
+		echo "<main><div style='background: #B22222; color: white; text-align:center'>";
+	    echo "No sea encontrado la convocatoria <label style='background: red; color: black;'> $id <label> <br></div><br>";
+	    echo "<a class='P_B' href='http:Convocatorias.php' style='text-decoration: none; display: block;'>Regresar</a></main>";
+	    exit();
+	}
+}
 ?>
+
 	<main>
 			<h1>Pre-Registro de la empresa</h1>
 			<h5></h5>

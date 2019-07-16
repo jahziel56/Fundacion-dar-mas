@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2019 a las 09:18:18
+-- Tiempo de generación: 09-07-2019 a las 10:09:10
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -41,10 +41,10 @@ CREATE TABLE `cuenta` (
 --
 
 INSERT INTO `cuenta` (`Id_Cuenta`, `Username`, `Password`, `Email`, `Type`) VALUES
-(1, '123', '$2y$10$RkvdNvc3eY3tyjn1f5i.uuqlpzEwgaNwRUkQ96iuarFykKhjbtNWq', 'jahziel56@hotmail.com', 1),
-(2, '222', '$2y$10$/zpfJxfxwfu6Usrm.Ke.Ce/3MpAhdPf9wYz5FFxPVvpirbce9fIOy', 'jahziel56@hotmail.com', 1),
+(1, '123', '$2y$10$MlGAbUn0agV1Nev2Lhs2.uN212AASF.G7u2BastzwRClgSwx8pE.C', 'jahziel56@hotmail.com', 1),
+(2, '222', '$2y$10$MlGAbUn0agV1Nev2Lhs2.uN212AASF.G7u2BastzwRClgSwx8pE.C', 'jahziel56@hotmail.com', 1),
 (3, '111', '$2y$10$9LzSWanAJmDf8KkX/T9bw.HzYYc1sWE8Mlv67NlxEarLT/zIfaoYG', 'q1@gmail.com', 3),
-(4, 'admin', '$2y$10$TX/dcAQcceI9LMc7hS5jdeMaFCcf9wfnrnpjneYj7YsG/ZDHyk/gG', 'jahziel56@hotmail.com', 3);
+(4, 'admin', '$2y$10$MlGAbUn0agV1Nev2Lhs2.uN212AASF.G7u2BastzwRClgSwx8pE.C', 'jahziel56@hotmail.com', 3);
 
 -- --------------------------------------------------------
 
@@ -210,6 +210,20 @@ CREATE TABLE `metas` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `password_reset`
+--
+
+CREATE TABLE `password_reset` (
+  `Password_Reset_Id` int(11) NOT NULL,
+  `Password_Reset_Email` text COLLATE utf8_spanish_ci NOT NULL,
+  `Password_Reset_Selector` text COLLATE utf8_spanish_ci NOT NULL,
+  `Password_Reset_Token` longtext COLLATE utf8_spanish_ci NOT NULL,
+  `Password_Reset_Expires` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `proyecto`
 --
 
@@ -280,6 +294,25 @@ INSERT INTO `registroactaconstitutiva` (`ActaID`, `numeroLibro`, `numeroInscripc
 (10, 662, 125, 512, 'Si', '2019-06-05', 12512, 1, 21),
 (11, 662, 125, 512, 'Si', '2019-06-05', 12512, 1, 22);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol`
+--
+
+CREATE TABLE `rol` (
+  `Id_Rol` int(11) NOT NULL,
+  `Nombre_Rol` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `Descripcion_Rol` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`Id_Rol`, `Nombre_Rol`, `Descripcion_Rol`) VALUES
+(1, ' Default', 'Rol por defecto, puede ver todos los campos');
+
 --
 -- Índices para tablas volcadas
 --
@@ -333,6 +366,12 @@ ALTER TABLE `metas`
   ADD KEY `FK_FormularioID` (`FK_FormularioID`);
 
 --
+-- Indices de la tabla `password_reset`
+--
+ALTER TABLE `password_reset`
+  ADD PRIMARY KEY (`Password_Reset_Id`);
+
+--
 -- Indices de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
@@ -352,6 +391,12 @@ ALTER TABLE `recursoscomplementarios`
 ALTER TABLE `registroactaconstitutiva`
   ADD PRIMARY KEY (`ActaID`),
   ADD KEY `FK_FormularioID` (`FK_FormularioID`);
+
+--
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`Id_Rol`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -398,6 +443,12 @@ ALTER TABLE `historialorganizacion`
 --
 ALTER TABLE `metas`
   MODIFY `MetasID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `password_reset`
+--
+ALTER TABLE `password_reset`
+  MODIFY `Password_Reset_Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `proyecto`
