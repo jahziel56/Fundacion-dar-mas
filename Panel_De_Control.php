@@ -43,7 +43,9 @@
 		<button class="P_B Btn_C_Y float-left"><a href='Campos_Rol.php'><i class='fa fa-pencil fa-2x'></i><br>Modificar</a></button>
 		<button class="P_B Btn_C_R float-left" style="border-radius: 0px 4px 4px 0px;"><a href='Campos_Rol_Lista_Eliminar.php'><i class='fa fa-trash fa-2x'></i><br>Eliminar</a></button>
 		<br><br><br>
-		<button class="P_B">Primary</button>
+		<button class="P_B">Primary</button></br><br>
+		<a href='creacion_empleados.php'>Crear empleado</a><br><br>
+		<a href='asignar_registro.php'>Asignar pre-registro a empleado</a><br><br>
 
 		<button id="myBtn">Open Modal</button>
 

@@ -231,5 +231,7 @@ CREATE TABLE Domicilios (
 	FOREIGN KEY (FK_RegistroID) REFERENCES PreRegistro(RegistroID)
 );
 
+INSERT INTO `roles` (`Id_Rol`, `Nombre`, `Descripcion`) VALUES (NULL, 'Abogado', 'Abogado que realiza acciones para la fundación.'), (NULL, 'Psicologo', 'Psicologo que realiza acciones para la fundación.'), (NULL, 'Administrador', 'Administrador que realiza acciones para la fundación.'), (NULL, 'Contador que realiza acciones para la fundación.', '');
+
 COMMIT;
 
