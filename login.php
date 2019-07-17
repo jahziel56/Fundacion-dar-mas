@@ -49,6 +49,11 @@
 						echo '<p class"signuperror">Se a cambiado la contraseña exitosamente!</p>';
 					}
 				}
+				if (isset($_GET['reset'])) {
+					if (($_GET['reset']) == "success") {
+						echo '<p class"signuperror">Se a cambiado la contraseña exitosamente!</p>';
+					}
+				}
 
 			?>			
 				<form action="includes/login.inc.php" method="post" class="login">
