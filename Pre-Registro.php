@@ -40,6 +40,56 @@
 ?>
 
 	<main>
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Ayuda</h2>
+    </div>
+    <div class="modal-body">
+      <p>Por favor llene todos los campos</p><br><hr>
+      <p>Forma adecuada de llenar el correo</p>
+      <img src="assets/Ejemplo_Correo.PNG" alt="Trulli" width="90%"><br><br><hr>
+      <p>Respetar las indicaciones que se dan</p>
+      <img src="assets/Ejemplo_Archivos.PNG" alt="Trulli" width="90%"><br><br>
+    </div>
+
+    <div class="modal-footer">
+      <h3>Gracias por su atencion</h3>
+    </div>
+  </div>
+</div>
+
+	<script>		
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// Onload
+window.onload = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+
 			<h1>Pre-Registro de la empresa</h1>
 			<h5>Para la proxima convocatoria</h5><br>
 			<?php 
@@ -154,7 +204,6 @@
 			          value="" required>
 
 			        <label>Correo de organización</label>
-
 			        <div>
 						<select name="Correos_1" class="float-right correo" style="padding: 11px 20px; border-radius: 0 30px 30px 0;">
 						  <option value="Hotmail.com">Hotmail.com</option>
@@ -175,12 +224,12 @@
 			          placeholder="Facebook de la organización:"
 			          value="" required>
 
-			        <label>Twitter</label>
+			        <label>Twitter</label> <label style="color: dimgray; font-size: 18px;">(No Obligatorio)</label>
 			        <input type="text" class="common" id="organizacionTW" name="organizacionTW"
 			          placeholder="Twitter de la organización:"
 			          value="">
 
-			        <label>Instagram</label>
+			        <label>Instagram</label> <label style="color: dimgray; font-size: 18px;">(No Obligatorio)</label>
 					<input type="text" class="common" id="organizacionInsta" name="organizacionInsta"
 			          placeholder="Instagram de la organización:"
 			          value="">
@@ -223,6 +272,7 @@
 			          value="" required><br><br>
 
 			        <label class="common">Acta constitutiva</label>
+			        <label style="color: dimgray; font-size: 18px;">(No exceder los 8 MB)</label>
 			        <input type="file" class="common" name="files[]" required>
 
 			        <label class="common">Acta protocolizada donde conste la representación legal vigente</label>
@@ -339,7 +389,8 @@
 			        	<input type="radio" class="common" name="observaciones32D" value="No"> No <br><br>
 			    	</div>
 
-			        <label class="common">32D en positivio y con 30 días de expedición como máximo</label>
+			        <label class="common">32D en positivio y con 30 días de expedición como máximo</label>  
+			        <label style="color: dimgray; font-size: 18px;">(No exceder los 300 KB)</label>
 			        <input type="file" class="common" name="files[]" required>
 
 			        <label class="titulos-form">¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?</label>
@@ -356,6 +407,7 @@
 
 
 			        <label class="common">F21, preferentemente 2018 o más reciente</label>
+			        <label style="color: dimgray; font-size: 18px;">(No exceder los 800 KB)</label>
 			        <input type="file" class="common" name="files[]" required>
 
 			        <label class="common">Constancia de Situación Fiscal</label>
@@ -414,10 +466,12 @@
 			          placeholder="Volúmen de acta constitutiva:"
 			          value="" required>
 
-			        <label class="common">Ultima acta modificatoria protocolizada</label><br/>
+			        <label class="common">Ultima acta modificatoria protocolizada</label>
+			        <label style="color: dimgray; font-size: 18px;">(No exceder los 3 MB)</label><br/>
 			        <input type="file" class="common" name="files[]" required><br>
 
-			        <label class="common">RPP ICRESON de la última acta modificatoria actualizada</label><br/>
+			        <label class="common">RPP ICRESON de la última acta modificatoria actualizada</label>
+			    	<label style="color: dimgray; font-size: 18px;">(No exceder los 3 MB)</label><br/>
 			        <input type="file" class="common" name="files[]" required><br>
 
 								<label class="common">Fecha de publicación en el Diario Oficial de la Federación</label><br>

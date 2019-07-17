@@ -36,57 +36,64 @@
 			}
 		?>
 	
-	<main>			
+	
+		<main>
+		<label>Empleado</label><br><br>
+		<button class="P_B Btn_C_B float-left"><a href='Campos_Rol_Lista.php'><i class='fa fa-eye fa-2x'></i><br> Ver</a></button>
+		<button class="P_B Btn_C_G float-left"><a href='Campos_Rol_Nombre.php'><i class='fa fa-plus-circle fa-2x'></i><br>Crear</a></button>
+		<button class="P_B Btn_C_Y float-left"><a href='Campos_Rol.php'><i class='fa fa-pencil fa-2x'></i><br>Modificar</a></button>
+		<button class="P_B Btn_C_R float-left" style="border-radius: 0px 4px 4px 0px;"><a href='Campos_Rol_Lista_Eliminar.php'><i class='fa fa-trash fa-2x'></i><br>Eliminar</a></button>
+		<br><br><br>
+		</main>
+
+		<main>
 		<label>Roles</label><br><br>
 		<button class="P_B Btn_C_B float-left"><a href='Campos_Rol_Lista.php'><i class='fa fa-eye fa-2x'></i><br> Ver</a></button>
 		<button class="P_B Btn_C_G float-left"><a href='Campos_Rol_Nombre.php'><i class='fa fa-plus-circle fa-2x'></i><br>Crear</a></button>
 		<button class="P_B Btn_C_Y float-left"><a href='Campos_Rol.php'><i class='fa fa-pencil fa-2x'></i><br>Modificar</a></button>
 		<button class="P_B Btn_C_R float-left" style="border-radius: 0px 4px 4px 0px;"><a href='Campos_Rol_Lista_Eliminar.php'><i class='fa fa-trash fa-2x'></i><br>Eliminar</a></button>
 		<br><br><br>
-		<button class="P_B">Primary</button>
+		</main>
 
-		<button id="myBtn">Open Modal</button>
+		<main>
+		<label>Asignar</label><br><br>
+		<button class="P_B Btn_C_B float-left"><a href='Campos_Rol_Lista.php'><i class='fa fa-eye fa-2x'></i><br> Ver</a></button>
+		<button class="P_B Btn_C_G float-left"><a href='Campos_Rol_Nombre.php'><i class='fa fa-plus-circle fa-2x'></i><br>Crear</a></button>
+		<button class="P_B Btn_C_Y float-left"><a href='Campos_Rol.php'><i class='fa fa-pencil fa-2x'></i><br>Modificar</a></button>
+		<button class="P_B Btn_C_R float-left" style="border-radius: 0px 4px 4px 0px;"><a href='Campos_Rol_Lista_Eliminar.php'><i class='fa fa-trash fa-2x'></i><br>Eliminar</a></button>
+		<br><br><br>
+		</main>
 
+		<main>
+		<label>Archivos</label><br><br>
+		<a href='Archivos_Archivos.php'class="A_P_B">Ver Archivos</a>
+		<hr>
 
-		<div>
-			<select name="Correos_1" class="float-right correo" style="padding: 11px 20px; border-radius: 0 8px 8px 0;">
-			  <option value="">Hotmail.com</option>
-			  <option value="">Gmail.com</option>
-			  <option value="">Outlook.com</option>
-			</select>
-			<input type="text" name="correo" value="@" style="width: 14px;" class="float-right correo" disabled>
-			<input type="text" name="correo" class="float-right correo" style="border-radius: 8px 0 0 8px; ">
-		</div>
-		
-		<div class="conten-alignt-center">										
-		<br><br><br><br><br><br><br><br>
-		</div>
-
-
-		<div id="myModal" class="modal">
-
+<div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
       <span class="close">&times;</span>
-      <h2>Modal Header</h2>
+      <h2>Ayuda</h2>
     </div>
     <div class="modal-body">
-      <p>Some text in the Modal Body</p>
-      <p>Some other text...</p>
+      <p>Por favor llene todos los campos</p><br><hr>
+      <p>Forma adecuada de llenar el correo</p>
+      <img src="assets/Ejemplo_Correo.PNG" alt="Trulli" width="90%"><br><br><hr>
+      <p>Respetar las indicaciones que se dan</p>
+      <img src="assets/Ejemplo_Archivos.PNG" alt="Trulli" width="90%"><br><br>
     </div>
+
     <div class="modal-footer">
-      <h3>Modal Footer</h3>
+      <h3>Gracias por su atencion</h3>
     </div>
   </div>
-
 </div>
-
-
 	</main>
 
 
 	<script>
+		
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -96,10 +103,16 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
+// When the user clicks the button, open the modal
+/*btn.onclick = function() {
   modal.style.display = "block";
 }
+<button id="myBtn">Open Modal</button>
+*/
+// Onload
+/*window.onload = function() {
+  modal.style.display = "block";
+}*/
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -112,6 +125,8 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
 </script>
 
 

@@ -16,7 +16,7 @@
 	    <th>nombreOSC</th>
 	    <th>objetoSocialOrganizacion</th>
 	    <th>areasAtencion</th>
-	    <th>Estado</th>
+	    <th>rfcHomoclave</th>
 	    <th>Visualizar</th>
 	  </tr>
 
@@ -34,8 +34,8 @@
 					<td><?php echo $a['nombreOSC']?></td>
 					<td><?php echo $a['objetoSocialOrganizacion']?></td>	
 					<td><?php echo $a['areasAtencion']?></td>	
-					<td><?php echo $a['Estado']?></td>
-					<td><?php echo "<a class='Hoverr' href='pre_ver.php?id=".$a['FormularioID']."'><i class='fa fa-eye fa-2x'></a>";?></td>
+					<td><?php echo $a['rfcHomoclave']?></td>
+					<td><?php echo "<a class='Hoverr' href='Archivos_Lista_Convocatoria.php?id=".$a['FormularioID']."'><i class='fa fa-eye fa-2x'></a>";?></td>
 
 				</tr>				  	   
 			<?php } ?>
