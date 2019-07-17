@@ -48,16 +48,19 @@ if (empty($_GET["id"])){
 			          placeholder="RFC con homoclave de la organización:"
 			          value="<?php echo $rfcHomoclave ?>" disabled>
 
+
 			        <label>RFC (PDF o JPG) </label><br>
-			        <input type="file" class="common" name="files[]" disabled><br><br>
+			       <?php echo "<a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileRFC."' target=»_blank»>Ver</a><br><br>";?>
+
 
 			        <label>CLUNI</label>
 			        <input type="text" class="common" id="CLUNI" name="CLUNI"
 			          placeholder="CLUNI (Si no se tiene, ingresar PRE-FOLIO otorgado)"
 			          value="<?php echo $CLUNI ?>" disabled>
 
-			        <label>(PDF o JPG) </label><br>
-			        <input type="file" class="common" name="files[]" disabled><br><br>
+			        <label>(PDF o JPG) </label>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileCLUNI."' target=»_blank»>Ver</a><br><br>";?>
+
 
 			        <label>Calle</label>
 			        <input type="text" class="common" id="calle" name="calle"
@@ -158,10 +161,10 @@ if (empty($_GET["id"])){
 			          value="<?php echo $fechaEstritura ?>" disabled><br><br>
 
 			        <label class="common">Acta constitutiva</label>
-			        <input type="file" class="common" name="files[]" disabled>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileActaConst."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label class="common">Acta protocolizada donde conste la representación legal vigente</label>
-			        <input type="file" class="common" name="files[]" disabled>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileActaProtoco."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label class="common">Municipio donde se registró la OSC</label><br>
 			       	<input type="text" class="common" value="<?php echo $municipioRegistroOSC ?>" disabled>
@@ -210,7 +213,7 @@ if (empty($_GET["id"])){
 			          value="<?php echo $idRepresentante ?>" disabled>
 
 			        <label class="common">INE del representante legal vigente</label>
-			        <input type="file" class="common" name="files[]" disabled>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileINERepre."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label>Nombre del presidente</label>
 			        <input type="text" class="common" id="nombrePresi" name="nombrePresi"
@@ -223,7 +226,7 @@ if (empty($_GET["id"])){
 			          value="<?php echo $nombreCoordi ?>" disabled>
 
 			        <label class="common">INE del coordinador del proyecto</label>
-			        <input type="file" class="common" name="files[]" disabled>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileINECoordi."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label>Correo electrónico del coordinador</label>
 			        <input type="email" class="common" id="correoCoordinador" name="correoCoordinador"
@@ -262,7 +265,7 @@ if (empty($_GET["id"])){
 			    	</div>
 
 			        <label class="common">32D en positivio y con 30 días de expedición como máximo</label>
-			        <input type="file" class="common" name="files[]" disabled>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFile32D."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label class="titulos-form">¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
@@ -276,16 +279,16 @@ if (empty($_GET["id"])){
 
 
 			        <label class="common">F21, preferentemente 2018 o más reciente</label>
-			        <input type="file" class="common" name="files[]" disabled>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileF21."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label class="common">Constancia de Situación Fiscal</label>
-			        <input type="file" class="common" name="files[]" disabled>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileConstanciaFiscal."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label class="common">Comprobante de cuenta bancaria</label>
-			        <input type="file" class="common" name="files[]" disabled>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileComprobanteBanco."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label class="common">Factura cancelada</label>
-			        <input type="file" class="common" name="files[]" disabled>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileFacturaCancelada."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label class="titulos-form">¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?</label>
 			        <div style="font-size: 20px; margin-left:20px;">
@@ -293,7 +296,7 @@ if (empty($_GET["id"])){
 			        </div>
 
 			        <label class="common">DNIAS</label>
-			        <input type="file" class="common" name="files[]" disabled>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileDNIAS."' target=»_blank»>Ver</a><br><br>";?>
 				
 
 				
@@ -313,7 +316,7 @@ if (empty($_GET["id"])){
 			          value="<?php echo $volumenICRESON ?>" disabled>
 
 			        <label class="titulos-form">RPP ICRESON</label><br/>
-			        <input type="file" class="common" name="files[]" disabled><br>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileRPPIcreson."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label class="titulos-form">¿Su organización ha tenido modificaciones a su acta constitutiva?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">
@@ -335,10 +338,10 @@ if (empty($_GET["id"])){
 			          value="<?php echo $volumenActaConsti ?>" disabled>
 
 			        <label class="common">Ultima acta modificatoria protocolizada</label><br/>
-			        <input type="file" class="common" name="files[]" disabled><br>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileUltimaActa."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label class="common">RPP ICRESON de la última acta modificatoria actualizada</label><br/>
-			        <input type="file" class="common" name="files[]" disabled><br>
+					<?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFileRPPUltimaActa."' target=»_blank»>Ver</a><br><br>";?>
 				
 
 				
@@ -350,7 +353,7 @@ if (empty($_GET["id"])){
 			          placeholder="Número de página del Diario Oficial de la Federación" value="<?php echo $numeroDiario ?>" disabled>
 
 			        <label class="common">Página del DOF donde se publicó su autorización</label><br>
-			        <input type="file" class="common" name="files[]" disabled><br>
+			       <?php echo "<br><a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$nameFilePaginaDiario."' target=»_blank»>Ver</a><br><br>";?>
 
 			        <label class="common">¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
 			        <div style="font-size: 20px; margin-left:20px;">

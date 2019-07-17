@@ -24,9 +24,7 @@
     $vision = $row['vision'];
     $areasAtencion = $row['areasAtencion'];
     $rfcHomoclave = $row['rfcHomoclave'];
-    #fileRFC
     $CLUNI = $row['CLUNI'];
-    #fileCLUNI
     $phoneOficina = $row['telefonoOficina'];
     $phoneCelular = $row['telefonoCelular'];
     $emailContacto = $row['email'];
@@ -161,8 +159,73 @@
     $esquemasRecursosComp = $row['esquemasRecursosComp'];
     $organizacionManejoRecursos = $row['organizacionManejoRecursos'];
 
+
+    //-------------------- archivos
+
+    $sql = "SELECT * FROM formularioarchivos  WHERE FK_FormularioID=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+
+    foreach ($result as $row) {
+
+        switch ($row['nombreSeccion']) {
+            case 'file_rfc':
+                $nameFileRFC = $row['FArchivosID'];
+                break;
+            case 'file_cluni':
+                $nameFileCLUNI = $row['FArchivosID'];
+                break;
+            case 'file_acta_const':
+                $nameFileActaConst = $row['FArchivosID'];
+                break;
+            case 'file_acta_protoco':
+                $nameFileActaProtoco = $row['FArchivosID'];
+                break;
+            case 'file_ine_repre':
+                $nameFileINERepre = $row['FArchivosID'];
+                break;
+            case 'file_ine_coordi':
+                $nameFileINECoordi = $row['FArchivosID'];
+                break;
+            case 'file_32_d':
+                $nameFile32D = $row['FArchivosID'];
+                break;
+            case 'file_f_21':
+                $nameFileF21 = $row['FArchivosID'];
+                break;
+            case 'file_constancia_fiscal':
+                $nameFileConstanciaFiscal = $row['FArchivosID'];
+                break;
+            case 'file_comprobante_banco':
+                $nameFileComprobanteBanco = $row['FArchivosID'];
+                break;
+            case 'file_factura_cancelada':
+                $nameFileFacturaCancelada = $row['FArchivosID'];
+                break;
+            case 'file_dnias':
+                $nameFileDNIAS = $row['FArchivosID'];
+                break;
+            case 'file_rpp_icreson':
+                $nameFileRPPIcreson = $row['FArchivosID'];
+                break;
+            case 'file_ultima_acta':
+                $nameFileUltimaActa = $row['FArchivosID'];
+                break;
+            case 'file_rpp_ultima_acta':
+                $nameFileRPPUltimaActa = $row['FArchivosID'];
+                break;
+            case 'file_pagina_diario':
+                $nameFilePaginaDiario = $row['FArchivosID'];
+                break;
+        }
+    }
+
+
     require"classes/Pre_Registro_Ver.php";
-
-
 	exit();
 

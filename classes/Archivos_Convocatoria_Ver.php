@@ -23,11 +23,11 @@ if (empty($_GET["id"])){
 		   <div class="cell -file">
 		      <i class="fa 
 		      <?php
-		      switch (strtoupper($row2['tipoArchivo'])) {
-		    	case "PDF":
+		      switch ($row2['tipoArchivo']) {
+		    	case "application/pdf":
 		    		echo "fa-file-pdf-o";
 		    		break;     
-		    	case "PNG":
+		    	case "image/jpeg":
 		    		echo "fa-file-image-o";
 		    		break;
 		    	case "TXT":
@@ -38,7 +38,7 @@ if (empty($_GET["id"])){
 		      }  	
 		      ?>" aria-hidden="true"></i>
 		      <div class="inner">
-		         <a href="#" class="filename"><?php echo $row2['nombreArchivo'];echo ".";echo $row2['tipoArchivo']; ?></a>
+		      	<?php echo "<a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$row2['FArchivosID']."' target=»_blank»>".$row2['nombreArchivo']."</a>";?>
 		         <small class="details">
 		            <span class="detail -filesize"><i class="fa fa-hdd-o" aria-hidden="true"></i>128.6kb</span>
 		            <span class="detail -updated"><i class="fa fa-clock-o" aria-hidden="true"></i><?php echo $row2['Fecha']; ?></span>
@@ -63,56 +63,4 @@ if (empty($_GET["id"])){
 
 }
 ?>
-	<div class="Files_Container">
-		<div class="row">
-		   
-		   <div class="cell -file">
-		      <i class="fa fa-file-text" aria-hidden="true"></i>
-		      <div class="inner">
-		         <a href="#" class="filename">Filename.pdf</a>
-		         <small class="details">
-		            <span class="detail -filesize"><i class="fa fa-hdd-o" aria-hidden="true"></i> 128.6kb</span>
-		            <span class="detail -updated"><i class="fa fa-clock-o" aria-hidden="true"></i> Updated 3 hours ago</span>
-		         </small>
-		      </div>
-		   </div>
-		   
-		   <button class="cell -action -download">
-		      <i class="fa fa-download" aria-hidden="true"></i>
-		      <span class="label">Download</span>
-		   </button>
-		   
-		   <button class="cell -action -share">
-		      <i class="fa fa-share-square-o" aria-hidden="true"></i>
-		      <span class="label">Share</span>
-		   </button>
-		   
-		   <button class="cell -action -more">
-		      <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-		      <span class="label">More</span>
-		   </button>
-		   
-		</div>
-	</div>
-			
-	
-
-		</div>
-	</main>
-
-<script>
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
-  });
-}
-</script>	
+</main>	

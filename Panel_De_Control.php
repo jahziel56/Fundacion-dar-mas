@@ -50,7 +50,7 @@
 		<label>Roles</label><br><br>
 		<button class="P_B Btn_C_B float-left"><a href='Campos_Rol_Lista.php'><i class='fa fa-eye fa-2x'></i><br> Ver</a></button>
 		<button class="P_B Btn_C_G float-left"><a href='Campos_Rol_Nombre.php'><i class='fa fa-plus-circle fa-2x'></i><br>Crear</a></button>
-		<button class="P_B Btn_C_Y float-left"><a href='Campos_Rol.php'><i class='fa fa-pencil fa-2x'></i><br>Modificar</a></button>
+		<button class="P_B Btn_C_Y float-left"><a href='Campos_Rol_Modificar_Lista.php'><i class='fa fa-pencil fa-2x'></i><br>Modificar</a></button>
 		<button class="P_B Btn_C_R float-left" style="border-radius: 0px 4px 4px 0px;"><a href='Campos_Rol_Lista_Eliminar.php'><i class='fa fa-trash fa-2x'></i><br>Eliminar</a></button>
 		<br><br><br>
 		</main>

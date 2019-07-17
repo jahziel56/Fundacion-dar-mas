@@ -1094,8 +1094,8 @@ button:hover.Panel_Control {
 }
 
 .row:hover .cell, .row:focus-within .cell, .row:active .cell {
-  background: rgba(186, 218, 85, 0.7);
-  border-color: #dceca9;
+  background: cadetblue;
+  border-color: white;
 }
 
 .cell {

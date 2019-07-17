@@ -128,7 +128,7 @@ window.onclick = function(event) {
 			?>	
 
 			<div class="">
-			<form action="includes/pre.inc.php" method="post">
+			<form action="includes/pre.inc.php" method="post" enctype="multipart/form-data">
 
 							
 					<label>Nombre de la OSC</label>					
@@ -474,8 +474,12 @@ window.onclick = function(event) {
 			    	<label style="color: dimgray; font-size: 18px;">(No exceder los 3 MB)</label><br/>
 			        <input type="file" class="common" name="files[]" required><br>
 
-								<label class="common">Fecha de publicación en el Diario Oficial de la Federación</label><br>
+					<label class="common">Fecha de publicación en el Diario Oficial de la Federación</label><br>
 					<input type="date" class="common" id="fechaDiario" name="fechaDiario" value="" required><br>
+
+			        <label class="form-control">Página del DOF donde se publicó su autorización</label>
+			    	<label style="color: dimgray; font-size: 18px;">(No exceder los 3 MB)</label><br/>
+			        <input type="file" class="common" name="files[]" required><br>
 
 					<label>Número de página</label>
 					<input type="text" class="common" id="numeroDiario" name="numeroDiario"

@@ -9,7 +9,7 @@ session_start();
 	<meta name="description" content="This is an example of a meta description. this will often whow up in search results.">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login</title>
-	<link rel="stylesheet" type="text/css" href="css/estilose.css">
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
   	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
