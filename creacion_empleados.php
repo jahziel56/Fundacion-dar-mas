@@ -36,6 +36,10 @@
 					}
 				}
 
+			$conn1 = new PDO("mysql:host=localhost;dbname=sistemadarmas", "root", "");
+		    $stmt2 = $conn1->prepare("SELECT * FROM rol");
+		    $stmt2->execute();
+
 			?>			
 				<form action="includes/signup.inc.empleado.php" method="post" class="Signup">
 					<input class="common" type="text" name="uid" placeholder="Nombre de usuario" required>
@@ -45,12 +49,13 @@
                     <input class="common" type="text" name="nombreEmpleado" placeholder="Nombre de empleado" required>
                     <input class="common" type="text" name="apellidoEmpleado" placeholder="Apellido de empleado" required>
                     <label>Seleccione el tipo de cuenta: </label>
-                    <select name="tipoCuenta" required>
-                        <option value="1">Abogado</option>
-                        <option value="2">Psicologo</option>
-                        <option value="3">Administrador</option>
-                        <option value="4">Contador</option>
-                    </select>			
+                    <select name="tipoCuenta" required>                   	
+
+		            <?php while($row2 = $stmt2->fetch()) {?>
+		                <option value="<?php echo $row2['Id_Rol']; ?>"><?php echo $row2['Nombre_Rol'];?></option>
+		            <?php } ?>
+
+					</select>
 					<button class="common" type="submit" name="signup-submit">Signup</button>
 				</form>
 		</div>

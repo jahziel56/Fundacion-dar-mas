@@ -2,14 +2,13 @@
 
 require"classes/header.php";
 
-    $conn1 = new PDO("mysql:host=localhost;dbname=fundacion", "root", "");
+    $conn1 = new PDO("mysql:host=localhost;dbname=sistemadarmas", "root", "");
 
     $stmt1 = $conn1->prepare("SELECT * FROM empleados");
     $stmt1->execute();
 
-    $stmt2 = $conn1->prepare("SELECT * FROM preregistro");
+    $stmt2 = $conn1->prepare("SELECT * FROM formularioprincipal");
     $stmt2->execute();
-    $row2 = $stmt2->fetch();
 ?>
 
     <main>
@@ -24,23 +23,15 @@ require"classes/header.php";
             </select>
             <br><br>
             <h6>Seleccione la solicitud a registrar: </h6>
-            <select name="solicitudSeleccionada" required>
-                <option value="1">México sin hambre</option>
-                <option value="2">México con agua</option>
-                <option value="3">México con bosques</option>
-                <option value="4">Feministas por un sueño</option>
+            <select name="solicitudSeleccionada" required>            
+            <?php while($row2 = $stmt2->fetch()) {?>
+                <option value="<?php echo $row2['FormularioID']; ?>"><?php echo $row2['nombreOSC'];?></option>
+            <?php } ?>
             </select>		
             <button class="common" type="submit" name="asignar-submit">Asignar</button>
         </form>
 
 		<div class='conten-alignt-center'>
-
-										
-		<br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br>
 		</div>
 
 	</main>;

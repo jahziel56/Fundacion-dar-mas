@@ -1,5 +1,5 @@
 <?php
-	$conn1 = new PDO("mysql:host=localhost;dbname=fundacion", "root", "");
+	$conn1 = new PDO("mysql:host=localhost;dbname=sistemadarmas", "root", "");
 /* METODO: evitar que el usuario ingrese a esta pagina php desde la barra de busqueda */
 /* signup-submit es el boton del formulario que se encuentra en la signup.php */
 	if (isset($_POST['signup-submit'])) {
@@ -31,7 +31,7 @@
 		$stmt2->bindParam(5,$ultimaID);*/
 		$stmt2->execute();
 
-		header("Location: ../login.php?signup=success");
+		header("Location: ../Panel_De_Control.php?signup=success");
 	}
 
 ?>
