@@ -12,3 +12,7 @@ $conn = mysqli_connect($servername, $dbUser, $dbPassword, $dbName);
 if (!$conn) {
 	die("Connection failed: ".mysqli_connect_error());
 }
+
+/* 
+ALTER TABLE `rol_detail` ADD CONSTRAINT `rol_detail_ibfk_1` FOREIGN KEY (`Id_Rol`) REFERENCES `rol` (`Id_Rol`); 
+*/

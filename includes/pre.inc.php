@@ -84,8 +84,8 @@ if (isset($_POST['pre-submit'])) {
     $volumenEstrituraPublica = $_POST['volumenEstrituraPublica'];
     $fechaEstritura = $_POST['fechaEstritura'];
     $municipioRegistroOSC = $_POST['municipioRegistroOSC'];
-    $estaResideOSC = $_POST['estaResideOSC'];
-    $muniResideOSC = $_POST['muniResideOSC'];
+    $estaResideOSC = $_POST['estaResideOSC']; /**/
+    $muniResideOSC = $_POST['muniResideOSC']; /**/
     $principalesLogros = $_POST['principalesLogros'];
     $metasOrganización = $_POST['metasOrganización'];
     $autorizadaDeducible = $_POST['autorizadaDeducible'];
@@ -93,9 +93,9 @@ if (isset($_POST['pre-submit'])) {
     $nombreRepresentante = $_POST['nombreRepresentante'];
     $idRepresentante = $_POST['idRepresentante'];
     $nombrePresi = $_POST['nombrePresi'];
-    $nombreCoordi = $_POST['nombreCoordi'];
+    $nombreCoordi = $_POST['nombreCoordi']; /**/
     
-    $Correos_2 = $_POST['Correos_2'];
+    $Correos_2 = $_POST['Correos_2']; /**/
     $correoCoordinador = $_POST['correoCoordinador']; 
     $correoCoordinador .='@';
     $correoCoordinador .=$Correos_2;

@@ -31,7 +31,7 @@
 					<td><?php echo $a['apellidoEmpleado']?></td>
 					<td><?php echo $a['correoEmpleado']?></td>
 					<td><?php echo $a['Nombre_Rol']?></td>
-					<td><?php echo "<a class='Hoverr' href='Campos_Rol_ver.php?id=".$a['EmpleadoID']."'><i class='fa fa-eye fa-2x'></a>";?></td>
+					<td><?php echo "<a class='Hoverr' href='Empleado_Modificar_Detalle.php?id=".$a['EmpleadoID']."'><i class='fa fa-eye fa-2x'></a>";?></td>
 
 				</tr>				  	   
 			<?php } ?>

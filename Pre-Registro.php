@@ -61,7 +61,7 @@
   </div>
 </div>
 
-	<script>		
+<script>		
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -92,40 +92,6 @@ window.onclick = function(event) {
 
 			<h1>Pre-Registro de la empresa</h1>
 			<h5>Para la proxima convocatoria</h5><br>
-			<?php 
-				if (isset($_GET['error'])) {
-					if (($_GET['error']) == "emptyfields") {
-						echo '<p class"signuperror">Fill in all fields!</p>';
-					}
-					else if (($_GET['error']) == "invalidmailuid") {
-						echo '<p class"signuperror">Fill correctly mail and Username!</p>';					
-					}
-					else if (($_GET['error']) == "invalidmail") {
-						echo '<p class"signuperror">Fill correctly mail!</p>';					
-					}
-					else if (($_GET['error']) == "invaliduid") {
-						echo '<p class"signuperror">Fill correctly Username!</p>';					
-					}
-					else if (($_GET['error']) == "passwordcheck") {
-						echo '<p class"signuperror">Repet correctly the password!</p>';
-					}
-					else if (($_GET['error']) == "usertaken") {
-						echo '<p class"signuperror">Username is already taken!</p>';
-					}
-					else if (($_GET['error']) == "Telefononum") {
-						echo '<p class"signuperror">Favor de colocar numeros en el campo telefono</p>';
-					}
-					else if (($_GET['error']) == "alreadycreated") {
-						echo '<p class"signuperror">Ya existe su pagina de usuario</p>';
-					}
-				}
-				if (isset($_GET['signup'])) {
-					if (($_GET['signup']) == "success") {
-						echo '<p class"signuperror">Perfil creado</p>';
-					}
-				}
-
-			?>	
 
 			<div class="">
 			<form action="includes/pre.inc.php" method="post" enctype="multipart/form-data">
@@ -389,7 +355,7 @@ window.onclick = function(event) {
 			        	<input type="radio" class="common" name="observaciones32D" value="No"> No <br><br>
 			    	</div>
 
-			        <label class="common">32D en positivio y con 30 días de expedición como máximo</label>  
+			        <label class="common">32D en positivo y con 30 días de expedición como máximo</label>  
 			        <label style="color: dimgray; font-size: 18px;">(No exceder los 300 KB)</label>
 			        <input type="file" class="common" name="files[]" required>
 

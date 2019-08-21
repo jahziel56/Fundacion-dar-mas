@@ -146,6 +146,6 @@
 	<p>Enviado: La convocatoria se envio, No se a asignado El empleado que la revisara</p><br>
 	<p>Revision: Se a asignado a un emplado</p><br>
 	<p>Revisado: El emplado a revisado la solicitud pero a habido problemas con esta y se a mandado una correcion</p><br>
-	<p>Corregido:La convocatoria se a enviado con anterioridad pero a tenido errores, estos se "corrigieron" y se a enviado nueva mente para su revision</p><br>
+<p>Corregido:La convocatoria se a enviado con anterioridad pero a tenido errores, estos se "corrigieron" y se a enviado nueva mente para su revision</p><br>
 	<p>Aceptado: La solicitud sea aceptado y aprobado</p><br>
 </main>

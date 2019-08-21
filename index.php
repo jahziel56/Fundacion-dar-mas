@@ -50,7 +50,8 @@
 		else{
 			//echo '<p> You are logged out!</p>';
 		}  
-	?>							
+	?>
+	<a href="Pre_Registro_New.php">Link</a>							
 	<br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br>

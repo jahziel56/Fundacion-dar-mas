@@ -1,14 +1,14 @@
 <?php 
-
 require"classes/header.php";
+require 'includes/dbh.inc.php';
 
-    $conn1 = new PDO("mysql:host=localhost;dbname=sistemadarmas", "root", "");
+    $statment = $conn->prepare("SELECT * FROM empleados");
+    $statment->execute();
+    $empleados = $statment->get_result();
 
-    $stmt1 = $conn1->prepare("SELECT * FROM empleados");
-    $stmt1->execute();
-
-    $stmt2 = $conn1->prepare("SELECT * FROM formularioprincipal");
-    $stmt2->execute();
+    $statment = $conn->prepare("SELECT * FROM formularioprincipal");
+    $statment->execute();
+    $solicitud = $statment->get_result();
 ?>
 
     <main>
@@ -16,18 +16,24 @@ require"classes/header.php";
 
 		<form action="includes/asignar.solicitud.php" method="post" class="Signup">
             <h6>Seleccione el empleado que revisará: </h6>
-            <select name="empleadoSeleccionado" required>
-                <?php while($row1 = $stmt1->fetch()) {?>
-                    <option value="<?php echo $row1['EmpleadoID']; ?>"><?php echo $row1['nombreEmpleado'];?></option>
-                <?php } ?>
-            </select>
+            <div class="selectdiv">
+                <select name="empleadoSeleccionado" required>
+                    <?php foreach ($empleados as $row) {?>
+                        <option value="<?php echo $row['EmpleadoID']; ?>"><?php echo $row['nombreEmpleado'];?></option>
+                    <?php } ?>
+                </select>
+            </div>
             <br><br>
             <h6>Seleccione la solicitud a registrar: </h6>
-            <select name="solicitudSeleccionada" required>            
-            <?php while($row2 = $stmt2->fetch()) {?>
-                <option value="<?php echo $row2['FormularioID']; ?>"><?php echo $row2['nombreOSC'];?></option>
-            <?php } ?>
-            </select>		
+
+                    
+            <div class="selectdiv">
+                <select name="solicitudSeleccionada" required>            
+                <?php foreach ($solicitud as $row) {?>
+                    <option value="<?php echo $row['FormularioID']; ?>"><?php echo $row['nombreOSC'];?></option>
+                <?php } ?>
+                </select>
+            </div>	
             <button class="common" type="submit" name="asignar-submit">Asignar</button>
         </form>
 
@@ -39,6 +45,4 @@ require"classes/header.php";
 <?php   
 /* manda a llamar a footer.php */ 
 	require"footer.php";
-
-/* el   header.php / index.php / footer.php   son en esencia una sola pagina php, se hace de esta forma para reutilizar codigo de forma facil y rapida */
 ?>
