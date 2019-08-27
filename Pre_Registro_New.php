@@ -15,6 +15,10 @@
 		'Soyopa', 'Suaqui Grande', 'Tepache', 'Trincheras', 'Tubutama', 'Ures', 'Villa Hidalgo',
 		'Villa Pesqueira', 'Yécora'
 	];
+
+	$Desarollo_Proyecto = [
+		'Salud', 'Asistencia y seguridad social (incluye asilo de ancianos, casas de día, etc)', 'Educación', 'Desarrollo urbano y vivienda', 'Deporte', 'Cultura', 'Desarrollo regional sustentable', 'Financiamiento para el desarrollo', 'Equidad género', 'Atención a pueblos indígenas', 'Juventud', 'Adultos mayores (servicios o proyectos distintos a lo asistencial, es decir, no asilos, no albergues o casas hogar)'
+	];
 		if (isset($_SESSION['user_Id'])) {
 		require 'includes/dbh.inc.php';
 
@@ -98,15 +102,15 @@ window.onclick = function(event) {
 		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Registro de la Organización</h5>
 
 			<label>1.- Correo de organización</label>
-				<div>
-					<select name="Correos_1" class="float-right correo" style="padding: 11px 20px; border-radius: 0 30px 30px 0;">
+				<div style="text-align: center">
+					<input type="text" class="correo Input_Correo" id="emailContacto" name="emailContacto" placeholder="Correo de contacto de la organización" value="" required>
+					<input type="text" value="@" class="correo Arroba_Correo" disabled>
+					<select name="Correos_1" class="correo Mail_Correo" >
 						<option value="Hotmail.com">Hotmail.com</option>
 						<option value="Gmail.com">Gmail.com</option>
 						<option value="Outlook.com">Outlook.com</option>
-					</select>
-						<input type="text" name="correo" value="@" style="width: 14px;" class="float-right correo" disabled>
-						<input type="text" class="float-right correo" style="border-radius: 30px 0 0 30px;" id="emailContacto" name="emailContacto" placeholder="Correo de contacto de la organización" value="" required>
-				</div>
+					</select>						
+				</div><br>
 
 			<label>2.- RFC</label>
 			<input type="text" class="common" id="rfcHomoclave" name="rfcHomoclave" placeholder="RFC con homoclave de la organización" value="" required>
@@ -133,8 +137,13 @@ window.onclick = function(event) {
 			<label>10.- Áreas de atención</label>
 			<textarea name="areasAtencion" class="common" id="areasAtencion" placeholder="Áreas de atención de la OSC" required></textarea>
 
-			<label>11.-</label><br><br>
-
+			
+			<label class="common">11.- ¿En qué tema de Derecho Social se desarrolla su proyecto?</label><br>
+				<select class="common" name="tema_de_Derecho_Social" value="" required>
+				    <?php foreach($Desarollo_Proyecto as $proyecto) {?>
+				  		<option><?php echo $proyecto?></option>
+				  	<?php } ?>
+				</select><br><br>
 
 			<h2></h2>
 			<label>12.- Calle</label>

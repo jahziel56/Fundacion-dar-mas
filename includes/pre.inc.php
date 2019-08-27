@@ -7,6 +7,12 @@ if (isset($_POST['pre-submit'])) {
 	require 'dbh.inc.php';	
 	session_start();
 
+
+    $Correos_1 = $_POST['Correos_1'];
+    $emailContacto = $_POST['emailContacto']; 
+    $emailContacto .='@';
+    $emailContacto .=$Correos_1;
+
     $nombreOSC = $_POST['nombreOSC'];
     $objetoSocialOrganizacion = $_POST['objetoSocialOrganizacion'];
     $mision = $_POST['mision'];
@@ -18,11 +24,6 @@ if (isset($_POST['pre-submit'])) {
     $phoneCelular = $_POST['phoneCelular'];
 
 
-
-    $Correos_1 = $_POST['Correos_1'];
-    $emailContacto = $_POST['emailContacto']; 
-    $emailContacto .='@';
-    $emailContacto .=$Correos_1;
 
 
 
@@ -56,18 +57,14 @@ if (isset($_POST['pre-submit'])) {
 
 
 
-    /* yyeee */
-
     $calle = $_POST['calle'];
     $numero = $_POST['numero'];
     $colonia = $_POST['colonia'];
     $codigoPostal = $_POST['codigoPostal'];
     $localidad = $_POST['localidad'];
-    $municipio = $_POST['municipio'];
+    //$municipio = $_POST['municipio']; /**/
     
-    /* yyeee */
-        $sql = "INSERT INTO domicilios (calle, numero, colonia, codigoPostal, localidad, municipio, FK_FormularioID) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)";        
+        $sql = "INSERT INTO domicilios (calle, numero, colonia, codigoPostal, localidad, municipio, FK_FormularioID) VALUES (?, ?, ?, ?, ?, ?, ?)";        
 		$stmt = mysqli_stmt_init($conn);
 		mysqli_stmt_prepare($stmt, $sql);
 		mysqli_stmt_bind_param($stmt, "ssssssi",$calle,$numero,$colonia,$codigoPostal,$localidad,$municipio,$ultimaID);
@@ -84,8 +81,8 @@ if (isset($_POST['pre-submit'])) {
     $volumenEstrituraPublica = $_POST['volumenEstrituraPublica'];
     $fechaEstritura = $_POST['fechaEstritura'];
     $municipioRegistroOSC = $_POST['municipioRegistroOSC'];
-    $estaResideOSC = $_POST['estaResideOSC']; /**/
-    $muniResideOSC = $_POST['muniResideOSC']; /**/
+    //$estaResideOSC = $_POST['estaResideOSC']; /**/
+    //$muniResideOSC = $_POST['muniResideOSC']; /**/
     $principalesLogros = $_POST['principalesLogros'];
     $metasOrganización = $_POST['metasOrganización'];
     $autorizadaDeducible = $_POST['autorizadaDeducible'];
@@ -93,14 +90,14 @@ if (isset($_POST['pre-submit'])) {
     $nombreRepresentante = $_POST['nombreRepresentante'];
     $idRepresentante = $_POST['idRepresentante'];
     $nombrePresi = $_POST['nombrePresi'];
-    $nombreCoordi = $_POST['nombreCoordi']; /**/
+    //$nombreCoordi = $_POST['nombreCoordi']; /**/
     
-    $Correos_2 = $_POST['Correos_2']; /**/
-    $correoCoordinador = $_POST['correoCoordinador']; 
-    $correoCoordinador .='@';
-    $correoCoordinador .=$Correos_2;
+    //$Correos_2 = $_POST['Correos_2']; /**/
+    //$correoCoordinador = $_POST['correoCoordinador']; 
+    //$correoCoordinador .='@';
+    //$correoCoordinador .=$Correos_2;
 
-    $cargoCoordinador = $_POST['cargoCoordinador'];
+    //$cargoCoordinador = $_POST['cargoCoordinador']; /**/
     $numeroEmpleados = $_POST['numeroEmpleados'];
     $numeroVoluntarios = $_POST['numeroVoluntarios'];
     $principalesAlianzas = $_POST['principalesAlianzas'];
@@ -120,7 +117,7 @@ if (isset($_POST['pre-submit'])) {
 
 
 
-    $numeroLibro = $_POST['numeroLibro'];
+    //$numeroLibro = $_POST['numeroLibro']; /**/
     $numeroInscripcion = $_POST['numeroInscripcion'];
     $volumenICRESON = $_POST['volumenICRESON'];
     $existenModis = $_POST['existenModis'];
@@ -128,7 +125,6 @@ if (isset($_POST['pre-submit'])) {
     $numeroActaConsti = $_POST['numeroActaConsti'];
     $volumenActaConsti = $_POST['volumenActaConsti'];
 
-    /* YEE */
         $sql = "INSERT INTO registroactaconstitutiva (numeroLibro, numeroInscripcion, volumenICRESON, existenModis, ultimaModi, numeroActaConsti, volumenActaConsti, FK_FormularioID) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt = mysqli_stmt_init($conn);
@@ -219,9 +215,9 @@ if (isset($_POST['pre-submit'])) {
     $nameFileRPPUltimaActa= $_FILES['files']['name'][14];
     $tipoFileRPPUltimaActa = $_FILES['files']['type'][14];
     $fileRPPUltimaActa = file_get_contents($_FILES['files']['tmp_name'][14]);
-    $nameFilePaginaDiario = $_FILES['files']['name'][15];
-    $tipoFilePaginaDiario = $_FILES['files']['type'][15];
-    $filePaginaDiario = file_get_contents($_FILES['files']['tmp_name'][15]);
+   // $nameFilePaginaDiario = $_FILES['files']['name'][15];
+   // $tipoFilePaginaDiario = $_FILES['files']['type'][15];
+   // $filePaginaDiario = file_get_contents($_FILES['files']['tmp_name'][15]);
 
         $Name_Archivo = 'file_rfc';
 
@@ -370,12 +366,12 @@ if (isset($_POST['pre-submit'])) {
 
 
 
+        echo "Guardado...";
 
-
-    header("Location: ../index.php");
-	exit();
+    //header("Location: ../index.php");
+	//exit();
 }
 else{
-	header("Location: ../index.php");
-	exit();		
+	//header("Location: ../index.php");
+	//exit();		
 }
