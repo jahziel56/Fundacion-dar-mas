@@ -29,7 +29,7 @@ Two
 			<input type="radio" class="common" name="esquemasRecursosComp" value="No" onclick="Oculto_5_N();"> No
 		</div>
 
-		<div class="hide" id="Oculto_5">
+		<div style="background: lightblue;" class="hide" id="Oculto_5">
 		<label>78.1.- Con qué organización ha manejado recursos complementarios</label>
 		<input type="text" class="common" id="organizacionManejoRecursos" name="organizacionManejoRecursos" placeholder="¿Con qué organización ha manejado recursos complementarios?" value="" required>
 		</div>
