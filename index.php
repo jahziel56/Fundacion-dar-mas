@@ -49,9 +49,10 @@
 		}
 		else{
 			//echo '<p> You are logged out!</p>';
-		}  
+		}		 
 	?>
-	<a href="Pre_Registro_New.php">Link</a>							
+	<br>
+	<a href="Pre_Registro_New.php">Registrar Una Organizacion</a>						
 	<br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br>

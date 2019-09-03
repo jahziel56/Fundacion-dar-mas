@@ -33,7 +33,7 @@
 		if(empty($row)){
 			
 		}else{
-			//header("Location: pre_ver.php?id=".$row['FormularioID']."");
+			header("Location: pre_ver.php?id=".$row['FormularioID']."");
 		}
 		
 			
@@ -96,7 +96,7 @@ window.onclick = function(event) {
 	<h1 style='background: LIGHTSEAGREEN; color: white; text-align:center; font-size:50px;'>Registro De Organizaciones De La Sociedad Civil</h1>
 
 	<div class="">
-		<form action="pre.inc.php" method="post" enctype="multipart/form-data">
+		<form action="includes/pre.inc.php" method="post" enctype="multipart/form-data">
 
 		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Datos Generales</h5>
 
@@ -507,8 +507,3 @@ function Oculto_79_S(){
   document.getElementById('Oculto_79').classList.add('Yes_Ver');
 }
 </script>
-
-<?php  
-/* manda a llamar a footer.php */ 
-	require"footer.php";
-?>

@@ -4,10 +4,10 @@
 
 if (isset($_POST['pre-submit'])) {
 	/* manda a llamar a la pagina php donde se conecta a la base de datos de esta forma se ahorra codigo y se tiene todo en una funcion mas simple */
-	require 'dbh.inc.php';	
-	session_start();
+	require 'includes/dbh.inc.php';	
+	//session_start();
 
-/* ------------------------------- Funciona ---------------------------------------------- */
+/* ------------------------------- datos_generales ---------------------------------------------- */
     $Correos_1 = $_POST['Correos_1'];
     $Correo_Organizacion = $_POST['Correo_Organizacion']; 
     $Correo_Organizacion .='@';
@@ -37,6 +37,7 @@ if (isset($_POST['pre-submit'])) {
 
 
 
+/* ------------------------------- domicilio ---------------------------------------------- */
     $calle = $_POST['calle'];
     $domicilio = $_POST['domicilio'];
     $colonia = $_POST['colonia'];
@@ -49,15 +50,20 @@ if (isset($_POST['pre-submit'])) {
 
     $domicilio_social_legal = $_POST['domicilio_social_legal'];
 
-    /* QUERY */
+    $sql = "INSERT INTO domicilio (calle, domicilio, colonia, codigoPostal, localidad, municipioRegistroOSC, Latitud, Longitud, domicilio_social_legal,  FK_FormularioID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "sssssssssi",$calle,$domicilio,$colonia,$codigoPostal,$localidad,$municipioRegistroOSC,$Latitud,$Longitud,$domicilio_social_legal,$ultimaID);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
     if (!empty($domicilio_social_legal)) {
-    echo "$domicilio_social_legal <br>";        
+    //echo "$domicilio_social_legal <br>";        
         if ($domicilio_social_legal == "No"){
             $municipio_Dom = $_POST['municipio_Dom'];
             $domicilio_Dom = $_POST['domicilio_Dom'];
             $localidad_Dom = $_POST['localidad_Dom'];
-            echo "$municipio_Dom";
+           // echo "$municipio_Dom";
             
             /* QUERY */
         }else{
@@ -69,7 +75,8 @@ if (isset($_POST['pre-submit'])) {
     }else{
         echo "Campo Domicilio social legal no selecionado";
     }
-     
+
+/* ------------------------------- contacto ---------------------------------------------- */
 
     $phoneOficina = $_POST['phoneOficina'];
     $phoneCelular = $_POST['phoneCelular'];
@@ -81,6 +88,7 @@ if (isset($_POST['pre-submit'])) {
     
     /* QUERY */
 
+/* ------------------------------- Historial_de_la_organización ---------------------------------------------- */
 
     /*Archivo*/
     $nameFileActaConst = $_FILES['files']['name'][2];
@@ -107,6 +115,8 @@ if (isset($_POST['pre-submit'])) {
 
     /* QUERY */
 
+/* ------------------------------- Acta_Constitutiva ---------------------------------------------- */
+
     /*Archivo*/
     $nameFileRPPIcreson= $_FILES['files']['name'][5];
     $tipoFileRPPIcreson = $_FILES['files']['type'][5];
@@ -121,7 +131,7 @@ if (isset($_POST['pre-submit'])) {
     /* QUERY */
 
     if (!empty($existenModis)) {
-    echo "<br>$existenModis <br>";        
+    //echo "<br>$existenModis <br>";        
         if ($existenModis == "Si"){
             $ultimaModi = $_POST['ultimaModi'];
             $numeroActaConsti = $_POST['numeroActaConsti'];
@@ -136,7 +146,7 @@ if (isset($_POST['pre-submit'])) {
             $tipoFileRPPUltimaActa = $_FILES['files']['type'][7];
             $fileRPPUltimaActa = file_get_contents($_FILES['files']['tmp_name'][7]);
 
-            echo "$ultimaModi";
+            //echo "$ultimaModi";
             
             /* QUERY */
         }else{
@@ -150,7 +160,7 @@ if (isset($_POST['pre-submit'])) {
     }  
     
     if (!empty($autorizadaDeducible)) {
-    echo "<br>$autorizadaDeducible <br>";        
+    //echo "<br>$autorizadaDeducible <br>";        
         if ($autorizadaDeducible == "Si"){
             $numeroDiario = $_POST['numeroDiario'];
             $fechaDiario = $_POST['fechaDiario'];
@@ -161,11 +171,25 @@ if (isset($_POST['pre-submit'])) {
             $nameFileDOF = $_FILES['files']['name'][8];
             $tipoFileDOF = $_FILES['files']['type'][8];
             $fileDOF = file_get_contents($_FILES['files']['tmp_name'][8]);
-
-
-            echo "$ultimaModi";
             
             /* QUERY */
+
+
+            if (!empty($detenidoAutorizado)) {
+                if ($detenidoAutorizado == "Si"){
+                    $razonDetenido = $_POST['razonDetenido'];
+
+                    //echo "$razonDetenido";
+                    
+                    /* QUERY */
+                }else{
+                    $razonDetenido = "";
+                    //echo "Nada";            
+                } 
+            }else{
+                echo "Campo detenidoAutorizado";
+            }
+
         }else{
             $numeroDiario = "";
             $fechaDiario = "";
@@ -177,22 +201,7 @@ if (isset($_POST['pre-submit'])) {
         echo "Campo autorizadaDeducible";
     }      
    
-    if (!empty($detenidoAutorizado)) {
-    echo "<br>$detenidoAutorizado <br>";        
-        if ($detenidoAutorizado == "Si"){
-            $razonDetenido = $_POST['razonDetenido'];
-
-            echo "$razonDetenido";
-            
-            /* QUERY */
-        }else{
-            $razonDetenido = "";
-            //echo "Nada";            
-        } 
-    }else{
-        echo "Campo detenidoAutorizado";
-    }
-
+/* ------------------------------- historial_de_la_organización_2 ---------------------------------------------- */
     
     $digiridaPor = $_POST['digiridaPor'];
     $nombrePresi = $_POST['nombrePresi'];
@@ -205,6 +214,7 @@ if (isset($_POST['pre-submit'])) {
 
     /* QUERY */
 
+/* ------------------------------- Población beneficiada en el úlitmo año ---------------------------------------------- */
 
     $poblacion_0_4 = $_POST['poblacion_0_4'];
     $poblacion_5_14 = $_POST['poblacion_5_14'];
@@ -215,7 +225,8 @@ if (isset($_POST['pre-submit'])) {
 
     /* QUERY */
 
-/* ------------------------------- Hasta aqui ---------------------------------------------- */
+/* -------------------------------  aaaa  ---------------------------------------------- */
+
     /*Archivo*/
     $nameFile32D = $_FILES['files']['name'][9];
     $tipoFile32D = $_FILES['files']['type'][9];
@@ -247,7 +258,7 @@ if (isset($_POST['pre-submit'])) {
     /* QUERY */
 
     if (!empty($inscritaDNIAS)) {
-    echo "<br>$inscritaDNIAS <br>";        
+    //echo "<br>$inscritaDNIAS <br>";        
         if ($inscritaDNIAS == "Si"){
             
             /*Archivo*/
@@ -259,7 +270,7 @@ if (isset($_POST['pre-submit'])) {
             
             /* QUERY */
         }else{
-            $razonDetenido = $_POST['razonDetenido'];
+            
             //echo "Nada";            
         } 
     }else{
@@ -267,11 +278,11 @@ if (isset($_POST['pre-submit'])) {
     }
 
     if (!empty($esquemasRecursosComp)) {
-    echo "<br>$esquemasRecursosComp <br>";        
+    //echo "<br>$esquemasRecursosComp <br>";        
         if ($esquemasRecursosComp == "Si"){
             $organizacionManejoRecursos = $_POST['organizacionManejoRecursos'];
 
-            echo "$organizacionManejoRecursos";
+            //echo "$organizacionManejoRecursos";
             
             /* QUERY */
         }else{
@@ -282,11 +293,12 @@ if (isset($_POST['pre-submit'])) {
         echo "Campo esquemasRecursosComp";
     }
 
+/* ------------------------------- Hasta aqui ---------------------------------------------- */
     
     
     
     
-
+    
 
 
 
