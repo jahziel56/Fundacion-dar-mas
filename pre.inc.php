@@ -1,11 +1,30 @@
 <?php
 /* METODO: evitar que el usuario ingrese a esta pagina php desde la barra de busqueda */
 /* signup-submit es el boton del formulario que se encuentra en la signup.php */
+?>
+<style>.Error_php{background: #CB4335; padding-left: 10px;}</style>
+<?php
 
 if (isset($_POST['pre-submit'])) {
 	/* manda a llamar a la pagina php donde se conecta a la base de datos de esta forma se ahorra codigo y se tiene todo en una funcion mas simple */
-	require 'includes/dbh.inc.php';	
-	//session_start();
+	require 'includes/dbh.inc.php';
+    /*  */	
+	$Contador = 0;
+
+    $rfcHomoclave = $_POST['rfcHomoclave'];
+    if (!empty($rfcHomoclave)) {
+        $Clave = substr( md5(microtime()), 1, 8);
+
+        $sql = "INSERT INTO registro (RFC_Organizacional, Clave ) VALUES (?, ?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ss",$rfcHomoclave ,$Clave);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+    }else{
+        echo "<p class='Error_php''>Error: RFC no ingresado...<p>";
+    }
+
 
 /* ------------------------------- datos_generales ---------------------------------------------- */
     $Correos_1 = $_POST['Correos_1'];
@@ -14,17 +33,35 @@ if (isset($_POST['pre-submit'])) {
     $Correo_Organizacion .=$Correos_1;
 
     /*Archivo*/
-    $nameFileRFC = $_FILES['files']['name'][0];
-    $tipoFileRFC = $_FILES['files']['type'][0];
-    $fileRFC = file_get_contents($_FILES['files']['tmp_name'][0]);  
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFileRFC = $_FILES['files']['name'][$Contador];
+        $tipoFileRFC = $_FILES['files']['type'][$Contador];
+        $fileRFC = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
-    $rfcHomoclave = $_POST['rfcHomoclave'];
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_rfc';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    }
+
+
     $CLUNI = $_POST['CLUNI'];
 
     /*Archivo*/
-    $nameFileCLUNI = $_FILES['files']['name'][1];
-    $tipoFileCLUNI = $_FILES['files']['type'][1];
-    $fileCLUNI = file_get_contents($_FILES['files']['tmp_name'][1]);
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFileCLUNI = $_FILES['files']['name'][$Contador];
+        $tipoFileCLUNI = $_FILES['files']['type'][$Contador];
+        $fileCLUNI = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_cluni';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    }    
 
     $nombreOSC = $_POST['nombreOSC'];    
     $objetoSocialOrganizacion = $_POST['objetoSocialOrganizacion'];
@@ -48,32 +85,29 @@ if (isset($_POST['pre-submit'])) {
     $Latitud = $_POST['Latitud'];
     $Longitud = $_POST['Longitud'];
 
-    $domicilio_social_legal = $_POST['domicilio_social_legal'];
-
-    $sql = "INSERT INTO domicilio (calle, domicilio, colonia, codigoPostal, localidad, municipioRegistroOSC, Latitud, Longitud, domicilio_social_legal,  FK_FormularioID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";        
+    /*$sql = "INSERT INTO domicilio (calle, domicilio, colonia, codigoPostal, localidad, municipioRegistroOSC, Latitud, Longitud, domicilio_social_legal,  FK_FormularioID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";        
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
         mysqli_stmt_bind_param($stmt, "sssssssssi",$calle,$domicilio,$colonia,$codigoPostal,$localidad,$municipioRegistroOSC,$Latitud,$Longitud,$domicilio_social_legal,$ultimaID);
         mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        $result = mysqli_stmt_get_result($stmt);*/
 
-    if (!empty($domicilio_social_legal)) {
-    //echo "$domicilio_social_legal <br>";        
+    if (!empty($_POST['domicilio_social_legal'])) {
+        $domicilio_social_legal = $_POST['domicilio_social_legal'];       
         if ($domicilio_social_legal == "No"){
             $municipio_Dom = $_POST['municipio_Dom'];
             $domicilio_Dom = $_POST['domicilio_Dom'];
             $localidad_Dom = $_POST['localidad_Dom'];
-           // echo "$municipio_Dom";
             
             /* QUERY */
-        }else{
+        }else{            
             $municipio_Dom = "";
             $domicilio_Dom = "";
-            $localidad_Dom = "";
-            //echo "Nada";            
+            $localidad_Dom = ""; 
+
         } 
     }else{
-        echo "Campo Domicilio social legal no selecionado";
+        echo "<p class='Error_php'>Error: Campo Domicilio social legal no selecionado...<p>";
     }
 
 /* ------------------------------- contacto ---------------------------------------------- */
@@ -85,23 +119,61 @@ if (isset($_POST['pre-submit'])) {
     $organizacionFB = $_POST['organizacionFB'];
     $organizacionTW = $_POST['organizacionTW'];
     $organizacionInsta = $_POST['organizacionInsta'];
+
+    if (empty($organizacionTW)){
+        $organizacionTW = 'Sin Twitter';
+    }
+
+    if (empty($organizacionInsta)){
+        $organizacionInsta = 'Sin Instagram';
+    }
     
     /* QUERY */
 
 /* ------------------------------- Historial_de_la_organización ---------------------------------------------- */
 
     /*Archivo*/
-    $nameFileActaConst = $_FILES['files']['name'][2];
-    $tipoFileActaConst = $_FILES['files']['type'][2];
-    $fileActaConst = file_get_contents($_FILES['files']['tmp_name'][2]);
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFileActaConst = $_FILES['files']['name'][$Contador];
+        $tipoFileActaConst = $_FILES['files']['type'][$Contador];
+        $fileActaConst = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_acta_const';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    }
+
     /*Archivo*/
-    $nameFileActaProtoco= $_FILES['files']['name'][3];
-    $tipoFileActaProtoco = $_FILES['files']['type'][3];
-    $fileActaProtoco = file_get_contents($_FILES['files']['tmp_name'][3]);
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFileActaProtoco= $_FILES['files']['name'][$Contador];
+        $tipoFileActaProtoco = $_FILES['files']['type'][$Contador];
+        $fileActaProtoco = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_acta_protoco';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    }
+
     /*Archivo*/
-    $nameFileINERepre = $_FILES['files']['name'][4];
-    $tipoFileINERepre = $_FILES['files']['type'][4];
-    $fileINERepre = file_get_contents($_FILES['files']['tmp_name'][4]);
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFileINERepre = $_FILES['files']['name'][$Contador];
+        $tipoFileINERepre = $_FILES['files']['type'][$Contador];
+        $fileINERepre = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_ine_repre';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    }
+
 
     $nombreRepresentante = $_POST['nombreRepresentante'];
     $idRepresentante = $_POST['idRepresentante'];
@@ -118,35 +190,63 @@ if (isset($_POST['pre-submit'])) {
 /* ------------------------------- Acta_Constitutiva ---------------------------------------------- */
 
     /*Archivo*/
-    $nameFileRPPIcreson= $_FILES['files']['name'][5];
-    $tipoFileRPPIcreson = $_FILES['files']['type'][5];
-    $fileRPPIcreson = file_get_contents($_FILES['files']['tmp_name'][5]);
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFileRPPIcreson= $_FILES['files']['name'][$Contador];
+        $tipoFileRPPIcreson = $_FILES['files']['type'][$Contador];
+        $fileRPPIcreson = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_rpp_icreson';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    }
+    
 
     $numeroLibro = $_POST['numeroLibro'];
     $numeroInscripcion = $_POST['numeroInscripcion'];    
     $volumenICRESON = $_POST['volumenICRESON'];    
-    $existenModis = $_POST['existenModis'];
-    $autorizadaDeducible = $_POST['autorizadaDeducible'];
+    
+    
 
     /* QUERY */
 
-    if (!empty($existenModis)) {
-    //echo "<br>$existenModis <br>";        
+    if (!empty($_POST['existenModis'])) {
+        $existenModis = $_POST['existenModis'];
+       
         if ($existenModis == "Si"){
             $ultimaModi = $_POST['ultimaModi'];
             $numeroActaConsti = $_POST['numeroActaConsti'];
             $volumenActaConsti = $_POST['volumenActaConsti'];
 
             /*Archivo*/
-            $nameFileUltimaActa= $_FILES['files']['name'][6];
-            $tipoFileUltimaActa = $_FILES['files']['type'][6];
-            $fileUltimaActa = file_get_contents($_FILES['files']['tmp_name'][6]);
-            /*Archivo*/
-            $nameFileRPPUltimaActa= $_FILES['files']['name'][7];
-            $tipoFileRPPUltimaActa = $_FILES['files']['type'][7];
-            $fileRPPUltimaActa = file_get_contents($_FILES['files']['tmp_name'][7]);
+            if (!empty($_FILES['files']['name'][$Contador])) {
+                $nameFileUltimaActa= $_FILES['files']['name'][$Contador];
+                $tipoFileUltimaActa = $_FILES['files']['type'][$Contador];
+                $fileUltimaActa = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
-            //echo "$ultimaModi";
+                /* Nombre identificador del archivo */
+                $Name_Archivo = 'file_ultima_acta';
+
+                /* QUERY */
+                $Contador+= 1;
+                echo $Contador;
+            } 
+            
+            /*Archivo*/
+            if (!empty($_FILES['files']['name'][$Contador])) {
+                $nameFileRPPUltimaActa= $_FILES['files']['name'][$Contador];
+                $tipoFileRPPUltimaActa = $_FILES['files']['type'][$Contador];
+                $fileRPPUltimaActa = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+                /* Nombre identificador del archivo */
+                $Name_Archivo = 'file_rpp_ultima_acta';
+
+                /* QUERY */
+                $Contador+= 1;
+                echo $Contador;
+            } 
             
             /* QUERY */
         }else{
@@ -156,26 +256,37 @@ if (isset($_POST['pre-submit'])) {
             //echo "Nada";            
         } 
     }else{
-        echo "Campo ha tenido modificaciones a su acta constitutiva no selecionado";
+        echo "<p class='Error_php'>Error: ha tenido modificaciones a su acta constitutiva no ingresado...<p>";
     }  
     
-    if (!empty($autorizadaDeducible)) {
-    //echo "<br>$autorizadaDeducible <br>";        
+    if (!empty($_POST['autorizadaDeducible'])) {
+    $autorizadaDeducible = $_POST['autorizadaDeducible'];        
         if ($autorizadaDeducible == "Si"){
             $numeroDiario = $_POST['numeroDiario'];
             $fechaDiario = $_POST['fechaDiario'];
-            $detenidoAutorizado = $_POST['detenidoAutorizado'];
+            
             $fechaAutorizada = $_POST['fechaAutorizada'];
 
             /*Archivo*/
-            $nameFileDOF = $_FILES['files']['name'][8];
-            $tipoFileDOF = $_FILES['files']['type'][8];
-            $fileDOF = file_get_contents($_FILES['files']['tmp_name'][8]);
+            if (!empty($_FILES['files']['name'][$Contador])) {
+                $nameFileDOF = $_FILES['files']['name'][$Contador];
+                $tipoFileDOF = $_FILES['files']['type'][$Contador];
+                $fileDOF = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+                /* Nombre identificador del archivo */
+
+                $Name_Archivo = 'file_pagina_diario_Oficial';
+
+                /* QUERY */
+                $Contador+= 1;
+                echo $Contador;
+            } 
+            
             
             /* QUERY */
 
 
-            if (!empty($detenidoAutorizado)) {
+            if (!empty($_POST['detenidoAutorizado'])) {
+                $detenidoAutorizado = $_POST['detenidoAutorizado'];
                 if ($detenidoAutorizado == "Si"){
                     $razonDetenido = $_POST['razonDetenido'];
 
@@ -187,7 +298,7 @@ if (isset($_POST['pre-submit'])) {
                     //echo "Nada";            
                 } 
             }else{
-                echo "Campo detenidoAutorizado";
+                echo "<p class='Error_php'>Error: Campo donativos deducibles de impuestos no ingresado...<p>";                
             }
 
         }else{
@@ -198,7 +309,7 @@ if (isset($_POST['pre-submit'])) {
             //echo "Nada";            
         } 
     }else{
-        echo "Campo autorizadaDeducible";
+        echo "<p class='Error_php'>Error: Campo donativos deducibles de impuestos no ingresado...<p>";
     }      
    
 /* ------------------------------- historial_de_la_organización_2 ---------------------------------------------- */
@@ -228,43 +339,101 @@ if (isset($_POST['pre-submit'])) {
 /* -------------------------------  aaaa  ---------------------------------------------- */
 
     /*Archivo*/
-    $nameFile32D = $_FILES['files']['name'][9];
-    $tipoFile32D = $_FILES['files']['type'][9];
-    $file32D = file_get_contents($_FILES['files']['tmp_name'][9]);
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFile32D = $_FILES['files']['name'][$Contador];
+        $tipoFile32D = $_FILES['files']['type'][$Contador];
+        $file32D = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_32_d';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    } 
+    
     /*Archivo*/
-    $nameFileF21 = $_FILES['files']['name'][10];
-    $tipoFileF21 = $_FILES['files']['type'][10];
-    $fileF21 = file_get_contents($_FILES['files']['tmp_name'][10]);
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFileF21 = $_FILES['files']['name'][$Contador];
+        $tipoFileF21 = $_FILES['files']['type'][$Contador];
+        $fileF21 = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_f_21';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    } 
+
     /*Archivo*/
-    $nameFileConstanciaFiscal = $_FILES['files']['name'][11];
-    $tipoFileConstanciaFiscal = $_FILES['files']['type'][11];
-    $fileConstanciaFiscal = file_get_contents($_FILES['files']['tmp_name'][11]);
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFileConstanciaFiscal = $_FILES['files']['name'][$Contador];
+        $tipoFileConstanciaFiscal = $_FILES['files']['type'][$Contador];
+        $fileConstanciaFiscal = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_constancia_fiscal';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    } 
+    
     /*Archivo*/
-    $nameFileComprobanteBanco = $_FILES['files']['name'][12];
-    $tipoFileComprobanteBanco = $_FILES['files']['type'][12];
-    $fileComprobanteBanco = file_get_contents($_FILES['files']['tmp_name'][12]);
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFileComprobanteBanco = $_FILES['files']['name'][$Contador];
+        $tipoFileComprobanteBanco = $_FILES['files']['type'][$Contador];
+        $fileComprobanteBanco = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_comprobante_banco';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    } 
+    
     /*Archivo*/
-    $nameFileFacturaCancelada = $_FILES['files']['name'][13];
-    $tipoFileFacturaCancelada = $_FILES['files']['type'][13];
-    $fileFacturaCancelada = file_get_contents($_FILES['files']['tmp_name'][13]);
+    if (!empty($_FILES['files']['name'][$Contador])) {
+        $nameFileFacturaCancelada = $_FILES['files']['name'][$Contador];
+        $tipoFileFacturaCancelada = $_FILES['files']['type'][$Contador];
+        $fileFacturaCancelada = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+        /* Nombre identificador del archivo */
+        $Name_Archivo = 'file_factura_cancelada';
+
+        /* QUERY */
+        $Contador+= 1;
+        echo $Contador;
+    } 
+    
     
 
     $observaciones32D = $_POST['observaciones32D'];
     $tiempoYforma = $_POST['tiempoYforma'];
     $tieneAdeudos = $_POST['tieneAdeudos'];
-    $inscritaDNIAS = $_POST['inscritaDNIAS'];
-    $esquemasRecursosComp = $_POST['esquemasRecursosComp'];
+    
+    
 
     /* QUERY */
 
-    if (!empty($inscritaDNIAS)) {
-    //echo "<br>$inscritaDNIAS <br>";        
+    if (!empty($_POST['inscritaDNIAS'])) {
+    $inscritaDNIAS = $_POST['inscritaDNIAS'];        
         if ($inscritaDNIAS == "Si"){
             
             /*Archivo*/
-            $nameFileDNIAS= $_FILES['files']['name'][14];
-            $tipoFileDNIAS = $_FILES['files']['type'][14];
-            $fileDNIAS = file_get_contents($_FILES['files']['tmp_name'][14]);
+            if (!empty($_FILES['files']['name'][$Contador])) {
+                $nameFileDNIAS= $_FILES['files']['name'][$Contador];
+                $tipoFileDNIAS = $_FILES['files']['type'][$Contador];
+                $fileDNIAS = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+                /* Nombre identificador del archivo */
+                $Name_Archivo = 'file_dnias';
+
+                /* QUERY */
+                $Contador+= 1;
+                echo $Contador;
+            }       
 
             
             
@@ -274,11 +443,11 @@ if (isset($_POST['pre-submit'])) {
             //echo "Nada";            
         } 
     }else{
-        echo "Campo ha tenido modificaciones a su acta constitutiva no selecionado";
+        echo "<p class='Error_php'>Error: modificaciones a su acta constitutiva no ingresado...<p>";
     }
 
-    if (!empty($esquemasRecursosComp)) {
-    //echo "<br>$esquemasRecursosComp <br>";        
+    if (!empty($_POST['esquemasRecursosComp'])) {
+    $esquemasRecursosComp = $_POST['esquemasRecursosComp'];       
         if ($esquemasRecursosComp == "Si"){
             $organizacionManejoRecursos = $_POST['organizacionManejoRecursos'];
 
@@ -290,15 +459,8 @@ if (isset($_POST['pre-submit'])) {
             //echo "Nada";            
         } 
     }else{
-        echo "Campo esquemasRecursosComp";
+        echo "<p class='Error_php'>Error: Campo esquemasRecursosComp no ingresado...<p>";
     }
-
-/* ------------------------------- Hasta aqui ---------------------------------------------- */
-    
-    
-    
-    
-    
 
 
 

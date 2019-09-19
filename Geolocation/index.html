@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+	<title>geo localizacion</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+        width: 100%
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+      }
+    </style>
+<script type="text/javascript">
+function loadLocation () {
+	//inicializamos la funcion y definimos  el tiempo maximo ,las funciones de error y exito.
+	navigator.geolocation.getCurrentPosition(viewMap,ViewError,{timeout:1000});
+}
+ 
+//Funcion de exito
+function viewMap (position) {
+	var lon = position.coords.longitude;	//guardamos la longitud
+	var lat = position.coords.latitude;		//guardamos la latitud
+ 
+	var link = "http://maps.google.com/?ll="+lat+","+lon+"&z=14";
+	document.getElementById("long").innerHTML = "Longitud: "+lon;
+	document.getElementById("latitud").innerHTML = "Latitud: "+lat;
+ 
+	document.getElementById("link").href = link;
+
+  //Reemplazamos las coordenadas predeterminadas por las nuevas que se generaron.
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: lat, lng: lon},
+    zoom: 13
+  });
+ 
+}
+ 
+ 
+ 
+function ViewError (error) {
+	alert(error.code);
+}
+</script>
+
+  <div id="map"></div>
+    <script>
+
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: lat, lng: lon},
+          zoom: 13
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQULLDHB9l7SoKuRP-mD_DcxyMDz1__B8&callback=initMap"
+    async defer></script>
+	
+</head>
+<body onload="loadLocation();">
+<label id="long"></label> <br/>
+<label id="latitud"></label> <br/>
+<a id="link" target="_blank">Enlace al mapa</a>
+ 
+ 
+</body>
+</html>
+
