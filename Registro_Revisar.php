@@ -41,11 +41,31 @@
 					<br>
 
 					<div class="inputGroup" style="margin-bottom: 0;">
-						<input id="option1" name="option1" type="checkbox" class="comentario" />
+						<input id="option1" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
 					    <label for="option1">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label>
 					    <div class="explication">(Respuesta)</div>
 					    <p>RESPUESTA, RESPONDIDO</p>
-					    <div class="">
+					    <div id="divComment1" class="hide">
+					    	<textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
+					    </div>
+					</div>
+					<br>
+					<div class="inputGroup" style="margin-bottom: 0;">
+						<input id="option2" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
+					    <label for="option2">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label>
+					    <div class="explication">(Respuesta)</div>
+					    <p>RESPUESTA, RESPONDIDO</p>
+					    <div id="divComment2" class="hide">
+					    	<textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
+					    </div>
+					</div>
+					<br>
+					<div class="inputGroup" style="margin-bottom: 0;">
+						<input id="option3" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
+					    <label for="option3">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label>
+					    <div class="explication">(Respuesta)</div>
+					    <p>RESPUESTA, RESPONDIDO</p>
+					    <div id="divComment3" class="hide">
 					    	<textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
 					    </div>
 					</div>
@@ -58,19 +78,36 @@
 	</main>
 
 	<script>
-		var acc = document.getElementsByClassName("comentario");
-		var i;
+		// var acc = document.getElementsByClassName("comentario");
+		// var i;
 
-		for (i = 0; i < acc.length; i++) {
-		  acc[i].addEventListener("click", function() {
-		    this.classList.toggle("active");
-		    var panel = this.nextElementSibling;
-		    if (panel.style.display === "block") {
-		      panel.style.display = "none";
-		    } else {
-		      panel.style.display = "block";
-		    }
-		  });
+		// for (i = 0; i < acc.length; i++) {
+		//   acc[i].addEventListener("click", function() {
+		//     this.classList.toggle("active");
+		//     var panel = this.nextElementSibling;
+		//     if (panel.style.display === "block") {
+		//       panel.style.display = "none";
+		//     } else {
+		//       panel.style.display = "block";
+		//     }
+		//   });
+		// }
+		function quitarComentario(CheckID){
+			console.log("El id que has recibido como parametro es: " + CheckID);
+			var idComentario = 'divComment' + CheckID.slice(-1);
+			var checkbox = document.getElementById(CheckID);
+			var comentario = document.getElementById(idComentario);
+			checkbox.addEventListener('change', function(){
+				if(checkbox.checked){
+					comentario.classList.remove("hide");
+				}else{
+					comentario.classList.add("hide");
+				}
+			});
 		}
+		
+		
+		//element.classList.add("otherclass");
+		
 
 	</script>
