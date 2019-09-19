@@ -70,6 +70,16 @@
 					    </div>
 					</div>
 					<br>
+					<div class="inputGroup" style="margin-bottom: 0;">
+						<input id="option300" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
+					    <label for="option300">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label>
+					    <div class="explication">(Respuesta)</div>
+					    <p>RESPUESTA, RESPONDIDO</p>
+					    <div id="divComment300" class="hide">
+					    	<textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
+					    </div>
+					</div>
+					<br>
 					
 			<button type="submit" class="common" name="">Enviar Revisión</button>
 		
@@ -94,7 +104,8 @@
 		// }
 		function quitarComentario(CheckID){
 			console.log("El id que has recibido como parametro es: " + CheckID);
-			var idComentario = 'divComment' + CheckID.slice(-1);
+			var numero = CheckID.replace("option","");
+			var idComentario = 'divComment' + numero;
 			var checkbox = document.getElementById(CheckID);
 			var comentario = document.getElementById(idComentario);
 			checkbox.addEventListener('change', function(){
@@ -105,7 +116,14 @@
 				}
 			});
 		}
-		
+		//S T R I N G 
+		/*
+
+			string1
+			string12
+			string101
+
+		*/
 		
 		//element.classList.add("otherclass");
 		
