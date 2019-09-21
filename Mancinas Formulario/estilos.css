@@ -4,8 +4,9 @@
 }
 body {
   font-size: 28px;
-  background: lightgray;
+  background: #D1D7DC;
   font-family: Arial;
+  box-sizing: border-box;
 }
 header{
   position: -webkit-sticky; /* Safari */
@@ -91,12 +92,16 @@ button[type=submit].half_button{
   margin: 0 auto;
 }
 
-h1{
+.info{
+
+}
+
+.info h1{
   text-align: center;
   margin-bottom: 80px;
 }
 
-p{
+.info p{
   text-align: justify;
   padding: 0 240px 0 240px;
   margin-bottom: 80px;

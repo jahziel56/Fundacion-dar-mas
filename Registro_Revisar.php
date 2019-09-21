@@ -23,29 +23,12 @@
 			<input type="hidden" name="Rol_Name" value="<?php echo $Rol_Name; ?>">
 			<input type="hidden" name="Rol_Descripcion" value="<?php echo $Rol_Descripcion; ?>">  
 				
-					<div class="checkbox">
-						<input id="checkbox_1" name="checker[]" type="checkbox" class="" value="1" checked/>
-						<label for="checkbox_1">
-						<div class="fake-label">
-							<i class="fa fa-check"></i>
-						</div>
-							<p>1.- Correo de organización</p>
-						</label>
-					</div>
-					<input type="text" class="common" name="" disabled value="Organizacion@Gmail.com"><br>
-					<input type="button" style="border: 1px solid #ccc; font-size: 20px; width: 100%" 
-					class="fa fa-input comentario" value="Hacer un comentario &#xf040">
-					<div style="background: lightblue; padding-left: 10px;" class="hide">
-						<textarea class="common"></textarea>
-					</div>
-					<br>
-
 					<div class="inputGroup" style="margin-bottom: 0;">
 						<input id="option1" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
 					    <label for="option1">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label>
 					    <div class="explication">(Respuesta)</div>
 					    <p>RESPUESTA, RESPONDIDO</p>
-					    <div id="divComment1" class="hide">
+					    <div id="divComment1" class="hide" >
 					    	<textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
 					    </div>
 					</div>

@@ -1341,8 +1341,8 @@ select::-ms-expand {
   border-bottom: 1px solid #ccc;
 }
 .inputGroup label:before {
-  width: 22px;
-  height: 16px;
+  width: 3%;
+  height: 10%;
   border-radius: 50%;
   content: '';
   background-color: #5562eb;
@@ -1406,8 +1406,7 @@ select::-ms-expand {
   margin-top:2px; 
   outline: none;
   resize: none;
-  width: 100%;
-  border-top: 1px solid #ccc;
+  width: 100%;  
   border: none;
   border-top: 1px solid #ccc;
 }
@@ -1425,15 +1424,16 @@ select::-ms-expand {
   padding: 2px 30px;
   color: #3C454C;
   width: 100%;
-  
 }
 
 /* ------------------------- Yes Open / No Hidden ------------------------- */
 .hide{
   display: none;
+  transition: max-height 2s ease-out;
 }
 
 .Yes_Ver{
   display: block;
   background: lightblue;
+  transition: max-height 2s ease-out;
 }
