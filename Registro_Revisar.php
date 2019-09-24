@@ -43,26 +43,6 @@
 					    </div>
 					</div>
 					<br>
-					<div class="inputGroup" style="margin-bottom: 0;">
-						<input id="option3" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
-					    <label for="option3">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label>
-					    <div class="explication">(Respuesta)</div>
-					    <p>RESPUESTA, RESPONDIDO</p>
-					    <div id="divComment3" class="hide">
-					    	<textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
-					    </div>
-					</div>
-					<br>
-					<div class="inputGroup" style="margin-bottom: 0;">
-						<input id="option300" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
-					    <label for="option300">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label>
-					    <div class="explication">(Respuesta)</div>
-					    <p>RESPUESTA, RESPONDIDO</p>
-					    <div id="divComment300" class="hide">
-					    	<textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
-					    </div>
-					</div>
-					<br>
 					
 			<button type="submit" class="common" name="">Enviar Revisión</button>
 		
