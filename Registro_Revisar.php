@@ -22,30 +22,40 @@
 		<form action="" method="post">
 			<input type="hidden" name="Rol_Name" value="<?php echo $Rol_Name; ?>">
 			<input type="hidden" name="Rol_Descripcion" value="<?php echo $Rol_Descripcion; ?>">  
-				
-					<div class="inputGroup" style="margin-bottom: 0;">
-						<input id="option1" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
-					    <label for="option1">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label>
-					    <div class="explication">(Respuesta)</div>
-					    <p>RESPUESTA, RESPONDIDO</p>
-					    <div id="divComment1" class="hide" >
-					    	<textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
-					    </div>
+
+
+  
+
+
+			<?php 
+			$I =0;
+			//echo "$I <br>";
+
+			$R = 'Respuesta';
+
+			echo revisar('11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?',$R,$I++);
+
+			echo revisar('12.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?',$R,$I++);
+			
+			revisar('13.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?',$R,$I++);
+
+			function revisar($P,$R,$I){?>
+			    
+				<div class="inputGroup" style="margin-bottom: 0;">
+					<input id="option<?php echo $I; ?>" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
+					<label for="option<?php echo $I; ?>"><?php echo $P; ?></label>
+					<div class="explication">(Respuesta)</div>
+					<p><?php echo $R; ?></p>
+					<div id="divComment<?php echo $I; ?>" class="hide" >
+					    <textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
 					</div>
-					<br>
-					<div class="inputGroup" style="margin-bottom: 0;">
-						<input id="option2" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
-					    <label for="option2">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label>
-					    <div class="explication">(Respuesta)</div>
-					    <p>RESPUESTA, RESPONDIDO</p>
-					    <div id="divComment2" class="hide">
-					    	<textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
-					    </div>
-					</div>
-					<br>
+				</div>
+				<br>
+
+			<?php  }	?>
 					
-			<button type="submit" class="common" name="">Enviar Revisión</button>
-		
+
+			<button type="submit" class="common" name="">Enviar Revisión</button>		
 	</form>
 		</div>
 	</main>
@@ -67,28 +77,20 @@
 		// }
 		function quitarComentario(CheckID){
 			console.log("El id que has recibido como parametro es: " + CheckID);
+
 			var numero = CheckID.replace("option","");
+
 			var idComentario = 'divComment' + numero;
+
 			var checkbox = document.getElementById(CheckID);
+
 			var comentario = document.getElementById(idComentario);
-			checkbox.addEventListener('change', function(){
-				if(checkbox.checked){
-					comentario.classList.remove("hide");
-				}else{
-					comentario.classList.add("hide");
-				}
-			});
+
+			if(checkbox.checked){
+				comentario.classList.remove("hide");
+			}else{
+				comentario.classList.add("hide");
+			}
+
 		}
-		//S T R I N G 
-		/*
-
-			string1
-			string12
-			string101
-
-		*/
-		
-		//element.classList.add("otherclass");
-		
-
 	</script>

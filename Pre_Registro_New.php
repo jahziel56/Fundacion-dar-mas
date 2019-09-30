@@ -279,7 +279,7 @@ window.onclick = function(event) {
 
 			<label class="titulos-form">44.- ¿Su organización ha tenido modificaciones a su acta constitutiva?</label><br>
 			<div style="font-size: 20px; margin-left:20px;">
-				<input type="radio" class="common" name="existenModis" value="Si" onclick="Oculto_Acta_Costitutiva_S();" > Si
+				<input type="radio" class="common" name="existenModis" value="Si" onclick="Oculto_Acta_Costitutiva_S();" required> Si
 				<input type="radio" class="common" name="existenModis" value="No" onclick="Oculto_Acta_Costitutiva_N();"> No 
 			</div>
 
@@ -417,7 +417,7 @@ window.onclick = function(event) {
 
 		<label class="common">59.- F21, del presente año (PDF)</label>
 		<label style="color: dimgray; font-size: 18px;">(No exceder los 800 KB)</label>
-		<input type="file" class="common" name="files[]" required>   
+		<input type="file" class="common" name="files[]" required>  
 
 		<label class="common">60.- Constancia de Situación Fiscal</label>
 		<input type="file" class="common" name="files[]" required>

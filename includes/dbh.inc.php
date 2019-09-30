@@ -3,7 +3,7 @@
 $servername = "localhost";
 $dbUser = "root";
 $dbPassword = "";
-$dbName = "sistemadarmas";
+$dbName = "registro_organisacion";
 
 //sistemadarmas
 //registro_organisacion

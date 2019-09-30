@@ -5,22 +5,48 @@
 <style>.Error_php{background: #CB4335; padding-left: 10px;}</style>
 <?php
 
+
+
 if (isset($_POST['pre-submit'])) {
 	/* manda a llamar a la pagina php donde se conecta a la base de datos de esta forma se ahorra codigo y se tiene todo en una funcion mas simple */
-	require 'includes/dbh.inc.php';
-    /*  */	
+        require 'includes/dbh.inc.php'; 
+	
+    /* Contador  */	
 	$Contador = 0;
 
     $rfcHomoclave = $_POST['rfcHomoclave'];
     if (!empty($rfcHomoclave)) {
-        $Clave = substr( md5(microtime()), 1, 8);
+        
+        $sql ="SELECT RFC_Organizacional FROM registro WHERE RFC_Organizacional=?";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            echo "error: Sql<br>";     
+            exit();
+        }else{
+            mysqli_stmt_bind_param($stmt, "s", $rfcHomoclave);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_store_result($stmt);
+            $resultCheck = mysqli_stmt_num_rows($stmt);
+            if ($resultCheck > 0) {
+                //header("Location: pre.inc.php");
+                //exit();
+                echo "Error: Ya existe un registro con ese rfc:$rfcHomoclave<br>";
+                //exit();
+            }else{
+                echo "Creado Exitosamente<br>";
+            }
+        }
+
+        $Clave = substr(md5(microtime()), 1, 8);
+
+        echo "Clave:$Clave <br> RFC:$rfcHomoclave";
 
         $sql = "INSERT INTO registro (RFC_Organizacional, Clave ) VALUES (?, ?)";        
         $stmt = mysqli_stmt_init($conn);
         mysqli_stmt_prepare($stmt, $sql);
         mysqli_stmt_bind_param($stmt, "ss",$rfcHomoclave ,$Clave);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        mysqli_stmt_execute($stmt);        
+        $ultimaID = $conn->insert_id;
     }else{
         echo "<p class='Error_php''>Error: RFC no ingresado...<p>";
     }
@@ -32,35 +58,43 @@ if (isset($_POST['pre-submit'])) {
     $Correo_Organizacion .='@';
     $Correo_Organizacion .=$Correos_1;
 
-    /*Archivo*/
+    /*Archivo+*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFileRFC = $_FILES['files']['name'][$Contador];
-        $tipoFileRFC = $_FILES['files']['type'][$Contador];
-        $fileRFC = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
-        /* Nombre identificador del archivo */
         $Name_Archivo = 'file_rfc';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
+        $nameFile = $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
     }
+
+
 
 
     $CLUNI = $_POST['CLUNI'];
 
-    /*Archivo*/
+    /*Archivo+*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFileCLUNI = $_FILES['files']['name'][$Contador];
-        $tipoFileCLUNI = $_FILES['files']['type'][$Contador];
-        $fileCLUNI = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        $nameFile = $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
         /* Nombre identificador del archivo */
         $Name_Archivo = 'file_cluni';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
     }    
 
     $nombreOSC = $_POST['nombreOSC'];    
@@ -132,46 +166,56 @@ if (isset($_POST['pre-submit'])) {
 
 /* ------------------------------- Historial_de_la_organización ---------------------------------------------- */
 
-    /*Archivo*/
+    /*Archivo+*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFileActaConst = $_FILES['files']['name'][$Contador];
-        $tipoFileActaConst = $_FILES['files']['type'][$Contador];
-        $fileActaConst = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        /* Nombre identificador del archivo */
+        $nameFile = $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
         /* Nombre identificador del archivo */
         $Name_Archivo = 'file_acta_const';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
     }
 
-    /*Archivo*/
+    /*Archivo+*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFileActaProtoco= $_FILES['files']['name'][$Contador];
-        $tipoFileActaProtoco = $_FILES['files']['type'][$Contador];
-        $fileActaProtoco = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        $nameFile= $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
         /* Nombre identificador del archivo */
         $Name_Archivo = 'file_acta_protoco';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
     }
 
-    /*Archivo*/
+    /*Archivo+*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFileINERepre = $_FILES['files']['name'][$Contador];
-        $tipoFileINERepre = $_FILES['files']['type'][$Contador];
-        $fileINERepre = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        $nameFile = $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
         /* Nombre identificador del archivo */
         $Name_Archivo = 'file_ine_repre';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
     }
 
 
@@ -189,18 +233,21 @@ if (isset($_POST['pre-submit'])) {
 
 /* ------------------------------- Acta_Constitutiva ---------------------------------------------- */
 
-    /*Archivo*/
+    /*Archivo+*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFileRPPIcreson= $_FILES['files']['name'][$Contador];
-        $tipoFileRPPIcreson = $_FILES['files']['type'][$Contador];
-        $fileRPPIcreson = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        $nameFile= $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
         /* Nombre identificador del archivo */
         $Name_Archivo = 'file_rpp_icreson';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
     }
     
 
@@ -220,32 +267,36 @@ if (isset($_POST['pre-submit'])) {
             $numeroActaConsti = $_POST['numeroActaConsti'];
             $volumenActaConsti = $_POST['volumenActaConsti'];
 
-            /*Archivo*/
+            /*Archivo+*/
             if (!empty($_FILES['files']['name'][$Contador])) {
-                $nameFileUltimaActa= $_FILES['files']['name'][$Contador];
-                $tipoFileUltimaActa = $_FILES['files']['type'][$Contador];
-                $fileUltimaActa = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+                $nameFile= $_FILES['files']['name'][$Contador];
+                $tipoFile = $_FILES['files']['type'][$Contador];
+                $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
                 /* Nombre identificador del archivo */
-                $Name_Archivo = 'file_ultima_acta';
+                $Name_Archivo = 'file_ultima_acta';                
 
-                /* QUERY */
-                $Contador+= 1;
-                echo $Contador;
+                $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+                $stmt = mysqli_stmt_init($conn);
+                mysqli_stmt_prepare($stmt, $sql);
+                mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+                mysqli_stmt_execute($stmt);
             } 
             
-            /*Archivo*/
+            /*Archivo+*/
             if (!empty($_FILES['files']['name'][$Contador])) {
-                $nameFileRPPUltimaActa= $_FILES['files']['name'][$Contador];
-                $tipoFileRPPUltimaActa = $_FILES['files']['type'][$Contador];
-                $fileRPPUltimaActa = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+                $nameFile= $_FILES['files']['name'][$Contador];
+                $tipoFile = $_FILES['files']['type'][$Contador];
+                $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
                 /* Nombre identificador del archivo */
                 $Name_Archivo = 'file_rpp_ultima_acta';
 
-                /* QUERY */
-                $Contador+= 1;
-                echo $Contador;
+                $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+                $stmt = mysqli_stmt_init($conn);
+                mysqli_stmt_prepare($stmt, $sql);
+                mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+                mysqli_stmt_execute($stmt);
             } 
             
             /* QUERY */
@@ -257,7 +308,10 @@ if (isset($_POST['pre-submit'])) {
         } 
     }else{
         echo "<p class='Error_php'>Error: ha tenido modificaciones a su acta constitutiva no ingresado...<p>";
-    }  
+    }
+    $Contador+=2;
+
+
     
     if (!empty($_POST['autorizadaDeducible'])) {
     $autorizadaDeducible = $_POST['autorizadaDeducible'];        
@@ -267,18 +321,21 @@ if (isset($_POST['pre-submit'])) {
             
             $fechaAutorizada = $_POST['fechaAutorizada'];
 
-            /*Archivo*/
+            /*Archivo+*/
             if (!empty($_FILES['files']['name'][$Contador])) {
-                $nameFileDOF = $_FILES['files']['name'][$Contador];
-                $tipoFileDOF = $_FILES['files']['type'][$Contador];
-                $fileDOF = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+                $nameFile = $_FILES['files']['name'][$Contador];
+                $tipoFile = $_FILES['files']['type'][$Contador];
+                $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
                 /* Nombre identificador del archivo */
 
                 $Name_Archivo = 'file_pagina_diario_Oficial';
+                
 
-                /* QUERY */
-                $Contador+= 1;
-                echo $Contador;
+                $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+                $stmt = mysqli_stmt_init($conn);
+                mysqli_stmt_prepare($stmt, $sql);
+                mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+                mysqli_stmt_execute($stmt);
             } 
             
             
@@ -310,7 +367,8 @@ if (isset($_POST['pre-submit'])) {
         } 
     }else{
         echo "<p class='Error_php'>Error: Campo donativos deducibles de impuestos no ingresado...<p>";
-    }      
+    }
+    $Contador++;      
    
 /* ------------------------------- historial_de_la_organización_2 ---------------------------------------------- */
     
@@ -338,73 +396,89 @@ if (isset($_POST['pre-submit'])) {
 
 /* -------------------------------  aaaa  ---------------------------------------------- */
 
-    /*Archivo*/
+    /*Archivo+*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFile32D = $_FILES['files']['name'][$Contador];
-        $tipoFile32D = $_FILES['files']['type'][$Contador];
-        $file32D = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        $nameFile = $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
         /* Nombre identificador del archivo */
         $Name_Archivo = 'file_32_d';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
     } 
     
     /*Archivo*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFileF21 = $_FILES['files']['name'][$Contador];
-        $tipoFileF21 = $_FILES['files']['type'][$Contador];
-        $fileF21 = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        $nameFile = $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+
         /* Nombre identificador del archivo */
         $Name_Archivo = 'file_f_21';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
     } 
 
     /*Archivo*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFileConstanciaFiscal = $_FILES['files']['name'][$Contador];
-        $tipoFileConstanciaFiscal = $_FILES['files']['type'][$Contador];
-        $fileConstanciaFiscal = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        $nameFile = $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
         /* Nombre identificador del archivo */
         $Name_Archivo = 'file_constancia_fiscal';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
-    } 
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
+    }  
     
     /*Archivo*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFileComprobanteBanco = $_FILES['files']['name'][$Contador];
-        $tipoFileComprobanteBanco = $_FILES['files']['type'][$Contador];
-        $fileComprobanteBanco = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        $nameFile = $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
         /* Nombre identificador del archivo */
         $Name_Archivo = 'file_comprobante_banco';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
     } 
     
     /*Archivo*/
     if (!empty($_FILES['files']['name'][$Contador])) {
-        $nameFileFacturaCancelada = $_FILES['files']['name'][$Contador];
-        $tipoFileFacturaCancelada = $_FILES['files']['type'][$Contador];
-        $fileFacturaCancelada = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+        $nameFile = $_FILES['files']['name'][$Contador];
+        $tipoFile = $_FILES['files']['type'][$Contador];
+        $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
         /* Nombre identificador del archivo */
         $Name_Archivo = 'file_factura_cancelada';
+        $Contador++;
 
-        /* QUERY */
-        $Contador+= 1;
-        echo $Contador;
+        $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+        $stmt = mysqli_stmt_init($conn);
+        mysqli_stmt_prepare($stmt, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+        mysqli_stmt_execute($stmt);
     } 
     
     
@@ -423,16 +497,19 @@ if (isset($_POST['pre-submit'])) {
             
             /*Archivo*/
             if (!empty($_FILES['files']['name'][$Contador])) {
-                $nameFileDNIAS= $_FILES['files']['name'][$Contador];
-                $tipoFileDNIAS = $_FILES['files']['type'][$Contador];
-                $fileDNIAS = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
+                $nameFile= $_FILES['files']['name'][$Contador];
+                $tipoFile = $_FILES['files']['type'][$Contador];
+                $file = file_get_contents($_FILES['files']['tmp_name'][$Contador]);
 
                 /* Nombre identificador del archivo */
                 $Name_Archivo = 'file_dnias';
+                $Contador++;
 
-                /* QUERY */
-                $Contador+= 1;
-                echo $Contador;
+                $sql = "INSERT INTO registro_archivos (nombreSeccion, nombreArchivo, tipoArchivo, dataArchivo, FK_Registro) VALUES (?,?,?,?,?)";        
+                $stmt = mysqli_stmt_init($conn);
+                mysqli_stmt_prepare($stmt, $sql);
+                mysqli_stmt_bind_param($stmt, "ssssi",$Name_Archivo,$nameFile,$tipoFile,$file,$ultimaID);
+                mysqli_stmt_execute($stmt);
             }       
 
             
