@@ -63,11 +63,11 @@ session_start();
             }elseif (isset($_SESSION['Type_User'])) {				
 				$nivel = $_SESSION['Type_User'];
 		  		if ($nivel == 1) {
-		  			echo "<a id='perfil_right2' class='perfil' href='Pre-Registro.php'>Pre-Registro</a>";                    
+		  			echo "<a id='perfil_right2' class='perfil' href='Pre_Registro_New.php'>Registro</a>";                    
 		  			echo '<form action="includes/logout.inc.php" method="post">
 						<button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"> Salir</i></button>
 					</form>';
-		  			echo "<a id='perfil_right1' class='perfil' href='Pre-Registro.php'>Pre-Registro</a>";
+		  			echo "<a id='perfil_right1' class='perfil' href='Pre_Registro_New.php'>Registro</a>";
                     echo "<a id='perfil_right1' class='perfil' href='OSC_acces.php'>Organizacion</a>";								
 		  		}elseif ($nivel == 2) {
                     echo "<a id='perfil_right2' class='' href='Convocatorias.php'>Convocatorias</a>"; 

@@ -85,7 +85,10 @@ if (isset($_POST['signup-submit'])) {
 
 							$selector = bin2hex(random_bytes(8));
 							$token = random_bytes(32);
-							$url = "http://localhost:8080/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
+
+							//$url = "http://localhost:8080/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
+							$url = "http://tacosalpastor.cf/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
+
 
 							$sql = "INSERT INTO confirmar_cuenta (cuenta_Id, Selector, Token) VALUES (?, ?, ?);";
 							$stmt = mysqli_stmt_init($conn);

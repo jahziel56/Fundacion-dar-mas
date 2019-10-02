@@ -11,7 +11,8 @@ if (isset($_POST['reset_password_submit'])) {
 	$selector = bin2hex(random_bytes(8));
 	$token = random_bytes(32);
 
-	$url = "http://localhost:8080/Fundacion-dar-mas/create_new_password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+	$url = "http://tacosalpastor.cf/Fundacion-dar-mas/create_new_password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+	
 
 	$expires = date("U") + 3700;
 
@@ -47,7 +48,8 @@ if (isset($_POST['reset_password_submit'])) {
 	$subject = utf8_decode("Reinicio de contraseña, Fundacion dar mas");
 	$message = utf8_decode('<h2>Solicitud de cambio de contraseña</h2><br>
 	<p>Recibimos una solicitud de cambio de contraseña para tu cuenta de Fundacion dar mas.</p><br>
-	<p>Este enlace expirará en 1 horas. Si no solicitaste un cambio de contraseña, ignora este correo y no se harán cambios en tu cuenta. Es posible que otra persona haya ingresado tu correo por error, pero te recomendamos consultar nuestros <a href="'. $url_consejos .'">consejos en Protección de cuenta</a> si tienes alguna duda o inquietud.</p>');
+	<p>Este enlace expirará en 1 horas. Si no solicitaste un cambio de contraseña, ignora este correo y no se harán cambios en tu cuenta. Es posible que otra persona haya ingresado tu correo por error, pero te recomendamos consultar nuestros <a href="'. $url_consejos .'">consejos en Protección de cuenta</a> si tienes alguna duda o inquietud.
+	http://tacosalpastor.cf/Fundacion-dar-mas/create_new_password.php?selector=" . $selector . "&validator=" . bin2hex($token)</p>');
 
 	$message .= utf8_decode("<p>Aqui esta el link para realizar el cambio de contraseña: <br>");
 

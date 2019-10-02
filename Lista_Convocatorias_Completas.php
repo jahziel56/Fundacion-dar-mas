@@ -4,11 +4,11 @@
 
 	$ID_Empleado = $_SESSION['user_Id'];
 
-	$statment = $conn->prepare("SELECT * FROM formularioprincipal");
+	$statment = $conn->prepare("SELECT * FROM registro");
 	$statment->execute();
 	$resultados = $statment->get_result();
 
-    $consultarPreregistros = "SELECT * FROM registroasignado inner join empleados on empleados.EmpleadoID = registroasignado.FK_Empleado inner join cuenta on empleados.FK_Cuenta = cuenta.Id_Cuenta WHERE Id_Cuenta = ?";
+    $consultarPreregistros = "SELECT * FROM registro inner join empleados on empleados.EmpleadoID = registroasignado.FK_Empleado inner join cuenta on empleados.FK_Cuenta = cuenta.Id_Cuenta WHERE Id_Cuenta = ?";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $consultarPreregistros);
     mysqli_stmt_bind_param($stmt, "i", $ID_Empleado);

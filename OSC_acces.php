@@ -7,37 +7,18 @@
 			<?php 
 			if (isset($_GET['error'])) {
 			echo "<main>";	
-				if (($_GET['error']) == "novery") {
-				echo '<p style="color: red;">Cuenta no verificada</p> Se envio un correo de verificacion<br>Este podria encontrarse en correos no deseados.';
+				if (($_GET['error']) == "clave_incorrecta") {
+					echo '<p style="color: red;">Error la clave no coincide</p>';
 				}
-				else if (($_GET['error']) == "invalidmailuid") {
-					echo '<p class"signuperror">LLene Correctamente el correo y El nombre de usuario!</p>';					
+				else if (($_GET['error']) == "rfc_incorrecta") {
+					echo '<p style="color: red;">Error el rfc no coincide</p>';
 				}
 			echo "</main>";
 			}
-			if (isset($_GET['rol'])) {
+			if (isset($_GET['access'])) {
 			echo "<main>";
-				if (($_GET['rol']) == "success") {
-					echo '<p class"signuperror">Se a creado el rol exitosamente</p>';
-				}
-				else if (($_GET['rol']) == "error") {
-					echo '<p class"signuperror">A habido un error</p>';					
-				}
-				else if (($_GET['rol']) == "alreadycreated") {
-					echo '<p class"signuperror">El nombre de dicho rol ya existe</p>';					
-				}
-				else if (($_GET['rol']) == "no_rol") {
-					echo '<p class"signuperror">El rol selecionado ya no existe</p>';					
-				}
-				else if (($_GET['rol']) == "delete") {
-					echo '<p class"signuperror">El rol se a eliminado</p>';					
-				}
-				echo "</main>";
-			}
-			if (isset($_GET['signup'])) {
-			echo "<main>";
-				if (($_GET['signup']) == "success") {
-					echo '<p class"signuperror">Se a creado el empleado exitosamente</p>';
+				if (($_GET['access']) == "success") {
+					echo '<p class"signuperror">Se a ingresado exitosamente</p>';
 				}
 			echo "</main>";
 			}
@@ -46,13 +27,13 @@
 	
 <main>
 	<h1 style='background: DARKGOLDENROD; color: white; text-align:center'>Acceder al registro institucional</h1>
-	<p style='background: TAN; color: white; text-align:center;'>bla bla bla</p><br>
+	<p style='background: TAN; color: white; text-align:center;'>panel de informacion sobre su organisacion</p><br>
 
-	<form action="includes/login.inc.php" method="post" class="login">
-		<input class="common" type="text" name="" placeholder="RFC Institucional" required>
-		<input class="common" type="password" name="" placeholder="Clave" required>
-		<button class="common" type="submit" name="">Acceder</button>		
-		<a href="reset_password.php" class="Link_Nonstyle">Olvido la Clave de su organisacion?</a>
+	<form action="includes/OSC_acces.inc.php" method="post" class="login">
+		<input class="common" type="text" name="RFC" placeholder="RFC Institucional" required>
+		<input class="common" type="password" name="Clave" placeholder="Clave" required>
+		<button class="common" type="submit" name="OSC_acces-submit">Acceder</button>		
+		<a style="text-decoration: line-through;" href="" class="Link_Nonstyle">Olvido la Clave de su organisacion?</a>
 	</form>
 </main>
 

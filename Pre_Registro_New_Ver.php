@@ -2,27 +2,76 @@
 	/* manda a llamar a header.php */ 
 	require"classes/header.php";
 
-		if (isset($_SESSION['user_Id'])) {
-		require 'includes/dbh.inc.php';
+	require 'includes/dbh.inc.php';	
 
-		$sql = "SELECT * FROM formularioprincipal inner join cuenta on formularioprincipal.Id_Cuenta = cuenta.Id_Cuenta WHERE cuenta.Id_Cuenta=?;";
-		$stmt = mysqli_stmt_init($conn);
-		mysqli_stmt_prepare($stmt, $sql);				
-		mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_Id']);
-		mysqli_stmt_execute($stmt);
-		$result = mysqli_stmt_get_result($stmt);
-		$row = mysqli_fetch_assoc($result);
+    //-------------------- Obtener el id a ver
 
-		if(empty($row)){
-			
-		}else{
-			//header("Location: pre_ver.php?id=".$row['FormularioID']."");
-		}
-		
-			
-	}else{
-		echo "No Sesion loged";
-	}
+    $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
+
+    $sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    
+    $Correo_Organizacion = $row['Correo_Organizacion'];
+    $rfcHomoclave = $row['rfcHomoclave'];
+    $CLUNI = $row['CLUNI'];
+    $nombreOSC = $row['nombreOSC'];
+    $objetoSocialOrganizacion = $row['objetoSocialOrganizacion'];
+    $mision = $row['mision'];
+    $vision = $row['vision'];
+    $areasAtencion = $row['areasAtencion'];
+    $tema_de_Derecho_Social = $row['tema_de_Derecho_Social'];
+
+
+
+    $sql = "SELECT * FROM contacto WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+
+    $phoneOficina = $row['phoneOficina'];
+    $phoneCelular = $row['phoneCelular'];
+    $emailContacto = $row['emailContacto'];
+    $paginaWeb = $row['paginaWeb'];
+    $organizacionFB = $row['organizacionFB'];
+    $organizacionTW = $row['organizacionTW'];
+    $organizacionInsta = $row['organizacionInsta'];
+
+    $sql = "SELECT * FROM domicilio WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $calle = $row['calle'];
+    $colonia = $row['colonia'];
+    $codigoPostal = $row['codigoPostal'];
+    $localidad = $row['localidad'];
+    $municipioRegistroOSC = $row['municipioRegistroOSC'];
+    $domicilio = $row['domicilio'];
+    $Latitud =  $row['Latitud'];
+    $Longitud =  $row['Longitud'];
+
+    // Corregir inputs
+    $domicilio_social_legal = $row ['domicilio_social_legal'];
+
+
+    	
+
+
+
+
 ?>
 
 <main>
@@ -35,23 +84,23 @@
 		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Datos Generales</h5>
 
 			<label>1.- Correo de organización</label>
-			<input type="text" class="common" id="Correo_Organizacion" name="Correo_Organizacion" placeholder="Correo de contacto de la organización" value="<?php echo $Correo_Organizacion; ?>" disabled>
+			<input type="text" class="common" id="Correo_Organizacion" name="Correo_Organizacion" value="<?php echo $Correo_Organizacion; ?>" disabled>
 
 			<label style="display: block;">2.- RFC</label>
-			<input type="text" class="common" id="rfcHomoclave" name="rfcHomoclave" placeholder="RFC con homoclave de la organización" value="<?php echo $rfcHomoclave; ?>" disabled>
+			<input type="text" class="common" id="rfcHomoclave" name="rfcHomoclave" value="<?php echo $rfcHomoclave; ?>" disabled>
 
 			<label>3.- RFC (PDF o JPG) </label><br>
 			<input type="file" class="common" name="files[]" disabled><br>
 
 
 			<label>4.- CLUNI</label>
-			<input type="text" class="common" id="CLUNI" name="CLUNI" placeholder="CLUNI (Si no se tiene, ingresar PRE-FOLIO otorgado)" value="<?php echo $CLUNI;?>" disabled>
+			<input type="text" class="common" id="CLUNI" name="CLUNI" value="<?php echo $CLUNI;?>" disabled>
 
 			<label>5.- CLUNI (PDF o JPG)</label><br>
 			<input type="file" class="common" name="files[]" disabled><br>
 
 			<label>6.- Nombre de la OSC</label>					
-			<input type="text" class="common" id="nombreOSC" name="nombreOSC" placeholder="Nombre de la OSC (tal cómo está escrita en su OSC)" value="<?php echo $nombreOSC ;?>" disabled>
+			<input type="text" class="common" id="nombreOSC" name="nombreOSC" value="<?php echo $nombreOSC ;?>" disabled>
 
 			<label>7.- Objeto social de la organización</label>
 			<input type="text" class="common" name="objetoSocialOrganizacion"  value="<?php echo $objetoSocialOrganizacion;?>" disabled>

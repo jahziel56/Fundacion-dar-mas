@@ -20,22 +20,7 @@
 		'Salud', 'Asistencia y seguridad social (incluye asilo de ancianos, casas de día, etc)', 'Educación', 'Desarrollo urbano y vivienda', 'Deporte', 'Cultura', 'Desarrollo regional sustentable', 'Financiamiento para el desarrollo', 'Equidad género', 'Atención a pueblos indígenas', 'Juventud', 'Adultos mayores (servicios o proyectos distintos a lo asistencial, es decir, no asilos, no albergues o casas hogar)'
 	];
 		if (isset($_SESSION['user_Id'])) {
-		require 'includes/dbh.inc.php';
-
-		$sql = "SELECT * FROM formularioprincipal inner join cuenta on formularioprincipal.Id_Cuenta = cuenta.Id_Cuenta WHERE cuenta.Id_Cuenta=?;";
-		$stmt = mysqli_stmt_init($conn);
-		mysqli_stmt_prepare($stmt, $sql);				
-		mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_Id']);
-		mysqli_stmt_execute($stmt);
-		$result = mysqli_stmt_get_result($stmt);
-		$row = mysqli_fetch_assoc($result);
-
-		if(empty($row)){
-			
-		}else{
-			//header("Location: pre_ver.php?id=".$row['FormularioID']."");
-		}
-		
+		require 'includes/dbh.inc.php';	
 			
 	}else{
 		echo "No Sesion loged";
@@ -101,8 +86,8 @@ window.onclick = function(event) {
 		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Datos Generales</h5>
 
 			<label>1.- Correo de organización</label>
-				<div style="display: block;">
-					<input type="text" class="correo Input_Correo" id="Correo_Organizacion" name="Correo_Organizacion" placeholder="Correo de contacto de la organización" value="" required>
+				<div style="display: block; text-align:center;">
+				<input type="text" class="correo Input_Correo" id="Correo_Organizacion" name="Correo_Organizacion" placeholder="Correo de contacto de la organización" value="" required>
 					<input type="text" value="@" class="correo Arroba_Correo" disabled>
 					<select name="Correos_1" class="correo Mail_Correo" >
 						<option value="hotmail.com">hotmail.com</option>
@@ -207,7 +192,7 @@ window.onclick = function(event) {
 				<input type="radio" class="common" name="domicilio_social_legal" value="No" onclick="Domicilio_Social_N();"> No <br><br>	
 			</div>
 
-		<div style="background: lightblue; padding-left: 10px;" class="hide" id="Oculto_Domicilio_Social">
+		<div style="background: lightblue; padding-left: 10px; box-shadow: inset 3px 3px 4px 1px rgba(0,0,0,0.30); padding: 12px;" class="hide" id="Oculto_Domicilio_Social">
 			<label>27a.- Domicilio Legal (registrado ante SAT)</label> <label style="color: dimgray; font-size: 14px;">(Calle, número, entre o esquina con, colonia,código postal, localidad y municipio)</label>
 			<input type="text" class="common" id="domicilio_Dom" name="domicilio_Dom" placeholder="Domicilio Legal" value="" >
 
@@ -389,7 +374,7 @@ window.onclick = function(event) {
 					value="" required>
 
 				<input type="text" class="common P6" id="poblacion_65_mas" name="poblacion_65_mas"
-					placeholder="45 a 64 años"
+					placeholder="65 años o mas"
 					value="" required>
 
 
