@@ -149,11 +149,15 @@ if (isset($_POST['pre-submit'])) {
 
     $phoneOficina = $_POST['phoneOficina'];
     $phoneCelular = $_POST['phoneCelular'];
-    $emailContacto = $_POST['emailContacto']; 
+    $emailContacto = $_POST['emailContacto'];
     $paginaWeb = $_POST['paginaWeb'];
     $organizacionFB = $_POST['organizacionFB'];
     $organizacionTW = $_POST['organizacionTW'];
     $organizacionInsta = $_POST['organizacionInsta'];
+
+    if (empty($paginaWeb)) {
+        $paginaWeb = 'Sin pagina Web'; 
+    }
 
     if (empty($organizacionTW)){
         $organizacionTW = 'Sin Twitter';

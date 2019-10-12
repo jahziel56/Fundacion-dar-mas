@@ -43,7 +43,7 @@
 			}
 			//Solicitante
 			if($tipoUsuario == 1){
-				echo "Bienvenido a Fundación Dar Más por Sonora";
+				echo "Fundación Dar Más para Sonora A.C.";
 			}
 			
 		}

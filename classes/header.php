@@ -22,17 +22,18 @@ session_start();
             <?php if (!isset($_SESSION['Type_User'])) {
 
                     echo '<div class="dropdown">
-                    <button class="dropbtn">quienes somos 
-                    <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-content">
-                            <a href="index.html">nosotros </a>
-                            <a href="web/mision.html">mision y vision</a>
-                            <a href="web/consejo.html">consejo</a>
-                            <a href="web/estructura.html">estructura organica</a>
-                    </div>
-                </div>';
-                                echo '<div class="dropdown">
+                        <button class="dropbtn">quienes somos 
+                        <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                                <a href="index.html">nosotros </a>
+                                <a href="web/mision.html">mision y vision</a>
+                                <a href="web/consejo.html">consejo</a>
+                                <a href="web/estructura.html">estructura organica</a>
+                        </div>
+                    </div>';
+
+                    echo '<div class="dropdown">
                         <button class="dropbtn">convocatorias 
                         <i class="fa fa-caret-down"></i>
                         </button>
@@ -41,7 +42,7 @@ session_start();
                                 <a href="web/peso.html">peso x peso </a>
                                 <a href="web/contigo.html">contigo</a>
                         </div>
-                </div>';
+                    </div>';
 
                 echo '<div class="dropdown">
                         <button class="dropbtn">transparencia 
@@ -62,37 +63,50 @@ session_start();
                     echo '<a id="login_right" href="login.php" >Login</a>';
             }elseif (isset($_SESSION['Type_User'])) {				
 				$nivel = $_SESSION['Type_User'];
-		  		if ($nivel == 1) {
-		  			echo "<a id='perfil_right2' class='perfil' href='Pre_Registro_New.php'>Registro</a>";                    
-		  			echo '<form action="includes/logout.inc.php" method="post">
+
+                //Tipo de usuario: Usuario                                             
+		  		if ($nivel == 1) {?>                    
+		  			<a id='perfil_right2' class='perfil' href='Pre_Registro_New.php'>Registro</a>
+                    <a id='perfil_right2' class='perfil' href='OSC_acces.php'>Organizacion</a>  
+  
+
+		  			<form action="includes/logout.inc.php" method="post">
 						<button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"> Salir</i></button>
-					</form>';
-		  			echo "<a id='perfil_right1' class='perfil' href='Pre_Registro_New.php'>Registro</a>";
-                    echo "<a id='perfil_right1' class='perfil' href='OSC_acces.php'>Organizacion</a>";								
-		  		}elseif ($nivel == 2) {
-                    echo "<a id='perfil_right2' class='' href='Convocatorias.php'>Convocatorias</a>"; 
-					echo '<form action="includes/logout.inc.php" method="post">
+					</form>
+
+		  			<a id='perfil_right1' class='perfil' href='Pre_Registro_New.php'>Registro</a>
+                    <a id='perfil_right1' class='perfil' href='OSC_acces.php'>Organizacion</a>	
+            <?php
+                //Tipo de usuario: Empleado  							
+		  		}elseif ($nivel == 2) { ?>
+                    <a id='perfil_right2' class='' href='Convocatorias.php'>Convocatorias</a>
+
+					<form action="includes/logout.inc.php" method="post">
 						<button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"> Salir</i></button>
-					</form>';
-                    echo "<a id='perfil_right1' class='' href='Convocatorias.php'>Convocatorias</a>"; 
-					echo '<ul class="notification-badges">';
-					echo "<a data-badge='{$_SESSION['user_Id']}' id='notificacion_right' class='' href='notificaciones.php'>Notificaciones</a>";
-					echo '</ul>';
-				}elseif ($nivel == 3) {
-                    echo "<a id='perfil_right2' class='' href='Panel_De_Control.php'>Panel De Control</a>"; 
-                    echo "<a id='perfil_right2' class='' href='Convocatorias.php'>Convocatorias</a>"; 
-                    echo '<form action="includes/logout.inc.php" method="post">
+					</form>
+
+                    <a id='perfil_right1' class='' href='Convocatorias.php'>Convocatorias</a> 
+
+            <?php  
+                //Tipo de usuario: Admin
+				}elseif ($nivel == 3) {?>
+                    <a id='perfil_right2' class='' href='Panel_De_Control.php'>Panel De Control</a>
+                    <a id='perfil_right2' class='' href='a.php'>Convocatorias</a>
+
+                    <form action="includes/logout.inc.php" method="post">
                         <button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"> Salir</i></button>
-                    </form>';
-                    echo "<a id='perfil_right1' class='' href='Panel_De_Control.php'>Panel De Control</a>";
-                    echo "<a id='perfil_right1' class='' href='Convocatorias.php'>Convocatorias</a>";
+                    </form>
+
+                    <a id='perfil_right1' class='' href='Panel_De_Control.php'>Panel De Control</a>
+                    <a id='perfil_right1' class='' href='a.php'>Convocatorias</a>
+            <?php  
                 }
 			}
-            echo '<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            ?>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
-            </a>';
+            </a>
 
-            ?>	
 
 		</div>
 </header>

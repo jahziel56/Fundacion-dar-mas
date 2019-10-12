@@ -9,9 +9,9 @@
 			<?php 
 			require 'includes/dbh.inc.php';
 
-			$statment = $conn->prepare("SELECT * FROM rol");
+			/*$statment = $conn->prepare("SELECT * FROM rol");
 			$statment->execute();
-			$resultados = $statment->get_result();
+			$resultados = $statment->get_result();*/
 			?>			
 				<form action="includes/signup.inc.empleado.php" method="post" class="Signup">
 					<input class="common" type="text" name="uid" placeholder="Nombre de usuario" required>

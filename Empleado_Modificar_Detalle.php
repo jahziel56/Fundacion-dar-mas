@@ -2,10 +2,10 @@
 	require 'includes/dbh.inc.php';
 	require"classes/header.php";
 
-		$id_Eliminar = $_GET['id'];
+		//$id_Eliminar = $_GET['id'];
 
 
-		$sql = "SELECT * FROM empleados INNER JOIN rol on empleados.FK_Roles = rol.Id_Rol WHERE EmpleadoID=?;";
+		/*$sql = "SELECT * FROM empleados INNER JOIN rol on empleados.FK_Roles = rol.Id_Rol WHERE EmpleadoID=?;";
 		$stmt = mysqli_stmt_init($conn);
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
 			header("Location: ../login.php?error=sqlerror");
@@ -16,7 +16,7 @@
 			$result = mysqli_stmt_get_result($stmt);
 			if ($row = mysqli_fetch_assoc($result)){
 			}
-		}	
+		}*/	
 ?>
 
 
@@ -26,9 +26,9 @@
 			<?php 
 			require 'includes/dbh.inc.php';
 
-			$statment = $conn->prepare("SELECT * FROM rol");
+			/*$statment = $conn->prepare("SELECT * FROM rol");
 			$statment->execute();
-			$resultados = $statment->get_result();
+			$resultados = $statment->get_result();*/
 			?>			
 				<form action="includes/signup.inc.empleado.php" method="post" class="Signup">
 				<input class="common" type="text" name="nombreEmpleado" placeholder="Nombre de empleado" value="<?php echo $row['nombreEmpleado']; ?>" required>

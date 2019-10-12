@@ -2,9 +2,9 @@
 	require 'includes/dbh.inc.php';
 	require"classes/header.php";
 
-	$statment = $conn->prepare("SELECT * FROM empleados INNER JOIN rol on empleados.FK_Roles = rol.Id_Rol");
+	/*$statment = $conn->prepare("SELECT * FROM empleados INNER JOIN rol on empleados.FK_Roles = rol.Id_Rol");
 	$statment->execute();
-	$resultados = $statment->get_result();
+	$resultados = $statment->get_result();*/
 ?>
 	
 <main>
@@ -22,7 +22,7 @@
 		<?php if(empty($resultados)){ ?>
 			</table><br>
 				  		
-			<label>No hay convocatorias en proceso..</label>
+			<label>No hay empleados..</label>
 		<?php }else{ ?>	
 
 			<?php foreach($resultados as $a) {?>				  		

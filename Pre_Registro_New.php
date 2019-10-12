@@ -165,17 +165,17 @@ window.onclick = function(event) {
 			</div>
 
 			<label>20.- Teléfono oficina</label>  
-			<input type="text" class="common" id="phoneOficina" name="phoneOficina" placeholder="Teléfono de la oficina (con lada)" value="" required>
+			<input type="number" class="common" id="phoneOficina" name="phoneOficina" placeholder="Teléfono de la oficina (con lada)" value="" required>
 
 			<label>21.- Teléfono celular</label>
-			<input type="text" class="common" id="phoneCelular" name="phoneCelular" placeholder="Teléfono celular (con lada)" value="" required>
+			<input type="number" class="common" id="phoneCelular" name="phoneCelular" placeholder="Teléfono celular (con lada)" value="" required>
 
 			<label>22.- Correo de organización</label>
 			<input type="text" class="common" id="emailContacto" name="emailContacto" placeholder="Correo de contacto de la organización" value="" required>
 
 
 			<label>23.- Página web</label>
-			<input type="url" class="common" id="paginaWeb" name="paginaWeb" placeholder="Página web de la organización" value="" required>
+			<input type="url" class="common" id="paginaWeb" name="paginaWeb" placeholder="Página web de la organización" value="" >
 
 			<label>24.- Facebook</label>
 			<input type="text" class="common" id="organizacionFB" name="organizacionFB" placeholder="Facebook de la organización" value="" required>
@@ -335,10 +335,10 @@ window.onclick = function(event) {
 		<input type="text" class="common" id="nombrePresi" name="nombrePresi" placeholder="Nombre del presidente y/o director general" value="" required>
 
 		<label>48.- Número de empleados</label>
-		<input type="text" class="common" id="numeroEmpleados" name="numeroEmpleados" placeholder="Número de empleados de la organización" value="" required>
+		<input type="number" class="common" id="numeroEmpleados" name="numeroEmpleados" placeholder="Número de empleados de la organización" value="" required>
 
 		<label>49.- Número de voluntarios</label>
-		<input type="text" class="common" id="numeroVoluntarios" name="numeroVoluntarios" placeholder="Número de voluntarios de la organización" value="" required>
+		<input type="number" class="common" id="numeroVoluntarios" name="numeroVoluntarios" placeholder="Número de voluntarios de la organización" value="" required>
 
 		<label>50.- Principales logros</label>			        
 		<input type="text" class="common" id="principalesLogros" name="principalesLogros" placeholder="Principales logros de su organización durante el último año" value="" required>
@@ -350,30 +350,30 @@ window.onclick = function(event) {
 		<input type="text" class="common" id="principalesAlianzas" name="principalesAlianzas" placeholder="Mencione las principales alianzas con las que cuente convenio o realiza acciones conjuntas" value="" required>
 
 		<label>53.- Número de personas que benefició el año anterior</label>
-		<input type="text" class="common" id="numeroBeneficiados" name="numeroBeneficiados" placeholder="Número de pesonas que beneficio el año pasado, en su totalidad, como organización" value="" required>
+		<input type="number" class="common" id="numeroBeneficiados" name="numeroBeneficiados" placeholder="Número de pesonas que beneficio el año pasado, en su totalidad, como organización" value="" required>
 	
 		<label class="common">54.- Numero de personas que veneficio en el úlitmo año</label><br> 
-				<input type="text" class="common P6" id="poblacion_0_4" name="poblacion_0_4"
+				<input type="number" class="common P6" id="poblacion_0_4" name="poblacion_0_4"
 					placeholder="0 a 4 años"
 					value="" required>
 
-				<input type="text" class="common P6" id="poblacion_5_14" name="poblacion_5_14"
+				<input type="number" class="common P6" id="poblacion_5_14" name="poblacion_5_14"
 					placeholder="5 a 14 años"
 					value="" required>
 
-				<input type="text" class="common P6" id="poblacion_15_29" name="poblacion_15_29"
+				<input type="number" class="common P6" id="poblacion_15_29" name="poblacion_15_29"
 					placeholder="15 a 29 años"
 					value="" required>
 
-				<input type="text" class="common P6" id="poblacion_30_44" name="poblacion_30_44"
+				<input type="number" class="common P6" id="poblacion_30_44" name="poblacion_30_44"
 					placeholder="30 a 44 años"
 					value=""  required>
 
-				<input type="text" class="common P6" id="poblacion_45_64" name="poblacion_45_64"
+				<input type="number" class="common P6" id="poblacion_45_64" name="poblacion_45_64"
 					placeholder="45 a 64 años"
 					value="" required>
 
-				<input type="text" class="common P6" id="poblacion_65_mas" name="poblacion_65_mas"
+				<input type="number" class="common P6" id="poblacion_65_mas" name="poblacion_65_mas"
 					placeholder="65 años o mas"
 					value="" required>
 

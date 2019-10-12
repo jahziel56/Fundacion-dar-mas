@@ -8,6 +8,7 @@
 
     $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
 
+    //---------------------  -------------------------
     $sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
@@ -16,7 +17,6 @@
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($result);
 
-    
     $Correo_Organizacion = $row['Correo_Organizacion'];
     $rfcHomoclave = $row['rfcHomoclave'];
     $CLUNI = $row['CLUNI'];
@@ -28,7 +28,7 @@
     $tema_de_Derecho_Social = $row['tema_de_Derecho_Social'];
 
 
-
+    //-------------------  -------------------------- 
     $sql = "SELECT * FROM contacto WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
@@ -46,6 +46,7 @@
     $organizacionTW = $row['organizacionTW'];
     $organizacionInsta = $row['organizacionInsta'];
 
+    //------------------  ---------------------------- 
     $sql = "SELECT * FROM domicilio WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
@@ -63,23 +64,213 @@
     $Latitud =  $row['Latitud'];
     $Longitud =  $row['Longitud'];
 
+
+
     // Corregir inputs
     $domicilio_social_legal = $row ['domicilio_social_legal'];
 
+    if ($domicilio_social_legal == 'No') {
+    	$ID_Domicilio =  $row['ID_Domicilio'];
+
+    	$sql = "SELECT * FROM domicilio_social_legal WHERE FK_Domicilio=?;";
+	    $stmt = mysqli_stmt_init($conn);
+	    mysqli_stmt_prepare($stmt, $sql);
+	    mysqli_stmt_bind_param($stmt, "i", $ID_Domicilio);
+	    mysqli_stmt_execute($stmt);
+	    $result = mysqli_stmt_get_result($stmt);
+	    $row = mysqli_fetch_assoc($result);
+
+	    $domicilio_Dom =  $row['domicilio_Dom'];
+		$localidad_Dom =  $row['localidad_Dom'];
+		$municipio_Dom =  $row['municipio_Dom'];
+    	
+    }
+
+    //------------------  ---------------------------- 
+
+
+    $sql = "SELECT * FROM historial_de_la_organizacion WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $nombreRepresentante = $row['nombreRepresentante'];
+    $idRepresentante = $row['idRepresentante'];
+    $fechaConstitucionOSC = $row['fechaConstitucionOSC'];
+    $nombreNotario = $row['nombreNotario'];
+    $numeroNotario = $row['numeroNotario'];
+    $municipioNotaria = $row['municipioNotaria'];
+    $noEstrituraPublica = $row['noEstrituraPublica'];
+    $volumenEstrituraPublica = $row['volumenEstrituraPublica'];
+    $fechaEstritura = $row['fechaEstritura'];
+
+
+    //------------------  ---------------------------- 
+
+    $sql = "SELECT * FROM acta_constitutiva WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $numeroLibro = $row['numeroLibro'];
+    $numeroInscripcion = $row['numeroInscripcion'];    
+    $volumenICRESON = $row['volumenICRESON'];
+    $existenModis = $row['existenModis'];
+    $autorizadaDeducible = $row['autorizadaDeducible']; 
+
+    $a = $row['ID_acta_constitutiva'];
+
+    if ($existenModis == 'Si') {
 
     	
 
+    	$sql = "SELECT * FROM existenmodis WHERE FK_acta_constitutiva=?;";
+	    $stmt = mysqli_stmt_init($conn);
+	    mysqli_stmt_prepare($stmt, $sql);
+	    mysqli_stmt_bind_param($stmt, "i", $a);
+	    mysqli_stmt_execute($stmt);
+	    $result = mysqli_stmt_get_result($stmt);
+	    $row = mysqli_fetch_assoc($result);
 
+    	$ultimaModi = $row['ultimaModi'];
+        $numeroActaConsti = $row['numeroActaConsti'];
+        $volumenActaConsti = $row['volumenActaConsti'];
+    }
+
+    if ($autorizadaDeducible == 'Si') {
+
+    	$sql = "SELECT * FROM autorizadadeducible WHERE FK_acta_constitutiva=?;";
+	    $stmt = mysqli_stmt_init($conn);
+	    mysqli_stmt_prepare($stmt, $sql);
+	    mysqli_stmt_bind_param($stmt, "i", $a);
+	    mysqli_stmt_execute($stmt);
+	    $result = mysqli_stmt_get_result($stmt);
+	    $row = mysqli_fetch_assoc($result);
+
+        $numeroDiario = $row['numeroDiario'];
+        $fechaDiario = $row['fechaDiario'];
+        $detenidoAutorizado = $row['detenidoAutorizado'];
+        $fechaAutorizada = $row['fechaAutorizada'];
+        $a = $row['ID_autorizadaDeducible'];
+
+
+        if ($detenidoAutorizado == 'Si') {        	
+        	
+    		$sql = "SELECT * FROM detenidoautorizado WHERE FK_autorizadaDeducible=?;";
+		    $stmt = mysqli_stmt_init($conn);
+		    mysqli_stmt_prepare($stmt, $sql);
+		    mysqli_stmt_bind_param($stmt, "i", $a);
+		    mysqli_stmt_execute($stmt);
+		    $result = mysqli_stmt_get_result($stmt);
+		    $row = mysqli_fetch_assoc($result);
+
+
+            $razonDetenido = $row['razonDetenido'];
+        }
+
+    }
+
+    //------------------  ---------------------------- 
+
+    $sql = "SELECT * FROM historial_de_la_organizacion_2 WHERE FK_Registro=?;";
+	$stmt = mysqli_stmt_init($conn);
+	mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
+	$row = mysqli_fetch_assoc($result);
+
+    $digiridaPor = $row['digiridaPor'];
+    $nombrePresi = $row['nombrePresi'];
+    $numeroEmpleados = $row['numeroEmpleados'];
+    $numeroVoluntarios = $row['numeroVoluntarios'];
+    $principalesLogros = $row['principalesLogros'];
+    $metasOrganizacion = $row['metasOrganizacion'];
+    $principalesAlianzas = $row['principalesAlianzas'];
+    $numeroBeneficiados = $row['numeroBeneficiados'];
+
+    //------------------  ---------------------------- 
+
+    $sql = "SELECT * FROM poblacion_beneficiada WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $poblacion_0_4 = $row['poblacion_0_4'];
+    $poblacion_5_14 = $row['poblacion_5_14'];
+    $poblacion_15_29 = $row['poblacion_15_29'];
+    $poblacion_30_44 = $row['poblacion_30_44'];
+    $poblacion_45_64 = $row['poblacion_45_64'];
+    $poblacion_65_mas = $row['poblacion_65_mas'];
+
+    //------------------  ---------------------------- 
+
+    $sql = "SELECT * FROM historial_de_la_organizacion_3 WHERE FK_Registro=?;";
+	$stmt = mysqli_stmt_init($conn);
+	mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
+	$row = mysqli_fetch_assoc($result);
+
+    $observaciones32D = $row['observaciones32D'];
+    $tiempoYforma = $row['tiempoYforma'];
+    $tieneAdeudos = $row['tieneAdeudos'];
+    $inscritaDNIAS = $row['inscritaDNIAS'];        
+    $esquemasRecursosComp = $row['esquemasRecursosComp']; 
+    $a = $row['ID_Historial_3'];
+
+    if ($inscritaDNIAS == 'Si') {
+    	/* Archivo */
+    }        	
+	
+    if ($esquemasRecursosComp == 'Si') {
+
+    	$sql = "SELECT * FROM esquemasrecursoscomp WHERE FK_Historial_3=?;";
+		$stmt = mysqli_stmt_init($conn);
+		mysqli_stmt_prepare($stmt, $sql);
+		mysqli_stmt_bind_param($stmt, "i", $a);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+		$row = mysqli_fetch_assoc($result);
+
+        $organizacionManejoRecursos = $row['organizacionManejoRecursos'];
+
+    }        	
+
+
+    //------------------  ---------------------------- 
+
+
+
+
+
+
+
+
+	//Error('Error: Sql_Conect_Lost');
+    //exit();    	
+function Error($P){?>
+	<main>
+		<p><?php echo $P; ?></p>
+	</main>
+<?php }
 
 
 ?>
 
 <main>
 
-	<h1 style='background: LIGHTSEAGREEN; color: white; text-align:center; font-size:50px;'>Registro De Organizaciones De La Sociedad Civil</h1>
-
-	<div class="">
-		<form action="includes/pre.inc.php" method="post" enctype="multipart/form-data">
+	<h1 style='background: LIGHTSEAGREEN; color: white; text-align:center; font-size:50px;'>Informacion Registrada de la Organizacion <?php echo $nombreOSC ;?></h1>
 
 		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Datos Generales</h5>
 
@@ -171,106 +362,95 @@
 
 			<?php if ($domicilio_social_legal == "No") { ?>
 				
-			<label>28.- Domicilio Legal (registrado ante SAT)</label>
+			<label>27a.- Domicilio Legal (registrado ante SAT)</label>
 			<input type="text" class="common" id="domicilio_Dom" name="domicilio_Dom" value="<?php echo $domicilio_Dom;?>" disabled>
 
-			<label>29.- Localidad</label>
+			<label>27b.- Localidad</label>
 			<input type="text" class="common" id="localidad_Dom" name="localidad_Dom" value="<?php echo $localidad_Dom;?>" disabled>
 
-			<label>30.- Municipio</label><br>
+			<label>27c.- Municipio</label><br>
 			<input type="text" class="common" id="municipio_Dom" name="municipio_Dom" value="<?php echo $municipio_Dom;?>" disabled>
 
 			<?php } ?>
 
+		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Órgano del gobierno</h5>
 
-
-
-
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Historial de la organización</h5>
-
-			<label class="common">31.- Acta constitutiva</label>
+			<label class="common">28.- Acta constitutiva</label>
 			<input type="file" class="common" name="files[]" disabled>
 
-			<label class="common">32.- Acta protocolizada donde conste la representación legal vigente</label>
+			<label class="common">29.- Acta protocolizada donde conste la representación legal vigente</label>
 			<input type="file" class="common" name="files[]" disabled>        
 
-			<label class="common">33.- INE del representante legal vigente</label>
+			<label class="common">30.- INE del representante legal vigente</label>
 			<input type="file" class="common" name="files[]" disabled>
 
-			<label>34.- Nombre del representante legal</label>
+			<label>31.- Nombre del representante legal</label>
 			<input type="text" class="common" name="nombreRepresentante" value="<?php echo $nombreRepresentante;?>" disabled>
 
-			<label>35.- Número de identificación oficial</label>
+			<label>32.- Número de identificación oficial</label>
 			<input type="text" class="common" name="idRepresentante"  value="<?php echo $idRepresentante;?>" disabled>
 
-			<label class="common">36.- Fecha de constitución de la OSC</label><br>
+			<label class="common">33.- Fecha de constitución de la OSC</label><br>
 			<input type="text" class="common" name="fechaConstitucionOSC"  value="<?php echo $fechaConstitucionOSC;?>" disabled>
 
 
-			<label>37.- Nombre del Notario Público donde registró su OSC</label>
+			<label>34.- Nombre del Notario Público donde registró su OSC</label>
 			<input type="text" class="common" id="nombreNotario" name="nombreNotario" value="<?php echo $nombreNotario;?>" disabled>
 
-			<label>38.- Número del notario público</label>
+			<label>35.- Número del notario público</label>
 			<input type="text" class="common" id="numeroNotario" name="numeroNotario" value="<?php echo $numeroNotario;?>" disabled>
 
-			<label class="common">39.- Municipio de la Notaría Pública</label><br>
+			<label class="common">36.- Municipio de la Notaría Pública</label><br>
 			<input type="text" class="common" name="municipioNotaria" value="<?php echo $municipioNotaria;?>" disabled>
 
-			<label>40.- Número de escritura pública</label>
+			<label>37.- Número de escritura pública</label>
 			<input type="text" class="common" name="noEstrituraPublica" value="<?php echo $noEstrituraPublica;?>" disabled>
 
-			<label>41.- Volumen (escritura pública)</label>
+			<label>38.- Volumen (escritura pública)</label>
 			<input type="text" class="common" name="volumenEstrituraPublica"  value="<?php echo $volumenEstrituraPublica;?>" disabled>
 
-			<label class="common">42.- Fecha de estritura pública</label><br>
+			<label class="common">39.- Fecha de estritura pública</label><br>
 			<input type="text" class="common" id="fechaEstritura" name="fechaEstritura" value="<?php echo $fechaEstritura;?>" disabled>
 
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Registro Público del Acta Constitutiva (ICRESON)</h5>
-
-			<label class="titulos-form">43.- RPP ICRESON</label><br/>
+			<label class="titulos-form">40.- RPP ICRESON</label><br/>
 			<input type="file" class="common" name="files[]" disabled><br>
 
-			<label>44. Número de libro</label>
+			<label>41. Número de libro</label>
 			<input type="text" class="common" id="numeroLibro" name="numeroLibro" value="<?php echo $numeroLibro;?>" disabled>
 
-			<label>45.- Número de inscrpción</label>
+			<label>42.- Número de inscrpción</label>
 			<input type="text" class="common" name="numeroInscripcion" value="<?php echo $numeroInscripcion;?>" disabled>
 
-			<label>46.- Volúmen ICRESON</label>
+			<label>43.- Volúmen ICRESON</label>
 			<input type="text" class="common" id="volumenICRESON" name="volumenICRESON" value="<?php echo $volumenICRESON;?>" disabled>
 
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Modificaciones del Acta Costitutiva</h5>
-
-			<label class="titulos-form">47.- ¿Su organización ha tenido modificaciones a su acta constitutiva?</label><br>
+			<label class="titulos-form">44.- ¿Su organización ha tenido modificaciones a su acta constitutiva?</label><br>
 			<div style="font-size: 20px; margin-left:20px;">
 				<input type="radio" class="common" name="existenModis" value="Si" checked disabled> <?php echo $existenModis; ?><br><br>
 			</div>
 
 			<?php if ($existenModis == "Si") { ?>
 
-			<label class="common">48.- Ultima acta modificatoria protocolizada</label>
+			<label class="common">44a.- Ultima acta modificatoria protocolizada</label>
 			<input type="file" class="common" name="files[]" disabled><br>
 
-			<label class="common">49.- Fecha de la última modificación del acta constitutiva</label><br>
+			<label class="common">44b.- Fecha de la última modificación del acta constitutiva</label><br>
 			<input type="text" class="common" id="ultimaModi" name="ultimaModi" value="<?php echo $ultimaModi;?>" disabled><br><br>
 
-			<label class="common">50.- RPP ICRESON de la última acta modificatoria actualizada</label>
+			<label class="common">44c.- RPP ICRESON de la última acta modificatoria actualizada</label>
 			<input type="file" class="common" name="files[]" disabled><br>
 
-			<label>51.- Número de acta constitutiva</label>
+			<label>44d.- Número de acta constitutiva</label>
 			<input type="text" class="common" id="numeroActaConsti" name="numeroActaConsti" value="<?php echo $numeroActaConsti;?>" disabled>
 
-			<label>52.- Volúmen de acta constitutiva</label>
+			<label>44e.- Volúmen de acta constitutiva</label>
 			<input type="text" class="common" id="volumenActaConsti" name="volumenActaConsti" value="<?php echo $volumenActaConsti;?>" disabled>
 
 			<?php } ?>
 
 
 		
-
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Donataria autorizada</h5>
-
-		<label class="common">53.- ¿Está autorizada para recibir donativos deducibles de impuestos?</label><br>
+		<label class="common">45.- ¿Está autorizada para recibir donativos deducibles de impuestos?</label><br>
 		<div style="font-size: 20px; margin-left:20px;">
 			<input type="radio" class="common" name="autorizadaDeducible" value="Si" checked disabled> <?php echo $autorizadaDeducible; ?><br><br>	
 		</div> 
@@ -278,121 +458,114 @@
 		
 		<?php if ($autorizadaDeducible == "Si") { ?>
 
-		<label class="form-control">54.- Página del DOF donde se publicó su autorización</label>
+		<label class="form-control">45a.- Página del DOF donde se publicó su autorización</label>
 		<input type="file" class="common" name="files[]" disabled><br>
 
-		<label>55.- número de página donde se identifica a su OSC</label>
+		<label>45b.- número de página donde se identifica a su OSC</label>
 		<input type="text" class="common" id="numeroDiario" name="numeroDiario"	value="<?php echo $numeroDiario;?>" disabled>
 
-		<label class="common">56.- Fecha de publicación en el Diario Oficial de la Federación</label><br>
+		<label class="common">45c.- Fecha de publicación en el Diario Oficial de la Federación</label><br>
 		<input type="text" class="common" id="fechaDiario" name="fechaDiario" value="<?php echo $fechaDiario;?>" disabled><br>
 
-		<label class="common">57.- ¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
+		<label class="common">45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
 		<input type="radio" class="common" name="detenidoAutorizado" value="Si" checked disabled> <?php echo $detenidoAutorizado; ?><br><br>
 
-		<label>58.- ¿Por qué detuvo el SAT su aturización?</label>
+		<?php if ($detenidoAutorizado == "Si") { ?>
+
+		<label>45e.- ¿Por qué detuvo el SAT su aturización?</label>
 		<input type="text" class="common" id="razonDetenido" name="razonDetenido" value="<?php echo $razonDetenido;?>" disabled>
 
-		<label class="common">59.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?</label><br>
+		<?php } ?>
+
+		<label class="common">45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?</label><br>
 		<input type="text" class="common" id="fechaAutorizada" name="fechaAutorizada" value="<?php echo $fechaAutorizada;?>" disabled>
 
 		<?php } ?>
 
 
-		
-
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Historial de la Organización (2)</h5>
-
-		<label class="common">60.- Su organización se rige o es dirigida por:</label>
+		<label class="common">46.- Su organización se rige o es dirigida por:</label>
 		<div style="font-size: 20px; margin-left:20px;">
 			<input type="radio" class="common" name="digiridaPor" checked disabled> <?php echo $digiridaPor; ?><br><br>
 		</div>
 
-		<label>61.- Nombre del presidente</label>
+		<label>47.- Nombre del presidente</label>
 		<input type="text" class="common" id="nombrePresi" name="nombrePresi" value="<?php echo $nombrePresi;?>" disabled>
 
-		<label>62.- Número de empleados</label>
+		<label>48.- Número de empleados</label>
 		<input type="text" class="common" id="numeroEmpleados" name="numeroEmpleados" value="<?php echo $numeroEmpleados;?>" disabled>
 
-		<label>63.- Número de voluntarios</label>
+		<label>49.- Número de voluntarios</label>
 		<input type="text" class="common" name="numeroVoluntarios" value="<?php echo $numeroVoluntarios;?>" disabled>
 
-		<label>64.- Principales logros</label>			        
+		<label>50.- Principales logros</label>			        
 		<input type="text" class="common" id="principalesLogros" name="principalesLogros" value="<?php echo $principalesLogros;?>" disabled>
 
-		<label>65.- Metas de la organización</label>
-		<input type="text" class="common" id="metasOrganización" name="metasOrganización" value="<?php echo $metasOrganización;?>" disabled>
+		<label>51.- Metas de la organización</label>
+		<input type="text" class="common" id="metasOrganización" name="metasOrganización" value="<?php echo $metasOrganizacion;?>" disabled>
 
-		<label>66.- Alianzas con las que cuenta</label>
+		<label>52.- Alianzas con las que cuenta</label>
 		<input type="text" class="common" name="principalesAlianzas"  value="<?php echo $principalesAlianzas;?>" disabled>
 
-		<label>67.- Número de personas que benefició el año anterior</label>
+		<label>53.- Número de personas que benefició el año anterior</label>
 		<input type="text" class="common" name="numeroBeneficiados"  value="<?php echo $numeroBeneficiados;?>" disabled>
 
-	
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Población beneficiada en el úlitmo año</h5>
+		<label class="common">54.- Población que atiende la OSC</label><br> 
+				<input type="number" class="common P6" name="poblacion_0_4"	value="<?php echo $poblacion_0_4;?>" disabled>
 
-		<label class="common">68.- Población que atiende la OSC</label><br> 
-				<input type="text" class="common P6" id="poblacion_0_4" name="poblacion_0_4"
-					placeholder="0 a 4 años"
-					value="<?php echo $poblacion_0_4;?>" disabled>
+				<input type="number" class="common P6" name="poblacion_5_14" value="<?php echo $poblacion_5_14;?>" disabled>
 
-				<input type="text" class="common P6" name="poblacion_5_14" value="<?php echo $poblacion_5_14;?>" disabled>
+				<input type="number" class="common P6" name="poblacion_15_29"	value="<?php echo $poblacion_15_29;?>" disabled>
 
-				<input type="text" class="common P6" name="poblacion_15_29"	value="<?php echo $poblacion_15_29;?>" disabled>
+				<input type="number" class="common P6" name="poblacion_30_44"	value="<?php echo $poblacion_30_44;?>"  disabled>
 
-				<input type="text" class="common P6" name="poblacion_30_44"	value="<?php echo $poblacion_30_44;?>"  disabled>
+				<input type="number" class="common P6" name="poblacion_45_64"	value="<?php echo $poblacion_45_64;?>" disabled>
 
-				<input type="text" class="common P6" name="poblacion_45_64"	value="<?php echo $poblacion_45_64;?>" disabled>
+				<input type="number" class="common P6" name="poblacion_65_mas" value="<?php echo $poblacion_65_mas;?>" disabled>
 
-				<input type="text" class="common P6" name="poblacion_65_mas" value="<?php echo $poblacion_65_mas;?>" disabled>
-
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Historial de la organización (3)</h5>
-
-		<label class="titulos-form">69.- ¿Tiene observaciones en su 32 D?</label>
+		<label class="titulos-form">55.- ¿Tiene observaciones en su 32 D?</label>
 		<div style="font-size: 20px; margin-left:20px;">
 			<input type="radio" class="common" name="observaciones32D" value="Si" checked disabled> <?php echo $observaciones32D; ?><br><br>
 		</div>
 
-		<label class="common">70.- 32D en positivo y con 30 días de expedición como máximo</label>  
+		<label class="common">56.- 32D en positivo y con 30 días de expedición como máximo</label>  
 		<input type="file" class="common" name="files[]" disabled>
 
-		<label class="titulos-form">71.- ¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?</label>
+		<label class="titulos-form">57.- ¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?</label>
 		<div style="font-size: 20px; margin-left:20px;">
 			<input type="radio" class="common" name="tiempoYforma" value="No"checked disabled> <?php echo $tiempoYforma; ?><br><br>
 		</div>
 
-		<label class="titulos-form">72.- ¿Tiene adeudos fiscales a cargo, por impuestos federales?</label>
+		<label class="titulos-form">58.- ¿Tiene adeudos fiscales a cargo, por impuestos federales?</label>
 		<div style="font-size: 20px; margin-left:20px;">
 			<input type="radio" class="common" name="tieneAdeudos" value="Si" checked disabled> <?php echo $tieneAdeudos; ?><br><br>
 		</div>
 
-		<label class="common">73.- F21, del presente año (PDF)</label>
+		<label class="common">59.- F21, del presente año (PDF)</label>
 		<input type="file" class="common" name="files[]" disabled>   
 
-		<label class="common">74.- Constancia de Situación Fiscal</label>
+		<label class="common">60.- Constancia de Situación Fiscal</label>
 		<input type="file" class="common" name="files[]" disabled>
 
-		<label class="common">75.- Comprobante de cuenta bancaria</label>
+		<label class="common">61.- Comprobante de cuenta bancaria</label>
 		<input type="file" class="common" name="files[]" disabled>
 
-		<label class="common">76.- Factura cancelada</label>
+		<label class="common">62.- Factura cancelada</label>
 		<input type="file" class="common" name="files[]" disabled>
 
-		<label class="titulos-form">77.- ¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?</label>
+		<label class="titulos-form">63.- ¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?</label>
 		<div style="font-size: 20px; margin-left:20px;">
 			<input type="radio" class="common" name="inscritaDNIAS" value="No" checked disabled> <?php echo $inscritaDNIAS; ?><br><br>
 		</div>
 
 		<?php if ($inscritaDNIAS == "Si") { ?>
 
-		<label class="common">78.- DNIAS</label>
+		<label class="common">63a.- DNIAS</label>
 		<input type="file" class="common" name="files[]" disabled>
 
 		<?php } ?>
 		
 
-		<label class="titulos-form">79.- ¿Ha manejado esquemas de recursos complementarios?</label><br>
+		<label class="titulos-form">64.- ¿Ha manejado esquemas de recursos complementarios?</label><br>
 		<div style="font-size: 20px; margin-left:20px;">
 		<input type="radio" class="common" name="esquemasRecursosComp" value="Si" checked disabled> <?php echo $esquemasRecursosComp; ?><br><br>
 		</div>
@@ -400,14 +573,8 @@
 
 		<?php if ($esquemasRecursosComp == "Si") { ?>
 
-		<label>80.- Con qué organización ha manejado recursos complementarios</label>
+		<label>64a.- Con qué organización ha manejado recursos complementarios</label>
 		<input type="text" class="common" name="organizacionManejoRecursos"  value="<?php echo $organizacionManejoRecursos;?>" disabled>
 
 		<?php } ?>
-
-
-		
-		 <button class="common" type="submit" name="pre-submit">Registrar</button>
-		</form>
-	</div>
 </main>

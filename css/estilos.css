@@ -69,43 +69,15 @@ main{
   display: block;
 }
 /* --------------------------------- Inputs ------------------------------ */
-/*input[type=text],input[type=password], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc; 
-  box-sizing: border-box;
-  border-radius: 6px;  
-}
-input[type=text],input[type=password]{
- border-radius: 30px;
- outline:0px;
-}
-
-input[type=text]:focus,
-input[type=password]:focus {
-    box-shadow: 0 0 1pt 1pt #2774EA;
-}
-
-button[type=submit] {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button[type=submit]:hover {
-  background-color: #45a049;
-}*/
-/* --------------------------------- signup  ------------------------------ */
 .Error_php{
   background: #CB4335; 
   padding-left: 10px;
+}
+
+input[type=number].common::-webkit-inner-spin-button, 
+input[type=number].common::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 
@@ -114,6 +86,7 @@ button[type=submit]:hover {
 .Pre-Registro input[type=email].common,
 .Pre-Registro input[type=url].common,
 .Pre-Registro input[type=file].common,
+.Pre-Registro input[type=number].common,
 .Pre-Registro textarea.common{
   width: 95%;
   padding: 12px 20px;
@@ -141,6 +114,7 @@ input[type=password].common,
 input[type=email].common,
 input[type=url].common,
 input[type=file].common,
+input[type=number].common,
 textarea.common{
   width: 100%;
   padding: 12px 20px;
@@ -165,23 +139,6 @@ textarea.common{
 input[type=radio].common{
   
 }
-/* Pre-registro
-  <style type="text/css">
-    input{
-      margin-bottom: 30px;
-      width: 100%;
-    }
-
-    input[type=radio].common{
-        margin-bottom: 0px;
-      width: 10%;
-    }
-    textarea.common{
-      margin-bottom: 30px;
-      width: 100%;
-    }
-  </style>
-*/
 
 .Pre-Registro select,
 .Pre-Registro input[type=date]{
@@ -189,7 +146,7 @@ input[type=radio].common{
   width: 90%;
 }
 
-input[type=text].P6{
+input[type=number].P6{
   width: 16%;
 }
 
@@ -688,35 +645,6 @@ a i:hover{
 .r i{
   color: #D80000;
 }
-
-
-/* ----------------------- Style Upload ------------------- */
-
-/*input[type="file"] {
-    display: none;
-}
-.custom-file-upload {
-    border: 2px solid #8E8E8E;
-    display: block;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 30px;
-    background:#F6F6F6;
-}
-
-.custom-file-upload:hover{
-  background:#B2B2B2;
-  border: 2px solid #414141;
-}
-
-/*          <label for="file-upload" class="custom-file-upload">
-              <i class="fa fa-cloud-upload"></i> Custom Upload
-          </label>
-          <input id="file-upload" type="file"/>
-*/
-
-/* -----------------------  ------------------- */
-
 
 /* Style the tab */
 .tab {
@@ -1447,4 +1375,24 @@ select::-ms-expand {
   display: block;
   background: lightblue;
   transition: max-height 2s ease-out;
+}
+/* ------------------------- Barr change ------------------------- */
+.Bar_change{
+  display: flex;
+  cursor: pointer;
+}
+
+.Bar_change div{
+  background: ;
+  width: 33%;
+  margin: 5px;
+  text-align: center;
+  padding: 10px 2px;
+  background: MEDIUMPURPLE;
+  color: white;
+  border-radius: 6px;
+  font-size: 26px;
+}
+.Bar_change div:hover{
+background: REBECCAPURPLE;
 }
