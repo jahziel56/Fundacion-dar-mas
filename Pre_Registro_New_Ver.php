@@ -8,7 +8,7 @@
 
     $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
 
-    //---------------------  -------------------------
+    //--------------------- datos_generales -------------------------
     $sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
@@ -27,26 +27,7 @@
     $areasAtencion = $row['areasAtencion'];
     $tema_de_Derecho_Social = $row['tema_de_Derecho_Social'];
 
-
-    //-------------------  -------------------------- 
-    $sql = "SELECT * FROM contacto WHERE FK_Registro=?;";
-    $stmt = mysqli_stmt_init($conn);
-    mysqli_stmt_prepare($stmt, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $row = mysqli_fetch_assoc($result);
-
-
-    $phoneOficina = $row['phoneOficina'];
-    $phoneCelular = $row['phoneCelular'];
-    $emailContacto = $row['emailContacto'];
-    $paginaWeb = $row['paginaWeb'];
-    $organizacionFB = $row['organizacionFB'];
-    $organizacionTW = $row['organizacionTW'];
-    $organizacionInsta = $row['organizacionInsta'];
-
-    //------------------  ---------------------------- 
+    //------------------ domicilio ---------------------------- 
     $sql = "SELECT * FROM domicilio WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
@@ -63,7 +44,6 @@
     $domicilio = $row['domicilio'];
     $Latitud =  $row['Latitud'];
     $Longitud =  $row['Longitud'];
-
 
 
     // Corregir inputs
@@ -86,9 +66,27 @@
     	
     }
 
-    //------------------  ---------------------------- 
+    //------------------- contacto -------------------------- 
+    $sql = "SELECT * FROM contacto WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
 
 
+    $phoneOficina = $row['phoneOficina'];
+    $phoneCelular = $row['phoneCelular'];
+    $emailContacto = $row['emailContacto'];
+    $paginaWeb = $row['paginaWeb'];
+    $organizacionFB = $row['organizacionFB'];
+    $organizacionTW = $row['organizacionTW'];
+    $organizacionInsta = $row['organizacionInsta'];
+
+
+
+    //------------------ historial_de_la_organizacion ---------------------------- 
     $sql = "SELECT * FROM historial_de_la_organizacion WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
@@ -109,7 +107,6 @@
 
 
     //------------------  ---------------------------- 
-
     $sql = "SELECT * FROM acta_constitutiva WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
@@ -252,7 +249,73 @@
 
 
 
+	function Archivo($ID_Selected,$nombreSeccion){
+	require 'includes/dbh.inc.php';	
 
+    $sql = "SELECT *, LENGTH(dataArchivo) FROM registro_archivos INNER JOIN registro on registro.ID_Registro = registro_archivos.FK_Registro INNER JOIN  datos_generales on registro.ID_Registro = datos_generales.FK_Registro  WHERE registro.ID_Registro = ? && registro_archivos.nombreSeccion = ? ;";
+
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "is", $ID_Selected, $nombreSeccion);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $nombreOSC = $row['nombreOSC'];
+    $LENGTH = $row['LENGTH(dataArchivo)'];
+
+	?>
+			    
+	<div class="Files_Container" style="margin: 12px 0;">
+		<div class="row">
+		   
+		   <div class="cell -file">
+		      <i class="fa 
+		      <?php
+		      switch ($row['tipoArchivo']) {
+		    	case "application/pdf":
+		    		echo "fa-file-pdf-o";
+		    		break;     
+		    	case "image/jpeg":
+		    		echo "fa-file-image-o";
+		    		break;
+		    	case "image/png":
+		    		echo "fa-file-image-o";
+		    		break;
+		    	case "text/plain":
+		    		echo "fa-file-text-o";
+		    		break;
+		    	default:
+		    		echo "fa-file"; 	
+		      }
+
+		    $nombre_fichero = $row['LENGTH(dataArchivo)']/1024;
+			$nombre_fichero = bcdiv($nombre_fichero, '1', 1);
+			
+
+		      ?>" aria-hidden="true"></i>
+		      <div class="inner">
+		      	<?php echo "<a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$row['Archivos_ID']."' target=»_blank»>".$row['nombreSeccion']."</a>";?>
+		         <small class="details">
+		            <span class="detail -filesize"><i class="fa fa-hdd-o" aria-hidden="true"></i><?php echo ' '.($nombre_fichero).' KB'; ?></span>
+		            <span class="detail -updated"><i class="fa fa-clock-o" aria-hidden="true"></i><?php echo $row['Fecha'];?></span>
+		         </small>
+		      </div>
+		   </div>
+		   
+		   <button class="cell -action -download">
+		      <i class="fa fa-download" aria-hidden="true"></i>
+		      <span class="label">Download</span>
+		   </button>		   
+		   <button class="cell -action -more">
+		      <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+		      <span class="label">More</span>
+		   </button>
+		   
+		</div>
+	</div>
+
+	<?php  }
 
 
 
@@ -281,14 +344,14 @@ function Error($P){?>
 			<input type="text" class="common" id="rfcHomoclave" name="rfcHomoclave" value="<?php echo $rfcHomoclave; ?>" disabled>
 
 			<label>3.- RFC (PDF o JPG) </label><br>
-			<input type="file" class="common" name="files[]" disabled><br>
+			<?php Archivo($ID_Selected,'file_rfc'); ?>
 
 
 			<label>4.- CLUNI</label>
 			<input type="text" class="common" id="CLUNI" name="CLUNI" value="<?php echo $CLUNI;?>" disabled>
 
 			<label>5.- CLUNI (PDF o JPG)</label><br>
-			<input type="file" class="common" name="files[]" disabled><br>
+			<?php Archivo($ID_Selected,'file_cluni'); ?>
 
 			<label>6.- Nombre de la OSC</label>					
 			<input type="text" class="common" id="nombreOSC" name="nombreOSC" value="<?php echo $nombreOSC ;?>" disabled>
@@ -376,13 +439,15 @@ function Error($P){?>
 		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Órgano del gobierno</h5>
 
 			<label class="common">28.- Acta constitutiva</label>
-			<input type="file" class="common" name="files[]" disabled>
+			<?php Archivo($ID_Selected,'file_acta_const'); ?>
 
 			<label class="common">29.- Acta protocolizada donde conste la representación legal vigente</label>
-			<input type="file" class="common" name="files[]" disabled>        
+			<?php Archivo($ID_Selected,'file_acta_protoco'); ?>
+       
 
 			<label class="common">30.- INE del representante legal vigente</label>
-			<input type="file" class="common" name="files[]" disabled>
+			<?php Archivo($ID_Selected,'file_ine_repre'); ?>
+
 
 			<label>31.- Nombre del representante legal</label>
 			<input type="text" class="common" name="nombreRepresentante" value="<?php echo $nombreRepresentante;?>" disabled>
@@ -413,7 +478,7 @@ function Error($P){?>
 			<input type="text" class="common" id="fechaEstritura" name="fechaEstritura" value="<?php echo $fechaEstritura;?>" disabled>
 
 			<label class="titulos-form">40.- RPP ICRESON</label><br/>
-			<input type="file" class="common" name="files[]" disabled><br>
+			<?php Archivo($ID_Selected,'file_rpp_icreson'); ?>
 
 			<label>41. Número de libro</label>
 			<input type="text" class="common" id="numeroLibro" name="numeroLibro" value="<?php echo $numeroLibro;?>" disabled>
@@ -432,13 +497,13 @@ function Error($P){?>
 			<?php if ($existenModis == "Si") { ?>
 
 			<label class="common">44a.- Ultima acta modificatoria protocolizada</label>
-			<input type="file" class="common" name="files[]" disabled><br>
+			<?php Archivo($ID_Selected,'none'); ?>
 
 			<label class="common">44b.- Fecha de la última modificación del acta constitutiva</label><br>
 			<input type="text" class="common" id="ultimaModi" name="ultimaModi" value="<?php echo $ultimaModi;?>" disabled><br><br>
 
 			<label class="common">44c.- RPP ICRESON de la última acta modificatoria actualizada</label>
-			<input type="file" class="common" name="files[]" disabled><br>
+			<?php Archivo($ID_Selected,'none'); ?>
 
 			<label>44d.- Número de acta constitutiva</label>
 			<input type="text" class="common" id="numeroActaConsti" name="numeroActaConsti" value="<?php echo $numeroActaConsti;?>" disabled>
@@ -459,7 +524,7 @@ function Error($P){?>
 		<?php if ($autorizadaDeducible == "Si") { ?>
 
 		<label class="form-control">45a.- Página del DOF donde se publicó su autorización</label>
-		<input type="file" class="common" name="files[]" disabled><br>
+		<?php Archivo($ID_Selected,'none'); ?>
 
 		<label>45b.- número de página donde se identifica a su OSC</label>
 		<input type="text" class="common" id="numeroDiario" name="numeroDiario"	value="<?php echo $numeroDiario;?>" disabled>
@@ -528,7 +593,7 @@ function Error($P){?>
 		</div>
 
 		<label class="common">56.- 32D en positivo y con 30 días de expedición como máximo</label>  
-		<input type="file" class="common" name="files[]" disabled>
+		<?php Archivo($ID_Selected,'file_32_d'); ?>
 
 		<label class="titulos-form">57.- ¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?</label>
 		<div style="font-size: 20px; margin-left:20px;">
@@ -541,16 +606,16 @@ function Error($P){?>
 		</div>
 
 		<label class="common">59.- F21, del presente año (PDF)</label>
-		<input type="file" class="common" name="files[]" disabled>   
+		<?php Archivo($ID_Selected,'file_f_21'); ?>
 
 		<label class="common">60.- Constancia de Situación Fiscal</label>
-		<input type="file" class="common" name="files[]" disabled>
+		<?php Archivo($ID_Selected,'file_constancia_fiscal'); ?>
 
 		<label class="common">61.- Comprobante de cuenta bancaria</label>
-		<input type="file" class="common" name="files[]" disabled>
+		<?php Archivo($ID_Selected,'file_comprobante_banco'); ?>
 
 		<label class="common">62.- Factura cancelada</label>
-		<input type="file" class="common" name="files[]" disabled>
+		<?php Archivo($ID_Selected,'file_factura_cancelada'); ?>
 
 		<label class="titulos-form">63.- ¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?</label>
 		<div style="font-size: 20px; margin-left:20px;">
@@ -560,7 +625,7 @@ function Error($P){?>
 		<?php if ($inscritaDNIAS == "Si") { ?>
 
 		<label class="common">63a.- DNIAS</label>
-		<input type="file" class="common" name="files[]" disabled>
+		<?php Archivo($ID_Selected,'none'); ?>
 
 		<?php } ?>
 		

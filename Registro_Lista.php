@@ -59,7 +59,7 @@
 					<td><?php echo $a['RFC_Organizacional']?></td>
 					<td><?php echo $a['Fecha_Registro']?></td>
 					<td><?php echo $a['Estado']?></td>
-					<td><?php echo "<a class='Hoverr' href='Empleado_Modificar_Detalle.php?id=".$a['ID_Registro']."'><i class='fa fa-eye fa-2x'></a>";?></td>
+					<td><?php echo "<a class='Hoverr' href='Registro_Revisar.php?id=".$a['ID_Registro']."'><i class='fa fa-eye fa-2x'></a>";?></td>
 
 				</tr>				  	   
 			<?php } ?>

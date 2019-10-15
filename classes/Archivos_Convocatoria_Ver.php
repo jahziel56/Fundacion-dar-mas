@@ -46,7 +46,7 @@ if (empty($_GET["id"])){
 
 		      ?>" aria-hidden="true"></i>
 		      <div class="inner">
-		      	<?php echo "<a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$row2['FArchivosID']."' target=»_blank»>".$row2['nombreSeccion']."</a>";?>
+		      	<?php echo "<a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$row2['Archivos_ID']."' target=»_blank»>".$row2['nombreSeccion']."</a>";?>
 		         <small class="details">
 		            <span class="detail -filesize"><i class="fa fa-hdd-o" aria-hidden="true"></i><?php echo ' '.($nombre_fichero).' KB'; ?></span>
 		            <span class="detail -updated"><i class="fa fa-clock-o" aria-hidden="true"></i><?php echo $row2['Fecha'];?></span>

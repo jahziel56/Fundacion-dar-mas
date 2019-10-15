@@ -1,33 +1,334 @@
 <?php
 /* manda a llamar a header.php */ 
 	require"classes/header.php";
+	require 'includes/dbh.inc.php';
+
+    $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
+
+	$sql = "SELECT * FROM registro INNER JOIN datos_generales on registro.ID_Registro = datos_generales.FK_Registro WHERE registro.ID_Registro=?;";
+	$stmt = mysqli_stmt_init($conn);
+	if (!mysqli_stmt_prepare($stmt, $sql)) {
+		//header("Location: ../login.php?error=sqlerror");
+		echo 'error';
+		exit();		
+	}else{
+		mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+		$row = mysqli_fetch_assoc($result);
+	}
+
+
+
+// -------------------------------------------- Querry -----------------------------------------------------------------------------------------------------
+$sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $Correo_Organizacion = $row['Correo_Organizacion'];
+    $rfcHomoclave = $row['rfcHomoclave'];
+    $CLUNI = $row['CLUNI'];
+    $nombreOSC = $row['nombreOSC'];
+    $objetoSocialOrganizacion = $row['objetoSocialOrganizacion'];
+    $mision = $row['mision'];
+    $vision = $row['vision'];
+    $areasAtencion = $row['areasAtencion'];
+    $tema_de_Derecho_Social = $row['tema_de_Derecho_Social'];
+
+
+    //-------------------  -------------------------- 
+    $sql = "SELECT * FROM contacto WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+
+    $phoneOficina = $row['phoneOficina'];
+    $phoneCelular = $row['phoneCelular'];
+    $emailContacto = $row['emailContacto'];
+    $paginaWeb = $row['paginaWeb'];
+    $organizacionFB = $row['organizacionFB'];
+    $organizacionTW = $row['organizacionTW'];
+    $organizacionInsta = $row['organizacionInsta'];
+
+    //------------------  ---------------------------- 
+    $sql = "SELECT * FROM domicilio WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $calle = $row['calle'];
+    $colonia = $row['colonia'];
+    $codigoPostal = $row['codigoPostal'];
+    $localidad = $row['localidad'];
+    $municipioRegistroOSC = $row['municipioRegistroOSC'];
+    $domicilio = $row['domicilio'];
+    $Latitud =  $row['Latitud'];
+    $Longitud =  $row['Longitud'];
+
+
+
+    // Corregir inputs
+    $domicilio_social_legal = $row ['domicilio_social_legal'];
+
+    if ($domicilio_social_legal == 'No') {
+    	$ID_Domicilio =  $row['ID_Domicilio'];
+
+    	$sql = "SELECT * FROM domicilio_social_legal WHERE FK_Domicilio=?;";
+	    $stmt = mysqli_stmt_init($conn);
+	    mysqli_stmt_prepare($stmt, $sql);
+	    mysqli_stmt_bind_param($stmt, "i", $ID_Domicilio);
+	    mysqli_stmt_execute($stmt);
+	    $result = mysqli_stmt_get_result($stmt);
+	    $row = mysqli_fetch_assoc($result);
+
+	    $domicilio_Dom =  $row['domicilio_Dom'];
+		$localidad_Dom =  $row['localidad_Dom'];
+		$municipio_Dom =  $row['municipio_Dom'];
+    	
+    }
+
+    //------------------  ---------------------------- 
+
+
+    $sql = "SELECT * FROM historial_de_la_organizacion WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $nombreRepresentante = $row['nombreRepresentante'];
+    $idRepresentante = $row['idRepresentante'];
+    $fechaConstitucionOSC = $row['fechaConstitucionOSC'];
+    $nombreNotario = $row['nombreNotario'];
+    $numeroNotario = $row['numeroNotario'];
+    $municipioNotaria = $row['municipioNotaria'];
+    $noEstrituraPublica = $row['noEstrituraPublica'];
+    $volumenEstrituraPublica = $row['volumenEstrituraPublica'];
+    $fechaEstritura = $row['fechaEstritura'];
+
+
+    //------------------  ---------------------------- 
+
+    $sql = "SELECT * FROM acta_constitutiva WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $numeroLibro = $row['numeroLibro'];
+    $numeroInscripcion = $row['numeroInscripcion'];    
+    $volumenICRESON = $row['volumenICRESON'];
+    $existenModis = $row['existenModis'];
+    $autorizadaDeducible = $row['autorizadaDeducible']; 
+
+    $a = $row['ID_acta_constitutiva'];
+
+    if ($existenModis == 'Si') {
+
+    	
+
+    	$sql = "SELECT * FROM existenmodis WHERE FK_acta_constitutiva=?;";
+	    $stmt = mysqli_stmt_init($conn);
+	    mysqli_stmt_prepare($stmt, $sql);
+	    mysqli_stmt_bind_param($stmt, "i", $a);
+	    mysqli_stmt_execute($stmt);
+	    $result = mysqli_stmt_get_result($stmt);
+	    $row = mysqli_fetch_assoc($result);
+
+    	$ultimaModi = $row['ultimaModi'];
+        $numeroActaConsti = $row['numeroActaConsti'];
+        $volumenActaConsti = $row['volumenActaConsti'];
+    }
+
+    if ($autorizadaDeducible == 'Si') {
+
+    	$sql = "SELECT * FROM autorizadadeducible WHERE FK_acta_constitutiva=?;";
+	    $stmt = mysqli_stmt_init($conn);
+	    mysqli_stmt_prepare($stmt, $sql);
+	    mysqli_stmt_bind_param($stmt, "i", $a);
+	    mysqli_stmt_execute($stmt);
+	    $result = mysqli_stmt_get_result($stmt);
+	    $row = mysqli_fetch_assoc($result);
+
+        $numeroDiario = $row['numeroDiario'];
+        $fechaDiario = $row['fechaDiario'];
+        $detenidoAutorizado = $row['detenidoAutorizado'];
+        $fechaAutorizada = $row['fechaAutorizada'];
+        $a = $row['ID_autorizadaDeducible'];
+
+
+        if ($detenidoAutorizado == 'Si') {        	
+        	
+    		$sql = "SELECT * FROM detenidoautorizado WHERE FK_autorizadaDeducible=?;";
+		    $stmt = mysqli_stmt_init($conn);
+		    mysqli_stmt_prepare($stmt, $sql);
+		    mysqli_stmt_bind_param($stmt, "i", $a);
+		    mysqli_stmt_execute($stmt);
+		    $result = mysqli_stmt_get_result($stmt);
+		    $row = mysqli_fetch_assoc($result);
+
+
+            $razonDetenido = $row['razonDetenido'];
+        }
+
+    }
+
+    //------------------  ---------------------------- 
+
+    $sql = "SELECT * FROM historial_de_la_organizacion_2 WHERE FK_Registro=?;";
+	$stmt = mysqli_stmt_init($conn);
+	mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
+	$row = mysqli_fetch_assoc($result);
+
+    $digiridaPor = $row['digiridaPor'];
+    $nombrePresi = $row['nombrePresi'];
+    $numeroEmpleados = $row['numeroEmpleados'];
+    $numeroVoluntarios = $row['numeroVoluntarios'];
+    $principalesLogros = $row['principalesLogros'];
+    $metasOrganizacion = $row['metasOrganizacion'];
+    $principalesAlianzas = $row['principalesAlianzas'];
+    $numeroBeneficiados = $row['numeroBeneficiados'];
+
+    //------------------  ---------------------------- 
+
+    $sql = "SELECT * FROM poblacion_beneficiada WHERE FK_Registro=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $poblacion_0_4 = $row['poblacion_0_4'];
+    $poblacion_5_14 = $row['poblacion_5_14'];
+    $poblacion_15_29 = $row['poblacion_15_29'];
+    $poblacion_30_44 = $row['poblacion_30_44'];
+    $poblacion_45_64 = $row['poblacion_45_64'];
+    $poblacion_65_mas = $row['poblacion_65_mas'];
+
+    //------------------  ---------------------------- 
+
+    $sql = "SELECT * FROM historial_de_la_organizacion_3 WHERE FK_Registro=?;";
+	$stmt = mysqli_stmt_init($conn);
+	mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
+	$row = mysqli_fetch_assoc($result);
+
+    $observaciones32D = $row['observaciones32D'];
+    $tiempoYforma = $row['tiempoYforma'];
+    $tieneAdeudos = $row['tieneAdeudos'];
+    $inscritaDNIAS = $row['inscritaDNIAS'];        
+    $esquemasRecursosComp = $row['esquemasRecursosComp']; 
+    $a = $row['ID_Historial_3'];
+	
+    if ($esquemasRecursosComp == 'Si') {
+
+    	$sql = "SELECT * FROM esquemasrecursoscomp WHERE FK_Historial_3=?;";
+		$stmt = mysqli_stmt_init($conn);
+		mysqli_stmt_prepare($stmt, $sql);
+		mysqli_stmt_bind_param($stmt, "i", $a);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+		$row = mysqli_fetch_assoc($result);
+
+        $organizacionManejoRecursos = $row['organizacionManejoRecursos'];
+
+    }        	
+
+// -------------------------------------------- Archivos ------------------------------------------------------------------------------------------------------
+	function Archivo($ID_Selected,$nombreSeccion){
+	require 'includes/dbh.inc.php';	
+
+    $sql = "SELECT *, LENGTH(dataArchivo) FROM registro_archivos INNER JOIN registro on registro.ID_Registro = registro_archivos.FK_Registro INNER JOIN  datos_generales on registro.ID_Registro = datos_generales.FK_Registro  WHERE registro.ID_Registro = ? && registro_archivos.nombreSeccion = ? ;";
+
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "is", $ID_Selected, $nombreSeccion);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $nombreOSC = $row['nombreOSC'];
+    $LENGTH = $row['LENGTH(dataArchivo)'];
+
+	?>
+			    
+	<div class="Files_Container" style="margin: 0 16px;">
+		<div class="row">
+		   
+		   <div class="cell -file" >
+		      <i class="fa 
+		      <?php
+		      switch ($row['tipoArchivo']) {
+		    	case "application/pdf":
+		    		echo "fa-file-pdf-o";
+		    		break;     
+		    	case "image/jpeg":
+		    		echo "fa-file-image-o";
+		    		break;
+		    	case "image/png":
+		    		echo "fa-file-image-o";
+		    		break;
+		    	case "text/plain":
+		    		echo "fa-file-text-o";
+		    		break;
+		    	default:
+		    		echo "fa-file"; 	
+		      }
+
+		    $nombre_fichero = $row['LENGTH(dataArchivo)']/1024;
+			$nombre_fichero = bcdiv($nombre_fichero, '1', 1);
+			
+
+		      ?>" aria-hidden="true"></i>
+		      <div class="inner">
+		      	<?php echo "<a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$row['Archivos_ID']."' target=»_blank»>".$row['nombreSeccion']."</a>";?>
+		         <small class="details">
+		            <span class="detail -filesize"><i class="fa fa-hdd-o" aria-hidden="true"></i><?php echo ' '.($nombre_fichero).' KB'; ?></span>
+		            <span class="detail -updated"><i class="fa fa-clock-o" aria-hidden="true"></i><?php echo $row['Fecha'];?></span>
+		         </small>
+		      </div>
+		   </div>
+		</div>
+	</div>
+	<?php  }
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ?>
 	<main>
 <?php 
-/*if (empty($_GET["Rol_Name"]) || empty($_GET["Rol_Descripcion"])){
+if (empty($_GET["id"])){
 	echo "<div style='background: #B22222; color: white; text-align:center'>";
-	echo "Rol no selecionado<br></div><br>";
-	echo "<a class='P_B' href='http:Panel_De_Control.php' style='text-decoration: none; display: block;'>Regresar</a>";
+	echo "Registro no selecionado<br></div><br>";
+	echo "<a class='P_B' href='http:Registro_Lista.php' style='text-decoration: none; display: block;'>Regresar</a>";
 	exit();
-}else{
-	$Rol_Name = strtoupper($_GET["Rol_Name"]);
-	$Rol_Descripcion = $_GET["Rol_Descripcion"];
-	echo "<h1 style='background: #5F9EA0; color: white; text-align:center'>$Rol_Name</h1>";
-	echo "<p style='background: #3E7D7F; color: white; text-align:center;'>
-	Selecione los campos que desea que $Rol_Name pueda ver ala hora de revisarlo</p><br>";
-}*/
-?>
+}else{?>
+		<h1 style='background: MEDIUMSEAGREEN; color: white; text-align:center'>Revision Registro</h1>
+		<p style='background: SEAGREEN; color: white; text-align:center;'>Organizacion: <?php echo $nombreOSC; ?></p><br>
+<?php
+}?>
 
 		<div>
 		<form action="" method="post">
-			<input type="hidden" name="Rol_Name" value="<?php echo $Rol_Name; ?>">
-			<input type="hidden" name="Rol_Descripcion" value="<?php echo $Rol_Descripcion; ?>">
-
-		<h1 style='background: MEDIUMSEAGREEN; color: white; text-align:center'>Revision Registro</h1>
-		<p style='background: SEAGREEN; color: white; text-align:center;'>Organizacion: Instituto sonorense de la mujer</p><br>
-
-  
-
 
 			<?php 
 			$I =0;
@@ -35,136 +336,150 @@
 
 			$R = 'Respuesta';
 
-			revisar('1.- Correo de organización',$R,$I++);
-			revisar('2.- RFC',$R,$I++);
-			revisar('3.- RFC (PDF o JPG)',$R,$I++);
-			revisar('4.- CLUNI',$R,$I++);
-			revisar('5.- CLUNI (PDF o JPG)',$R,$I++);
-			revisar('6.- Nombre de la Organizaciones de Sociedad Civil',$R,$I++);
-			revisar('7.- Objeto social de la organización',$R,$I++);
-			revisar('8.- Misión',$R,$I++);
-			revisar('9.- Visión',$R,$I++);
-			revisar('10.- Áreas de atención',$R,$I++);
-			revisar('11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?',$R,$I++);
-			revisar('12.- Calle',$R,$I++);			
-			revisar('13.- Colonia',$R,$I++);
+			$AR = 'Archivos';
 
-			revisar('14.- Codigo postal',$R,$I++);
-			revisar('15.- Localidad',$R,$I++);
-			revisar('16.- Domicilio',$R,$I++);
-			revisar('17.- Municipio',$R,$I++);
+//--------------------------------- Datos Generales
+			revisar('1.- Correo de organización',$Correo_Organizacion,$I++);
+			revisar('2.- RFC',$rfcHomoclave,$I++);
 
-			revisar('18 / 19 mapa (Desactivado)',$R,$I++);
+			revisar_Archivo('3.- RFC (PDF o JPG)',$ID_Selected,'file_rfc',$I++);
 
-			revisar('20.- Teléfono oficina',$R,$I++);
-			revisar('21.- Teléfono celular',$R,$I++);
-			revisar('22.- Correo de organización',$R,$I++);
-			revisar('23.- Página web',$R,$I++);
-			revisar('24.- Facebook',$R,$I++);
-			revisar('25.- Twitter',$R,$I++);
-			revisar('26.- Instagram',$R,$I++);
+			revisar('4.- CLUNI',$CLUNI,$I++);
 
-			revisar('27.- ¿Su domicilio social es el mismo que el legal?',$R,$I++);
+			revisar_Archivo('5.- CLUNI (PDF o JPG)',$ID_Selected,'file_cluni',$I++);
+
+			revisar('6.- Nombre de la Organizacion de Sociedad Civil',$nombreOSC,$I++);
+			revisar('7.- Objeto social de la organización',$objetoSocialOrganizacion,$I++);
+			revisar('8.- Misión',$mision,$I++);
+			revisar('9.- Visión',$vision,$I++);
+			revisar('10.- Áreas de atención',$areasAtencion,$I++);
+			revisar('11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?',$tema_de_Derecho_Social,$I++);
+
+//--------------------------------- Datos Generales
+			revisar('12.- Calle',$calle,$I++);			
+			revisar('13.- Colonia',$colonia,$I++);
+			revisar('14.- Codigo postal',$codigoPostal,$I++);
+			revisar('15.- Localidad',$localidad,$I++);
+			revisar('16.- Domicilio',$domicilio,$I++);
+			revisar('17.- Municipio',$municipioRegistroOSC,$I++);
+
+			revisar('18 / 19 mapa (Desactivado)','(Desactivado)',$I++);
+
+//--------------------------------- contacto
+			revisar('20.- Teléfono oficina',$phoneOficina,$I++);
+			revisar('21.- Teléfono celular',$phoneCelular,$I++);
+			revisar('22.- Correo de organización',$emailContacto,$I++);
+			revisar('23.- Página web',$paginaWeb,$I++);
+			revisar('24.- Facebook',$organizacionFB,$I++);
+			revisar('25.- Twitter',$organizacionTW,$I++);
+			revisar('26.- Instagram',$organizacionInsta,$I++);
+
+			revisar('27.- ¿Su domicilio social es el mismo que el legal?',$domicilio_social_legal,$I++);
 
 			//27 R
 
-			if ($R == 'No') {
-				revisar('27a.- Domicilio Legal (registrado ante SAT)',$R,$I++);
-				revisar('27b.- Localidad',$R,$I++);
-				revisar('27c.- Municipio',$R,$I++);
+			if ($domicilio_social_legal == 'No') {
+				revisar('27a.- Domicilio Legal (registrado ante SAT)',$domicilio_Dom,$I++);
+				revisar('27b.- Localidad',$localidad_Dom,$I++);
+				revisar('27c.- Municipio',$municipio_Dom,$I++);
 			}
 			
+//------------------ historial_de_la_organizacion ---------------------------- 
+			revisar_Archivo('28.- Acta constitutiva',$ID_Selected,'file_acta_const',$I++);
+			revisar_Archivo('29.- Acta protocolizada donde conste la representación legal vigente',$ID_Selected,'file_acta_protoco',$I++);
+			revisar_Archivo('30.- INE del representante legal vigente',$ID_Selected,'file_ine_repre',$I++);
 
-			revisar('28.- Acta constitutiva',$R,$I++);
-			revisar('29.- Acta protocolizada donde conste la representación legal vigente',$R,$I++);
-			revisar('30.- INE del representante legal vigente',$R,$I++);
-			revisar('31.- Nombre del representante legal',$R,$I++);
-			revisar('32.- Número de identificación oficial',$R,$I++);
-			revisar('33.- Fecha de constitución de la Organización de Sociedad Civil',$R,$I++);
-			revisar('34.- Nombre del Notario Público donde registró su Organización de Sociedad Civil',$R,$I++);
-			revisar('35.- Número del notario público',$R,$I++);
-			revisar('36.- Municipio de la Notaría Pública',$R,$I++);
-			revisar('37.- Número de escritura pública',$R,$I++);
-			revisar('38.- Volumen (escritura pública)',$R,$I++);
-			revisar('39.- Fecha de estritura pública',$R,$I++);
-			revisar('40.- RPP ICRESON',$R,$I++);
-			revisar('41. Número de libro',$R,$I++);
-			revisar('42.- Número de inscrpción',$R,$I++);
-			revisar('43.- Volúmen ICRESON',$R,$I++);
+			revisar('31.- Nombre del representante legal',$nombreRepresentante,$I++);
+			revisar('32.- Número de identificación oficial',$idRepresentante,$I++);
+			revisar('33.- Fecha de constitución de la Organización de Sociedad Civil',$fechaConstitucionOSC,$I++);
+			revisar('34.- Nombre del Notario Público donde registró su Organización de Sociedad Civil',$nombreNotario,$I++);
+			revisar('35.- Número del notario público',$numeroNotario,$I++);
+			revisar('36.- Municipio de la Notaría Pública',$municipioNotaria,$I++);
+			revisar('37.- Número de escritura pública',$noEstrituraPublica,$I++);
+			revisar('38.- Volumen (escritura pública)',$volumenEstrituraPublica,$I++);
+			revisar('39.- Fecha de estritura pública',$fechaEstritura,$I++);
 
-			revisar('44.- ¿Su organización ha tenido modificaciones a su acta constitutiva?',$R,$I++);
+			revisar_Archivo('40.- RPP ICRESON',$ID_Selected,'file_rpp_icreson',$I++);
+
+
+			revisar('41. Número de libro',$numeroLibro,$I++);
+			revisar('42.- Número de inscrpción',$numeroInscripcion,$I++);
+			revisar('43.- Volúmen ICRESON',$volumenICRESON,$I++);
+
+			revisar('44.- ¿Su organización ha tenido modificaciones a su acta constitutiva?',$existenModis,$I++);
 
 			//44 R
-			if ($R == 'Si') {
-				revisar('44a.- Ultima acta modificatoria protocolizada',$R,$I++);
-				revisar('44b.- Fecha de la última modificación del acta constitutiva',$R,$I++);
-				revisar('44c.- RPP ICRESON de la última acta modificatoria actualizada',$R,$I++);
-				revisar('44d.- Número de acta constitutiva',$R,$I++);
-				revisar('44e.- Volúmen de acta constitutiva',$R,$I++);
+			if ($existenModis == 'Si') {
+				revisar_Archivo('44a.- Ultima acta modificatoria protocolizada',$ID_Selected,'RRR',$I++);				
+				revisar('44b.- Fecha de la última modificación del acta constitutiva',$ultimaModi,$I++);
+
+				revisar_Archivo('44c.- RPP ICRESON de la última acta modificatoria actualizada',$ID_Selected,'rrr',$I++);
+
+				revisar('44d.- Número de acta constitutiva',$numeroActaConsti,$I++);
+				revisar('44e.- Volúmen de acta constitutiva',$volumenActaConsti,$I++);
 			}		
 
 
-			revisar('45.- ¿Está autorizada para recibir donativos deducibles de impuestos?',$R,$I++);
+			revisar('45.- ¿Está autorizada para recibir donativos deducibles de impuestos?',$autorizadaDeducible,$I++);
 
 			// 45 R
-			if ($R == 'Si') {
+			if ($autorizadaDeducible == 'Si') {
 				revisar('45a.- Página del Diario Oficial de la Federación donde se publicó su autorización',$R,$I++);
-				revisar('45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil',$R,$I++);
-				revisar('45c.- Fecha de publicación en el Diario Oficial de la Federación',$R,$I++);
-				revisar('45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?',$R,$I++);
+				revisar('45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil',$numeroDiario,$I++);
+				revisar('45c.- Fecha de publicación en el Diario Oficial de la Federación',$fechaDiario,$I++);
+				revisar('45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?',$detenidoAutorizado,$I++);
 
 				// 45D R
-				if ($R == 'Si') {
-					revisar('45e.- ¿Por qué detuvo el SAT su aturización?',$R,$I++);
+				if ($detenidoAutorizado == 'Si') {
+					revisar('45e.- ¿Por qué detuvo el SAT su aturización?',$razonDetenido,$I++);
 				}
 
-				revisar('45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?',$R,$I++);				
+				revisar('45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?',$fechaAutorizada,$I++);				
 			}
 
 
 
-			revisar('46.- Su organización se rige o es dirigida por',$R,$I++);
-			revisar('47.- Nombre del presidente',$R,$I++);
-			revisar('48.- Número de empleados',$R,$I++);
-			revisar('49.- Número de voluntarios',$R,$I++);
-			revisar('50.- Principales logros',$R,$I++);
-			revisar('51.- Metas de la organización',$R,$I++);
-			revisar('52.- Alianzas con las que cuenta',$R,$I++);
-			revisar('53.- Número de personas que benefició el año anterior',$R,$I++);
+			revisar('46.- Su organización se rige o es dirigida por',$digiridaPor,$I++);
+			revisar('47.- Nombre del presidente',$nombrePresi,$I++);
+			revisar('48.- Número de empleados',$numeroEmpleados,$I++);
+			revisar('49.- Número de voluntarios',$numeroVoluntarios,$I++);
+			revisar('50.- Principales logros',$principalesLogros,$I++);
+			revisar('51.- Metas de la organización',$metasOrganizacion,$I++);
+			revisar('52.- Alianzas con las que cuenta',$principalesAlianzas,$I++);
+			revisar('53.- Número de personas que benefició el año anterior',$numeroBeneficiados,$I++);
 
-			$R = '|0 a 4: 2| 
-			|5 a 14: 2|  
-			|15 a 29: 2|  
-			|30 a 44: 2|  
-			|45 a 64: 2|  
-			|65 o mas: 2|';
-			revisar('54.- Numero de personas que veneficio en el úlitmo año',$R,$I++);
 
-			$R = 'Respuesta';
-			revisar('55.- ¿Tiene observaciones en su 32 D?',$R,$I++);
-			revisar('56.- 32D en positivo y con 30 días de expedición como máximo',$R,$I++);
-			revisar('57.- ¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?',$R,$I++);
-			revisar('58.- ¿Tiene adeudos fiscales a cargo, por impuestos federales?',$R,$I++);
-			revisar('59.- F21, del presente año',$R,$I++);
-			revisar('60.- Constancia de Situación Fiscal',$R,$I++);
-			revisar('61.- Comprobante de cuenta bancaria',$R,$I++);
-			revisar('62.- Factura cancelada',$R,$I++);
+			$poblacion_beneficiada = "poblacion de<br> 0 a 4: " . $poblacion_0_4 . "<br> 5 a 14: " . $poblacion_5_14 . "<br>15 a 29: " . $poblacion_15_29 . "<br>30 a 44: " . $poblacion_30_44 . "<br>45 a 64: " . $poblacion_45_64 . "<br>65 a mas: " . $poblacion_65_mas . "<br>";
 
-			revisar('63.- ¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?',$R,$I++);
+			revisar('54.- Numero de personas que veneficio en el úlitmo año',$poblacion_beneficiada,$I++);
+
+
+			revisar('55.- ¿Tiene observaciones en su 32 D?',$observaciones32D,$I++);
+
+			revisar_Archivo('56.- 32D en positivo y con 30 días de expedición como máximo',$ID_Selected,'file_32_d',$I++);
+
+			revisar('57.- ¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?',$tiempoYforma,$I++);
+			revisar('58.- ¿Tiene adeudos fiscales a cargo, por impuestos federales?',$tieneAdeudos,$I++);
+
+			revisar_Archivo('59.- F21, del presente año',$ID_Selected,'file_f_21',$I++);
+			revisar_Archivo('60.- Constancia de Situación Fiscal',$ID_Selected,'file_constancia_fiscal',$I++);
+			revisar_Archivo('61.- Comprobante de cuenta bancaria',$ID_Selected,'file_comprobante_banco',$I++);
+			revisar_Archivo('62.- Factura cancelada',$ID_Selected,'file_factura_cancelada',$I++);
+
+			revisar('63.- ¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?',$inscritaDNIAS,$I++);
 
 			//63 R
-			if ($R == 'Si') {
-				revisar('63a.- DNIAS',$R,$I++);
+			if ($inscritaDNIAS == 'Si') {
+				revisar_Archivo('63a.- DNIAS',$ID_Selected,'rrr',$I++);
 			}
 
 
-			revisar('64.- ¿Ha manejado esquemas de recursos complementarios?',$R,$I++);		
+			revisar('64.- ¿Ha manejado esquemas de recursos complementarios?',$esquemasRecursosComp,$I++);		
 
 			//64 R
-			if ($R == 'Si') {	
-				revisar('64a.- Con qué organización ha manejado recursos complementarios',$R,$I++);
+			if ($esquemasRecursosComp == 'Si') {	
+				revisar('64a.- Con qué organización ha manejado recursos complementarios',$organizacionManejoRecursos,$I++);
 			}
-
 
 
 
@@ -174,36 +489,36 @@
 					<input id="option<?php echo $I; ?>" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
 					<label for="option<?php echo $I; ?>"><?php echo $P; ?></label>
 					<div class="explication">(Respuesta)</div>
-					<p><?php echo $R; ?></p>
+					<p style="color: " ><?php echo $R; ?></p>
 					<div id="divComment<?php echo $I; ?>" class="hide" >
-					    <textarea class="text_area_low" placeholder="Comentario/Revisión"></textarea>
+					    <textarea class="text_area_low" placeholder="Comentario/Revisión" name="<?php echo $I; ?>"></textarea>
 					</div>
 				</div>
 				<br>
 
-			<?php  }	?>
-					
+			<?php  }	
 
-			<button type="submit" class="common" name="">Enviar Revisión</button>		
-	</form>
+			function revisar_Archivo($P,$ID_Selected,$R,$I){?>
+			    
+				<div class="inputGroup" style="margin-bottom: 0;">
+					<input id="option<?php echo $I; ?>" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
+					<label for="option<?php echo $I; ?>"><?php echo $P; ?></label>
+					<div class="explication">(Respuesta)</div>
+					<p style="color: " ><?php Archivo($ID_Selected,$R); ?></p>
+					<div id="divComment<?php echo $I; ?>" class="hide" >
+					    <textarea class="text_area_low" placeholder="Comentario/Revisión" name="<?php echo $I; ?>" ></textarea>
+					</div>
+				</div>
+				<br>
+
+			<?php  }	?>					
+
+			<button type="submit" class="common" >Enviar Revisión</button>		
+		</form>
 		</div>
 	</main>
 
 	<script>
-		// var acc = document.getElementsByClassName("comentario");
-		// var i;
-
-		// for (i = 0; i < acc.length; i++) {
-		//   acc[i].addEventListener("click", function() {
-		//     this.classList.toggle("active");
-		//     var panel = this.nextElementSibling;
-		//     if (panel.style.display === "block") {
-		//       panel.style.display = "none";
-		//     } else {
-		//       panel.style.display = "block";
-		//     }
-		//   });
-		// }
 		function quitarComentario(CheckID){
 			console.log("El id que has recibido como parametro es: " + CheckID);
 

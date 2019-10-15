@@ -54,7 +54,7 @@
 	?>
 	<br>
 	<a href="Pre_Registro_New.php">Registrar Una Organizacion</a><br><br>
-	<a href="Registro_Revisar.php">Revisar</a>						
+	<a href="Registro_Lista.php">Revisar</a>						
 	<br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br>

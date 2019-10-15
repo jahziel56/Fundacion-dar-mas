@@ -8,11 +8,18 @@ body {
   font-family: Arial;
   box-sizing: border-box;
 }
+
 header{
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
   z-index: 1001;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
 }
 
 main{
@@ -1016,12 +1023,14 @@ border: 1px solid #ccc;
 }
 
 
-
+/* --- Archivos ---  */
 
 .Files_Container{
   font-size: 15px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  box-sizing: content-box;
 }
+
 
 .Files_Container button {
   border: none;
@@ -1278,6 +1287,9 @@ select::-ms-expand {
   border-radius: 6px 6px 0 0;
   border-bottom: 1px solid #ccc;
 }
+
+
+
 .inputGroup label:before {
   width: 2.8%;
   height: 30%;
@@ -1350,10 +1362,15 @@ select::-ms-expand {
 }
 
 .inputGroup p {
-  padding: 0 0 0 30px;
+  padding: 0 0 5px 30px;
   color: #3C454C;
   width: 100%;
-  
+    -webkit-touch-callout: text; /* iOS Safari */
+    -webkit-user-select: text; /* Safari */
+     -khtml-user-select: text; /* Konqueror HTML */
+       -moz-user-select: text; /* Old versions of Firefox */
+        -ms-user-select: text; /* Internet Explorer/Edge */
+            user-select: text;   
 }
 
 .inputGroup .explication{

@@ -8,7 +8,7 @@
         echo "Error: archivo no selecionado";
     }else{
             //Consulta al formulario de archivos
-            $sql = "SELECT * FROM formularioarchivos WHERE FArchivosID=?";
+            $sql = "SELECT * FROM registro_archivos WHERE Archivos_ID=?";
             $stmt = mysqli_stmt_init($conn);
             mysqli_stmt_prepare($stmt, $sql);
             mysqli_stmt_bind_param($stmt, "i", $id);
