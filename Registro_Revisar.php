@@ -328,7 +328,7 @@ if (empty($_GET["id"])){
 }?>
 
 		<div>
-		<form action="" method="post">
+			<form action="Registro_Revisar_Ver.php" method="post" enctype="multipart/form-data">
 
 			<?php 
 			$I =0;
@@ -363,7 +363,9 @@ if (empty($_GET["id"])){
 			revisar('16.- Domicilio',$domicilio,$I++);
 			revisar('17.- Municipio',$municipioRegistroOSC,$I++);
 
-			revisar('18 / 19 mapa (Desactivado)','(Desactivado)',$I++);
+			revisar('18 mapa (Desactivado)','(Desactivado)',$I++);
+			revisar('19 mapa (Desactivado)','(Desactivado)',$I++);
+
 
 //--------------------------------- contacto
 			revisar('20.- Teléfono oficina',$phoneOficina,$I++);
@@ -478,7 +480,7 @@ if (empty($_GET["id"])){
 
 			//64 R
 			if ($esquemasRecursosComp == 'Si') {	
-				revisar('64a.- Con qué organización ha manejado recursos complementarios',$organizacionManejoRecursos,$I++);
+				revisar('64a.- Con qué organización ha manejado recursos complementarios',$organizacionManejoRecursos,'64a');
 			}
 
 
@@ -486,7 +488,7 @@ if (empty($_GET["id"])){
 			function revisar($P,$R,$I){?>
 			    
 				<div class="inputGroup" style="margin-bottom: 0;">
-					<input id="option<?php echo $I; ?>" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
+					<input id="option<?php echo $I; ?>" type="checkbox" name="checkbox<?php echo $I; ?>" class="comentario" onClick="quitarComentario(this.id)"/>
 					<label for="option<?php echo $I; ?>"><?php echo $P; ?></label>
 					<div class="explication">(Respuesta)</div>
 					<p style="color: " ><?php echo $R; ?></p>
@@ -501,7 +503,7 @@ if (empty($_GET["id"])){
 			function revisar_Archivo($P,$ID_Selected,$R,$I){?>
 			    
 				<div class="inputGroup" style="margin-bottom: 0;">
-					<input id="option<?php echo $I; ?>" name="option1" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
+					<input id="option<?php echo $I; ?>" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
 					<label for="option<?php echo $I; ?>"><?php echo $P; ?></label>
 					<div class="explication">(Respuesta)</div>
 					<p style="color: " ><?php Archivo($ID_Selected,$R); ?></p>
@@ -513,7 +515,7 @@ if (empty($_GET["id"])){
 
 			<?php  }	?>					
 
-			<button type="submit" class="common" >Enviar Revisión</button>		
+			<button class="common" type="submit" name="Enviar_Revisión">Enviar Revisión</button>		
 		</form>
 		</div>
 	</main>
@@ -525,6 +527,7 @@ if (empty($_GET["id"])){
 			var numero = CheckID.replace("option","");
 
 			var idComentario = 'divComment' + numero;
+
 
 			var checkbox = document.getElementById(CheckID);
 

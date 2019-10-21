@@ -592,6 +592,6 @@ if (isset($_POST['pre-submit'])) {
 	//exit();
 }
 else{
-	//header("Location: ../index.php");
-	//exit();		
+	header("Location: index.php");
+	exit();		
 }
