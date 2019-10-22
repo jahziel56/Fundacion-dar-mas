@@ -11,6 +11,7 @@ if (isset($_POST['Enviar_Revisión'])) {
     if (!empty($_POST['64a'])) {
     	$P64a = $_POST['64a'];
     	unset($_POST['64a']);
+    	unset($_POST['checkbox64a']);
     	echo "<BR> -- $P64a --<BR><BR>";
     }
 
