@@ -2,7 +2,7 @@
 	require"classes/header.php";  
 	require 'includes/dbh.inc.php';
 
-	$statment = $conn->prepare("SELECT * FROM registro INNER JOIN datos_generales on registro.ID_Registro = datos_generales.FK_Registro");
+	$statment = $conn->prepare("SELECT * FROM registro INNER JOIN datos_generales on registro.ID_Registro = datos_generales.FK_Registro where registro.Estado = 'Enviado' || registro.Estado = 'Corregido'");
 	$statment->execute();
 	$resultados = $statment->get_result();
 ?>
@@ -16,20 +16,15 @@
 	<link rel="stylesheet" type="text/css" href="../css/estilos.css">
   	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
 <main>
-	<div class="Bar_change">
-
+	<div class="Bar_change" style="">
 		<div>
 			<i class="fa fa-caret-left" aria-hidden="true"></i>
-			Convocatorias (Enero)			
-		</div>
-		<div>
 			Registros
 		</div>
 		<div>
-			Convocatorias (Diciembre)
+			Convocatorias
 			<i class="fa fa-caret-right" aria-hidden="true"></i>
 		</div>
 	</div>
@@ -60,6 +55,7 @@
 					<td><?php echo $a['Fecha_Registro']?></td>
 					<td><?php echo $a['Estado']?></td>
 					<td><?php echo "<a class='Hoverr' href='Registro_Revisar.php?id=".$a['ID_Registro']."'><i class='fa fa-eye fa-2x'></a>";?></td>
+                    
 
 				</tr>				  	   
 			<?php } ?>

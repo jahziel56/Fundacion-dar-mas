@@ -1,9 +1,54 @@
 <?php
-/* manda a llamar a header.php */ 
-	require"classes/header.php";
+	require"classes/header.php";	
 	require 'includes/dbh.inc.php';
 
     $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
+
+    /* Query 	
+    $sql = "SELECT * FROM tabla_revision where FK_registro = ?($ID_Selected) ";
+ 	*/
+ 	/* Significa que no existia */
+ 	$Querry = false;
+ 	if ($Querry = false) {
+ 		/* Query 	
+    	$sql = "SELECT * FROM tabla_revision where FK_empleado = ?($Sesion[userid]) ";
+ 		*/
+ 		$Querry = true;
+ 		/* Si existe un empleado en la tabla solo updatea los datos, si no existe agrega los datos a la tabla */
+ 		if ($Querry = true) {
+    		/* Query Update */
+    	}else{
+    		/* Query Add */ 
+    	}
+    		/* Query Update registro */
+    		
+ 	}else{
+ 		echo "Error: Alguien se encuentra revisando este registro.";
+ 		header();
+ 	}
+
+	function Query_add($sql,$Tipo,$Datos,$conn){	
+		$sql = "SELECT * FROM registro INNER JOIN datos_generales on registro.ID_Registro = datos_generales.FK_Registro WHERE registro.ID_Registro=?;";
+		$stmt = mysqli_stmt_init($conn);
+		if (!mysqli_stmt_prepare($stmt, $sql)) {
+			//header("Location: ../login.php?error=sqlerror");
+			echo 'Error: SQL Conection.';
+			exit();		
+		}else{
+			mysqli_stmt_bind_param($stmt, "iss" , $Datos);
+			mysqli_stmt_execute($stmt);
+			$result = mysqli_stmt_get_result($stmt);
+			$row = mysqli_fetch_assoc($result);
+
+			echo "<pre>";
+			print_r($row);
+			echo "</pre>";
+		}
+
+
+	}
+
+
 
 	$sql = "SELECT * FROM registro INNER JOIN datos_generales on registro.ID_Registro = datos_generales.FK_Registro WHERE registro.ID_Registro=?;";
 	$stmt = mysqli_stmt_init($conn);
@@ -412,13 +457,13 @@ if (empty($_GET["id"])){
 
 			//44 R
 			if ($existenModis == 'Si') {
-				revisar_Archivo('44a.- Ultima acta modificatoria protocolizada',$ID_Selected,'RRR',$I++);				
-				revisar('44b.- Fecha de la última modificación del acta constitutiva',$ultimaModi,$I++);
+				revisar_Archivo('44a.- Ultima acta modificatoria protocolizada',$ID_Selected,'file_ultima_acta','44a');				
+				revisar('44b.- Fecha de la última modificación del acta constitutiva',$ultimaModi,'44b');
 
-				revisar_Archivo('44c.- RPP ICRESON de la última acta modificatoria actualizada',$ID_Selected,'rrr',$I++);
+				revisar_Archivo('44c.- RPP ICRESON de la última acta modificatoria actualizada',$ID_Selected,'file_rpp_ultima_acta','44c');
 
-				revisar('44d.- Número de acta constitutiva',$numeroActaConsti,$I++);
-				revisar('44e.- Volúmen de acta constitutiva',$volumenActaConsti,$I++);
+				revisar('44d.- Número de acta constitutiva',$numeroActaConsti,'44d');
+				revisar('44e.- Volúmen de acta constitutiva',$volumenActaConsti,'44e');
 			}		
 
 
@@ -426,17 +471,17 @@ if (empty($_GET["id"])){
 
 			// 45 R
 			if ($autorizadaDeducible == 'Si') {
-				revisar('45a.- Página del Diario Oficial de la Federación donde se publicó su autorización',$R,$I++);
-				revisar('45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil',$numeroDiario,$I++);
-				revisar('45c.- Fecha de publicación en el Diario Oficial de la Federación',$fechaDiario,$I++);
-				revisar('45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?',$detenidoAutorizado,$I++);
+				revisar('45a.- Página del Diario Oficial de la Federación donde se publicó su autorización',$R,'45a');
+				revisar('45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil',$numeroDiario,'45b');
+				revisar('45c.- Fecha de publicación en el Diario Oficial de la Federación',$fechaDiario,'45c');
+				revisar('45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?',$detenidoAutorizado,'45d');
 
 				// 45D R
 				if ($detenidoAutorizado == 'Si') {
-					revisar('45e.- ¿Por qué detuvo el SAT su aturización?',$razonDetenido,$I++);
+					revisar('45e.- ¿Por qué detuvo el SAT su aturización?',$razonDetenido,'45e');
 				}
 
-				revisar('45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?',$fechaAutorizada,$I++);				
+				revisar('45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?',$fechaAutorizada,'45f');				
 			}
 
 
@@ -472,7 +517,7 @@ if (empty($_GET["id"])){
 
 			//63 R
 			if ($inscritaDNIAS == 'Si') {
-				revisar_Archivo('63a.- DNIAS',$ID_Selected,'rrr',$I++);
+				revisar_Archivo('63a.- DNIAS',$ID_Selected,'file_dnias','63a');
 			}
 
 
@@ -488,12 +533,12 @@ if (empty($_GET["id"])){
 			function revisar($P,$R,$I){?>
 			    
 				<div class="inputGroup" style="margin-bottom: 0;">
-					<input id="option<?php echo $I; ?>" type="checkbox" name="checkbox<?php echo $I; ?>" class="comentario" onClick="quitarComentario(this.id)"/>
+					<input id="option<?php echo $I; ?>" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
 					<label for="option<?php echo $I; ?>"><?php echo $P; ?></label>
 					<div class="explication">(Respuesta)</div>
 					<p style="color: " ><?php echo $R; ?></p>
 					<div id="divComment<?php echo $I; ?>" class="hide" >
-					    <textarea class="text_area_low" placeholder="Comentario/Revisión" name="<?php echo $I; ?>"></textarea>
+					    <textarea class="text_area_low" id="textarea<?php echo $I; ?>" placeholder="Comentario/Revisión" name="<?php echo $I; ?>"></textarea>
 					</div>
 				</div>
 				<br>
@@ -508,12 +553,21 @@ if (empty($_GET["id"])){
 					<div class="explication">(Respuesta)</div>
 					<p style="color: " ><?php Archivo($ID_Selected,$R); ?></p>
 					<div id="divComment<?php echo $I; ?>" class="hide" >
-					    <textarea class="text_area_low" placeholder="Comentario/Revisión" name="<?php echo $I; ?>" ></textarea>
+					    <textarea class="text_area_low" id="textarea<?php echo $I; ?>" placeholder="Comentario/Revisión" name="<?php echo $I; ?>" ></textarea>
 					</div>
 				</div>
 				<br>
 
-			<?php  }	?>					
+			<?php  }	?>
+
+			<input class="hide" placeholder="ID_Registro" name="Registro" value="<?php echo $ID_Selected; ?>" >
+
+			<?php 
+				//Querry Select cuenta inner join Empleado on Id_Cuenta = FK_Cuenta WHERE Id_Cuenta = SESSION['user_Id']; 
+				$EmpleadoID = ''; 
+			?>
+			<input class="hide" placeholder="EmpleadoID" name="EmpleadoID" value="<?php echo $EmpleadoID; ?>" >
+
 
 			<button class="common" type="submit" name="Enviar_Revisión">Enviar Revisión</button>		
 		</form>
@@ -527,16 +581,20 @@ if (empty($_GET["id"])){
 			var numero = CheckID.replace("option","");
 
 			var idComentario = 'divComment' + numero;
-
+            var idTextarea = 'textarea' + numero;
 
 			var checkbox = document.getElementById(CheckID);
 
 			var comentario = document.getElementById(idComentario);
+            var textarea = document.getElementById(idTextarea);
 
 			if(checkbox.checked){
 				comentario.classList.remove("hide");
+                comentario.hidden = false;
 			}else{
 				comentario.classList.add("hide");
+                comentario.hidden = true;
+                textarea.value = "";
 			}
 
 		}

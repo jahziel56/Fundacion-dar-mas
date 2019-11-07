@@ -74,6 +74,7 @@
 		<main>
 		<label>Archivos</label><br><br>
 		<a href='Archivos_Archivos.php'class="A_P_B">Ver Archivos</a>
+		<a href='Panel_Informacion.php'class="A_P_B">Panel de Informacion</a>
 		<hr>
 
 <div id="myModal" class="modal">

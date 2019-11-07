@@ -91,14 +91,14 @@ session_start();
                 //Tipo de usuario: Admin
 				}elseif ($nivel == 3) {?>
                     <a id='perfil_right2' class='' href='Panel_De_Control.php'>Panel De Control</a>
-                    <a id='perfil_right2' class='' href='a.php'>Convocatorias</a>
+                    <a id='perfil_right2' class='' href='Registro_Lista.php'>Convocatorias</a>
 
                     <form action="includes/logout.inc.php" method="post">
                         <button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"> Salir</i></button>
                     </form>
 
                     <a id='perfil_right1' class='' href='Panel_De_Control.php'>Panel De Control</a>
-                    <a id='perfil_right1' class='' href='a.php'>Convocatorias</a>
+                    <a id='perfil_right1' class='' href='Registro_Lista.php'>Convocatorias</a>
             <?php  
                 }
 			}
