@@ -192,7 +192,8 @@ window.onclick = function(event) {
 				<input type="radio" class="common" name="domicilio_social_legal" value="No" onclick="Domicilio_Social_N();"> No <br><br>	
 			</div>
 
-		<div style="background: lightblue; padding-left: 10px; box-shadow: inset 3px 3px 4px 1px rgba(0,0,0,0.30); padding: 12px;" class="hide" id="Oculto_Domicilio_Social">
+		<div style="background: lightblue;" class="hide" id="Oculto_Domicilio_Social">
+		<h5 style="background: lightcyan; margin: 15px 0; text-align: center;">Domicilio Legal</h5>
 			<label>27a.- Domicilio Legal (registrado ante SAT)</label> <label style="color: dimgray; font-size: 14px;">(Calle, número, entre o esquina con, colonia,código postal, localidad y municipio)</label>
 			<input type="text" class="common" id="domicilio_Dom" name="domicilio_Dom" placeholder="Domicilio Legal" value="" >
 

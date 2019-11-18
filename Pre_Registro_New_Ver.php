@@ -5,8 +5,9 @@
 	require 'includes/dbh.inc.php';	
 
     //-------------------- Obtener el id a ver
+	if (isset($_POST['Registro'])) {	
 
-    $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
+    $ID_Selected = $_POST['Registro'];
 
     //--------------------- datos_generales -------------------------
     $sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
@@ -643,3 +644,5 @@ function Error($P){?>
 
 		<?php } ?>
 </main>
+
+<?php } ?>

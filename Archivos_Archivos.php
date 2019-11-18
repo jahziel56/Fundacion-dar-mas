@@ -35,7 +35,7 @@
 					<td><?php echo $a['RFC_Organizacional']?></td>
 					<td><?php echo $a['Fecha_Registro']?></td>
 					<td><?php echo $a['Estado']?></td>
-					<td><?php echo "<a class='Hoverr' href='Archivos_Lista_Convocatoria.php?id=".$a['ID_Registro']."'><i class='fa fa-eye fa-2x'></a>";?></td>
+					<td><?php echo "<a class='Hoverr' href='Archivos_Lista_Convocatoria.php?id=".$a['ID_Registro']."'><i class='fa fa-eye fa-2x'>a</a>";?></td>
 
 				</tr>				  	   
 			<?php } ?>

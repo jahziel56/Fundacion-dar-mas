@@ -3,49 +3,103 @@
 	require 'includes/dbh.inc.php';
 
     $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
+    $ID_Cuenta = $_SESSION['user_Id'];
+    date_default_timezone_set('America/Hermosillo');
 
-    /* Query 	
-    $sql = "SELECT * FROM tabla_revision where FK_registro = ?($ID_Selected) ";
- 	*/
- 	/* Significa que no existia */
- 	$Querry = false;
- 	if ($Querry = false) {
- 		/* Query 	
-    	$sql = "SELECT * FROM tabla_revision where FK_empleado = ?($Sesion[userid]) ";
- 		*/
- 		$Querry = true;
+
+ 	if (empty(Query_select("SELECT * FROM revisando WHERE FK_Registro=?;",$ID_Selected,$conn))) {
+
+ 		 $sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
+
  		/* Si existe un empleado en la tabla solo updatea los datos, si no existe agrega los datos a la tabla */
- 		if ($Querry = true) {
-    		/* Query Update */
+ 		if (!empty ($Row=Query_select($sql,$ID_Cuenta,$conn))) {
+
+    		echo "ya estabas revisando una convocatoria<br>";
+    		Query_update_registro('Enviado',$Row['FK_Registro'],$conn);
+    			
+    		echo "esta es tu nueva convocatoria";
+    		Query_update($ID_Selected,$Row['FK_Registro'],$conn);
+
     	}else{
-    		/* Query Add */ 
+    		echo "No tenias convocatoria";
+    		Query_insert($ID_Selected,$ID_Cuenta,$conn);	
     	}
-    		/* Query Update registro */
+    		Query_update_registro('Revision',$ID_Selected,$conn);
     		
  	}else{
- 		echo "Error: Alguien se encuentra revisando este registro.";
- 		header();
+ 		$sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
+ 		if (!empty (Query_select($sql,$ID_Cuenta,$conn))) {
+ 			echo "tu estas revisando este registro";
+ 		}else{
+ 			echo "Error: Alguien se encuentra revisando este registro.";
+ 			header("Location: Registro_Lista.php?error=revisando");	
+ 		}
  	}
 
-	function Query_add($sql,$Tipo,$Datos,$conn){	
-		$sql = "SELECT * FROM registro INNER JOIN datos_generales on registro.ID_Registro = datos_generales.FK_Registro WHERE registro.ID_Registro=?;";
+
+
+	function Query_select($sql,$D,$conn){	
 		$stmt = mysqli_stmt_init($conn);
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
-			//header("Location: ../login.php?error=sqlerror");
 			echo 'Error: SQL Conection.';
 			exit();		
 		}else{
-			mysqli_stmt_bind_param($stmt, "iss" , $Datos);
+			mysqli_stmt_bind_param($stmt, "i" , $D);
 			mysqli_stmt_execute($stmt);
 			$result = mysqli_stmt_get_result($stmt);
 			$row = mysqli_fetch_assoc($result);
+			return $row;
+		}
+	}
 
-			echo "<pre>";
-			print_r($row);
-			echo "</pre>";
+	function Query_insert($FK_Registro,$FK_Usuario,$conn){
+ 		$sql = "SELECT * FROM empleados WHERE FK_Cuenta=?;";
+		$stmt = mysqli_stmt_init($conn);
+		if (!mysqli_stmt_prepare($stmt, $sql)) {
+			echo 'Error: SQL Conection.';
+			exit();		
+		}else{
+			mysqli_stmt_bind_param($stmt, "i" , $FK_Usuario);
+			mysqli_stmt_execute($stmt);
+			$result = mysqli_stmt_get_result($stmt);
+			$row = mysqli_fetch_assoc($result);
 		}
 
+		$sql = "INSERT INTO revisando (FK_Registro, FK_Empleado) VALUES (?, ?)";	
+		$stmt = mysqli_stmt_init($conn);
+		if (!mysqli_stmt_prepare($stmt, $sql)) {
+			echo 'Error: SQL Conection.';
+			exit();		
+		}else{
+			mysqli_stmt_bind_param($stmt, "ii" , $FK_Registro,$row['EmpleadoID']);
+			mysqli_stmt_execute($stmt);
+		}
+	}
 
+
+
+	function Query_update($Nuevo,$Viejo,$conn){
+		$sql = "UPDATE revisando SET FK_Registro=?,Fecha=? WHERE FK_Registro=?;";
+		$stmt = mysqli_stmt_init($conn);
+		if (!mysqli_stmt_prepare($stmt, $sql)) {
+			echo 'Error: SQL Conection.';
+			exit();		
+		}else{
+			mysqli_stmt_bind_param($stmt, "isi" , $Nuevo,$Fecha,$Viejo);
+			mysqli_stmt_execute($stmt);
+		}
+	}
+
+	function Query_update_registro($Estado,$ID_Registro,$conn){
+		$sql = "UPDATE registro SET Estado=? WHERE ID_Registro=?;";
+		$stmt = mysqli_stmt_init($conn);
+		if (!mysqli_stmt_prepare($stmt, $sql)) {
+			echo 'Error: SQL Conection.';
+			exit();		
+		}else{
+			mysqli_stmt_bind_param($stmt, "si" , $Estado,$ID_Registro);
+			mysqli_stmt_execute($stmt);
+		}
 	}
 
 
@@ -426,9 +480,9 @@ if (empty($_GET["id"])){
 			//27 R
 
 			if ($domicilio_social_legal == 'No') {
-				revisar('27a.- Domicilio Legal (registrado ante SAT)',$domicilio_Dom,$I++);
-				revisar('27b.- Localidad',$localidad_Dom,$I++);
-				revisar('27c.- Municipio',$municipio_Dom,$I++);
+				revisar('27a.- Domicilio Legal (registrado ante SAT)',$domicilio_Dom,'27a');
+				revisar('27b.- Localidad',$localidad_Dom,'27b');
+				revisar('27c.- Municipio',$municipio_Dom,'27c');
 			}
 			
 //------------------ historial_de_la_organizacion ---------------------------- 

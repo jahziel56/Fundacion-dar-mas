@@ -588,7 +588,7 @@ if (isset($_POST['pre-submit'])) {
 
     require"Registro_Succes.php";
 
-    //header("Location: ../index.php");
+   //header("Location: ../index.php");
 	//exit();
 }
 else{

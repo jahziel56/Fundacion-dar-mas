@@ -33,6 +33,18 @@ main{
   box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.30);
 }
 
+.div_main{
+  margin: 10px 0 auto;
+  padding: 5px;
+  width: 100%;
+  background: white;
+  border-radius: 8px 8px 0 0;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.30);
+}
+
+
 .In_Container{
   background: white;
   border-radius: 4px;
@@ -46,8 +58,19 @@ main{
   text-align: center;
 }
 
+/*------------------ Tamaños ----------------------*/
+.div_100{
+  width: 99%;
+}
+
+.div_50{
+  width: 48%;
+}
 .div_40{
   width: 40%;
+}
+.div_20T{
+  width: 20%;
 }
 
 .div_20{
@@ -115,6 +138,10 @@ input[type=number].common::-webkit-outer-spin-button {
 .signup{
   text-align:center;
   margin: 10px 40px 20px 40px;
+}
+.conten-alignt-center{
+  text-align: center;
+  margin: 0 0 40px 0;
 }
 input[type=text].common,
 input[type=password].common,
@@ -462,6 +489,11 @@ button[type=submit]:hover.Reset {
     display: block;
     float: none;
     width: 100%
+  }
+
+  main{
+    padding: 2px;
+    width: 95%;
   }
 
 }
@@ -861,7 +893,9 @@ button:hover.Panel_Control {
   color: black;
 }
 
-/* ---- BLUE ---- */
+/* -------------------------------------- Colores ---------------------------------------------- */
+
+/* ---- Blue ---- */
 .Btn_C_B{
   color: #fff;
   background-color: #337ab7;
@@ -900,6 +934,32 @@ button:hover.Panel_Control {
   background: #eea236;
 }
 
+/* ---- Golden ---- */
+.Btn_C_Gold{
+  color: #fff;
+  background-color: GOLDENROD;
+  border-color: #eea236;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.Btn_C_Gold:hover{
+  background: DARKGOLDENROD;
+}
+
+/* ---- Golden ---- */
+.Btn_C_LightSeaG{
+  color: #fff;
+  background-color: LIGHTSEAGREEN;
+  border-color: #eea236;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.Btn_C_LightSeaG:hover{
+  background: DARKCYAN;
+}
+
+
+
 /* ---- Red ---- */
 .Btn_C_R{
   color: #fff;
@@ -911,6 +971,24 @@ button:hover.Panel_Control {
   background: #d43f3a;
 }
 
+/* ---- Purple ---- */
+.Btn_C_P{
+  color: #fff;
+  background-color: #6700CC;
+  border-color: #4cae4c;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.Btn_C_P:hover{
+  background: #5B01B5;
+}
+
+.purple_header{
+  color: #6700CC;
+  background: #3A0072;
+}
+
+/* ---------------------------------------- */
 .float-left{
   float: left;
 }
@@ -1085,6 +1163,22 @@ border: 1px solid #ccc;
   border-color: white;
 }
 
+.row:hover .notificacion{
+  background: pink;
+  border-color: lightpink;
+}
+
+.row:hover .notificacion, .row:focus-within .notificacion, .row:active .notificacion {
+  background: pink;
+  border-color: white;
+}
+
+.vista{
+  filter:brightness(0.8);
+  background: white;
+}
+
+
 .cell {
   background: #fff;
   padding: 0.75rem 1rem;
@@ -1137,6 +1231,7 @@ border: 1px solid #ccc;
 .cell.-action .label {
   transition: opacity 96ms ease;
   transition-delay: 24ms;
+  z-index: 20;
 }
 .cell.-action:not(:hover):not(:focus) .label {
   opacity: 0;
@@ -1451,14 +1546,14 @@ background: REBECCAPURPLE;
 .Bar_Panel_Info{
   background: lightgray; 
   height: 300px; 
-  width: 25%; 
+  width: 28%; 
   overflow: auto;
   border-radius: 6px;
 }
 
 .Bar_Panel_Display{
   padding: 3px 5px; 
-  width: 75%; 
+  width: 72%; 
   margin: 0 0 0 25px;
   display: flex;
 }
@@ -1573,4 +1668,80 @@ align-self: stretch;
 #Registros_general_detalle,
 #Registros_este_año_detalle{
   display: none;
+}
+
+/* ----------------------------------- */
+.Go {
+  border-radius: 4px;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  outline: none;
+}
+
+.Go span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.Go span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  bottom: -8px;
+  right: -60px;
+  transition: 0.5s;
+  font-size: 50px;
+}
+
+.Go:hover span {
+  padding-right: 25px;
+}
+
+.Go:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+a .Go i{ 
+  color: #fff;
+  margin-right: 10px;
+}
+
+.Go:visited i{ 
+  color: #fff;
+}
+
+.Go:novisited i{ 
+  color: #fff;
+}
+
+.Go i:hover{
+  color: #fff;
+}
+/* ----------------------------------- */
+.Ga {
+  border-radius: 0px;
+  border-bottom: 1px solid #ccc; 
+  font-size: 20px;
+  padding: 10px;
+  margin: 0px;
+  width: 100%;
+}
+
+.Ga span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  bottom: -4px;
+  right: -60px;
+  transition: 0.5s;
+  font-size: 30px;
 }

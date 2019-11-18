@@ -1,6 +1,7 @@
 <?php 
 if (isset($_POST['OSC_acces-submit'])) {
 	require 'dbh.inc.php';
+	session_start();
 
 	$RFC = $_POST['RFC'];
 	$Clave = $_POST['Clave'];
@@ -21,11 +22,11 @@ if (isset($_POST['OSC_acces-submit'])) {
 			$result = mysqli_stmt_get_result($stmt);
 			if ($row = mysqli_fetch_assoc($result)) {
 				
-				$loco = $row['Clave'];
-				$loco2 = $row['RFC_Organizacional'];
+
 
 				if ($Clave == $row['Clave']) {
-					header("Location: ../Pre_Registro_New_Ver.php?id=".$row['ID_Registro']);
+					$_SESSION['ID_OSC'] = $row['ID_Registro'];
+					header("Location: ../OSC_panel.php");
 
 				}else{
 					header("Location: ../OSC_acces.php?error=clave_incorrecta");

@@ -1,6 +1,15 @@
 <?php
 /* manda a llamar a header.php */ 
 	require"classes/header.php";
+
+	if (!isset ($_SESSION['user_Id'])) {
+		header("Location: login.php?error=nouser");
+	}else if (isset ($_SESSION['ID_OSC'])) {
+		header("Location: OSC_panel.php");
+	}else{
+
+
+
 ?>
 	
 	
@@ -40,6 +49,7 @@
 
 
 <?php
+}
 /* manda a llamar a footer.php */ 
 	require"footer.php";
 
