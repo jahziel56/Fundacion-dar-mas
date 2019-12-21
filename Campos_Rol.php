@@ -24,12 +24,16 @@ if (empty($_GET["Rol_Name"]) || empty($_GET["Rol_Descripcion"])){
 			<input type="hidden" name="Rol_Descripcion" value="<?php echo $Rol_Descripcion; ?>">  
 			<div class="Pre-Registro" style="width: 100%;">
 				
-					<div style="background: lightblue">
-						<label>Nombre de la OSC</label><br>					
-				        <input type="text" class="common" id="nombreOSC" name="nombreOSC"
-				          placeholder="Nombre de la OSC (tal cómo está escrita en su OSC):" disabled>
-						    <input name="checker[]" type="checkbox" class="promoted-input-checkbox" value="1" checked/>
-						</div><br>
+					<div class="checkbox">
+						<input id="1" name="checker[]" type="checkbox" class="promoted-input-checkbox" value="1"/>
+						<label for="1">
+						<div class="fake-label">
+							<i class="fa fa-check"></i>
+						</div>
+							<p>Nombre de la OSC</p>
+						</label>
+					</div><br>
+
 
 					<div style="background: lightblue">
 			        <label style="width: 100%">Objeto social</label><br>

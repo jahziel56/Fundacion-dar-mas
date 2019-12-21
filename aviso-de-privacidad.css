@@ -1,0 +1,610 @@
+div#container
+{
+   width: 1000px;
+   position: relative;
+   margin: 0 auto 0 auto;
+   text-align: left;
+}
+body
+{
+   background-color: #5B5A5F;
+   color: #000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   line-height: 1.1875;
+   margin: 0;
+   text-align: center;
+}
+#layer-region
+{
+   background-color: #023F6E;
+   background-image: none;
+}
+#layer-giro
+{
+   background-color: #9D80B6;
+   background-image: none;
+}
+#layer-status
+{
+   background-color: #FDBE0F;
+   background-image: none;
+}
+#Layer101
+{
+   background-color: transparent;
+   background-image: url(images/banner-aviso-legal.jpg);
+   background-repeat: repeat;
+   background-position: left top;
+   background-attachment: fixed;
+   background-position: 50% 0;
+   background-size: cover;
+}
+#wb_Text191 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text191 div
+{
+   text-align: center;
+}
+#Layer01233
+{
+   background-color: #FFFFFF;
+   background-image: none;
+}
+#Shape1
+{
+   width: 169px;
+   height: 4px;
+   background-color: #023F6E;
+   background-image: none;
+   border: 0px #245580 solid;
+}
+#Shape1_text
+{
+   position: absolute;
+   left: 1px;
+   top: 1px;
+   width: 167px;
+   height: 2px;
+   overflow: hidden;
+   text-align: center;
+}
+#wb_Text10092 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text10092 div
+{
+   text-align: center;
+}
+#wb_Text10093 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text10093 div
+{
+   text-align: center;
+}
+#wb_Text100934 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text100934 div
+{
+   text-align: center;
+}
+#wb_Text130091 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_Text130091 div
+{
+   text-align: left;
+}
+#avisoprivacidad01
+{
+   border: 0px #000000 solid;
+   padding: 0px 0px 0px 0px;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Text130092 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_Text130092 div
+{
+   text-align: left;
+}
+#logo_dar_massonora
+{
+   border: 0px #000000 solid;
+   padding: 0px 0px 0px 0px;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Text1F1 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_Text1F1 div
+{
+   text-align: left;
+}
+#Layer1
+{
+   background-color: #3A3A3A;
+   background-image: none;
+}
+#wb_Text1100 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: right;
+}
+#wb_Text1100 div
+{
+   text-align: right;
+}
+#SiteSearch1
+{
+   border: 1px #CCCCCC solid;
+   -moz-border-radius: 4px;
+   -webkit-border-radius: 4px;
+   border-radius: 4px;
+   background-color: #FFFFFF;
+   background-image: none;
+   color :#000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   padding: 4px 4px 4px 4px;
+   text-align: left;
+   vertical-align: middle;
+}
+#SiteSearch1:focus
+{
+   border-color: #66AFE9;
+   -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   -moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   outline: 0;
+}
+#Button1
+{
+   border: 1px #2E6DA4 solid;
+   -moz-border-radius: 4px;
+   -webkit-border-radius: 4px;
+   border-radius: 4px;
+   background-color: #3370B7;
+   background-image: none;
+   color: #FFFFFF;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+}
+#wb_Text10099 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: right;
+}
+#wb_Text10099 div
+{
+   text-align: right;
+}
+#wb_Text18887 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text18887 div
+{
+   text-align: center;
+}
+#facebooklink
+{
+   border: 0px #000000 solid;
+   padding: 0px 0px 0px 0px;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#twitterlink
+{
+   border: 0px #000000 solid;
+   padding: 0px 0px 0px 0px;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#topshape
+{
+   border-width: 0;
+}
+#Layer0012
+{
+   background-color: transparent;
+   background-image: none;
+}
+#MenuBar22
+{
+   background-color: transparent;
+   border: 0px solid #CCCCCC;
+}
+.MenuBar22SubMenu
+{
+   background-color: #FFFFFF;
+   border: 1px solid #CCCCCC;
+   position:	absolute;
+   visibility: hidden;
+   overflow: visible;
+   z-index: 100;
+}
+.MenuBar22SubMenuTable
+{
+   cursor: default;
+   border: 0;
+   padding: 0;
+}
+.MenuBar22SubMenuTable tr
+{
+   margin: 0;
+   padding: 0;
+}
+.MenuBar22Menu
+{
+   background-color: transparent;
+   margin: 0px 0 0px 0px;
+   padding: 0;
+}
+.MenuBar22MenuOuter
+{
+   background-color: transparent;
+   border: 0px solid #CCCCCC;
+}
+.MenuBar22Menu tr
+{
+   margin: 0;
+   padding: 0;
+}
+.MenuBar22MainItem .MenuBar22MainItemLeft,
+.MenuBar22MainItem .MenuBar22MainFolderLeft
+{
+   width: 0px;
+   cursor: pointer;
+   border-width: 0;
+   text-align: center;
+   padding: 3px 0px 3px 0px;
+   font-size: 1px;
+}
+.MenuBar22MainItem .MenuBar22MainItemText, 
+.MenuBar22MainItem .MenuBar22MainItemText a,
+.MenuBar22MainItem .MenuBar22MainFolderText,
+.MenuBar22MainItem .MenuBar22MainFolderText a
+{
+   background-color: transparent;
+   color: #FFFFFF;
+   font-size: 13px;
+   font-family: Arial;
+   font-weight: normal;
+   line-height: 16px;
+   text-align: left;
+   text-decoration: none;
+   white-space: nowrap;
+   margin: 0;
+   cursor: pointer;
+   border-bottom: 0px solid #CCCCCC;
+   border-right: 0px solid #CCCCCC;
+   border-top: 0px solid #CCCCCC;
+   border-left: 0px solid #CCCCCC;
+   padding: 3px 5px 3px 5px;
+   vertical-align: middle;
+}
+.MenuBar22MainItem .MenuBar22MainItemRight,
+.MenuBar22MainItem .MenuBar22MainFolderRight
+{
+   width: 0px;
+   cursor: pointer;
+   border-width: 0;
+   padding: 3px 0px 3px 0px;
+   font-size: 1px;
+}
+.MenuBar22MainItemHover .MenuBar22MainItemLeft,
+.MenuBar22MainItemActive .MenuBar22MainItemLeft,
+.MenuBar22MainItemHover .MenuBar22MainFolderLeft,
+.MenuBar22MainItemActive .MenuBar22MainFolderLeft
+{
+   width: 0px;
+   cursor: pointer;
+   border-width: 0;
+   padding: 3px 0px 3px 0px;
+   font-size: 1px;
+}
+.MenuBar22MainItemHover .MenuBar22MainItemText,
+.MenuBar22MainItemActive .MenuBar22MainItemText,
+.MenuBar22MainItemHover .MenuBar22MainItemText a,
+.MenuBar22MainItemActive .MenuBar22MainItemText a,
+.MenuBar22MainItemHover .MenuBar22MainFolderText,
+.MenuBar22MainItemActive .MenuBar22MainFolderText,
+.MenuBar22MainItemHover .MenuBar22MainFolderText a,
+.MenuBar22MainItemActive .MenuBar22MainFolderText a
+{
+   background-color: transparent;
+   color: #337AB7;
+   font-size: 13px;
+   font-family: Arial;
+   font-weight: bold;
+   line-height: 16px;
+   text-align: left;
+   text-decoration: none;
+   white-space: nowrap;
+   margin: 0;
+   cursor: pointer;
+   border-bottom: 0px solid #FFFFFF;
+   border-right: 0px solid #FFFFFF;
+   border-top: 0px solid #FFFFFF;
+   border-left: 0px solid #FFFFFF;
+   padding: 3px 5px 3px 5px;
+   vertical-align: middle;
+}
+.MenuBar22MainItemHover .MenuBar22MainItemRight,
+.MenuBar22MainItemActive .MenuBar22MainItemRight,
+.MenuBar22MainItemHover .MenuBar22MainFolderRight,
+.MenuBar22MainItemActive .MenuBar22MainFolderRight
+{
+   width: 0px;
+   cursor: pointer;
+   border-width: 0;
+   padding: 3px 0px 3px 0px;
+   font-size: 1px;
+}
+.MenuBar22MenuItem .MenuBar22MenuItemLeft,
+.MenuBar22MenuItem .MenuBar22MenuFolderLeft
+{
+   width: 0px;
+   cursor: pointer;
+   border-width: 0;
+   text-align: center;
+   padding: 3px 0px 3px 0px;
+   font-size: 1px;
+}
+.MenuBar22MenuItem .MenuBar22MenuItemText, 
+.MenuBar22MenuItem .MenuBar22MenuItemText a,
+.MenuBar22MenuItem .MenuBar22MenuFolderText,
+.MenuBar22MenuItem .MenuBar22MenuFolderText a
+{
+   background-color: #FFFFFF;
+   color: #333333;
+   font-size: 13px;
+   font-family: Arial;
+   font-weight: normal;
+   line-height: 16px;
+   text-align: left;
+   text-decoration: none;
+   white-space: nowrap;
+   margin: 0;
+   cursor: pointer;
+   border-bottom: 0px solid #CCCCCC;
+   border-top: 0px solid #CCCCCC;
+   border-right: 0px solid #CCCCCC;
+   border-left: 0px solid #CCCCCC;
+   padding: 3px 5px 3px 5px;
+   vertical-align: middle;
+}
+.MenuBar22MenuItem .MenuBar22MenuItemRight,
+.MenuBar22MenuItem .MenuBar22MenuFolderRight
+{
+   width: 0px;
+   cursor: pointer;
+   border-width: 0;
+   padding: 3px 0px 3px 0px;
+   font-size: 1px;
+}
+.MenuBar22MenuItemHover .MenuBar22MenuItemLeft, 
+.MenuBar22MenuItemActive .MenuBar22MenuItemLeft,
+.MenuBar22MenuItemHover .MenuBar22MenuFolderLeft,
+.MenuBar22MenuItemActive .MenuBar22MenuFolderLeft
+{
+   width: 0px;
+   cursor: pointer;
+   border-width: 0;
+   padding: 3px 0px 3px 0px;
+   font-size: 1px;
+}
+.MenuBar22MenuItemHover .MenuBar22MenuItemText,
+.MenuBar22MenuItemActive .MenuBar22MenuItemText,
+.MenuBar22MenuItemHover .MenuBar22MenuItemText a,
+.MenuBar22MenuItemActive .MenuBar22MenuItemText a,
+.MenuBar22MenuItemHover .MenuBar22MenuFolderText,
+.MenuBar22MenuItemActive .MenuBar22MenuFolderText,
+.MenuBar22MenuItemHover .MenuBar22MenuFolderText a,
+.MenuBar22MenuItemActive .MenuBar22MenuFolderText a
+{
+   background-color: #337AB7;
+   color: #FFFFFF;
+   font-size: 13px;
+   font-family: Arial;
+   font-weight: normal;
+   line-height: 16px;
+   text-align: left;
+   text-decoration: none;
+   white-space: nowrap;
+   margin: 0;
+   cursor: pointer;
+   border-bottom: 0px solid #CCCCCC;
+   border-top: 0px solid #CCCCCC;
+   border-right: 0px solid #CCCCCC;
+   border-left: 0px solid #CCCCCC;
+   padding: 3px 5px 3px 5px;
+   vertical-align: middle;
+}
+.MenuBar22MenuItemHover .MenuBar22MenuItemRight,
+.MenuBar22MenuItemActive .MenuBar22MenuItemRight,
+.MenuBar22MenuItemHover .MenuBar22MenuFolderRight,
+.MenuBar22MenuItemActive .MenuBar22MenuFolderRight
+{
+   width: 0px;
+   cursor: pointer;
+   border-width: 0;
+   padding: 3px 0px 3px 0px;
+   font-size: 1px;
+}
+.MenuBar22SubMenu td,
+.MenuBar22Menu td,
+.MenuBar22Menu tr
+{
+   vertical-align: middle;
+}
+.MenuBar22MenuSplitText div
+{
+   height: 1px;
+   padding: 0;
+   background-color: #333333;
+   overflow: hidden;
+}
+.MenuBar22MenuItem .MenuBar22MenuSplitLeft
+{
+   height: 7px;
+   padding: 0px 0px 0px 0px;
+}
+.MenuBar22MenuItem .MenuBar22MenuSplitText
+{
+   background-color: #FFFFFF;
+   height: 7px;
+   padding: 0px 6px 0px 6px;
+}
+.MenuBar22MenuItem .MenuBar22MenuSplitRight
+{
+   height: 7px;
+   padding: 0px 0px 0px 0px;
+}
+.MenuBar22MainSplitText div
+{
+   background-color: #333333;
+   height: 1px;
+   padding: 0;
+   overflow: hidden;
+}
+.MenuBar22MainItem .MenuBar22MainSplitLeft 
+{
+   height: 7px;
+   padding: 0px 0px 0px 0px;
+}
+.MenuBar22MainItem .MenuBar22MainSplitText
+{
+   background-color: transparent;
+   height: 7px;
+   padding: 0px 0px 0px 0px;
+}
+.MenuBar22MainItem .MenuBar22MainSplitRight
+{
+   height: 7px;
+   padding: 0px 0px 0px 0px;
+}
+.MenuBar22MainItem
+{
+   vertical-align: middle;
+}
+.MenuBar22HorizontalSplit
+{
+   border-right: 0 solid #8080FF;
+   border-left: 0 solid #8080FF;
+   width: 15px;
+   background-color: transparent;
+   padding: 3px 0px 3px 0px;
+   vertical-align: middle;
+   text-align: center;
+   text-decoration: none;
+   color: #333333;
+   font-size: 13px;
+   font-family: Arial;
+   font-style: normal;
+}
+.MenuBar22MainItem, .MenuBar22MainItemHover, .MenuBar22MainItemActive,
+.MenuBar22MenuItem, .MenuBar22MenuItemHover, .MenuBar22MenuItemActive
+{
+   white-space: nowrap;
+}
+.MenuBar22SpacerDiv
+{
+   background: transparent;
+   margin: 0;
+   padding: 0;
+   border: 0;
+   font-size: 1px;
+}
+#wb_Text10111101 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: right;
+}
+#wb_Text10111101 div
+{
+   text-align: right;
+}
+#PageFooter1
+{
+   background-color: #3A3A3A;
+   background-image: none;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+}

@@ -4,15 +4,24 @@
 }
 body {
   font-size: 28px;
-  background: #F5F6FA;
+  background: #D1D7DC;
   font-family: Arial;
+  box-sizing: border-box;
 }
+
 header{
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
-
+  z-index: 1001;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
 }
+
 main{
 	margin: 0 auto;
 	padding: 5px;
@@ -21,8 +30,48 @@ main{
 	border-radius: 4px;
   margin-top: 30px;
   margin-bottom: 20px;
-  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.30);
 }
+
+.dontselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+.div_main{
+  margin: 10px 0 auto;
+  padding: 5px;
+  width: 100%;
+  background: white;
+  border-radius: 8px 8px 0 0;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.30);
+}
+.div_main_R{
+  background: #207FBF; 
+  color: white;
+  margin: 10px 0 0 0;
+}
+.div_main_Red{
+  background: #e53935; 
+  color: white;
+  margin: 10px 0 0 0;
+}
+
+.div_container{
+  width: 100%;
+  background: white;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.30);
+  padding: 0 6px;
+}
+
 
 .In_Container{
   background: white;
@@ -37,8 +86,27 @@ main{
   text-align: center;
 }
 
+/*------------------ Tamaños ----------------------*/
+.div_100{
+  width: 99%;
+}
+
+.div_95{
+  width: 95%;
+}
+
+.div_90{
+  width: 89%;
+}
+
+.div_50{
+  width: 48%;
+}
 .div_40{
   width: 40%;
+}
+.div_20T{
+  width: 20%;
 }
 
 .div_20{
@@ -67,46 +135,24 @@ main{
   display: block;
 }
 /* --------------------------------- Inputs ------------------------------ */
-/*input[type=text],input[type=password], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc; 
-  box-sizing: border-box;
-  border-radius: 6px;  
-}
-input[type=text],input[type=password]{
- border-radius: 30px;
- outline:0px;
+.Error_php{
+  background: #CB4335; 
+  padding-left: 10px;
 }
 
-input[type=text]:focus,
-input[type=password]:focus {
-    box-shadow: 0 0 1pt 1pt #2774EA;
+input[type=number].common::-webkit-inner-spin-button, 
+input[type=number].common::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
-button[type=submit] {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button[type=submit]:hover {
-  background-color: #45a049;
-}*/
-/* --------------------------------- signup  ------------------------------ */
 
 .Pre-Registro input[type=text].common,
 .Pre-Registro input[type=password].common,
 .Pre-Registro input[type=email].common,
 .Pre-Registro input[type=url].common,
 .Pre-Registro input[type=file].common,
+.Pre-Registro input[type=number].common,
 .Pre-Registro textarea.common{
   width: 95%;
   padding: 12px 20px;
@@ -129,11 +175,16 @@ button[type=submit]:hover {
   text-align:center;
   margin: 10px 40px 20px 40px;
 }
+.conten-alignt-center{
+  text-align: center;
+  margin: 0 0 40px 0;
+}
 input[type=text].common,
 input[type=password].common,
 input[type=email].common,
 input[type=url].common,
 input[type=file].common,
+input[type=number].common,
 textarea.common{
   width: 100%;
   padding: 12px 20px;
@@ -152,28 +203,12 @@ input[type=file].common{
 
 textarea.common{
   border-radius: 6px;
+
 }
 
 input[type=radio].common{
   
 }
-/* Pre-registro
-  <style type="text/css">
-    input{
-      margin-bottom: 30px;
-      width: 100%;
-    }
-
-    input[type=radio].common{
-        margin-bottom: 0px;
-      width: 10%;
-    }
-    textarea.common{
-      margin-bottom: 30px;
-      width: 100%;
-    }
-  </style>
-*/
 
 .Pre-Registro select,
 .Pre-Registro input[type=date]{
@@ -181,13 +216,14 @@ input[type=radio].common{
   width: 90%;
 }
 
-input[type=text].P6{
+input[type=number].P6{
   width: 16%;
 }
 
-
 .common:focus{
-    box-shadow: 0 0 2pt 1pt #2774EA;
+  -moz-box-shadow: 0px 0px 2pt 1pt #2774EA;
+  -webkit-box-shadow: 0px 0px 2pt 1pt #2774EA;
+  box-shadow: 0px 0px 2pt 1pt #2774EA;
 }
 
 input[type=text].common_r,
@@ -321,7 +357,7 @@ button[type=submit]:hover.Reset {
 }
 
 #perfil_right1:hover{
-  background: #5800AF;
+  background: #6700CC;
   color: white;
 }
 
@@ -331,7 +367,7 @@ button[type=submit]:hover.Reset {
 }
 
 #perfil_right:hover{
-  background: #5800AF;
+  background: #6700CC;
   color: white;
 }
 
@@ -341,7 +377,7 @@ button[type=submit]:hover.Reset {
 }
 
 #perfil_right2:hover{
-  background: #5800AF;
+  background: #6700CC;
   color: white;
 }
 
@@ -350,7 +386,7 @@ button[type=submit]:hover.Reset {
   display: inline-block;
 }
 #notificacion_right:hover{
-  background: #5800AF;
+  background: #6700CC;
   color: white;
 }
 
@@ -428,7 +464,7 @@ button[type=submit]:hover.Reset {
   display: block;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1150px) {
   .topnav a:not(:first-child), .dropdown .dropbtn, #notificacion_right{
     display: none;
   }
@@ -464,7 +500,6 @@ button[type=submit]:hover.Reset {
   #log{
     display: none;
   }
-
   #log.active {
     display: inline-block;
     float: none;
@@ -490,6 +525,11 @@ button[type=submit]:hover.Reset {
     display: block;
     float: none;
     width: 100%
+  }
+
+  main{
+    padding: 2px;
+    width: 95%;
   }
 
 }
@@ -681,35 +721,6 @@ a i:hover{
   color: #D80000;
 }
 
-
-/* ----------------------- Style Upload ------------------- */
-
-/*input[type="file"] {
-    display: none;
-}
-.custom-file-upload {
-    border: 2px solid #8E8E8E;
-    display: block;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 30px;
-    background:#F6F6F6;
-}
-
-.custom-file-upload:hover{
-  background:#B2B2B2;
-  border: 2px solid #414141;
-}
-
-/*          <label for="file-upload" class="custom-file-upload">
-              <i class="fa fa-cloud-upload"></i> Custom Upload
-          </label>
-          <input id="file-upload" type="file"/>
-*/
-
-/* -----------------------  ------------------- */
-
-
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -794,16 +805,17 @@ a i:hover{
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 .accordion {
-  background-color: #CECECE;
+  background-color: #C1C0C0;
   color: #444;
   cursor: pointer;
-  padding: 18px;
+  padding: 10px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
   font-size: 15px;
   transition: 0.4s;
+  font-size: 18px;
 }
 
 .activetoggle, .accordion:hover {
@@ -811,7 +823,8 @@ a i:hover{
 }
 
 .accordion:after {
-  content: '\002B';
+  font-family: "FontAwesome";
+  content: "\f105";
   color: #777;
   font-weight: bold;
   float: right;
@@ -819,18 +832,42 @@ a i:hover{
 }
 
 .activetoggle:after {
-  content: "\2212";
+  content: "\f107";
 }
 
 .panel {
-  padding: 0 18px;
+  font-size: 16px;
   background-color: #F1F1F1;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  transition: max-height 0.25s ease-out;
 }
 
+.panel label{
+  background: ;
+  padding: 5px;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+}
 
+.panel label:hover{
+  background: lightgray;
+  cursor: pointer;
+}
+.panel label:before{
+  font-family: "FontAwesome";
+  content: "\02013 ";
+  padding: 0px 12px;
+  color: gray;
+}
+
+.panel label:after{
+  float: right;
+  font-family: "FontAwesome";
+  content: "\f06e";
+  color: #1682B5;
+}
 
 // ---------------------------------------- PANEL DE CONTROL ------------------------------------------ //
 
@@ -892,7 +929,9 @@ button:hover.Panel_Control {
   color: black;
 }
 
-/* ---- BLUE ---- */
+/* -------------------------------------- Colores ---------------------------------------------- */
+
+/* ---- Blue ---- */
 .Btn_C_B{
   color: #fff;
   background-color: #337ab7;
@@ -931,6 +970,31 @@ button:hover.Panel_Control {
   background: #eea236;
 }
 
+/* ---- Golden ---- */
+.Btn_C_Gold{
+  color: #fff;
+  background-color: GOLDENROD;
+  border-color: #eea236;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.Btn_C_Gold:hover{
+  background: DARKGOLDENROD;
+}
+
+/* ---- Golden ---- */
+.Btn_C_LightSeaG{
+  color: #fff;
+  background-color: LIGHTSEAGREEN;
+  border-color: #eea236;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.Btn_C_LightSeaG:hover{
+  background: DARKCYAN;
+}
+
+
 
 /* ---- Red ---- */
 .Btn_C_R{
@@ -943,6 +1007,24 @@ button:hover.Panel_Control {
   background: #d43f3a;
 }
 
+/* ---- Purple ---- */
+.Btn_C_P{
+  color: #fff;
+  background-color: #6700CC;
+  border-color: #4cae4c;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.Btn_C_P:hover{
+  background: #5B01B5;
+}
+
+.purple_header{
+  color: #6700CC;
+  background: #3A0072;
+}
+
+/* ---------------------------------------- */
 .float-left{
   float: left;
 }
@@ -982,13 +1064,33 @@ button:hover.Panel_Control {
 }
 
 
-.correo{
-  width: 45.4%;
+.correo{  
   padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc; 
-  outline:0px; 
+  display: block;
+  border: none; 
+  outline:0px;
+  float: left; 
+}
+
+.Input_Correo{
+  width: 48%;
+  border-radius: 30px 0 0 30px;
+  border: 1px solid #ccc;
+}
+
+.Arroba_Correo{
+width: 4%;
+padding: 12px 4px;
+text-align: center;
+border: 1px solid #ccc;
+}
+
+.Mail_Correo{
+  width: 48%;
+  border-radius: 0 30px 30px 0;
+  border: 1px solid #ccc;
+  padding: 11px;
+
 }
 
 
@@ -998,7 +1100,7 @@ button:hover.Panel_Control {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 60px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -1064,12 +1166,14 @@ button:hover.Panel_Control {
 }
 
 
-
+/* --- Archivos ---  */
 
 .Files_Container{
   font-size: 15px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  box-sizing: content-box;
 }
+
 
 .Files_Container button {
   border: none;
@@ -1097,6 +1201,22 @@ button:hover.Panel_Control {
   background: cadetblue;
   border-color: white;
 }
+
+.row:hover .notificacion{
+  background: pink;
+  border-color: lightpink;
+}
+
+.row:hover .notificacion, .row:focus-within .notificacion, .row:active .notificacion {
+  background: pink;
+  border-color: white;
+}
+
+.vista{
+  filter:brightness(0.8);
+  background: white;
+}
+
 
 .cell {
   background: #fff;
@@ -1150,6 +1270,7 @@ button:hover.Panel_Control {
 .cell.-action .label {
   transition: opacity 96ms ease;
   transition-delay: 24ms;
+  z-index: 20;
 }
 .cell.-action:not(:hover):not(:focus) .label {
   opacity: 0;
@@ -1234,3 +1355,496 @@ button:hover.Panel_Control {
   left: 100%;
   margin-left: 0.375rem;
 }
+
+
+/* ----------------- Options ------------------ */
+.selectdiv {
+  position: relative;
+}
+
+/* IE11 hide native button (thanks Matt!) */
+select::-ms-expand {
+/*display: none;*/
+}
+
+.selectdiv:after {
+  content: '<>';
+  font: 17px "Consolas", monospace;
+  color: #333;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 11px;
+  /*Adjust for position however you want*/
+  
+  top: 14px;
+  padding: 0 0 2px;
+  border-bottom: 1px solid #999;
+  /*left line */
+  
+  position: absolute;
+  pointer-events: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add some styling */
+  
+  display: block;
+  width: 100%;
+  height: 40px;
+  float: right;
+  margin: 5px 0px;
+  padding: 0px 24px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  -ms-word-break: normal;
+  word-break: normal;
+}
+:root {
+  --lightblue: lightblue;
+  --limegreen: forestgreen;
+  --lightred: #CB4335;  
+}
+
+/* ----------- Custom Check Box ----------- */
+.inputGroup {
+  background-color: #fff;
+  display: block;
+  margin: 10px 0;
+  position: relative;
+  font-family: 'Fira Sans', sans-serif;
+  border-radius: 6px;
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.30);
+}
+.inputGroup {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+.inputGroup label {
+  padding: 12px 30px;
+  width: 100%;
+  display: block;
+  text-align: left;
+  color: #3C454C;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  transition: color 200ms ease-in;
+  overflow: hidden;
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid #ccc;
+}
+
+
+
+.inputGroup label:before {
+  width: 2.8%;
+  height: 30%;
+  border-radius: 50%;
+  content: '';
+  background-color: #c62828;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale3d(1, 1, 1);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  z-index: -1;
+}
+.inputGroup label:after {
+  width: 32px;
+  height: 32px;
+  content: '';
+  border: 2px solid #D1D7DC;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg width='35' height='35' viewBox='0 0 36 38' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+  background-repeat: no-repeat;
+  background-position: 2px 3px;
+  border-radius: 50%;
+  z-index: 2;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+.inputGroup input:checked ~ label {
+  color: #fff;
+}
+.inputGroup input:checked ~ label:before {
+  transform: translate(-50%, -50%) scale3d(56, 56, 1);
+  opacity: 1;
+}
+.inputGroup input:checked ~ label:after {
+  background-color: #ff5f52;
+  border-color: #ff5f52;
+}
+.inputGroup input {
+  width: 32px;
+  height: 32px;
+  order: 1;
+  z-index: 2;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  visibility: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+.text_area_low{
+  padding: 8px 30px;
+  border-radius: 0 0 6px 6px; 
+  margin-top:2px; 
+  outline: none;
+  resize: none;
+  width: 100%;  
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.inputGroup p {
+  padding: 0 0 5px 30px;
+  color: #3C454C;
+  width: 100%;
+    -webkit-touch-callout: text; /* iOS Safari */
+    -webkit-user-select: text; /* Safari */
+     -khtml-user-select: text; /* Konqueror HTML */
+       -moz-user-select: text; /* Old versions of Firefox */
+        -ms-user-select: text; /* Internet Explorer/Edge */
+            user-select: text;   
+}
+
+.inputGroup .explication{
+  color: dimgray; 
+  font-size: 18px;
+  padding: 2px 30px;
+  color: #7c43bd;
+  width: 100%;
+  font-weight: 560;
+}
+
+/* ------------------------- Yes Open / No Hidden ------------------------- */
+.hide{
+  display: none;
+  transition: max-height 2s ease-out;
+}
+
+.Yes_Ver{
+  display: block;
+  background: lightblue;
+  transition: max-height 2s ease-out;
+}
+/* ------------------------- Barr change ------------------------- */
+.Bar_change{
+  display: flex;
+  justify-content:space-evenly;
+}
+
+.Bar_change div{
+  background: ;
+  width: 49%;
+  margin: 5px;
+  text-align: center;
+  padding: 10px 2px;
+  background: MEDIUMPURPLE;
+  color: white;
+  border-radius: 6px;
+  font-size: 26px;
+    cursor: pointer;
+
+}
+.Bar_change div:hover{
+background: REBECCAPURPLE;
+}
+
+/* --------------------- Panel informativo -------------------------- */
+.Bar_Panel{
+  width: 96%; 
+  display: flex;
+}
+
+.Bar_Panel_Info{
+  background: lightgray; 
+  height: 300px; 
+  width: 28%; 
+  overflow: auto;
+  border-radius: 6px;
+}
+
+.Bar_Panel_Display{
+  padding: 3px 5px; 
+  width: 72%; 
+  margin: 0 0 0 25px;
+  display: flex;
+}
+
+
+.lola {
+  background: lightgray;
+  border-collapse: collapse;
+  text-align: start;
+  margin: 5px;
+  padding: 0;
+  border:none;
+  width: 100%;
+  display: inline-block;
+}
+
+.lola td,
+.lola th{
+  border-bottom:none;
+  padding: 20px;
+  width: 100%;
+}
+
+.lola th {
+  color:#393A58;
+  font-size: 16px;
+}
+
+.lola td:nth-child(odd):after{  content: ":";}
+.lola tr:nth-child(even){background-color: #f2f2f2}
+.lola tr:nth-child(odd){background-color: #C3C3C3}
+.lola tr:nth-child(n):hover{background-color: #A3A3A3}
+
+.lola tr:nth-child(n):hover{  transform: scale(1.02);}
+
+
+.lola td{
+  font-size: 14px;
+  max-width: 80px;
+}
+
+.lola tr {
+align-self: stretch;
+}
+
+
+
+@media screen and (max-width: 800px) {
+  .Bar_Panel{
+    display: block;
+  }
+
+  .Bar_Panel_Info{
+    display: inline;
+    height: 100%;  
+  }
+
+  .Bar_Panel_Display{
+    padding: 6px 6px; 
+    margin: 20px 0 0 0;
+    width: 100%;
+  }
+
+  .lola{
+    margin: 15px 0;
+  }
+
+}
+
+/* ---------------------------- tooltip ------------------------------ */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 90%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border: 1px solid black;
+
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+#Registros_general_detalle,
+#Registros_este_año_detalle{
+  display: none;
+}
+
+/* ----------------------------------- */
+.Go {
+  border-radius: 4px;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  outline: none;
+}
+
+.Go span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.Go span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  bottom: -8px;
+  right: -60px;
+  transition: 0.5s;
+  font-size: 50px;
+}
+
+.Go:hover span {
+  padding-right: 25px;
+}
+
+.Go:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+a .Go i{ 
+  color: #fff;
+  margin-right: 10px;
+}
+
+.Go:visited i{ 
+  color: #fff;
+}
+
+.Go:novisited i{ 
+  color: #fff;
+}
+
+.Go i:hover{
+  color: #fff;
+}
+/* ----------------------------------- */
+.Ga {
+  border-radius: 0px;
+  border-bottom: 1px solid #ccc; 
+  font-size: 20px;
+  padding: 10px;
+  margin: 0px;
+  width: 100%;
+}
+
+.Ga span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  bottom: -4px;
+  right: -60px;
+  transition: 0.5s;
+  font-size: 30px;
+}
+
+/* -------------------------------- */
+.Panel_Boton{
+  cursor: pointer; 
+  display: block;
+  width: 100%;
+  font-size: 16px;
+  background: #0D84B8;
+  border: 2px solid #ccc;
+  color: white;
+  border-radius: 40px;
+  margin: 1px 0; 
+  outline: none;
+}
+
+.Panel_Boton a,
+.Panel_Boton span{
+  text-decoration: none; 
+  color: white;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
+  padding: 3px 0px; 
+}
+
+.Panel_Boton:hover{
+  background: #0671A0;
+  text-decoration: none; 
+  color: white; 
+  border: 2px solid #0D84B8; 
+}
+
+#myTable{
+  max-height: 500px;
+  overflow: auto;
+}
+
+
+
+
+
+
+/* --------------------------- */
+.Info_button{
+  text-align: center;
+  background: #2980B9; 
+  color: white; 
+  width: 50px; 
+  height: 50px;   
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.30);
+  border: 2px solid #0D84B8;
+  border-radius: 60px; 
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 8px;
+  float: right;
+}
+
+.Info_button:hover{
+  background: #2471A3;
+  border: 2px solid #2874A6;
+}
+/* ---------------------------------------- Registro Corregir ----------------------------------------  */

@@ -5,6 +5,9 @@ $dbUser = "root";
 $dbPassword = "";
 $dbName = "sistemadarmas";
 
+//sistemadarmas
+//registro_organisacion
+
 /* Metodo de conexion a mysql: (nombre server, nombre usuario, contraseña, nombre de la base de datos) */
 $conn = mysqli_connect($servername, $dbUser, $dbPassword, $dbName);
 

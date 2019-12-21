@@ -8,8 +8,8 @@
 
 
     //-------------------- Formulario
+    $sql = "SELECT *, LENGTH(dataArchivo) FROM registro_archivos INNER JOIN registro on registro.ID_Registro = registro_archivos.FK_Registro INNER JOIN  datos_generales on registro.ID_Registro = datos_generales.FK_Registro  WHERE registro.ID_Registro = ?;";
 
-    $sql = "SELECT * FROM formularioarchivos INNER JOIN formularioprincipal ON formularioarchivos.FK_FormularioID = formularioprincipal.FormularioID WHERE formularioprincipal.FormularioID = ?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
     mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
@@ -18,9 +18,7 @@
     $row = mysqli_fetch_assoc($result);
 
     $nombreOSC = $row['nombreOSC'];
-
-
-
+    $LENGTH = $row['LENGTH(dataArchivo)'];
 
     require"classes/Archivos_Convocatoria_Ver.php";
 

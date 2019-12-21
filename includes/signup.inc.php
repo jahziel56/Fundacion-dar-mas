@@ -1,14 +1,12 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+
+
 /* METODO: evitar que el usuario ingrese a esta pagina php desde la barra de busqueda */
 /* signup-submit es el boton del formulario que se encuentra en la signup.php */
 if (isset($_POST['signup-submit'])) {
 	/* manda a llamar a la pagina php donde se conecta a la base de datos de esta forma se ahorra codigo y se tiene todo en una funcion mas simple */
 	require 'dbh.inc.php';
-	require '../PHPMailer/src/Exception.php';
-	require '../PHPMailer/src/PHPMailer.php';
-	require '../PHPMailer/src/SMTP.php';
+	require 'send_mail.inc.inc.php';
 
 	/* lo que se encuentra dentro del metodo post es el name de cada input en signup.php */
 	$username = $_POST['uid'];
@@ -85,7 +83,10 @@ if (isset($_POST['signup-submit'])) {
 
 							$selector = bin2hex(random_bytes(8));
 							$token = random_bytes(32);
+
 							$url = "http://localhost:8080/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
+							//$url = "http://tacosalpastor.cf/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
+
 
 							$sql = "INSERT INTO confirmar_cuenta (cuenta_Id, Selector, Token) VALUES (?, ?, ?);";
 							$stmt = mysqli_stmt_init($conn);
@@ -109,43 +110,7 @@ if (isset($_POST['signup-submit'])) {
 
 								$message .= utf8_decode("<br>Si tienes cualquier pregunta, no dudes en comunicarte directamente al teléfono: (622)1477894");
 
-								$headers = "FROM: Fundacion dar mas <jahziel56@hotmail.com>\r\n";
-								$headers .= "Reply-To: jahziel56@hotmail.com\r\n";
-
-								$mail = new PHPMailer();
-								$mail->setLanguage('es', '/optional/path/to/language/directory/');
-
-
-								$mail->isSMTP();
-								$mail->SMTPAuth = true;                               
-								$mail->SMTPSecure = 'ssl';                            
-								$mail->Host = 'smtp.gmail.com'; 
-								$mail->Port = '465';
-								$mail->isHTML();
-
-								$mail->Username = 'darkkeioz@gmail.com';                 
-								$mail->Password = 'jahziel555';
-
-							    $mail->setFrom('fundaciondarmas@gmail.com', 'Fundacion Dar Mas');
-							    $mail->addReplyTo('Reply-To: pepeeltoro@hotmail.com', 'Information');
-
-
-								$mail->Subject = $subject;
-								$mail->Body    = $message;
-
-								$mail->addAddress($email); 
-
-								$mail->Send();
-
-
-
-
-
-
-
-
-
-
+								Enviar_Correo ($email,$subject,$message);
 
 
 								header("Location: ../login.php?signup=confirmmail");

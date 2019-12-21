@@ -1,22 +1,17 @@
 <?php 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 if (isset($_POST['reset_password_submit'])) {
-	require '../PHPMailer/src/Exception.php';
-	require '../PHPMailer/src/PHPMailer.php';
-	require '../PHPMailer/src/SMTP.php';
+	require 'send_mail.inc.php';
+	require 'dbh.inc.php';
 
 
 	$selector = bin2hex(random_bytes(8));
 	$token = random_bytes(32);
 
 	$url = "http://localhost:8080/Fundacion-dar-mas/create_new_password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+	//$url = "http://tacosalpastor.cf/Fundacion-dar-mas/create_new_password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
 	$expires = date("U") + 3700;
-
-
-	require 'dbh.inc.php';
+	
 
 	$Email = $_POST["mail_reset_password"];
 
@@ -53,33 +48,7 @@ if (isset($_POST['reset_password_submit'])) {
 
 	$message .= '<a href="'. $url .'">'. $url .'</a></p>';
 
-	$headers = "FROM: Fundacion dar mas <jahziel56@hotmail.com>\r\n";
-	$headers .= "Reply-To: jahziel56@hotmail.com\r\n";
-
-	$mail = new PHPMailer();
-	$mail->setLanguage('es', '/optional/path/to/language/directory/');
-
-
-	$mail->isSMTP();
-	$mail->SMTPAuth = true;                               
-	$mail->SMTPSecure = 'ssl';                            
-	$mail->Host = 'smtp.gmail.com'; 
-	$mail->Port = '465';
-	$mail->isHTML();
-
-	$mail->Username = 'darkkeioz@gmail.com';                 
-	$mail->Password = 'jahziel555';
-
-    $mail->setFrom('fundaciondarmas@gmail.com', 'Fundacion Dar Mas');
-    $mail->addReplyTo('Reply-To: jahziel56@hotmail.com', 'Information');
-
-
-	$mail->Subject = $subject;
-	$mail->Body    = $message;
-
-	$mail->addAddress($Email); 
-
-	$mail->Send();
+	Enviar_Correo ($Email,$subject,$message);
 
 
 	header("Location: ../reset_password.php?reset=success");
