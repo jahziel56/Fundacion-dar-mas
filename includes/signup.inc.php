@@ -6,7 +6,7 @@
 if (isset($_POST['signup-submit'])) {
 	/* manda a llamar a la pagina php donde se conecta a la base de datos de esta forma se ahorra codigo y se tiene todo en una funcion mas simple */
 	require 'dbh.inc.php';
-	require 'send_mail.inc.inc.php';
+	require 'send_mail.inc.php';
 
 	/* lo que se encuentra dentro del metodo post es el name de cada input en signup.php */
 	$username = $_POST['uid'];
