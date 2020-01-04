@@ -124,11 +124,14 @@ window.onclick = function(event) {
 
 			
 			<label class="common">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label><br>
+			<div class="selectdiv">		    	
 				<select class="common" name="tema_de_Derecho_Social" value="" required>
 				    <?php foreach($Desarollo_Proyecto as $proyecto) {?>
 				  		<option><?php echo $proyecto?></option>
 				  	<?php } ?>
-				</select><br><br>
+				</select>
+			</div>
+			<br>
 
 			<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Domicilio</h5>
 
@@ -148,11 +151,14 @@ window.onclick = function(event) {
 			<input type="text" class="common" id="domicilio" name="domicilio" placeholder="Número del domicilio" value="" required>
 
 			<label>17.- Municipio</label><label style="color: dimgray; font-size: 18px;">(Dom. Soc)</label><br>
+			<div class="selectdiv">		    	
 			<select class="common" id="municipioRegistroOSC" name="municipioRegistroOSC" value="" required>
 				<?php foreach($municipiosDeSonora as $municipio) {?>
 				  	<option><?php echo $municipio?></option>
 				<?php } ?>
-			</select><br><br>
+			</select>
+			</div>
+			<br><br>
 
 			<iframe src="Geolocation/index.html" style="width: 100%; height: 500px; padding: 0;"></iframe>
 
@@ -234,13 +240,15 @@ window.onclick = function(event) {
 
 			<label>35.- Número del notario público</label>
 			<input type="text" class="common" id="numeroNotario" name="numeroNotario" placeholder="Número del notario público" value="" required>
-
 			<label class="common">36.- Municipio de la Notaría Pública</label><br>
+			<div class="selectdiv">	
 				<select class="common" name="municipioNotaria" value="" required>
 				    <?php foreach($municipiosDeSonora as $municipio) {?>
 				  		<option><?php echo $municipio?></option>
 				  	<?php } ?>
-				</select><br><br>
+				</select>
+			</div>
+			<br>
 
 			<label>37.- Número de escritura pública</label>
 			<input type="text" class="common" id="noEstrituraPublica" name="noEstrituraPublica" placeholder="Número de estritura pública" value="" required>

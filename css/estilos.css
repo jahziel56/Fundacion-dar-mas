@@ -220,7 +220,8 @@ input[type=number].P6{
   width: 16%;
 }
 
-.common:focus{
+.common:focus,
+.selectdiv select:focus{
   -moz-box-shadow: 0px 0px 2pt 1pt #2774EA;
   -webkit-box-shadow: 0px 0px 2pt 1pt #2774EA;
   box-shadow: 0px 0px 2pt 1pt #2774EA;
@@ -528,7 +529,7 @@ button[type=submit]:hover.Reset {
   }
 
   main{
-    padding: 2px;
+    padding: 6px;
     width: 95%;
   }
 
@@ -1089,7 +1090,7 @@ border: 1px solid #ccc;
   width: 48%;
   border-radius: 0 30px 30px 0;
   border: 1px solid #ccc;
-  padding: 11px;
+  padding: 11.2px 4px;
 
 }
 
@@ -1362,6 +1363,7 @@ border: 1px solid #ccc;
   position: relative;
 }
 
+
 /* IE11 hide native button (thanks Matt!) */
 select::-ms-expand {
 /*display: none;*/
@@ -1407,6 +1409,8 @@ select::-ms-expand {
   border: 1px solid #cccccc;
   -ms-word-break: normal;
   word-break: normal;
+  border-radius: 20px;
+  outline: none;
 }
 :root {
   --lightblue: lightblue;

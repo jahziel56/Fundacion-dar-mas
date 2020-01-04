@@ -101,9 +101,6 @@ if (empty($_GET["id"])){
     $i++;
 	echo '<div class="" style="width: 100%;">';
 		switch ($row2['Pregunta']) {
-		    case 0:
-
-		        break;
 		    case '1':
 		    	pregunta_1($row2['Detalle']);
 		    	break;

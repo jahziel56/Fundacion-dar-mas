@@ -24,7 +24,7 @@
 				<option value="5">Por Estado</option>
 			</select>
 		</div>
-		<input type="text" class="common" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+		<input type="text" class="common" id="myInput" onkeyup="ymFunction()" placeholder="Search for names.." title="Type in a name">
 
 
 <div id="myTable">
@@ -107,10 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
         //Setting Value
         //document.getElementById("textFieldValueJS").value = select;
 
-        myFunction();
+        ymFunction();
     }
 
-function myFunction() {
+function ymFunction() {
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
