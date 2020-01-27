@@ -1,6 +1,7 @@
 <?php
 /* manda a llamar a header.php */ 
 	require"classes/header.php";
+	require 'no_login.php';
 
 	if (!isset($_SESSION['ID_OSC'])) {
 		header("Location: OSC_acces.php");

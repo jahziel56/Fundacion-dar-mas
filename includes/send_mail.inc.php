@@ -35,17 +35,17 @@ function Enviar_Correo ($Email,$subject,$message){
 	$mail->isHTML();
 
 	//Set Correo y Contraseña
-	$mail->Username = 'darkkeioz@gmail.com';                 
-	$mail->Password = 'jahziel555';
+	$mail->Username = 'registro@darmas.org.mx';                 
+	$mail->Password = 'Fundacion2020';
 
 	//Set Headers
-	$headers = "FROM: Fundacion dar mas <fundaciondarmas@gmail.com>\r\n";
-	$headers .= "Reply-To: fundaciondarmas@gmail.com\r\n";
+	$headers = "FROM: Fundacion dar mas <registro@darmas.org.mx>\r\n";
+	$headers .= "Reply-To: registro@darmas.org.mx\r\n";
 
 
 	//Set send From and Reply-To
-    $mail->setFrom('fundaciondarmas@gmail.com', 'Fundacion Dar Mas');
-    $mail->addReplyTo('Reply-To: fundaciondarmas@gmail.com', 'Information');
+    $mail->setFrom('registro@darmas.org.mx', 'Fundacion Dar Mas');
+    $mail->addReplyTo('Reply-To: registro@darmas.org.mx', 'Information');
 
 
     //Set Structure

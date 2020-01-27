@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
 	unset($_POST['ID_Registro']);
 
     echo "<pre>";
-    print_r($_POST);
+    //print_r($_POST);
     echo "</pre>";
 
     $sql = "SELECT * FROM correcciones_registro WHERE ID_Correcion_R=?;";
@@ -514,8 +514,8 @@ if (isset($_POST['submit'])) {
 		    case '51':
     			$metasOrganizacion = $_POST['metasOrganización'];
 		    	$Table = 'historial_de_la_organizacion_2';
-		    	$Update = 'metasOrganización';
-		    	Update_registro($Table,$Update,$metasOrganización,$ID_Registro,$conn); 
+		    	$Update = 'metasOrganizacion';
+		    	Update_registro($Table,$Update,$metasOrganizacion,$ID_Registro,$conn); 
 
 		    	break;
 		    case '52':
@@ -548,14 +548,18 @@ if (isset($_POST['submit'])) {
 					exit();
 				}else{
     				mysqli_stmt_bind_param($stmt, "iiiiiii", $poblacion_0_4,$poblacion_5_14,$poblacion_15_29,$poblacion_30_44,$poblacion_45_64, $poblacion_65_mas, $ID_Registro);
-					/*if(!mysqli_stmt_execute($stmt)){
+					if(!mysqli_stmt_execute($stmt)){
 						throw new Exception('error!');
-					}*/
+					}
 				}
 
 		    	break;
 		    case '55':
-		    	pregunta_55($row2['Detalle']);
+    			$observaciones32D = $_POST['observaciones32D'];
+		    	$Table = 'historial_de_la_organizacion_3';
+		    	$Update = 'observaciones32D';
+		    	Update_registro($Table,$Update,$observaciones32D,$ID_Registro,$conn); 
+
 		    	break;
 		    case '56':
 
@@ -566,10 +570,18 @@ if (isset($_POST['submit'])) {
 		    	break;
 
 		    case '57':
-		    	pregunta_57($row2['Detalle']);
+    			$tiempoYforma = $_POST['tiempoYforma'];
+		    	$Table = 'historial_de_la_organizacion_3';
+		    	$Update = 'tiempoYforma';
+		    	Update_registro($Table,$Update,$tiempoYforma,$ID_Registro,$conn); 
+
 		    	break;
 		    case '58':
-		    	pregunta_58($row2['Detalle']);
+    			$tieneAdeudos = $_POST['tieneAdeudos'];
+		    	$Table = 'historial_de_la_organizacion_3';
+		    	$Update = 'tieneAdeudos';
+		    	Update_registro($Table,$Update,$tieneAdeudos,$ID_Registro,$conn); 
+
 		    	break;
 		    case '59':
 
@@ -604,7 +616,11 @@ if (isset($_POST['submit'])) {
 		    	break;
 
 		    case '63':
-		    	pregunta_63($row2['Detalle']);
+    			$inscritaDNIAS = $_POST['inscritaDNIAS'];        
+		    	$Table = 'historial_de_la_organizacion_3';
+		    	$Update = 'inscritaDNIAS';
+		    	Update_registro($Table,$Update,$inscritaDNIAS,$ID_Registro,$conn); 
+
 		    	break;
 		    case '63a':
 
@@ -615,20 +631,41 @@ if (isset($_POST['submit'])) {
 		    	break;
 
 		    case '64':
-		    	pregunta_64($row2['Detalle']);
+    			$esquemasRecursosComp = $_POST['esquemasRecursosComp'];       
+		    	$Table = 'historial_de_la_organizacion_3';
+		    	$Update = 'esquemasRecursosComp';
+		    	Update_registro($Table,$Update,$esquemasRecursosComp,$ID_Registro,$conn); 
+
 		    	break;
 		    case '64a':
-		    	pregunta_64a($row2['Detalle']);
+            	$organizacionManejoRecursos = $_POST['organizacionManejoRecursos'];
+		    	$Table = 'esquemasrecursoscomp';
+		    	$Update = 'organizacionManejoRecursos';
+		    	Update_registro($Table,$Update,$organizacionManejoRecursos,$ID_Registro,$conn);
+
 		    	break;
+		}
+	}
+
+	Update_registro('correcciones_registro','correciones','No',$ID_Registro,$conn);
+
+	$Dato = 'Corregido';
+	$sql = "UPDATE registro SET Estado = ? WHERE ID_Registro=?;";        
+	$stmt = mysqli_stmt_init($conn);
+	if (!mysqli_stmt_prepare($stmt, $sql)) {
+		//header("Location: ../../index.php?SQL=Error_Update");
+		exit();
+	}else{
+		mysqli_stmt_bind_param($stmt, "si", $Dato,$ID_Registro);
+		if(!mysqli_stmt_execute($stmt)){
+			throw new Exception('error!');
 		}
 	}
 
 
 
-
-
-    //header("Location: ../index.php");
-	//exit();
+    header("Location: Notificaciones.php");
+	exit();
 }else{
 	header("Location: index.php");
 	exit();		
@@ -648,9 +685,9 @@ function Update_registro($Table,$Update,$Dato,$ID_Registro,$conn){
 		exit();
 	}else{
 		mysqli_stmt_bind_param($stmt, "si", $Dato,$ID_Registro);
-		/*if(!mysqli_stmt_execute($stmt)){
+		if(!mysqli_stmt_execute($stmt)){
 			throw new Exception('error!');
-		}*/
+		}
 	}
 }
 
@@ -660,7 +697,7 @@ function Update_archivos($nameFile,$tipoFile,$file,$CurrentDate,$ID_Registro,$Na
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
     mysqli_stmt_bind_param($stmt, "ssssis",$nameFile,$tipoFile,$file,$CurrentDate,$ID_Registro,$Name_Archivo);
-    //mysqli_stmt_execute($stmt);
+    mysqli_stmt_execute($stmt);
 
 }
 

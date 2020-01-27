@@ -7,7 +7,7 @@ session_start();
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<meta name="description" content="This is an example of a meta description. this will often whow up in search results.">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, user-scalable=no">
 	<title>Sistema Dar Mas</title>
 	<link rel="icon" type="image/x-icon" href="assets/fabicon_.png">
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">

@@ -1,6 +1,7 @@
 <?php
 	require"classes/header.php";  
 	require 'includes/dbh.inc.php';
+	require 'no_login.php';
 
 //echo $_SESSION['user_Id'];
 $Tipo = $_SESSION['Type_User'];
@@ -8,7 +9,7 @@ $Tipo = $_SESSION['Type_User'];
 
 switch ($Tipo){
 	case 1:
-		//header("Location: /login.php");	
+		header("Location: index.php");	
 		break; 
 	case 3:
 		//header("Location: /Panel_Informacion.php");	

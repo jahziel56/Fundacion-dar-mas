@@ -76,8 +76,8 @@ function Tr_Solicitante($row){?>
 			</form>
 		<?php 
 		switch ($row['Estado']) {
-			case 'Revisado':
-				?><button class="Panel_Boton" style="background: #fbc02d;" ><a class='filename' href='Registro_Corregir.php?id=<?php echo $row['ID_Registro']; ?>'>Correciones</a></button><?php 
+			case 'Revisado con Observaciones':
+				?><button class="Panel_Boton" style="background: #fbc02d;" ><a class='filename' href='Registro_Corregir.php?id=<?php Correciones($row['ID_Registro']); ?>'>Correciones</a></button><?php 
 				break;
 
 			case 'Rechazado':
@@ -168,7 +168,7 @@ function revisado($Registro){
 				Empleado_nombre($row1['FK_Empleado'], $conn);
 				break;
 
-			case 'Revisado':
+			case 'Revisado con Observaciones':
 				$sql = "SELECT * FROM correcciones_registro WHERE FK_Registro = ?";
 				$stmt = mysqli_stmt_init($conn);
 				if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -225,6 +225,27 @@ function Empleado_nombre($ID_EMPLADO, $conn){
 		$result = mysqli_stmt_get_result($stmt);
 		$row = mysqli_fetch_assoc($result);
 		echo $row['nombreEmpleado'];		
+	}
+
+}
+
+function Correciones($ID_Registro){
+
+	require 'includes/dbh.inc.php';
+
+
+	$sql = "SELECT * FROM notificaciones WHERE FK_registro = ? and Identificador = 1  ORDER BY ID_Notificacion DESC LIMIT 1";
+	$stmt = mysqli_stmt_init($conn);
+	if (!mysqli_stmt_prepare($stmt, $sql)) {
+		//header("Location: ../login.php?error=sqlerror");
+		echo 'error';
+		exit();		
+	}else{
+		mysqli_stmt_bind_param($stmt, "i", $ID_Registro);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+		$row = mysqli_fetch_assoc($result);
+		echo $row['ID_Notificacion'];		
 	}
 
 }

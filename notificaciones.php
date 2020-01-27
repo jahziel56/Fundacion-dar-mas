@@ -2,6 +2,7 @@
 /* manda a llamar a header.php */ 
 	require"classes/header.php";
 	require 'includes/dbh.inc.php';
+	require 'no_login.php';
 
     if ( isset($_SESSION['ID_OSC'])) {
     	$ID_Selected = $_SESSION['ID_OSC'];
@@ -20,11 +21,9 @@
 	    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
 	    mysqli_stmt_execute($stmt);
 	    $result = mysqli_stmt_get_result($stmt);
-	    $row = mysqli_fetch_assoc($result);
-	    $Identificador = $row['Identificador'];
+	    $noempty = mysqli_fetch_assoc($result);
 	}
 
-	
 ?>	
 <main>
 	<h1 style='background: pink; color: white; text-align:center'>Notificaciones</h1>
@@ -32,10 +31,12 @@
 	
 <?php
 	
-	if (empty($row)) {
+	if (empty($noempty)) {
 		echo "<p style='text-align: center; color: #5A5A5A;'> Su Organización no tiene notificaciones</p><br>";
 	}else{
 		foreach ($result as $row) {
+
+		$Identificador = $row['Identificador'];
 
 		switch ($row['Identificador']) {
 
@@ -81,7 +82,7 @@
 
 
 
-    		Notificacion($row['Mensaje'],$Fecha,$row['Tipo'],'',$row['FK_registro'],$row['Identificador']);
+    		Notificacion($row['Mensaje'],$Fecha,$row['Tipo'],'',$row['ID_Notificacion'],$row['Identificador']);
     	}	
 	}
 
@@ -98,7 +99,6 @@ function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador){
 		      <div class="inner">
 		      	<?php //echo "<a class='filename' href='Archivos_Convocatoria_Ver_Detalle.php?id=".$a."' target=»_blank»>".$a."</a>";?>
 		      	<?php 
-
 		      	switch ($Identificador) {
 		      		case '1':
 		      			echo "<a class='filename' href='Registro_Corregir.php?id=$ID'>".$Mensaje."</a>";

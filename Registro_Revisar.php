@@ -1,6 +1,7 @@
 <?php
 	require"classes/header.php";	
 	require 'includes/dbh.inc.php';
+	require 'no_login.php';
 
     $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
     $ID_Cuenta = $_SESSION['user_Id'];
@@ -15,7 +16,7 @@
  		if (!empty ($Row=Query_select($sql,$ID_Cuenta,$conn))) {
 
     		//echo "ya estabas revisando una convocatoria<br>";
-    		Query_update_registro('Enviado',$Row['FK_Registro'],$conn);
+    		Query_update_registro('No Revisado',$Row['FK_Registro'],$conn);
     			
     		//echo "esta es tu nueva convocatoria";
     		Query_update($ID_Selected,$Row['FK_Registro'],$conn);
@@ -120,7 +121,9 @@
 		$Num_Reviciones = $row['Num_Reviciones'];
 	}
 
-
+	if ($Num_Reviciones >= 1) {
+		header("Location: Registro_Revisar_Correciones.php");
+	}
 
 
 

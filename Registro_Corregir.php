@@ -1,6 +1,7 @@
 <?php
 	require"classes/header.php";	
 	require 'includes/dbh.inc.php';
+	require 'no_login.php';
 
     $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
 
@@ -20,6 +21,18 @@
 	];
 
 // -------------------------------------------- Querry -----------------------------------------------------------------------------------------------------
+	$sql = "SELECT * FROM correcciones_registro WHERE FK_Notificacion=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row1 = mysqli_fetch_assoc($result);
+    $ID_Selected = $row1['FK_Revisor'];
+
+
+
+
 $sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
@@ -28,28 +41,10 @@ $sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($result);
 
-    $Correo_Organizacion = $row['Correo_Organizacion'];
-    $rfcHomoclave = $row['rfcHomoclave'];
-    $CLUNI = $row['CLUNI'];
     $nombreOSC = $row['nombreOSC'];
-    $objetoSocialOrganizacion = $row['objetoSocialOrganizacion'];
-    $mision = $row['mision'];
-    $vision = $row['vision'];
-    $areasAtencion = $row['areasAtencion'];
-    $tema_de_Derecho_Social = $row['tema_de_Derecho_Social'];
 
 
-
-	$sql = "SELECT * FROM correcciones_registro WHERE FK_Registro=?;";
-    $stmt = mysqli_stmt_init($conn);
-    mysqli_stmt_prepare($stmt, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $row = mysqli_fetch_assoc($result);
-
-
-if (empty($row)) {
+if (empty($row1)) {
 	echo "<main>";
 	echo "<div style='background: #B22222; color: white; text-align:center'>";
 	echo "El Registro no tiene correciones<br></div><br>";
@@ -58,13 +53,9 @@ if (empty($row)) {
 	exit();
 }
 
-    $ID_Correcion_R = $row['ID_Correcion_R'];
-    $FK_Registro = $row['FK_Registro'];
-    $Fecha = $row['Fecha'];
-    $FK_Revisor = $row['FK_Revisor'];
-    $correciones = $row['correciones'];
+    $ID_Correcion_R = $row1['ID_Correcion_R'];
+    $correciones = $row1['correciones'];
 
-if ($correciones == 'Si') {	
 	$sql = "SELECT * FROM detalle_correcciones_registro WHERE FK_Correcion_R=?;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
@@ -76,7 +67,6 @@ if ($correciones == 'Si') {
     	echo "Fatal Error: Resultado Detalle Empty";
     	exit;
     }
-}
 
 
 
@@ -343,11 +333,17 @@ if (empty($_GET["id"])){
 }
 
 if (isset($_SESSION['Type_User'])) {
-	if ($_SESSION['Type_User'] == 1 ) {?>
+	if ($_SESSION['Type_User'] == 1 ) {
+
+		if ($correciones == 'Si') {?>
+
 
 		    <button class="common" type="submit" name="submit">Mandar correciones</button>
 
-	<?php 
+		<?php 
+		}else {
+			echo '<br><label style="display: block; text-align:center;">Correciones enviadas</label>';
+		} 
 	} 
 }?>
          
