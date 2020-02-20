@@ -2,7 +2,7 @@
 /* manda a llamar a header.php */ 
 	require"classes/header.php";		
 ?>
-<main>
+<main style="height: 510px">
 	<div class="conten-alignt-center">
 	<?php
 		if (isset($_GET['signup'])) {
@@ -16,7 +16,7 @@
 				echo '<div class="error_box" id="error_box"><p>Error: LLenar ambos campos</p></div>';
 			}
 			else if (($_GET['login']) == "success") {
-				echo '<label>Bienvenido</label><br>';					
+				echo '<label class="Saludo" style="background: #FAFAFA;">Bienvenido</label>';					
 			}
 		}	
 
@@ -26,7 +26,7 @@
 			$usuarioID = $_SESSION['user_Id'];
 			$nombreUsuario = $_SESSION['user_Username'];
 			$tipoUsuario = $_SESSION['Type_User'];
-			echo "<label>Fundación Dar Más para Sonora A.C.</label><br><br>";
+			echo "<label class='Saludo'>Fundación Dar Más para Sonora A.C.</label><br><br>";
 			if($tipoUsuario == 3){
 			//Admin
 			?>
@@ -63,7 +63,6 @@
 		}		 
 	?>
 	</div>						
-	<br><br><br><br><br><br><br><br>
 
 </main>
 <?php

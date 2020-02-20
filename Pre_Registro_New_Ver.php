@@ -267,8 +267,8 @@
 
 	?>
 			    
-	<div class="Files_Container" style="margin: 12px 0;">
-		<div class="row">
+	<div class="Files_Container" style="margin: 0;">
+		<div class="row" >
 		   
 		   <div class="cell -file">
 		      <i class="fa 
@@ -295,24 +295,14 @@
 			
 
 		      ?>" aria-hidden="true"></i>
-		      <div class="inner">
+		      <div class="inner" >
 		      	<?php echo "<a class='filename' href='classes/Archivos_Convocatoria_Ver_Detalle.php?id=".$row['Archivos_ID']."' target=»_blank»>".$row['nombreSeccion']."</a>";?>
 		         <small class="details">
 		            <span class="detail -filesize"><i class="fa fa-hdd-o" aria-hidden="true"></i><?php echo ' '.($nombre_fichero).' KB'; ?></span>
 		            <span class="detail -updated"><i class="fa fa-clock-o" aria-hidden="true"></i><?php echo $row['Fecha'];?></span>
 		         </small>
 		      </div>
-		   </div>
-		   
-		   <button class="cell -action -download">
-		      <i class="fa fa-download" aria-hidden="true"></i>
-		      <span class="label">Download</span>
-		   </button>		   
-		   <button class="cell -action -more">
-		      <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-		      <span class="label">More</span>
-		   </button>
-		   
+		   </div>  
 		</div>
 	</div>
 
@@ -337,7 +327,7 @@ function Error($P){?>
 <h1 style='background: LIGHTSEAGREEN; color: white; text-align:center; font-size:50px;'>Informacion Registrada de la Organizacion</h1>
 <p style='background: DARKCYAN; color: white; text-align:center;'> <?php echo $nombreOSC ;?> </p><br>
 
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Datos Generales</h5>
+		<h5 class="Separador" >Datos Generales</h5>
 
 			<label>1.- Correo de organización</label>
 			<input type="text" class="common" id="Correo_Organizacion" name="Correo_Organizacion" value="<?php echo $Correo_Organizacion; ?>" disabled>
@@ -372,7 +362,7 @@ function Error($P){?>
 			<label class="common">11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?</label><br>
 			<input type="text" name="tema_de_Derecho_Social" class="common" value="<?php echo $tema_de_Derecho_Social ;?>" disabled></input>
 
-			<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Domicilio</h5>
+			<h5 class="Separador">Domicilio</h5>
 
 			<label>12.- Calle</label>
 			<input type="text" class="common" id="calle" name="calle" value="<?php echo $calle;?>" disabled>
@@ -397,6 +387,10 @@ function Error($P){?>
 
 			<label>19.- Ubicación geográfica (Longitud)</label>
 			<input type="text" class="common" id="Longitud" name="Longitud" value="<?php echo $Longitud;?>" disabled>
+
+
+			<h5 class="Separador">Contacto</h5>
+
 
 			<label>20.- Teléfono oficina</label>  
 			<input type="text" class="common" id="phoneOficina" name="phoneOficina" value="<?php echo $phoneOficina;?>" disabled>
@@ -438,7 +432,7 @@ function Error($P){?>
 
 			<?php } ?>
 
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Órgano del gobierno</h5>
+		<h5 class="Separador" >Órgano del gobierno</h5>
 
 			<label class="common">28.- Acta constitutiva</label>
 			<?php Archivo($ID_Selected,'file_acta_const'); ?>

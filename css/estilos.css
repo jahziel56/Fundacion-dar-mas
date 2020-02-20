@@ -171,6 +171,36 @@ input[type=number].common::-webkit-outer-spin-button {
   font-size: 20px;
 }
 
+.Separador{
+  background: #DFDFDF; 
+  margin: 20px 0; 
+  text-align: center; 
+  border-radius: 6px;
+}
+
+.HidenConteiners{
+  background: lightblue; 
+  border-radius: 0 0 11px 11px; 
+  padding: 10px; 
+  background: white;
+  width: 99.95%;
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.30);
+
+}
+.HidenTag{
+  background: STEELBLUE; 
+  color: white; 
+  text-align: center; 
+  border-radius: 11px 11px 0 0;
+
+  padding: 5px;
+  width: 100%;
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.40);
+
+  margin: 10px 0 0 0;
+}
+
+
 .signup{
   text-align:center;
   margin: 10px 40px 20px 40px;
@@ -206,8 +236,8 @@ textarea.common{
 
 }
 
-input[type=radio].common{
-  
+input[type=radio]{
+  outline: none;
 }
 
 .Pre-Registro select,
@@ -959,6 +989,8 @@ button:hover.Panel_Control {
 }
 
 
+
+
 /* ---- Yellow ---- */
 .Btn_C_Y{
   color: #fff;
@@ -1046,6 +1078,7 @@ button:hover.Panel_Control {
   align-items: flex-start;
   border-radius: 4px;
   display: inline-block;
+  outline: none;
 }
 
 .A_P_B:hover{
@@ -1064,6 +1097,15 @@ button:hover.Panel_Control {
   color: black;
 }
 
+.Btn_CG{
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.Btn_CG:hover{
+  background: #4cae4c;
+}
 
 .correo{  
   padding: 12px 20px;
@@ -1226,12 +1268,12 @@ border: 1px solid #ccc;
   cursor: pointer;
   transition: background-color 96ms ease, box-shadow 48ms ease, outline 48ms ease;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
-  outline: 1px solid rgba(255, 255, 255, 0.001);
+  outline: none;
+  border-radius: 8px;
 }
 .cell:hover, .cell:focus, .cell:focus-within {
   transition: 48ms ease;
-  box-shadow: 0 0 0 1px #fff inset;
-  outline: 1px solid #fff;
+  box-shadow: 0 0 0 2px #fff inset;
 }
 .cell.-file {
   flex: 1;
@@ -1554,7 +1596,6 @@ select::-ms-expand {
 
 .Yes_Ver{
   display: block;
-  background: lightblue;
   transition: max-height 2s ease-out;
 }
 /* ------------------------- Barr change ------------------------- */
@@ -1852,3 +1893,13 @@ a .Go i{
   border: 2px solid #2874A6;
 }
 /* ---------------------------------------- Registro Corregir ----------------------------------------  */
+
+/* ---------------------------------------- Saludo ----------------------------------------  */
+.Saludo{
+  padding: 4px; 
+  display: block; 
+  border-radius: 5px; 
+  color: #2C2C2C;   
+  font-family: Tahoma, Geneva, sans-serif; 
+  font-size: 42px;  
+}

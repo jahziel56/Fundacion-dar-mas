@@ -9,8 +9,22 @@ if (isset($_POST['Enviar_Revisión'])) {
 	$Registro_ID = $_POST['Registro'];
 	unset($_POST['Registro']);
 
-	$Num_Reviciones = $_POST['Num_Reviciones'];
-	unset($_POST['Num_Reviciones']);
+
+
+	$sql = "SELECT * FROM registro where ID_Registro=?;";
+	$stmt = mysqli_stmt_init($conn);
+	if (!mysqli_stmt_prepare($stmt, $sql)) {
+		//header("Location: ../login.php?error=sqlerror");
+		echo 'error';
+		exit();		
+	}else{
+		mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+		$row = mysqli_fetch_assoc($result);
+
+		$Num_Reviciones = $row['Num_Reviciones'];
+	}
 
 	unset($_POST['Enviar_Revisión']);
 
@@ -39,7 +53,14 @@ if ($Correcto == false) {
 
 	update_registro('Revisado con Observaciones', $Registro_ID,$Num_Reviciones, $conn);
 
-	correcciones_registro($Registro_ID,$Revisor,'Si', $conn);
+	$Identificador = 1;
+	$Tipo = 'Correccion: Registro';
+	$Mensaje = 'Hubieron correciones en su registro.';
+	    
+	notificaciones($Identificador,$Tipo,$Mensaje,$Registro_ID,$conn);
+	$FK_notificaciones = $conn->insert_id;
+
+	correcciones_registro($Registro_ID,$Revisor,$FK_notificaciones,'Si', $conn);
 	$ultimaID = $conn->insert_id;
 
 	    try{
@@ -270,14 +291,6 @@ if ($Correcto == false) {
 
 		Delete_revisando($Registro_ID, $conn);
 
-
-		$Identificador = 1;
-	    $Tipo = 'Correccion: Registro';
-	    $Mensaje = 'Hubieron correciones en su registro.';
-	    
-		notificaciones($Identificador,$Tipo,$Mensaje,$Registro_ID,$conn);
-
-
 		$Mensaje_email = "Su registro a producido una serie de correciones que deben ser atendidas";
 		Mandar_Notificacion($Mensaje_email,$Registro_ID,$conn);
 
@@ -286,16 +299,18 @@ if ($Correcto == false) {
 	    header("Location: ../Registro_Lista.php?succes=correciones");
     }else{
 		echo "Update: Registro Aceptado.";
-		correcciones_registro($Registro_ID,$Revisor,'No', $conn);
-		update_registro('Aceptado', $Registro_ID,$Num_Reviciones,$conn);
-		Delete_revisando($Registro_ID, $conn);
-		Revisado($Registro_ID,$Revisor,$conn);
 
 		$Identificador = 0;
 	    $Tipo = 'Aceptado: Registro';
 	    $Mensaje = 'Su registro fue aceptado';
-	    
+
 		notificaciones($Identificador,$Tipo,$Mensaje,$Registro_ID,$conn);
+		$FK_notificaciones = $conn->insert_id;
+
+		correcciones_registro($Registro_ID,$Revisor,$FK_notificaciones,'No', $conn);
+		update_registro('Aceptado', $Registro_ID,$Num_Reviciones,$conn);
+		Delete_revisando($Registro_ID, $conn);
+		Revisado($Registro_ID,$Revisor,$conn);
 
 	    $Mensaje_email = 'Su registro fue aceptado satisfactoriamente';
 		Mandar_Notificacion($Mensaje_email,$Registro_ID,$conn);
@@ -309,15 +324,14 @@ if ($Correcto == false) {
 
 function update_registro($Estado,$ID_Registro,$Num_Reviciones, $conn){
 
-	$Num_Reviciones++;
 
-	$sql = "UPDATE registro SET Estado = ?, Num_Reviciones = ? WHERE ID_Registro=?;";        
+	$sql = "UPDATE registro SET Estado = ?, Num_Reviciones = Num_Reviciones + 1 WHERE ID_Registro=?;";        
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
 		//header("Location: ../../index.php?SQL=Error_Update");
 		exit();
 	}else{
-		mysqli_stmt_bind_param($stmt, "sii", $Estado,$Num_Reviciones,$ID_Registro);
+		mysqli_stmt_bind_param($stmt, "si", $Estado,$ID_Registro);
 		if(!mysqli_stmt_execute($stmt)){
 			throw new Exception('Error: update_registro');
 		}
@@ -359,15 +373,15 @@ function Delete_revisando($Registro_ID, $conn){
 	}
 }
 
-function correcciones_registro($Registro_ID,$Revisor,$correciones, $conn){
+function correcciones_registro($Registro_ID,$Revisor,$FK_notificaciones,$correciones, $conn){
 
-    $sql = "INSERT INTO correcciones_registro (FK_Registro, FK_Revisor, correciones) VALUES (?,?,?)";        
+    $sql = "INSERT INTO correcciones_registro (FK_Registro, FK_Revisor, FK_Notificacion, correciones) VALUES (?,?,?,?)";        
     $stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
 		//header("Location: ../../index.php?SQL=Error_Update");
 		exit();
 	}else{
-    	mysqli_stmt_bind_param($stmt, "iss",$Registro_ID,$Revisor,$correciones);
+    	mysqli_stmt_bind_param($stmt, "isis",$Registro_ID,$Revisor,$FK_notificaciones,$correciones);
 		if(!mysqli_stmt_execute($stmt)){
 			throw new Exception('error!');
 		}

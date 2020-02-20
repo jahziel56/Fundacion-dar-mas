@@ -12,7 +12,7 @@
 
 	
 	// -------------------------------------------- Querry -----------------------------------------------------------------------------------------------------
-	$sql = "SELECT * FROM notificaciones WHERE FK_Registro=?;";
+	$sql = "SELECT * FROM notificaciones WHERE FK_Registro=? ORDER BY ID_Notificacion DESC;";
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
 		echo 'Error: SQL Conection.';
@@ -28,20 +28,21 @@
 <main>
 	<h1 style='background: pink; color: white; text-align:center'>Notificaciones</h1>
 	<p style='background: lightpink; color: white; text-align:center;'>panel de notificaciones sobre su Organización</p><br>
-	
+
+<div style="height: 380px; overflow: auto;">
 <?php
 	
 	if (empty($noempty)) {
 		echo "<p style='text-align: center; color: #5A5A5A;'> Su Organización no tiene notificaciones</p><br>";
 	}else{
+		$i = 0;
 		foreach ($result as $row) {
-
-		$Identificador = $row['Identificador'];
+		$i++;
 
 		switch ($row['Identificador']) {
 
 			case '0':
-				$sql = "SELECT * FROM revisado WHERE FK_Registro=?;";
+				$sql = "SELECT * FROM revisado WHERE FK_Registro=? ORDER BY Fecha ASC LIMIT $i;";
 				$stmt = mysqli_stmt_init($conn);
 				if (!mysqli_stmt_prepare($stmt, $sql)) {
 					echo 'Error: SQL Conection.';
@@ -52,12 +53,15 @@
 				    $result1 = mysqli_stmt_get_result($stmt);
 				    $row1 = mysqli_fetch_assoc($result1);
 
-				    $Fecha = date( "Y-m-d H:i", strtotime( $row1['Fecha'] ) );
+				    foreach ($result1 as $row1) {
+				    	$fecha = $row1['Fecha'];
+				    }
+
 				}
 				break;
 
 			case '1':
-				$sql = "SELECT * FROM correcciones_registro WHERE FK_Registro=?;";
+				$sql = "SELECT * FROM correcciones_registro WHERE FK_Registro=? ORDER BY Fecha ASC LIMIT $i;";
 				$stmt = mysqli_stmt_init($conn);
 				if (!mysqli_stmt_prepare($stmt, $sql)) {
 					echo 'Error: SQL Conection.';
@@ -68,36 +72,39 @@
 				    $result1 = mysqli_stmt_get_result($stmt);
 				    $row1 = mysqli_fetch_assoc($result1);
 
-				    $Fecha = date( "Y-m-d H:i", strtotime( $row1['Fecha'] ) );
+				    foreach ($result1 as $row1) {
+				    	$fecha = $row1['Fecha'];
+				    }
+
 				}
 				break;
 
 			default:
 				$Fecha = date("Y-m-d H:i");
-
 				break;
-		}
 
-
-
-
-
-    		Notificacion($row['Mensaje'],$Fecha,$row['Tipo'],'',$row['ID_Notificacion'],$row['Identificador']);
+		}	
+    		Notificacion($row['Mensaje'],$row1['Fecha'],$row['Tipo'],$row['Vista'],$row['ID_Notificacion'],$row['Identificador']);
     	}	
 	}
 
 
  
 function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador){
+	$Fecha = date( "Y-m-d H:i", strtotime( $Fecha ) );
+	if ($vista == 'si') {
+		$colorvista = 'NoVisto';
+	}else{
+		$colorvista = 'vista';		
+	}
 ?>
 
 	<div class="Files_Container ">
 		<div class="row " >
 		   
-		   <div class="cell -file notificacion <?php echo $vista ?>">
+		   <div class="cell -file notificacion <?php echo $colorvista ?>">
 		      <i class="fa fa-address-card-o" aria-hidden="true"></i>
 		      <div class="inner">
-		      	<?php //echo "<a class='filename' href='Archivos_Convocatoria_Ver_Detalle.php?id=".$a."' target=»_blank»>".$a."</a>";?>
 		      	<?php 
 		      	switch ($Identificador) {
 		      		case '1':
@@ -120,14 +127,14 @@ function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador){
 		      </div>
 		   </div>
 		   
-		   <?php if ($vista ==  'vista') { 	?>
-		   		<button class="cell -action  notificacion">
+		   <?php if ($vista ==  'si') { 	?>
+		   		<button class="cell -action  notificacion <?php echo $colorvista ?>">
 		      		<i class="fa fa-eye-slash" aria-hidden="true"></i>
 		      		<span class="label">Marcar como visto</span>
 		   		</button>
 		   	<?php 
 		   } else { ?>
-		   		<button class="cell -action -download notificacion">
+		   		<button class="cell -action -download notificacion <?php echo $colorvista ?>">
 		      		<i class="fa fa-eye" aria-hidden="true"></i>
 		      		<span class="label">Marcar como no visto</span>
 		   		</button>
@@ -144,7 +151,7 @@ function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador){
 }
 ?>
 
-
+</div>	
 </main>
 
 <?php

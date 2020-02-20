@@ -83,7 +83,7 @@ window.onclick = function(event) {
 	<div class="">
 		<form action="pre.inc.php" method="post" enctype="multipart/form-data">
 
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Datos Generales</h5>
+		<h5 class="Separador">Datos Generales</h5>
 
 			<label>1.- Correo de organización</label>
 				<div style="display: block; text-align:center;">
@@ -133,7 +133,7 @@ window.onclick = function(event) {
 			</div>
 			<br>
 
-			<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Domicilio</h5>
+			<h5 class="Separador">Domicilio</h5>
 
 			<label>12.- Calle</label>
 			<input type="text" class="common" id="calle" name="calle" placeholder="Calle del domicilio" value="" required>
@@ -170,6 +170,8 @@ window.onclick = function(event) {
 			<input type="text" class="common" id="Longitud" name="Longitud" placeholder="Ingrese la Longitud" value="123123" >
 			</div>
 
+			<h5 class="Separador">Contacto</h5>
+
 			<label>20.- Teléfono oficina</label>  
 			<input type="number" class="common" id="phoneOficina" name="phoneOficina" placeholder="Teléfono de la oficina (con lada)" value="" required>
 
@@ -195,11 +197,14 @@ window.onclick = function(event) {
 			<label>27.- ¿Su domicilio social es el mismo que el legal?</label>
 			<div style="font-size: 20px; margin-left:20px;" >
 				<input type="radio" class="common" name="domicilio_social_legal" value="Si" onclick="Domicilio_Social_S();" required> Si
-				<input type="radio" class="common" name="domicilio_social_legal" value="No" onclick="Domicilio_Social_N();"> No <br><br>	
+				<input type="radio" class="common" name="domicilio_social_legal" value="No" onclick="Domicilio_Social_N();"> No <br>	
 			</div>
 
-		<div style="background: lightblue;" class="hide" id="Oculto_Domicilio_Social">
-		<h5 style="background: lightcyan; margin: 15px 0; text-align: center;">Domicilio Legal</h5>
+		<div class="hide " id="Oculto_Domicilio_Social">
+
+			<h5 class="HidenTag">Domicilio Legal</h5>
+			<div class="HidenConteiners">
+
 			<label>27a.- Domicilio Legal (registrado ante SAT)</label> <label style="color: dimgray; font-size: 14px;">(Calle, número, entre o esquina con, colonia,código postal, localidad y municipio)</label>
 			<input type="text" class="common" id="domicilio_Dom" name="domicilio_Dom" placeholder="Domicilio Legal" value="" >
 
@@ -212,9 +217,11 @@ window.onclick = function(event) {
 				  	<option><?php echo $municipio?></option>
 				<?php } ?>
 			</select><br>
+
+			</div>
 		</div>
 
-		<h5 style="background: lightgray; margin: 20px 0; text-align: center;">Órgano del gobierno</h5>
+		<h5 class="Separador">Órgano del gobierno</h5>
 
 			<label class="common">28.- Acta constitutiva</label>
 			<label style="color: dimgray; font-size: 18px;">(No exceder los 8 MB)</label>
@@ -277,60 +284,74 @@ window.onclick = function(event) {
 				<input type="radio" class="common" name="existenModis" value="No" onclick="Oculto_Acta_Costitutiva_N();"> No 
 			</div>
 
-		<div style="background: lightblue;" class="hide" id="Oculto_Acta_Costitutiva">
-		<h5 style="background: lightcyan; margin: 15px 0; text-align: center;">Útima modificación de su acta constitutiva protocolizada</h5>
 
-		<label class="common">44a.- Ultima acta modificatoria protocolizada</label>
-		<label style="color: dimgray; font-size: 18px;">(No exceder los 3 MB)</label><br/>
-		<input type="file" class="common" name="files[]" ><br>
 
-		<label class="common">44b.- Fecha de la última modificación del acta constitutiva</label><br>
-		<input type="date" class="common" id="ultimaModi" name="ultimaModi" value="" ><br><br>
+		<div class="hide" id="Oculto_Acta_Costitutiva">
 
-		<label class="common">44c.- RPP ICRESON de la última acta modificatoria actualizada</label>
-		<label style="color: dimgray; font-size: 18px;">(No exceder los 3 MB)</label><br/>
-		<input type="file" class="common" name="files[]" ><br>
+		<h5 class="HidenTag">Útima modificación de su acta constitutiva protocolizada</h5>
+		<div class="HidenConteiners">
 
-		<label>44d.- Número de acta constitutiva</label>
-		<input type="text" class="common" id="numeroActaConsti" name="numeroActaConsti" placeholder="Número de acta constitutiva" value="" >
+			<label class="common">44a.- Ultima acta modificatoria protocolizada</label>
+			<label style="color: dimgray; font-size: 18px;">(No exceder los 3 MB)</label><br/>
+			<input type="file" class="common" name="files[]" ><br>
 
-		<label>44e.- Volúmen de acta constitutiva</label>
-		<input type="text" class="common" id="volumenActaConsti" name="volumenActaConsti" placeholder="Volúmen de acta constitutiva" value="" >
+			<label class="common">44b.- Fecha de la última modificación del acta constitutiva</label><br>
+			<input type="date" class="common" id="ultimaModi" name="ultimaModi" value="" ><br><br>
+
+			<label class="common">44c.- RPP ICRESON de la última acta modificatoria actualizada</label>
+			<label style="color: dimgray; font-size: 18px;">(No exceder los 3 MB)</label><br/>
+			<input type="file" class="common" name="files[]" ><br>
+
+			<label>44d.- Número de acta constitutiva</label>
+			<input type="text" class="common" id="numeroActaConsti" name="numeroActaConsti" placeholder="Número de acta constitutiva" value="" >
+
+			<label>44e.- Volúmen de acta constitutiva</label>
+			<input type="text" class="common" id="volumenActaConsti" name="volumenActaConsti" placeholder="Volúmen de acta constitutiva" value="" >
+		
+		</div>
+		<br>		
 		</div>
 
 
 		<label class="common">45.- ¿Está autorizada para recibir donativos deducibles de impuestos?</label><br>
 		<div style="font-size: 20px; margin-left:20px;">
 			<input type="radio" class="common" name="autorizadaDeducible" value="Si" onclick="Oculto_Donataria_S();" required> Si
-			<input type="radio" class="common" name="autorizadaDeducible" value="No" onclick="Oculto_Donataria_N();"> No <br><br>	
+			<input type="radio" class="common" name="autorizadaDeducible" value="No" onclick="Oculto_Donataria_N();"> No <br>	
 		</div> 
 
-		<div style="background: lightblue;" class="hide" id="Oculto_Donataria">
 
-		<h5 style="background: lightcyan; margin: 15px 0; text-align: center;">Donataria autorizada</h5>
+		<div class="hide" id="Oculto_Donataria">
 
-		<label class="form-control">45a.- Página del Diario Oficial de la Federación donde se publicó su autorización</label>
-		<label style="color: dimgray; font-size: 18px;">(No exceder los 3 MB)</label><br/>
-		<input type="file" class="common" name="files[]" ><br>
+		<h5 class="HidenTag">Donataria autorizada</h5>
+		<div class="HidenConteiners">
 
-		<label>45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil</label> <label style="color: dimgray; font-size: 18px">(En caso de subir todo el DOF)</label>
-		<input type="text" class="common" id="numeroDiario" name="numeroDiario"	placeholder="Número de página del Diario Oficial de la Federación" value="" >
+			<label class="form-control">45a.- Página del Diario Oficial de la Federación donde se publicó su autorización</label>
+			<label style="color: dimgray; font-size: 18px;">(No exceder los 3 MB)</label><br/>
+			<input type="file" class="common" name="files[]" ><br>
 
-		<label class="common">45c.- Fecha de publicación en el Diario Oficial de la Federación</label><br>
-		<input type="date" class="common" id="fechaDiario" name="fechaDiario" value="" ><br>
+			<label>45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil</label> <label style="color: dimgray; font-size: 18px">(En caso de subir todo el DOF)</label>
+			<input type="text" class="common" id="numeroDiario" name="numeroDiario"	placeholder="Número de página del Diario Oficial de la Federación" value="" >
 
-		<label class="common">45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
-			<input type="radio" class="common" name="detenidoAutorizado" value="Si" onclick="Oculto_57_S();" > Si
-			<input type="radio" class="common" name="detenidoAutorizado" value="No" onclick="Oculto_57_N();"> No <br>
+			<label class="common">45c.- Fecha de publicación en el Diario Oficial de la Federación</label><br>
+			<input type="date" class="common" id="fechaDiario" name="fechaDiario" value="" ><br>
 
-		<div style="background: lightblue; margin-top: 10px;" class="hide" id="Oculto_57">
-		<label>45e.- ¿Por qué detuvo el SAT su aturización?</label>
-		<input type="text" class="common" id="razonDetenido" name="razonDetenido" placeholder="¿Por qué detuvo el SAT su autorización?"	value="" >
+			<label class="common">45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?</label><br>
+				<input type="radio" class="common" name="detenidoAutorizado" value="Si" onclick="Oculto_57_S();" > Si
+				<input type="radio" class="common" name="detenidoAutorizado" value="No" onclick="Oculto_57_N();"> No <br>
+
+			<div class="hide" id="Oculto_57">
+			<h5 class="HidenTag">Detenido autorización donataria</h5>
+			<div class="HidenConteiners">		
+				<label>45e.- ¿Por qué detuvo el SAT su aturización?</label>
+				<input type="text" class="common" id="razonDetenido" name="razonDetenido" placeholder="¿Por qué detuvo el SAT su autorización?"	value="" >
+			</div>
+			</div>
+
+			<label class="common">45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?</label><br>
+			<input type="date" class="common" id="fechaAutorizada" name="fechaAutorizada" value="" ><br>
+
 		</div>
-
-		<label class="common">45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?</label><br>
-		<input type="date" class="common" id="fechaAutorizada" name="fechaAutorizada" value="" ><br><br>
-
+		<br>
 		</div>
 
 		<label class="common">46.- Su organización se rige o es dirigida por:</label>
@@ -425,23 +446,36 @@ window.onclick = function(event) {
 		<label class="titulos-form">63.- ¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?</label>
 		<div style="font-size: 20px; margin-left:20px;">
 			<input type="radio" class="common" name="inscritaDNIAS" value="Si" onclick="Oculto_77_S();" required> Si
-			<input type="radio" class="common" name="inscritaDNIAS" value="No" onclick="Oculto_77_N();"> No somos una organización de asistencia social <br><br>
+			<input type="radio" class="common" name="inscritaDNIAS" value="No" onclick="Oculto_77_N();"> No somos una organización de asistencia social <br>
 		</div>
 
-		<div style="background: lightblue;" class="hide" id="Oculto_77">
-		<label class="common">63a.- DNIAS</label>
-		<input type="file" class="common" name="files[]" >
+
+		<div class="hide" id="Oculto_77">
+		<h5 class="HidenTag">DNIAS</h5>
+
+		<div class="HidenConteiners">
+			<label class="common">63a.- DNIAS</label>
+			<input type="file" class="common" name="files[]" >
+
+		</div>
+		<br>
 		</div>
 
 		<label class="titulos-form">64.- ¿Ha manejado esquemas de recursos complementarios?</label><br>
 		<div style="font-size: 20px; margin-left:20px;">
 			<input type="radio" class="common" name="esquemasRecursosComp" value="Si" onclick="Oculto_79_S();" required> Sí
 			<input type="radio" class="common" name="esquemasRecursosComp" value="No" onclick="Oculto_79_N();"> No
-		</div><br>
+		</div>
 
-		<div style="background: lightblue;" class="hide" id="Oculto_79">
-		<label>64a.- Con qué organización ha manejado recursos complementarios</label>
-		<input type="text" class="common" id="organizacionManejoRecursos" name="organizacionManejoRecursos" placeholder="¿Con qué organización ha manejado recursos complementarios?" value="" >
+		<div class="hide" id="Oculto_79">
+		<h5 class="HidenTag">Recursos complementarios</h5>
+		<div class="HidenConteiners">
+
+			<label>64a.- Con qué organización ha manejado recursos complementarios</label>
+			<input type="text" class="common" id="organizacionManejoRecursos" name="organizacionManejoRecursos" placeholder="¿Con qué organización ha manejado recursos complementarios?" value="" >
+
+		</div>
+		<br>
 		</div>
 
 		 <button class="common" type="submit" name="pre-submit">Registrar</button>

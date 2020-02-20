@@ -36,11 +36,7 @@ $date = $date_year . $date_dia;
 		$result = mysqli_stmt_get_result($stmt);
 
 		while ($row = mysqli_fetch_assoc($result)) {
-			echo "<pre>";
-			//print_r($row);
-			echo "</pre>";
-
-			Update_registro('Enviado', $row['FK_Registro'], $conn);
+			Update_registro('No Revisado', $row['FK_Registro'], $conn);
 			Delete_correcciones($row['ID_Revisando'], $conn);
 		}		
 	}
@@ -186,7 +182,7 @@ function Delete_correcciones($Registro_ID, $conn){
 		</table>
     </div>
     <div class="modal-footer">
-      <h3> </h3>
+    	<br>
     </div>
   </div>
 

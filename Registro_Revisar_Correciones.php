@@ -7,6 +7,7 @@
     $ID_Cuenta = $_SESSION['user_Id'];
     date_default_timezone_set('America/Hermosillo');
 
+
  	if (empty(Query_select("SELECT * FROM revisando WHERE FK_Registro=?;",$ID_Selected,$conn))) {
 
  		 $sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
@@ -119,9 +120,16 @@
 
 		$Num_Reviciones = $row['Num_Reviciones'];
 	}
-	if ($Num_Reviciones >= 1) {
-		header("Location: Registro_Revisar_Correciones.php?id=$ID_Selected"); 
+
+	if ($Num_Reviciones >= 3) {	
+
+		$_SESSION['Rechazado_Datos'] = $ID_Selected;
+
+	    header("Location: Justificar_Rechazo.php?id=$ID_Selected");
+
 	}
+
+
 
 
 
@@ -418,6 +426,31 @@ $sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
 		</div>
 	</div>
 	<?php  }
+
+
+	$sql = "SELECT * FROM correcciones_registro WHERE FK_Registro=? ORDER BY Fecha DESC LIMIT 1;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row1 = mysqli_fetch_assoc($result);
+    $ID_Correcion_R = $row1['ID_Correcion_R'];
+
+
+	$sql = "SELECT * FROM detalle_correcciones_registro WHERE FK_Correcion_R=?;";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ID_Correcion_R);
+    mysqli_stmt_execute($stmt);
+    $result_detalle_correcciones_registro = mysqli_stmt_get_result($stmt);
+
+
+    if (empty($result_detalle_correcciones_registro)) {
+    	echo "Fatal Error: Resultado Detalle Empty";
+    	exit;
+    }
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ?>
 	<main>
@@ -433,202 +466,303 @@ if (empty($_GET["id"])){
 <?php
 }?>
 
-		<div>
-			<form action="includes/Registro_Revisar.inc.php" method="post" enctype="multipart/form-data">
 
-			<?php 
+	<form action="includes/Registro_Revisar.inc.php" method="post" enctype="multipart/form-data">
 
-			$I =0;
-			//echo "$I <br>";
+		<input class="hide" placeholder="ID_Registro" name="Registro" value="<?php echo $ID_Selected; ?>" >
 
-			$R = 'Respuesta';
+<?php	
+	$I =0;
+	foreach ($result_detalle_correcciones_registro as $row2) {
+	echo '<div class="" style="width: 100%;">';
+		switch ($row2['Pregunta']) {
+		    case '1':
+				revisar('1.- Correo de organización',$Correo_Organizacion,$I++);
+		    	break;
 
-			$AR = 'Archivos';
+		    case '2':
+				revisar('2.- RFC',$rfcHomoclave,$I++);
+		    	break;
 
-//--------------------------------- Datos Generales
-			revisar('1.- Correo de organización',$Correo_Organizacion,$I++);
-			revisar('2.- RFC',$rfcHomoclave,$I++);
+		    case '3':
+				revisar_Archivo('3.- RFC (PDF o JPG)',$ID_Selected,'file_rfc',$I++);
+		    	break;
 
-			revisar_Archivo('3.- RFC (PDF o JPG)',$ID_Selected,'file_rfc',$I++);
+		   	case '4':
+				revisar('4.- CLUNI',$CLUNI,$I++);
+		    	break;
 
-			revisar('4.- CLUNI',$CLUNI,$I++);
+		    case '5':
+				revisar_Archivo('5.- CLUNI (PDF o JPG)',$ID_Selected,'file_cluni',$I++);
+		    	break;
 
-			revisar_Archivo('5.- CLUNI (PDF o JPG)',$ID_Selected,'file_cluni',$I++);
+		    case '6':
+				revisar('6.- Nombre de la Organizacion de Sociedad Civil',$nombreOSC,$I++);
+		    	break;
 
-			revisar('6.- Nombre de la Organizacion de Sociedad Civil',$nombreOSC,$I++);
-			revisar('7.- Objeto social de la organización',$objetoSocialOrganizacion,$I++);
-			revisar('8.- Misión',$mision,$I++);
-			revisar('9.- Visión',$vision,$I++);
-			revisar('10.- Áreas de atención',$areasAtencion,$I++);
-			revisar('11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?',$tema_de_Derecho_Social,$I++);
+		    case '7':
+				revisar('7.- Objeto social de la organización',$objetoSocialOrganizacion,$I++);
+		    	break;
 
-//--------------------------------- Datos Generales
-			revisar('12.- Calle',$calle,$I++);			
-			revisar('13.- Colonia',$colonia,$I++);
-			revisar('14.- Codigo postal',$codigoPostal,$I++);
+		    case '8':
+				revisar('8.- Misión',$mision,$I++);
+		    	break;
+
+		    case '9':
+				revisar('9.- Visión',$vision,$I++);
+		    	break;
+
+		    case '10':
+				revisar('10.- Áreas de atención',$areasAtencion,$I++);
+		    	break;
+
+		    case '11':
+				revisar('11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?',$tema_de_Derecho_Social,$I++);
+		    	break;
+		    	
+		    case '12':
+		    	pregunta_12($row2['Detalle']);
+		    	break;
+		    case '13':
+		    	pregunta_13($row2['Detalle']);
+		    	break;
+		    case '14':
+		    	pregunta_14($row2['Detalle']);
+		    	break;
+		    case '15':
 			revisar('15.- Localidad',$localidad,$I++);
-			revisar('16.- Domicilio',$domicilio,$I++);
-			revisar('17.- Municipio',$municipioRegistroOSC,$I++);
-
-			revisar('18 mapa (Desactivado)','(Desactivado)',$I++);
-			revisar('19 mapa (Desactivado)','(Desactivado)',$I++);
-
-
-//--------------------------------- contacto
-			revisar('20.- Teléfono oficina',$phoneOficina,$I++);
-			revisar('21.- Teléfono celular',$phoneCelular,$I++);
-			revisar('22.- Correo de organización',$emailContacto,$I++);
-			revisar('23.- Página web',$paginaWeb,$I++);
-			revisar('24.- Facebook',$organizacionFB,$I++);
-			revisar('25.- Twitter',$organizacionTW,$I++);
+		    	break;
+		    case '16':
+		    	pregunta_16($row2['Detalle']);
+		    	break;
+		    case '17':
+		    	pregunta_17($row2['Detalle']);
+		    	break;
+		    case '20':
+		    	pregunta_20($row2['Detalle']);
+		    	break;
+		    case '21':
+		    	pregunta_21($row2['Detalle']);
+		    	break;
+		    case '22':
+		    	pregunta_22($row2['Detalle']);
+		    	break;
+		    case '23':
+		    	pregunta_23($row2['Detalle']);
+		    	break;
+		    case '24':
+		    	pregunta_24($row2['Detalle']);
+		    	break;
+		    case '25':
+		    	pregunta_25($row2['Detalle']);
+		    	break;
+		    case '26':
 			revisar('26.- Instagram',$organizacionInsta,$I++);
-
-			revisar('27.- ¿Su domicilio social es el mismo que el legal?',$domicilio_social_legal,$I++);
-
-			//27 R
-
-			if ($domicilio_social_legal == 'No') {
-				revisar('27a.- Domicilio Legal (registrado ante SAT)',$domicilio_Dom,'27a');
-				revisar('27b.- Localidad',$localidad_Dom,'27b');
-				revisar('27c.- Municipio',$municipio_Dom,'27c');
-			}
-			
-//------------------ historial_de_la_organizacion ---------------------------- 
-			revisar_Archivo('28.- Acta constitutiva',$ID_Selected,'file_acta_const',$I++);
-			revisar_Archivo('29.- Acta protocolizada donde conste la representación legal vigente',$ID_Selected,'file_acta_protoco',$I++);
-			revisar_Archivo('30.- INE del representante legal vigente',$ID_Selected,'file_ine_repre',$I++);
-
-			revisar('31.- Nombre del representante legal',$nombreRepresentante,$I++);
-			revisar('32.- Número de identificación oficial',$idRepresentante,$I++);
-			revisar('33.- Fecha de constitución de la Organización de Sociedad Civil',$fechaConstitucionOSC,$I++);
-			revisar('34.- Nombre del Notario Público donde registró su Organización de Sociedad Civil',$nombreNotario,$I++);
-			revisar('35.- Número del notario público',$numeroNotario,$I++);
-			revisar('36.- Municipio de la Notaría Pública',$municipioNotaria,$I++);
-			revisar('37.- Número de escritura pública',$noEstrituraPublica,$I++);
-			revisar('38.- Volumen (escritura pública)',$volumenEstrituraPublica,$I++);
-			revisar('39.- Fecha de estritura pública',$fechaEstritura,$I++);
-
-			revisar_Archivo('40.- RPP ICRESON',$ID_Selected,'file_rpp_icreson',$I++);
-
-
-			revisar('41. Número de libro',$numeroLibro,$I++);
-			revisar('42.- Número de inscrpción',$numeroInscripcion,$I++);
-			revisar('43.- Volúmen ICRESON',$volumenICRESON,$I++);
-
+		    	break;
+		    case '27':
+		    	pregunta_27($row2['Detalle']);
+		    	break;
+		    case '27a':
+		    	pregunta_27a($row2['Detalle']);
+		    	break;
+		    case '27b':
+		    	pregunta_27b($row2['Detalle']);
+		    	break;
+		    case '27c':
+		    	pregunta_27c($row2['Detalle'], $municipiosDeSonora);
+		    	break;		    	
+		    case '28':
+		    	pregunta_28($row2['Detalle']);
+		    	break;
+		    case '29':
+		    	pregunta_29($row2['Detalle']);
+		    	break;
+		    case '30':
+		    	pregunta_30($row2['Detalle']);
+		    	break;
+		    case '31':
+		    	pregunta_31($row2['Detalle']);
+		    	break;
+		    case '32':
+		    	pregunta_32($row2['Detalle']);
+		    	break;
+		    case '33':
+		    	pregunta_33($row2['Detalle']);
+		    	break;
+		    case '34':
+		    	pregunta_34($row2['Detalle']);
+		    	break;
+		    case '35':
+		    	pregunta_35($row2['Detalle']);
+		    	break;
+		    case '36':
+		    	pregunta_36($row2['Detalle'], $municipiosDeSonora);
+		    	break;
+		    case '37':
+		    	pregunta_37($row2['Detalle']);
+		    	break;
+		    case '38':
+		    	pregunta_38($row2['Detalle']);
+		    	break;
+		    case '39':
+		    	pregunta_39($row2['Detalle']);
+		    	break;
+		    case '40':
+		    	pregunta_40($row2['Detalle']);
+		    	break;
+		    case '41':
+		    	pregunta_41($row2['Detalle']);
+		    	break;
+		    case '42':
+		    	pregunta_42($row2['Detalle']);
+		    	break;
+		    case '43':
+		    	pregunta_43($row2['Detalle']);
+		    	break;
+		    case '44':
 			revisar('44.- ¿Su organización ha tenido modificaciones a su acta constitutiva?',$existenModis,$I++);
+		    	break;
+		    case '44a':
+		    	pregunta_44a($row2['Detalle']);
+		    	break;
+		    case '44b':
+		    	pregunta_44b($row2['Detalle']);
+		    	break;
+		    case '44c':
+		    	pregunta_44c($row2['Detalle']);
+		    	break;
+		    case '44d':
+		    	pregunta_44d($row2['Detalle']);
+		    	break;
+		    case '44e':
+		    	pregunta_44e($row2['Detalle']);
+		    	break;	
+		    case '45':
+		    	pregunta_45($row2['Detalle']);
+		    	break;
+		    case '45a':
+		    	pregunta_45a($row2['Detalle']);
+		    	break;
+		    case '45b':
+		    	pregunta_45b($row2['Detalle']);
+		    	break;
+		    case '45c':
+		    	pregunta_45c($row2['Detalle']);
+		    	break;
+		    case '45d':
+		    	pregunta_45d($row2['Detalle']);
+		    	break;
+		    case '45e':
+		    	pregunta_45e($row2['Detalle']);
+		    	break;	
+		    case '45f':
+		    	pregunta_45f($row2['Detalle']);
+		    	break;		    	
+		    case '46':
+		    	pregunta_46($row2['Detalle']);
+		    	break;
+		    case '47':
+		    	pregunta_47($row2['Detalle']);
+		    	break;
+		    case '48':
+		    	pregunta_48($row2['Detalle']);
+		    	break;
+		    case '49':
+		    	pregunta_49($row2['Detalle']);
+		    	break;		    
+		    case '50':
+		    	pregunta_50($row2['Detalle']);
+		    	break;
+		    case '51':
+		    	pregunta_51($row2['Detalle']);
+		    	break;
+		    case '52':
+		    	pregunta_52($row2['Detalle']);
+		    	break;
+		    case '53':
+		    	pregunta_53($row2['Detalle']);
+		    	break;
+		    case '54':
+		    	pregunta_54($row2['Detalle']);
+		    	break;
+		    case '55':
+		    	pregunta_55($row2['Detalle']);
+		    	break;
+		    case '56':
+		    	pregunta_56($row2['Detalle']);
+		    	break;
+		    case '57':
+		    	pregunta_57($row2['Detalle']);
+		    	break;
+		    case '58':
+		    	pregunta_58($row2['Detalle']);
+		    	break;
+		    case '59':
+		    	pregunta_59($row2['Detalle']);
+		    	break;
+		    case '60':
+		    	pregunta_60($row2['Detalle']);
+		    	break;
+		    case '61':
+		    	pregunta_61($row2['Detalle']);
+		    	break;
+		    case '62':
+		    	pregunta_62($row2['Detalle']);
+		    	break;
+		    case '63':
+		    	pregunta_63($row2['Detalle']);
+		    	break;
+		    case '63a':
+		    	pregunta_63a($row2['Detalle']);
+		    	break;
+		    case '64':
+				revisar('64.- ¿Ha manejado esquemas de recursos complementarios?',$esquemasRecursosComp,$I++);		
+		    	break;
+		    case '64a':
+		    	pregunta_64a($row2['Detalle']);
+		    	break;		
+		}
+	}
 
-			//44 R
-			if ($existenModis == 'Si') {
-				revisar_Archivo('44a.- Ultima acta modificatoria protocolizada',$ID_Selected,'file_ultima_acta','44a');				
-				revisar('44b.- Fecha de la última modificación del acta constitutiva',$ultimaModi,'44b');
-
-				revisar_Archivo('44c.- RPP ICRESON de la última acta modificatoria actualizada',$ID_Selected,'file_rpp_ultima_acta','44c');
-
-				revisar('44d.- Número de acta constitutiva',$numeroActaConsti,'44d');
-				revisar('44e.- Volúmen de acta constitutiva',$volumenActaConsti,'44e');
-			}		
-
-
-			revisar('45.- ¿Está autorizada para recibir donativos deducibles de impuestos?',$autorizadaDeducible,$I++);
-
-			// 45 R
-			if ($autorizadaDeducible == 'Si') {
-				revisar('45a.- Página del Diario Oficial de la Federación donde se publicó su autorización',$R,'45a');
-				revisar('45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil',$numeroDiario,'45b');
-				revisar('45c.- Fecha de publicación en el Diario Oficial de la Federación',$fechaDiario,'45c');
-				revisar('45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?',$detenidoAutorizado,'45d');
-
-				// 45D R
-				if ($detenidoAutorizado == 'Si') {
-					revisar('45e.- ¿Por qué detuvo el SAT su aturización?',$razonDetenido,'45e');
-				}
-
-				revisar('45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?',$fechaAutorizada,'45f');				
-			}
-
-
-
-			revisar('46.- Su organización se rige o es dirigida por',$digiridaPor,$I++);
-			revisar('47.- Nombre del presidente',$nombrePresi,$I++);
-			revisar('48.- Número de empleados',$numeroEmpleados,$I++);
-			revisar('49.- Número de voluntarios',$numeroVoluntarios,$I++);
-			revisar('50.- Principales logros',$principalesLogros,$I++);
-			revisar('51.- Metas de la organización',$metasOrganizacion,$I++);
-			revisar('52.- Alianzas con las que cuenta',$principalesAlianzas,$I++);
-			revisar('53.- Número de personas que benefició el año anterior',$numeroBeneficiados,$I++);
-
-
-			$poblacion_beneficiada = "poblacion de<br> 0 a 4: " . $poblacion_0_4 . "<br> 5 a 14: " . $poblacion_5_14 . "<br>15 a 29: " . $poblacion_15_29 . "<br>30 a 44: " . $poblacion_30_44 . "<br>45 a 64: " . $poblacion_45_64 . "<br>65 a mas: " . $poblacion_65_mas . "<br>";
-
-			revisar('54.- Numero de personas que veneficio en el úlitmo año',$poblacion_beneficiada,$I++);
-
-
-			revisar('55.- ¿Tiene observaciones en su 32 D?',$observaciones32D,$I++);
-
-			revisar_Archivo('56.- 32D en positivo y con 30 días de expedición como máximo',$ID_Selected,'file_32_d',$I++);
-
-			revisar('57.- ¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?',$tiempoYforma,$I++);
-			revisar('58.- ¿Tiene adeudos fiscales a cargo, por impuestos federales?',$tieneAdeudos,$I++);
-
-			revisar_Archivo('59.- F21, del presente año',$ID_Selected,'file_f_21',$I++);
-			revisar_Archivo('60.- Constancia de Situación Fiscal',$ID_Selected,'file_constancia_fiscal',$I++);
-			revisar_Archivo('61.- Comprobante de cuenta bancaria',$ID_Selected,'file_comprobante_banco',$I++);
-			revisar_Archivo('62.- Factura cancelada',$ID_Selected,'file_factura_cancelada',$I++);
-
-			revisar('63.- ¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?',$inscritaDNIAS,$I++);
-
-			//63 R
-			if ($inscritaDNIAS == 'Si') {
-				revisar_Archivo('63a.- DNIAS',$ID_Selected,'file_dnias','63a');
-			}
-
-
-			revisar('64.- ¿Ha manejado esquemas de recursos complementarios?',$esquemasRecursosComp,$I++);		
-
-			//64 R
-			if ($esquemasRecursosComp == 'Si') {	
-				revisar('64a.- Con qué organización ha manejado recursos complementarios',$organizacionManejoRecursos,'64a');
-			}
-
-
-
-			function revisar($P,$R,$I){?>
-			    
-				<div class="inputGroup" style="margin-bottom: 0;">
-					<input id="option<?php echo $I; ?>" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
-					<label for="option<?php echo $I; ?>"><?php echo $P; ?></label>
-					<div class="explication">(Respuesta)</div>
-					<p style="color: " ><?php echo $R; ?></p>
-					<div id="divComment<?php echo $I; ?>" class="hide" >
-					    <textarea class="text_area_low" id="textarea<?php echo $I; ?>" placeholder="Comentario/Revisión" name="<?php echo $I; ?>"></textarea>
-					</div>
-				</div>
-				<br>
-
-			<?php  }	
-
-			function revisar_Archivo($P,$ID_Selected,$R,$I){?>
-			    
-				<div class="inputGroup" style="margin-bottom: 0;">
-					<input id="option<?php echo $I; ?>" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
-					<label for="option<?php echo $I; ?>"><?php echo $P; ?></label>
-					<div class="explication">(Respuesta)</div>
-					<p style="color: " ><?php Archivo($ID_Selected,$R); ?></p>
-					<div id="divComment<?php echo $I; ?>" class="hide" >
-					    <textarea class="text_area_low" id="textarea<?php echo $I; ?>" placeholder="Comentario/Revisión" name="<?php echo $I; ?>" ></textarea>
-					</div>
-				</div>
-				<br>
-
-			<?php  }	?>
-
-			<input class="hide" placeholder="ID_Registro" name="Registro" value="<?php echo $ID_Selected; ?>" >
-
-
-			<button class="common" type="submit" name="Enviar_Revisión">Enviar Revisión</button>		
+?>
+         
+		<button class="common" type="submit" name="Enviar_Revisión">Enviar Revisión</button>		
 		</form>
+</main>
+<?php 
+
+function revisar($P,$R,$I){?>
+			    
+	<div class="inputGroup" style="margin-bottom: 0;">
+		<input id="option<?php echo $I; ?>" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
+		<label for="option<?php echo $I; ?>"><?php echo $P; ?></label>
+		<div class="explication">(Respuesta)</div>
+		<p style="color: " ><?php echo $R; ?></p>
+		<div id="divComment<?php echo $I; ?>" class="hide" >
+	<textarea class="text_area_low" id="textarea<?php echo $I; ?>" placeholder="Comentario/Revisión" name="<?php echo $I; ?>"></textarea>
+	</div>
+	</div>
+	<br>
+
+<?php  } 
+
+function revisar_Archivo($P,$ID_Selected,$R,$I){?>
+    
+	<div class="inputGroup" style="margin-bottom: 0;">
+		<input id="option<?php echo $I; ?>" type="checkbox" class="comentario" onClick="quitarComentario(this.id)"/>
+		<label for="option<?php echo $I; ?>"><?php echo $P; ?></label>
+		<div class="explication">(Respuesta)</div>
+		<p style="color: " ><?php Archivo($ID_Selected,$R); ?></p>
+		<div id="divComment<?php echo $I; ?>" class="hide" >
+		    <textarea class="text_area_low" id="textarea<?php echo $I; ?>" placeholder="Comentario/Revisión" name="<?php echo $I; ?>" ></textarea>
 		</div>
-	</main>
+	</div>
+	<br>
+
+<?php  }	?>
+
+
+
 
 	<script>
 		function quitarComentario(CheckID){

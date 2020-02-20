@@ -5,6 +5,17 @@
 
     $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
 
+    $Dato = 'si';
+    $sql = "UPDATE notificaciones SET Vista = ? WHERE ID_Notificacion=?;";        
+	$stmt = mysqli_stmt_init($conn);
+	if (!mysqli_stmt_prepare($stmt, $sql)) {
+		//header("Location: ../../index.php?SQL=Error_Update");
+		exit();
+	}else{
+		mysqli_stmt_bind_param($stmt, "si", $Dato,$ID_Selected);
+		mysqli_stmt_execute($stmt);
+	}
+
 
 	$municipiosDeSonora = [
 		'Aconchi', 'Agua Prieta', 'Alamos', 'Altar', 'Arivechi', 'Arizpe', 'Atil',
