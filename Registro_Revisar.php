@@ -7,101 +7,109 @@
     $ID_Cuenta = $_SESSION['user_Id'];
     date_default_timezone_set('America/Hermosillo');
 
- 	if (empty(Query_select("SELECT * FROM revisando WHERE FK_Registro=?;",$ID_Selected,$conn))) {
+	if ($_SESSION['Type_User'] == 2) {
 
- 		 $sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
+	 	if (empty(Query_select("SELECT * FROM revisando WHERE FK_Registro=?;",$ID_Selected,$conn))) {
 
- 		/* Si existe un empleado en la tabla solo updatea los datos, si no existe agrega los datos a la tabla */
- 		if (!empty ($Row=Query_select($sql,$ID_Cuenta,$conn))) {
+	 		 $sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
 
-    		//echo "ya estabas revisando una convocatoria<br>";
-    		Query_update_registro('No Revisado',$Row['FK_Registro'],$conn);
-    			
-    		//echo "esta es tu nueva convocatoria";
-    		Query_update($ID_Selected,$Row['FK_Registro'],$conn);
+	 		/* Si existe un empleado en la tabla solo updatea los datos, si no existe agrega los datos a la tabla */
+	 		if (!empty ($Row=Query_select($sql,$ID_Cuenta,$conn))) {
 
-    	}else{
-    		//echo "No tenias convocatoria";
-    		Query_insert($ID_Selected,$ID_Cuenta,$conn);	
-    	}
+	    		//echo "ya estabas revisando una convocatoria<br>";
+	    		Query_update_registro('No Revisado',$Row['FK_Registro'],$conn);
+	    			
+	    		//echo "esta es tu nueva convocatoria";
+	    		Query_update($ID_Selected,$Row['FK_Registro'],$conn);
 
-    		Query_update_registro('Revision',$ID_Selected,$conn);
-    		
- 	}else{
- 		$sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
- 		if (!empty (Query_select($sql,$ID_Cuenta,$conn))) {
- 			//echo "tu estas revisando este registro";
- 		}else{
- 			//echo "Error: Alguien se encuentra revisando este registro.";
- 			header("Location: Registro_Lista.php?error=revisando");	
- 		}
- 	}
+	    	}else{
+	    		//echo "No tenias convocatoria";
+	    		Query_insert($ID_Selected,$ID_Cuenta,$conn);	
+	    	}
+
+	    		Query_update_registro('Revision',$ID_Selected,$conn);
+	    		
+	 	}else{
+	 		$sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
+	 		if (!empty (Query_select($sql,$ID_Cuenta,$conn))) {
+	 			//echo "tu estas revisando este registro";
+	 		}else{
+	 			//echo "Error: Alguien se encuentra revisando este registro.";
+	 			header("Location: Registro_Lista.php?error=revisando");	
+	 		}
+	 	}
+
+	} else {
+        echo '<br><p style="color: gray; text-align: center;">Solo lectura</p>';
+	}	
 
 
-
-	function Query_select($sql,$D,$conn){	
-		$stmt = mysqli_stmt_init($conn);
-		if (!mysqli_stmt_prepare($stmt, $sql)) {
-			echo 'Error: SQL Conection.';
-			exit();		
-		}else{
-			mysqli_stmt_bind_param($stmt, "i" , $D);
-			mysqli_stmt_execute($stmt);
-			$result = mysqli_stmt_get_result($stmt);
-			$row = mysqli_fetch_assoc($result);
-			return $row;
-		}
-	}
-
-	function Query_insert($FK_Registro,$FK_Usuario,$conn){
- 		$sql = "SELECT * FROM empleados WHERE FK_Cuenta=?;";
-		$stmt = mysqli_stmt_init($conn);
-		if (!mysqli_stmt_prepare($stmt, $sql)) {
-			echo 'Error: SQL Conection.';
-			exit();		
-		}else{
-			mysqli_stmt_bind_param($stmt, "i" , $FK_Usuario);
-			mysqli_stmt_execute($stmt);
-			$result = mysqli_stmt_get_result($stmt);
-			$row = mysqli_fetch_assoc($result);
+		function Query_select($sql,$D,$conn){	
+			$stmt = mysqli_stmt_init($conn);
+			if (!mysqli_stmt_prepare($stmt, $sql)) {
+				echo 'Error: SQL Conection.';
+				exit();		
+			}else{
+				mysqli_stmt_bind_param($stmt, "i" , $D);
+				mysqli_stmt_execute($stmt);
+				$result = mysqli_stmt_get_result($stmt);
+				$row = mysqli_fetch_assoc($result);
+				return $row;
+			}
 		}
 
-		$sql = "INSERT INTO revisando (FK_Registro, FK_Empleado) VALUES (?, ?)";	
-		$stmt = mysqli_stmt_init($conn);
-		if (!mysqli_stmt_prepare($stmt, $sql)) {
-			echo 'Error: SQL Conection.';
-			exit();		
-		}else{
-			mysqli_stmt_bind_param($stmt, "ii" , $FK_Registro,$row['EmpleadoID']);
-			mysqli_stmt_execute($stmt);
+		function Query_insert($FK_Registro,$FK_Usuario,$conn){
+	 		$sql = "SELECT * FROM empleados WHERE FK_Cuenta=?;";
+			$stmt = mysqli_stmt_init($conn);
+			if (!mysqli_stmt_prepare($stmt, $sql)) {
+				echo 'Error: SQL Conection.';
+				exit();		
+			}else{
+				mysqli_stmt_bind_param($stmt, "i" , $FK_Usuario);
+				mysqli_stmt_execute($stmt);
+				$result = mysqli_stmt_get_result($stmt);
+				$row = mysqli_fetch_assoc($result);
+			}
+
+			$sql = "INSERT INTO revisando (FK_Registro, FK_Empleado) VALUES (?, ?)";	
+			$stmt = mysqli_stmt_init($conn);
+			if (!mysqli_stmt_prepare($stmt, $sql)) {
+				echo 'Error: SQL Conection.';
+				exit();		
+			}else{
+				mysqli_stmt_bind_param($stmt, "ii" , $FK_Registro,$row['EmpleadoID']);
+				mysqli_stmt_execute($stmt);
+			}
 		}
-	}
 
 
 
-	function Query_update($Nuevo,$Viejo,$conn){
-		$sql = "UPDATE revisando SET FK_Registro=?,Fecha=? WHERE FK_Registro=?;";
-		$stmt = mysqli_stmt_init($conn);
-		if (!mysqli_stmt_prepare($stmt, $sql)) {
-			echo 'Error: SQL Conection.';
-			exit();		
-		}else{
-			mysqli_stmt_bind_param($stmt, "isi" , $Nuevo,$Fecha,$Viejo);
-			mysqli_stmt_execute($stmt);
+		function Query_update($Nuevo,$Viejo,$conn){
+			$sql = "UPDATE revisando SET FK_Registro=?,Fecha=? WHERE FK_Registro=?;";
+			$stmt = mysqli_stmt_init($conn);
+			if (!mysqli_stmt_prepare($stmt, $sql)) {
+				echo 'Error: SQL Conection.';
+				exit();		
+			}else{
+				mysqli_stmt_bind_param($stmt, "isi" , $Nuevo,$Fecha,$Viejo);
+				mysqli_stmt_execute($stmt);
+			}
 		}
-	}
 
-	function Query_update_registro($Estado,$ID_Registro,$conn){
-		$sql = "UPDATE registro SET Estado=? WHERE ID_Registro=?;";
-		$stmt = mysqli_stmt_init($conn);
-		if (!mysqli_stmt_prepare($stmt, $sql)) {
-			echo 'Error: SQL Conection.';
-			exit();		
-		}else{
-			mysqli_stmt_bind_param($stmt, "si" , $Estado,$ID_Registro);
-			mysqli_stmt_execute($stmt);
+		function Query_update_registro($Estado,$ID_Registro,$conn){
+			$sql = "UPDATE registro SET Estado=? WHERE ID_Registro=?;";
+			$stmt = mysqli_stmt_init($conn);
+			if (!mysqli_stmt_prepare($stmt, $sql)) {
+				echo 'Error: SQL Conection.';
+				exit();		
+			}else{
+				mysqli_stmt_bind_param($stmt, "si" , $Estado,$ID_Registro);
+				mysqli_stmt_execute($stmt);
+			}
 		}
-	}
+
+
+
 
 
 
@@ -533,7 +541,7 @@ if (empty($_GET["id"])){
 
 			// 45 R
 			if ($autorizadaDeducible == 'Si') {
-				revisar('45a.- Página del Diario Oficial de la Federación donde se publicó su autorización',$R,'45a');
+				revisar_Archivo('45a.- Página del Diario Oficial de la Federación donde se publicó su autorización',$ID_Selected,'file_pagina_diario_Oficial',$I++);
 				revisar('45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil',$numeroDiario,'45b');
 				revisar('45c.- Fecha de publicación en el Diario Oficial de la Federación',$fechaDiario,'45c');
 				revisar('45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?',$detenidoAutorizado,'45d');
@@ -624,8 +632,13 @@ if (empty($_GET["id"])){
 
 			<input class="hide" placeholder="ID_Registro" name="Registro" value="<?php echo $ID_Selected; ?>" >
 
+			<?php if ($_SESSION['Type_User'] == 2) { ?>
 
-			<button class="common" type="submit" name="Enviar_Revisión">Enviar Revisión</button>		
+				<button class="common" type="submit" name="Enviar_Revisión">Enviar Revisión</button>
+
+			<?php } else {
+            	echo '<p style="color: gray; text-align: center;">Usted no tiene permitido Mandar a correcion el registro</p>';
+			} ?>		
 		</form>
 		</div>
 	</main>

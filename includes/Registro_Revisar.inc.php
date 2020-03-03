@@ -18,12 +18,13 @@ if (isset($_POST['Enviar_Revisión'])) {
 		echo 'error';
 		exit();		
 	}else{
-		mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+		mysqli_stmt_bind_param($stmt, "i", $Registro_ID);
 		mysqli_stmt_execute($stmt);
 		$result = mysqli_stmt_get_result($stmt);
 		$row = mysqli_fetch_assoc($result);
 
 		$Num_Reviciones = $row['Num_Reviciones'];
+		echo $Num_Reviciones;
 	}
 
 	unset($_POST['Enviar_Revisión']);
@@ -45,13 +46,11 @@ if ($Correcto == false) {
 	//Comienza transacion
 
 	if ($Num_Reviciones == 3) {
-
-		$_SESSION['Rechazado_Datos'] = $Registro_ID;
-
-	    header("Location: Justificar_Rechazo.php");
+		update_registro('No Revisado', $Registro_ID,$Num_Reviciones, $conn);
+	} else {		
+		update_registro('Revisado con Observaciones', $Registro_ID,$Num_Reviciones, $conn);
 	}
 
-	update_registro('Revisado con Observaciones', $Registro_ID,$Num_Reviciones, $conn);
 
 	$Identificador = 1;
 	$Tipo = 'Correccion: Registro';
@@ -296,7 +295,15 @@ if ($Correcto == false) {
 
 
 	    $conn->commit();
-	    header("Location: ../Registro_Lista.php?succes=correciones");
+
+	    if ($Num_Reviciones == 3) {
+
+			$_SESSION['Rechazado_Datos'] = $Registro_ID;
+
+	    	header("Location: ../Justificar_Rechazo.php?id=$Registro_ID");
+		}else{
+			header("Location: ../Registro_Lista.php?succes=correciones");
+		}
     }else{
 		echo "Update: Registro Aceptado.";
 

@@ -212,11 +212,14 @@ window.onclick = function(event) {
 			<input type="text" class="common" id="localidad_Dom" name="localidad_Dom" placeholder="Localidad" value="" >
 
 			<label>27c.- Municipio</label> <label style="color: dimgray; font-size: 14px;">(Dom. Legal)</label><br>
-			<select class="common" id="municipio_Dom" name="municipio_Dom" value="" >
+			<div class="selectdiv">		    	
+			<select class="common" id="municipio_Dom" name="municipio_Dom" value="" required>
 				<?php foreach($municipiosDeSonora as $municipio) {?>
 				  	<option><?php echo $municipio?></option>
 				<?php } ?>
-			</select><br>
+			</select>
+			</div>
+			<br><br>
 
 			</div>
 		</div>
@@ -339,7 +342,7 @@ window.onclick = function(event) {
 				<input type="radio" class="common" name="detenidoAutorizado" value="Si" onclick="Oculto_57_S();" > Si
 				<input type="radio" class="common" name="detenidoAutorizado" value="No" onclick="Oculto_57_N();"> No <br>
 
-			<div class="hide" id="Oculto_57">
+			<div class="hide" id="Oculto_57" style="margin-bottom: 8px;">
 			<h5 class="HidenTag">Detenido autorización donataria</h5>
 			<div class="HidenConteiners">		
 				<label>45e.- ¿Por qué detuvo el SAT su aturización?</label>

@@ -80,7 +80,26 @@ function Delete_correcciones($Registro_ID, $conn){
 	$row = mysqli_fetch_assoc($resultados);
 
 
+
+	if (isset($_GET['error'])) {
+		echo "<main>";
+		if (($_GET['error']) == "Fatal Error") {
+			echo '<p style="color: red;">ERROR FATAL, Favor de contactar al administrador del sistema</p>';
+		}
+		else if (($_GET['error']) == "justificar") {
+			echo '<p style="text-align: center;">No tiene el permiso de justificar el rechazo de una convocatoria</p>';					
+		}
+		else if (($_GET['error']) == "no_select") {
+			echo '<p style="text-align: center;">Vuelva a selecionar un registro</p>';					
+		}
+		echo "</main>";
+	}
+
+
+
 ?>
+
+<p style="text-align: center;"></p>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,7 +111,7 @@ function Delete_correcciones($Registro_ID, $conn){
   	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<main class="hide" >
+<main class="hiden" >
 	<div class="Bar_change" style="">
 		<div>
 			<i class="fa fa-caret-left" aria-hidden="true"></i>
@@ -106,9 +125,10 @@ function Delete_correcciones($Registro_ID, $conn){
 </main>
 <main>
 
-	<h2 style="float: left;">Registros</h2><br>
+<h1 style='background: MEDIUMSEAGREEN; color: white; text-align:center'>Revisar</h1>
+<p style='background: SEAGREEN; color: white; text-align:center;'>Registros </p>
 
-	<button id="myBtn" class="Info_button tooltip">
+	<button id="myBtn" class="Info_button tooltip" style="margin: 12px">
 		<i class='fa fa-info fa-2x'></i>
 		<span class="tooltiptext">Estados de las convocatorias</span>		
 	</button>
@@ -130,7 +150,7 @@ function Delete_correcciones($Registro_ID, $conn){
 		<?php if(empty($row)){ ?>
 			</table>
 			<table>  		
-				<th style="text-align: center;">No hay convocatorias en proceso..</th>
+				<th style="text-align: center; height: 300px">No hay registros por revisar..</th>
 			</table>	
 		<?php }else{ ?>	
 

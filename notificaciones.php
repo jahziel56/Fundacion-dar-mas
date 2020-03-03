@@ -33,7 +33,7 @@
 <?php
 	
 	if (empty($noempty)) {
-		echo "<p style='text-align: center; color: #5A5A5A;'> Su Organización no tiene notificaciones</p><br>";
+		echo "<p style='text-align: center; color: #5A5A5A; margin-top:150px;'> Su Organización no tiene notificaciones</p><br>";
 	}else{
 		$i = 0;
 		foreach ($result as $row) {
@@ -78,13 +78,36 @@
 
 				}
 				break;
+			case '2':
+				$sql = "SELECT * FROM rechazado WHERE FK_Registro=? ORDER BY Fecha ASC LIMIT $i;";
+				$stmt = mysqli_stmt_init($conn);
+				if (!mysqli_stmt_prepare($stmt, $sql)) {
+					echo 'Error: SQL Conection.';
+					exit();		
+				}else{
+				    mysqli_stmt_bind_param($stmt, "i", $ID_Selected);
+				    mysqli_stmt_execute($stmt);
+				    $result1 = mysqli_stmt_get_result($stmt);
+				    $row1 = mysqli_fetch_assoc($result1);
+
+				    $row['ID_Notificacion'] = $row1['FK_Registro'];
+
+				    foreach ($result1 as $row1) {
+				    	$fecha = $row1['Fecha'];
+				    }
+
+				}
+				break;
 
 			default:
 				$Fecha = date("Y-m-d H:i");
 				break;
 
 		}	
+
     		Notificacion($row['Mensaje'],$row1['Fecha'],$row['Tipo'],$row['Vista'],$row['ID_Notificacion'],$row['Identificador']);
+
+
     	}	
 	}
 
@@ -112,7 +135,10 @@ function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador){
 		      			break;
 		      		case '0':
 		      			echo "<a class='filename' href='#' id='myBtn1' class='open_modal' onClick='abrirModal(this.id)'>".$Mensaje."</a>";
-		      			Modal('');
+
+		      			break;
+		      		case '2':
+		      			echo "<a class='filename' href='Rechazado.php?id=$ID'>".$Mensaje."</a>";
 		      			break;
 		      		
 		      		default:
@@ -151,19 +177,10 @@ function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador){
 }
 ?>
 
-</div>	
+</div>
 </main>
-
-<?php
-
-/* manda a llamar a footer.php */ 
-	require"footer.php";
-
-/* el   header.php / index.php / footer.php   son en esencia una sola pagina php, se hace de esta forma para reutilizar codigo de forma facil y rapida */
-?>
-
-<?php  function Modal($Mensaje){ ?>
 <div id="myModal" class="modal">
+
 
   <!-- Modal content -->
   <div class="modal-content">
@@ -181,7 +198,14 @@ function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador){
     </div>
   </div>
 </div>
-<?php } ?>
+<?php
+
+/* manda a llamar a footer.php */ 
+	require"footer.php";
+
+/* el   header.php / index.php / footer.php   son en esencia una sola pagina php, se hace de esta forma para reutilizar codigo de forma facil y rapida */
+?>
+
 
 
 

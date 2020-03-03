@@ -246,6 +246,29 @@ input[type=radio]{
   width: 90%;
 }
 
+input[type=date].common::-webkit-inner-spin-button { 
+    display: none;
+}
+
+input[type=date].common::-webkit-calendar-picker-indicator{
+    color: #2c3e50;
+    padding: 16px 45%; 
+    background: ;
+}
+
+input[type=date].common{
+  width: 100%;
+  padding: 0 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc; 
+  box-sizing: border-box;
+  border-radius: 30px; 
+  outline:0px;
+  color: #95a5a6;
+  font-family: "Helvetica", arial, sans-serif;
+}
+
 input[type=number].P6{
   width: 16%;
 }
@@ -654,7 +677,7 @@ table {
   background: #fff;
   text-align: center;
   border-collapse: collapse;
-
+  border-radius: 2px
 }
 
 td, th {
@@ -1255,6 +1278,18 @@ border: 1px solid #ccc;
   border-color: white;
 }
 
+.row:hover .Correciones_Color_File{
+  background: DARKSALMON;
+  border-color: lightpink;
+}
+
+.row:hover .Correciones_Color_File, .row:focus-within .Correciones_Color_File, .row:active .Correciones_Color_File {
+  background: DARKSALMON;
+  border-color: white;
+}
+
+
+
 .vista{
   filter:brightness(0.8);
   background: white;
@@ -1589,14 +1624,22 @@ select::-ms-expand {
 }
 
 /* ------------------------- Yes Open / No Hidden ------------------------- */
-.hide{
+.hiden{
   display: none;
-  transition: max-height 2s ease-out;
+}
+
+.hide{
+  height: 0;
+  visibility:hidden;
+  opacity:0;
+  transition: 0.3s ease-out;
 }
 
 .Yes_Ver{
-  display: block;
-  transition: max-height 2s ease-out;
+  height: 100%;
+  visibility:visible;
+  opacity:1;
+  transition: .6s ease-out;
 }
 /* ------------------------- Barr change ------------------------- */
 .Bar_change{
@@ -1628,11 +1671,12 @@ background: REBECCAPURPLE;
 }
 
 .Bar_Panel_Info{
-  background: lightgray; 
-  height: 300px; 
-  width: 28%; 
-  overflow: auto;
-  border-radius: 6px;
+  height: 100%;
+  border-radius: 8px;
+  width: 35%; 
+  background: #DADADA; 
+  font-size: 16;
+  overflow: hidden;
 }
 
 .Bar_Panel_Display{
@@ -1711,7 +1755,7 @@ align-self: stretch;
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+  border-bottom: 1px solid black;
 }
 
 .tooltip .tooltiptext {
@@ -1724,7 +1768,7 @@ align-self: stretch;
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  bottom: 90%;
+  bottom: 100%;
   left: 50%;
   margin-left: -60px;
   opacity: 0;
@@ -1745,6 +1789,40 @@ align-self: stretch;
 }
 
 .tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* ---------------------------- tooltip panel ------------------------------ */
+.tooltip .tooltiptext_panel {
+  visibility: hidden;
+  width: 160px;
+  background-color: #5B5B5B;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%;
+  left: 20%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+}
+
+.tooltip .tooltiptext_panel::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+}
+
+.tooltip:hover .tooltiptext_panel {
   visibility: visible;
   opacity: 1;
 }

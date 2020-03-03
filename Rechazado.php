@@ -3,9 +3,30 @@
 	require"classes/header.php";
 	require"includes/dbh.inc.php";
 
+    if ($_SESSION['Type_User'] == 3) {
+        $Regresar = 'Panel_Informacion.php';
+    }elseif ($_SESSION['Type_User'] == 1) {
+        $Regresar = 'Notificaciones.php';
+    }else{
+        $Regresar = 'index.php';
+    }   
+
     $ID_Selected = isset($_GET['id'])? $_GET['id'] : "";
 
-	$sql = "SELECT * FROM rechazado WHERE ID_Rechazo=?;";
+
+    $Dato = 'si';
+    $sql = "UPDATE notificaciones SET Vista = ? WHERE ID_Notificacion=?;";        
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        //header("Location: ../../index.php?SQL=Error_Update");
+        exit();
+    }else{
+        mysqli_stmt_bind_param($stmt, "si", $Dato,$ID_Selected);
+        mysqli_stmt_execute($stmt);
+    }
+
+
+	$sql = "SELECT * FROM rechazado WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo 'Error: SQL Conection.';
@@ -38,11 +59,17 @@
 
     <div class="div_main div_main_Red">La convocatoria a sido rechazada por</div>
     <div class="div_container">
-        <?php echo $row['Razon']; ?>
+        <?php 
+        if (isset($row['Razon'])) {
+            echo $row['Razon'];
+        }else{
+            echo '<br><p style="color: red; text-align: center;">Error: Justificacion del rechazo no encontrado.</p>';
+        }
+        ?>
     <br><br>
-    </div>
+    </div> 
     <br>
-    <a class='P_B' href='Panel_Informacion.php' style='text-decoration: none; display: block;'>Regresar</a>
+    <a class='P_B' href='<?php echo $Regresar; ?>' style='text-decoration: none; display: block;'>Regresar</a>
 
 </main>
 <?php

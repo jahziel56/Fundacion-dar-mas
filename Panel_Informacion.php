@@ -4,7 +4,9 @@
 	require 'includes/dbh.inc.php';
 	require 'includes/Panel_Informacion.inc.php';
 
-
+	if ($_SESSION['Type_User'] != 3) {
+		header("Location: index.php");
+	}	
 
 ?>
 
@@ -32,11 +34,12 @@
 	<tr>
 		<th>Folio</th>
 	    <th>Solicitante</th>
-	    <th>Revisor</th>
-	   	<th>Fecha <br> Año/Mes/Dia</th>
+	    <th>Fecha Enviada<br> Año/Mes/Dia</th>
+	    <th style="min-width: 170px;">Revisor</th>
+	   	<th>Fecha Revisado<br> Año/Mes/Dia</th>
 	   	<th style="width: 10%">Número de revisiones</th>
 	   	<th>Estado</th>
-	   	<th style="min-width: 200px">Opciones</th>
+	   	<th style="min-width: 210px">Opciones</th>
 	</tr>
 <?php 
 
@@ -61,13 +64,33 @@ function Tr_Solicitante($row){?>
 	<tr>
 		<td><?php echo $row['ID_Registro']; ?></td>
 		<td><?php echo $row['nombreOSC']; ?></td>
+		<td>
+			<label class="tooltip">
+			<?php echo date( "Y/m/d", strtotime( $row['Fecha_Registro'] ) );?>
+			<span class="tooltiptext_panel"><?php echo date( "Y/m/d", strtotime( $row['Fecha_Registro'] ) ); echo "  ".date( "G:i:s", strtotime( $row['Fecha_Registro'] ) );  ?></span>		
+			</label>
+		</td>
+
+		<td><?php revisado($row['ID_Registro']);  ?></td>
+
+
 		<td><?php 
+		switch ($row['Estado']) {
+			case 'Aceptado':
+				$sql = "SELECT * FROM revisado WHERE FK_Registro = ?";
+				fecha($sql,$row['ID_Registro']);
+				break;
 
-		revisado($row['ID_Registro']);
+			case 'Rechazado':
+				$sql = "SELECT * FROM rechazado WHERE FK_Registro = ?";
+				fecha($sql,$row['ID_Registro']);
+				break;
+			default:
+				echo 'Sin revisar';
+				break;
+		}
+		?></td>
 
-
-		//echo $row['ID_Registro']; ?></td>
-		<td><?php echo date( "Y-m-d", strtotime( $row['Fecha_Registro'] ) ); ?></td>
 		<td><?php echo $row['Num_Reviciones']; ?></td>
 		<td><?php echo $row['Estado']; ?></td>
 		<td>
@@ -132,6 +155,30 @@ function ymFunction() {
 <?php 
 }
 
+function fecha($sql,$Registro){
+
+	require 'includes/dbh.inc.php';
+
+	$stmt = mysqli_stmt_init($conn);
+	if (!mysqli_stmt_prepare($stmt, $sql)) {
+		//header("Location: ../login.php?error=sqlerror");
+		echo 'error';
+		exit();		
+	}else{
+		mysqli_stmt_bind_param($stmt, "i", $Registro);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+		$row1 = mysqli_fetch_assoc($result);
+	}
+	$fecha_Revisado = $row1['Fecha'];
+
+	?>
+		<label class="tooltip">
+			<?php 	echo date( "Y/m/d", strtotime( $fecha_Revisado ) );?>
+			<span class="tooltiptext_panel"><?php echo date( "Y/m/d", strtotime( $fecha_Revisado ) ); echo "  ".date( "G:i:s", strtotime( $fecha_Revisado ) );  ?></span>		
+		</label>
+	<?php 
+}
 
 function revisado($Registro){
 
@@ -186,7 +233,7 @@ function revisado($Registro){
 				break;
 
 			case 'Rechazado':
-				$sql = "SELECT * FROM rechazado WHERE ID_Rechazo = ?";
+				$sql = "SELECT * FROM rechazado WHERE FK_Registro = ?";
 				$stmt = mysqli_stmt_init($conn);
 				if (!mysqli_stmt_prepare($stmt, $sql)) {
 					//header("Location: ../login.php?error=sqlerror");
@@ -224,7 +271,19 @@ function Empleado_nombre($ID_EMPLADO, $conn){
 		mysqli_stmt_execute($stmt);
 		$result = mysqli_stmt_get_result($stmt);
 		$row = mysqli_fetch_assoc($result);
-		echo $row['nombreEmpleado'];		
+		if (isset($row['nombreEmpleado'])) {
+
+			?>
+			<label class="tooltip">
+			<?php echo $row['nombreEmpleado'];?>
+			<span class="tooltiptext_panel" style="width: 280px; left: -40%;"><?php echo $row['nombreEmpleado']; echo " ".$row['apellidoEmpleado'];  ?></span>		
+			</label>
+			<?php 
+			
+		}else{
+			echo 'Revisor desconocido';
+		}
+
 	}
 
 }

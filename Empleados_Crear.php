@@ -20,14 +20,6 @@
 					<input class="common" type="password" name="pwd-repeat" placeholder="Repita la Contraseña" id="myInput">
                     <input class="common" type="text" name="nombreEmpleado" placeholder="Nombre de empleado" required>
                     <input class="common" type="text" name="apellidoEmpleado" placeholder="Apellido de empleado" required>
-                    <p>Seleccione el rol de la cuenta</p>
-                    <div class="selectdiv">
-	                    <select name="tipoCuenta" required> 
-				            <?php 	foreach($resultados as $a) {?>
-				                <option value="<?php echo $a['Id_Rol']; ?>"><?php echo $a['Nombre_Rol'];?></option>
-				            <?php } ?>
-						</select>
-					</div>
 					<br>
 					<button class="common" type="submit" name="signup-submit">Signup</button>
 				</form>

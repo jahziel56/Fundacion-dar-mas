@@ -693,10 +693,10 @@ function Update_registro($Table,$Update,$Dato,$ID_Registro,$conn){
 
 function Update_archivos($nameFile,$tipoFile,$file,$CurrentDate,$ID_Registro,$Name_Archivo,$conn){
 
-	$sql = "UPDATE registro_archivos SET nombreArchivo=?,tipoArchivo=?,dataArchivo=?,Fecha=?  WHERE FK_Registro=? && nombreSeccion=? ;";
+	$sql = "UPDATE registro_archivos SET nombreArchivo=?,tipoArchivo=?,dataArchivo=? WHERE FK_Registro=? && nombreSeccion=? ;";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
-    mysqli_stmt_bind_param($stmt, "ssssis",$nameFile,$tipoFile,$file,$CurrentDate,$ID_Registro,$Name_Archivo);
+    mysqli_stmt_bind_param($stmt, "sssis",$nameFile,$tipoFile,$file,$ID_Registro,$Name_Archivo);
     mysqli_stmt_execute($stmt);
 
 }

@@ -8,12 +8,10 @@
 		header("Location: OSC_panel.php");
 	}else{
 
+	if ($_SESSION['Type_User'] != 1) {
+		header("Location: index.php");
+	}	
 
-
-?>
-	
-	
-			<?php 
 			if (isset($_GET['error'])) {
 			echo "<main>";	
 				if (($_GET['error']) == "clave_incorrecta") {

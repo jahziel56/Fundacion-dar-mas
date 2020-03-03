@@ -7,37 +7,44 @@
     $ID_Cuenta = $_SESSION['user_Id'];
     date_default_timezone_set('America/Hermosillo');
 
+	mysqli_begin_transaction($conn);
+	$conn->autocommit(FALSE);
 
- 	if (empty(Query_select("SELECT * FROM revisando WHERE FK_Registro=?;",$ID_Selected,$conn))) {
+	if ($_SESSION['Type_User'] == 2) {
 
- 		 $sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
+	 	if (empty(Query_select("SELECT * FROM revisando WHERE FK_Registro=?;",$ID_Selected,$conn))) {
 
- 		/* Si existe un empleado en la tabla solo updatea los datos, si no existe agrega los datos a la tabla */
- 		if (!empty ($Row=Query_select($sql,$ID_Cuenta,$conn))) {
+	 		 $sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
 
-    		//echo "ya estabas revisando una convocatoria<br>";
-    		Query_update_registro('No Revisado',$Row['FK_Registro'],$conn);
-    			
-    		//echo "esta es tu nueva convocatoria";
-    		Query_update($ID_Selected,$Row['FK_Registro'],$conn);
+	 		/* Si existe un empleado en la tabla solo updatea los datos, si no existe agrega los datos a la tabla */
+	 		if (!empty ($Row=Query_select($sql,$ID_Cuenta,$conn))) {
 
-    	}else{
-    		//echo "No tenias convocatoria";
-    		Query_insert($ID_Selected,$ID_Cuenta,$conn);	
-    	}
+	    		//echo "ya estabas revisando una convocatoria<br>";
+	    		Query_update_registro('No Revisado',$Row['FK_Registro'],$conn);
+	    			
+	    		//echo "esta es tu nueva convocatoria";
+	    		Query_update($ID_Selected,$Row['FK_Registro'],$conn);
 
-    		Query_update_registro('Revision',$ID_Selected,$conn);
-    		
- 	}else{
- 		$sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
- 		if (!empty (Query_select($sql,$ID_Cuenta,$conn))) {
- 			//echo "tu estas revisando este registro";
- 		}else{
- 			//echo "Error: Alguien se encuentra revisando este registro.";
- 			header("Location: Registro_Lista.php?error=revisando");	
- 		}
- 	}
+	    	}else{
+	    		//echo "No tenias convocatoria";
+	    		Query_insert($ID_Selected,$ID_Cuenta,$conn);	
+	    	}
 
+	    		Query_update_registro('Revision',$ID_Selected,$conn);
+	    		
+	 	}else{
+	 		$sql = "SELECT * FROM revisando INNER JOIN empleados ON revisando.FK_Empleado = empleados.EmpleadoID WHERE empleados.FK_Cuenta=?;";
+	 		if (!empty (Query_select($sql,$ID_Cuenta,$conn))) {
+	 			//echo "tu estas revisando este registro";
+	 		}else{
+	 			//echo "Error: Alguien se encuentra revisando este registro.";
+	 			header("Location: Registro_Lista.php?error=revisando");	
+	 		}
+	 	}
+
+	} else {
+        echo '<br><p style="color: gray; text-align: center;">Solo lectura</p>';
+	}
 
 
 	function Query_select($sql,$D,$conn){	
@@ -121,19 +128,25 @@
 		$Num_Reviciones = $row['Num_Reviciones'];
 	}
 
-	if ($Num_Reviciones >= 3) {	
+	$conn->commit();
 
-		$_SESSION['Rechazado_Datos'] = $ID_Selected;
 
-	    header("Location: Justificar_Rechazo.php?id=$ID_Selected");
+
+
+
+
+
+
+	if ($Num_Reviciones > 3) {	
+
+		if ($_SESSION['Type_User'] == 2) {
+			$_SESSION['Rechazado_Datos'] = $ID_Selected;
+		    header("Location: Justificar_Rechazo.php?id=$ID_Selected");
+		}else{
+			header("Location: Registro_Lista.php?error=justificar");           
+		}
 
 	}
-
-
-
-
-
-
 // -------------------------------------------- Querry -----------------------------------------------------------------------------------------------------
 $sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
@@ -450,7 +463,6 @@ $sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
     	echo "Fatal Error: Resultado Detalle Empty";
     	exit;
     }
-
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ?>
 	<main>
@@ -464,13 +476,13 @@ if (empty($_GET["id"])){
 		<h1 style='background: MEDIUMSEAGREEN; color: white; text-align:center'>Revision Registro</h1>
 		<p style='background: SEAGREEN; color: white; text-align:center;'>Organizacion: <?php echo $nombreOSC; ?></p><br>
 <?php
-}?>
+}
+?>
 
 
 	<form action="includes/Registro_Revisar.inc.php" method="post" enctype="multipart/form-data">
 
-		<input class="hide" placeholder="ID_Registro" name="Registro" value="<?php echo $ID_Selected; ?>" >
-
+	<input class="hiden" placeholder="ID_Registro" name="Registro" value="<?php echo $ID_Selected; ?>" >
 <?php	
 	$I =0;
 	foreach ($result_detalle_correcciones_registro as $row2) {
@@ -521,212 +533,229 @@ if (empty($_GET["id"])){
 		    	break;
 		    	
 		    case '12':
-		    	pregunta_12($row2['Detalle']);
+				revisar('12.- Calle',$calle,$I++);
 		    	break;
 		    case '13':
-		    	pregunta_13($row2['Detalle']);
+				revisar('13.- Colonia',$colonia,$I++);
 		    	break;
 		    case '14':
-		    	pregunta_14($row2['Detalle']);
+				revisar('14.- Codigo postal',$codigoPostal,$I++);
 		    	break;
 		    case '15':
-			revisar('15.- Localidad',$localidad,$I++);
+				revisar('15.- Localidad',$localidad,$I++);
 		    	break;
 		    case '16':
-		    	pregunta_16($row2['Detalle']);
+				revisar('16.- Domicilio',$domicilio,$I++);
 		    	break;
 		    case '17':
-		    	pregunta_17($row2['Detalle']);
+				revisar('17.- Municipio',$municipioRegistroOSC,$I++);
+		    	break;
+		    case '18':
+				revisar('18.- Ubicación geográfica (Latitud)',$Latitud,$I++);
+		    	break;
+		    case '19':
+				revisar('19.- Ubicación geográfica (Longitud)',$Longitud,$I++);
 		    	break;
 		    case '20':
-		    	pregunta_20($row2['Detalle']);
+				revisar('20.- Teléfono oficina',$phoneOficina,$I++);
 		    	break;
 		    case '21':
-		    	pregunta_21($row2['Detalle']);
+				revisar('21.- Teléfono celular',$phoneCelular,$I++);
 		    	break;
 		    case '22':
-		    	pregunta_22($row2['Detalle']);
+				revisar('22.- Correo de organización',$emailContacto,$I++);
 		    	break;
 		    case '23':
-		    	pregunta_23($row2['Detalle']);
+				revisar('23.- Página web',$paginaWeb,$I++);
 		    	break;
 		    case '24':
-		    	pregunta_24($row2['Detalle']);
+				revisar('24.- Facebook',$organizacionFB,$I++);
 		    	break;
 		    case '25':
-		    	pregunta_25($row2['Detalle']);
+				revisar('25.- Twitter',$organizacionTW,$I++);
 		    	break;
 		    case '26':
-			revisar('26.- Instagram',$organizacionInsta,$I++);
+				revisar('26.- Instagram',$organizacionInsta,$I++);
 		    	break;
 		    case '27':
-		    	pregunta_27($row2['Detalle']);
+				revisar('27.- ¿Su domicilio social es el mismo que el legal?',$domicilio_social_legal,$I++);
 		    	break;
 		    case '27a':
-		    	pregunta_27a($row2['Detalle']);
+				revisar('27a.- Domicilio Legal (registrado ante SAT)',$domicilio_Dom,$I++);
 		    	break;
 		    case '27b':
-		    	pregunta_27b($row2['Detalle']);
+				revisar('27b.- Localidad',$localidad_Dom,$I++);
 		    	break;
 		    case '27c':
-		    	pregunta_27c($row2['Detalle'], $municipiosDeSonora);
+				revisar('27c.- Municipio',$municipio_Dom,$I++);
 		    	break;		    	
 		    case '28':
-		    	pregunta_28($row2['Detalle']);
+				revisar_Archivo('28.- Acta constitutiva',$ID_Selected,'file_acta_const',$I++);
 		    	break;
 		    case '29':
-		    	pregunta_29($row2['Detalle']);
+				revisar_Archivo('29.- Acta protocolizada donde conste la representación legal vigente',$ID_Selected,'file_acta_protoco',$I++);
 		    	break;
 		    case '30':
-		    	pregunta_30($row2['Detalle']);
+				revisar_Archivo('30.- INE del representante legal vigente',$ID_Selected,'file_ine_repre',$I++);
 		    	break;
 		    case '31':
-		    	pregunta_31($row2['Detalle']);
+				revisar('31.- Nombre del representante legal',$nombreRepresentante,$I++);
 		    	break;
 		    case '32':
-		    	pregunta_32($row2['Detalle']);
+				revisar('32.- Número de identificación oficial',$idRepresentante,$I++);
 		    	break;
 		    case '33':
-		    	pregunta_33($row2['Detalle']);
+				revisar('33.- Fecha de constitución de la Organización de Sociedad Civil',$fechaConstitucionOSC,$I++);
 		    	break;
 		    case '34':
-		    	pregunta_34($row2['Detalle']);
+				revisar('34.- Nombre del Notario Público donde registró su Organización de Sociedad Civil',$nombreNotario,$I++);
 		    	break;
 		    case '35':
-		    	pregunta_35($row2['Detalle']);
+				revisar('35.- Número del notario público',$numeroNotario,$I++);
 		    	break;
 		    case '36':
-		    	pregunta_36($row2['Detalle'], $municipiosDeSonora);
+				revisar('36.- Municipio de la Notaría Pública',$municipioNotaria,$I++);
 		    	break;
 		    case '37':
-		    	pregunta_37($row2['Detalle']);
+				revisar('37.- Número de escritura pública',$noEstrituraPublica,$I++);
 		    	break;
 		    case '38':
-		    	pregunta_38($row2['Detalle']);
+				revisar('38.- Volumen (escritura pública)',$volumenEstrituraPublica,$I++);
 		    	break;
 		    case '39':
-		    	pregunta_39($row2['Detalle']);
+				revisar('39.- Fecha de estritura pública',$fechaEstritura,$I++);
 		    	break;
 		    case '40':
-		    	pregunta_40($row2['Detalle']);
+				revisar_Archivo('40.- RPP ICRESON',$ID_Selected,'file_rpp_icreson',$I++);
 		    	break;
 		    case '41':
-		    	pregunta_41($row2['Detalle']);
+				revisar('41. Número de libro',$numeroLibro,$I++);
 		    	break;
 		    case '42':
-		    	pregunta_42($row2['Detalle']);
+				revisar('42.- Número de inscrpción',$numeroInscripcion,$I++);
 		    	break;
 		    case '43':
-		    	pregunta_43($row2['Detalle']);
+				revisar('43.- Volúmen ICRESON',$volumenICRESON,$I++);
 		    	break;
 		    case '44':
-			revisar('44.- ¿Su organización ha tenido modificaciones a su acta constitutiva?',$existenModis,$I++);
+				revisar('44.- ¿Su organización ha tenido modificaciones a su acta constitutiva?',$existenModis,$I++);
 		    	break;
 		    case '44a':
-		    	pregunta_44a($row2['Detalle']);
+				revisar_Archivo('44a.- Ultima acta modificatoria protocolizada',$ID_Selected,'file_ultima_acta',$I++);
 		    	break;
 		    case '44b':
-		    	pregunta_44b($row2['Detalle']);
+				revisar('44b.- Fecha de la última modificación del acta constitutiva',$ultimaModi,$I++);
 		    	break;
 		    case '44c':
-		    	pregunta_44c($row2['Detalle']);
+				revisar_Archivo('44c.- RPP ICRESON de la última acta modificatoria actualizada',$ID_Selected,'file_rpp_ultima_acta',$I++);
 		    	break;
 		    case '44d':
-		    	pregunta_44d($row2['Detalle']);
+				revisar('44d.- Número de acta constitutiva',$numeroActaConsti,$I++);
 		    	break;
 		    case '44e':
-		    	pregunta_44e($row2['Detalle']);
+				revisar('44e.- Volúmen de acta constitutiva',$volumenActaConsti,$I++);
 		    	break;	
 		    case '45':
-		    	pregunta_45($row2['Detalle']);
+				revisar('45.- ¿Está autorizada para recibir donativos deducibles de impuestos?',$autorizadaDeducible,$I++);
 		    	break;
 		    case '45a':
-		    	pregunta_45a($row2['Detalle']);
+				revisar_Archivo('45a.- Página del Diario Oficial de la Federación donde se publicó su autorización',$ID_Selected,'file_pagina_diario_Oficial',$I++);
 		    	break;
 		    case '45b':
-		    	pregunta_45b($row2['Detalle']);
+				revisar('45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil',$numeroDiario,$I++);
 		    	break;
 		    case '45c':
-		    	pregunta_45c($row2['Detalle']);
+				revisar('45c.- Fecha de publicación en el Diario Oficial de la Federación',$fechaDiario,$I++);
 		    	break;
 		    case '45d':
-		    	pregunta_45d($row2['Detalle']);
+				revisar('45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?',$detenidoAutorizado,$I++);
 		    	break;
 		    case '45e':
-		    	pregunta_45e($row2['Detalle']);
+				revisar('45e.- ¿Por qué detuvo el SAT su aturización?',$razonDetenido,$I++);
 		    	break;	
 		    case '45f':
-		    	pregunta_45f($row2['Detalle']);
+				revisar('45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?',$fechaAutorizada,$I++);
 		    	break;		    	
 		    case '46':
-		    	pregunta_46($row2['Detalle']);
+				revisar('46.- Su organización se rige o es dirigida por',$digiridaPor,$I++);
 		    	break;
 		    case '47':
-		    	pregunta_47($row2['Detalle']);
+				revisar('47.- Nombre del presidente',$nombrePresi,$I++);
 		    	break;
 		    case '48':
-		    	pregunta_48($row2['Detalle']);
+				revisar('48.- Número de empleados',$numeroEmpleados,$I++);
 		    	break;
 		    case '49':
-		    	pregunta_49($row2['Detalle']);
+				revisar('49.- Número de voluntarios',$numeroVoluntarios,$I++);
 		    	break;		    
 		    case '50':
-		    	pregunta_50($row2['Detalle']);
+				revisar('50.- Principales logros',$principalesLogros,$I++);
 		    	break;
 		    case '51':
-		    	pregunta_51($row2['Detalle']);
+				revisar('51.- Metas de la organización',$metasOrganizacion,$I++);
 		    	break;
 		    case '52':
-		    	pregunta_52($row2['Detalle']);
+				revisar('52.- Alianzas con las que cuenta',$principalesAlianzas,$I++);
 		    	break;
 		    case '53':
-		    	pregunta_53($row2['Detalle']);
+				revisar('53.- Número de personas que benefició el año anterior',$numeroBeneficiados,$I++);
 		    	break;
 		    case '54':
-		    	pregunta_54($row2['Detalle']);
+
+
+				$poblacion_beneficiada = "poblacion de<br> 0 a 4: " . $poblacion_0_4 . "<br> 5 a 14: " . $poblacion_5_14 . "<br>15 a 29: " . $poblacion_15_29 . "<br>30 a 44: " . $poblacion_30_44 . "<br>45 a 64: " . $poblacion_45_64 . "<br>65 a mas: " . $poblacion_65_mas . "<br>";
+
+				revisar('54.- Numero de personas que veneficio en el úlitmo año',$poblacion_beneficiada,$I++);
+
+
 		    	break;
 		    case '55':
-		    	pregunta_55($row2['Detalle']);
+				revisar('55.- ¿Tiene observaciones en su 32 D?',$observaciones32D,$I++);
 		    	break;
 		    case '56':
-		    	pregunta_56($row2['Detalle']);
+				revisar_Archivo('56.- 32D en positivo y con 30 días de expedición como máximo',$ID_Selected,'file_32_d',$I++);
 		    	break;
 		    case '57':
-		    	pregunta_57($row2['Detalle']);
+				revisar('57.- ¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?',$tiempoYforma,$I++);
 		    	break;
 		    case '58':
-		    	pregunta_58($row2['Detalle']);
+				revisar('58.- ¿Tiene adeudos fiscales a cargo, por impuestos federales?',$tieneAdeudos,$I++);
 		    	break;
 		    case '59':
-		    	pregunta_59($row2['Detalle']);
+				revisar_Archivo('59.- F21, del presente año (PDF)',$ID_Selected,'file_f_21',$I++);
 		    	break;
 		    case '60':
-		    	pregunta_60($row2['Detalle']);
+				revisar_Archivo('60.- Constancia de Situación Fiscal',$ID_Selected,'file_constancia_fiscal',$I++);
 		    	break;
 		    case '61':
-		    	pregunta_61($row2['Detalle']);
+				revisar_Archivo('61.- Comprobante de cuenta bancaria',$ID_Selected,'file_comprobante_banco',$I++);
 		    	break;
 		    case '62':
-		    	pregunta_62($row2['Detalle']);
+				revisar_Archivo('62.- Factura cancelada',$ID_Selected,'file_factura_cancelada',$I++);
 		    	break;
 		    case '63':
-		    	pregunta_63($row2['Detalle']);
+				revisar('63.- ¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?',$inscritaDNIAS,$I++);
 		    	break;
 		    case '63a':
-		    	pregunta_63a($row2['Detalle']);
+				revisar_Archivo('63a.- DNIAS',$ID_Selected,'file_dnias',$I++);
 		    	break;
 		    case '64':
 				revisar('64.- ¿Ha manejado esquemas de recursos complementarios?',$esquemasRecursosComp,$I++);		
 		    	break;
 		    case '64a':
-		    	pregunta_64a($row2['Detalle']);
+				revisar('64a.- Con qué organización ha manejado recursos complementarios',$organizacionManejoRecursos,'64a');
 		    	break;		
 		}
 	}
 
-?>
-         
-		<button class="common" type="submit" name="Enviar_Revisión">Enviar Revisión</button>		
+	if ($_SESSION['Type_User'] == 2) { ?>
+
+		<button class="common" type="submit" name="Enviar_Revisión">Enviar Revisión</button>
+
+	<?php } else {
+        echo '<p style="color: gray; text-align: center;">Usted no tiene permitido Mandar a correcion el registro</p>';
+	} ?>	
+
 		</form>
 </main>
 <?php 

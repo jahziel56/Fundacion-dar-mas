@@ -1,6 +1,9 @@
 <?php
 /* manda a llamar a header.php */ 
 	require"classes/header.php";
+	if (isset($_SESSION['user_Id'])) {
+		header("Location: index.php?error=already_login");
+	}
 ?>
 
 		<main>		

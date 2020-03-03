@@ -358,7 +358,7 @@ if (isset($_SESSION['Type_User'])) {
 	} 
 }?>
          
-	<input type="text" class="hide" name="ID_Registro" value="<?php echo $ID_Correcion_R; ?>">    		
+	<input type="text" class="hiden" name="ID_Registro" value="<?php echo $ID_Correcion_R; ?>">  		
 
 
 
