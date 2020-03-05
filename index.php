@@ -16,7 +16,7 @@
 				echo '<div class="error_box" id="error_box"><p>Error: LLenar ambos campos</p></div>';
 			}
 			else if (($_GET['login']) == "success") {
-				echo '<label class="Saludo" style="background: #FAFAFA;">Bienvenido</label>';					
+				//echo '<label class="Saludo" style="background: #FAFAFA;">Bienvenido</label>';					
 			}
 		}	
 
@@ -31,15 +31,17 @@
 			//Admin
 			?>
 				<div>
-					<a href="Panel_De_Control.php"><button class="Go div_100 Btn_C_B"><span>Panel de control <i class="fa fa-cogs"></i> </i></span></button></a>
 					<a href="Panel_Informacion.php"><button class="Go div_100 Btn_C_B"><span>Panel de Informacion <i class="fa fa-cogs" aria-hidden="true"> </i></span></button></a>
+					<a href="Empleado_Lista.php"><button class="Go div_100 Btn_C_B"><span>Empleado <i class="fa fa-pencil-square"></i> </i></span></button></a>
+					<a href="Registro_Lista.php"><button class="Go div_100 Btn_C_B"><span>Revisar Registros <i class="fa fa-check-square-o fa-1x"></i></span></button></a>
+
 				</div>
 			<?php 
 			}else if($tipoUsuario == 2){
 			//Empleado
 			?>
 				<div>
-					<a href="Registro_Lista.php"><button class="Go div_100 Btn_C_B"><span>Revisar convocatorias / Registros <i class="fa fa-check-square-o fa-1x"></i></span></button></a>
+					<a href="Registro_Lista.php"><button class="Go div_100 Btn_C_B"><span>Revisar Registros <i class="fa fa-check-square-o fa-1x"></i></span></button></a>
 				</div>
 			<?php 
 			} else if($tipoUsuario == 1){

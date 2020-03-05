@@ -68,7 +68,7 @@
 
 ?>
 <main>
-	<h1 style='background: DARKGOLDENROD; color: white; text-align:center'>Acceder al registro institucional</h1>
+	<h1 style='background: DARKGOLDENROD; color: white; text-align:center'>Panel institucional</h1>
 	<p style='background: TAN; color: white; text-align:center;'>panel de informacion sobre su organisacion</p><br>
 	
 	<div style="display: flex; margin-bottom: 6px; padding:2px">

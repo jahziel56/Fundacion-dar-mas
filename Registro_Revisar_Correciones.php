@@ -489,261 +489,261 @@ if (empty($_GET["id"])){
 	echo '<div class="" style="width: 100%;">';
 		switch ($row2['Pregunta']) {
 		    case '1':
-				revisar('1.- Correo de organización',$Correo_Organizacion,$I++);
+				revisar('1.- Correo de organización',$Correo_Organizacion,$row2['Pregunta']);
 		    	break;
 
 		    case '2':
-				revisar('2.- RFC',$rfcHomoclave,$I++);
+				revisar('2.- RFC',$rfcHomoclave,$row2['Pregunta']);
 		    	break;
 
 		    case '3':
-				revisar_Archivo('3.- RFC (PDF o JPG)',$ID_Selected,'file_rfc',$I++);
+				revisar_Archivo('3.- RFC (PDF o JPG)',$ID_Selected,'file_rfc',$row2['Pregunta']);
 		    	break;
 
 		   	case '4':
-				revisar('4.- CLUNI',$CLUNI,$I++);
+				revisar('4.- CLUNI',$CLUNI,$row2['Pregunta']);
 		    	break;
 
 		    case '5':
-				revisar_Archivo('5.- CLUNI (PDF o JPG)',$ID_Selected,'file_cluni',$I++);
+				revisar_Archivo('5.- CLUNI (PDF o JPG)',$ID_Selected,'file_cluni',$row2['Pregunta']);
 		    	break;
 
 		    case '6':
-				revisar('6.- Nombre de la Organizacion de Sociedad Civil',$nombreOSC,$I++);
+				revisar('6.- Nombre de la Organizacion de Sociedad Civil',$nombreOSC,$row2['Pregunta']);
 		    	break;
 
 		    case '7':
-				revisar('7.- Objeto social de la organización',$objetoSocialOrganizacion,$I++);
+				revisar('7.- Objeto social de la organización',$objetoSocialOrganizacion,$row2['Pregunta']);
 		    	break;
 
 		    case '8':
-				revisar('8.- Misión',$mision,$I++);
+				revisar('8.- Misión',$mision,$row2['Pregunta']);
 		    	break;
 
 		    case '9':
-				revisar('9.- Visión',$vision,$I++);
+				revisar('9.- Visión',$vision,$row2['Pregunta']);
 		    	break;
 
 		    case '10':
-				revisar('10.- Áreas de atención',$areasAtencion,$I++);
+				revisar('10.- Áreas de atención',$areasAtencion,$row2['Pregunta']);
 		    	break;
 
 		    case '11':
-				revisar('11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?',$tema_de_Derecho_Social,$I++);
+				revisar('11.- ¿En qué tema de Derecho Social se desarrolla principalmente su organización?',$tema_de_Derecho_Social,$row2['Pregunta']);
 		    	break;
 		    	
 		    case '12':
-				revisar('12.- Calle',$calle,$I++);
+				revisar('12.- Calle',$calle,$row2['Pregunta']);
 		    	break;
 		    case '13':
-				revisar('13.- Colonia',$colonia,$I++);
+				revisar('13.- Colonia',$colonia,$row2['Pregunta']);
 		    	break;
 		    case '14':
-				revisar('14.- Codigo postal',$codigoPostal,$I++);
+				revisar('14.- Codigo postal',$codigoPostal,$row2['Pregunta']);
 		    	break;
 		    case '15':
-				revisar('15.- Localidad',$localidad,$I++);
+				revisar('15.- Localidad',$localidad,$row2['Pregunta']);
 		    	break;
 		    case '16':
-				revisar('16.- Domicilio',$domicilio,$I++);
+				revisar('16.- Domicilio',$domicilio,$row2['Pregunta']);
 		    	break;
 		    case '17':
-				revisar('17.- Municipio',$municipioRegistroOSC,$I++);
+				revisar('17.- Municipio',$municipioRegistroOSC,$row2['Pregunta']);
 		    	break;
 		    case '18':
-				revisar('18.- Ubicación geográfica (Latitud)',$Latitud,$I++);
+				revisar('18.- Ubicación geográfica (Latitud)',$Latitud,$row2['Pregunta']);
 		    	break;
 		    case '19':
-				revisar('19.- Ubicación geográfica (Longitud)',$Longitud,$I++);
+				revisar('19.- Ubicación geográfica (Longitud)',$Longitud,$row2['Pregunta']);
 		    	break;
 		    case '20':
-				revisar('20.- Teléfono oficina',$phoneOficina,$I++);
+				revisar('20.- Teléfono oficina',$phoneOficina,$row2['Pregunta']);
 		    	break;
 		    case '21':
-				revisar('21.- Teléfono celular',$phoneCelular,$I++);
+				revisar('21.- Teléfono celular',$phoneCelular,$row2['Pregunta']);
 		    	break;
 		    case '22':
-				revisar('22.- Correo de organización',$emailContacto,$I++);
+				revisar('22.- Correo de organización',$emailContacto,$row2['Pregunta']);
 		    	break;
 		    case '23':
-				revisar('23.- Página web',$paginaWeb,$I++);
+				revisar('23.- Página web',$paginaWeb,$row2['Pregunta']);
 		    	break;
 		    case '24':
-				revisar('24.- Facebook',$organizacionFB,$I++);
+				revisar('24.- Facebook',$organizacionFB,$row2['Pregunta']);
 		    	break;
 		    case '25':
-				revisar('25.- Twitter',$organizacionTW,$I++);
+				revisar('25.- Twitter',$organizacionTW,$row2['Pregunta']);
 		    	break;
 		    case '26':
-				revisar('26.- Instagram',$organizacionInsta,$I++);
+				revisar('26.- Instagram',$organizacionInsta,$row2['Pregunta']);
 		    	break;
 		    case '27':
-				revisar('27.- ¿Su domicilio social es el mismo que el legal?',$domicilio_social_legal,$I++);
+				revisar('27.- ¿Su domicilio social es el mismo que el legal?',$domicilio_social_legal,$row2['Pregunta']);
 		    	break;
 		    case '27a':
-				revisar('27a.- Domicilio Legal (registrado ante SAT)',$domicilio_Dom,$I++);
+				revisar('27a.- Domicilio Legal (registrado ante SAT)',$domicilio_Dom,$row2['Pregunta']);
 		    	break;
 		    case '27b':
-				revisar('27b.- Localidad',$localidad_Dom,$I++);
+				revisar('27b.- Localidad',$localidad_Dom,$row2['Pregunta']);
 		    	break;
 		    case '27c':
-				revisar('27c.- Municipio',$municipio_Dom,$I++);
+				revisar('27c.- Municipio',$municipio_Dom,$row2['Pregunta']);
 		    	break;		    	
 		    case '28':
-				revisar_Archivo('28.- Acta constitutiva',$ID_Selected,'file_acta_const',$I++);
+				revisar_Archivo('28.- Acta constitutiva',$ID_Selected,'file_acta_const',$row2['Pregunta']);
 		    	break;
 		    case '29':
-				revisar_Archivo('29.- Acta protocolizada donde conste la representación legal vigente',$ID_Selected,'file_acta_protoco',$I++);
+				revisar_Archivo('29.- Acta protocolizada donde conste la representación legal vigente',$ID_Selected,'file_acta_protoco',$row2['Pregunta']);
 		    	break;
 		    case '30':
-				revisar_Archivo('30.- INE del representante legal vigente',$ID_Selected,'file_ine_repre',$I++);
+				revisar_Archivo('30.- INE del representante legal vigente',$ID_Selected,'file_ine_repre',$row2['Pregunta']);
 		    	break;
 		    case '31':
-				revisar('31.- Nombre del representante legal',$nombreRepresentante,$I++);
+				revisar('31.- Nombre del representante legal',$nombreRepresentante,$row2['Pregunta']);
 		    	break;
 		    case '32':
-				revisar('32.- Número de identificación oficial',$idRepresentante,$I++);
+				revisar('32.- Número de identificación oficial',$idRepresentante,$row2['Pregunta']);
 		    	break;
 		    case '33':
-				revisar('33.- Fecha de constitución de la Organización de Sociedad Civil',$fechaConstitucionOSC,$I++);
+				revisar('33.- Fecha de constitución de la Organización de Sociedad Civil',$fechaConstitucionOSC,$row2['Pregunta']);
 		    	break;
 		    case '34':
-				revisar('34.- Nombre del Notario Público donde registró su Organización de Sociedad Civil',$nombreNotario,$I++);
+				revisar('34.- Nombre del Notario Público donde registró su Organización de Sociedad Civil',$nombreNotario,$row2['Pregunta']);
 		    	break;
 		    case '35':
-				revisar('35.- Número del notario público',$numeroNotario,$I++);
+				revisar('35.- Número del notario público',$numeroNotario,$row2['Pregunta']);
 		    	break;
 		    case '36':
-				revisar('36.- Municipio de la Notaría Pública',$municipioNotaria,$I++);
+				revisar('36.- Municipio de la Notaría Pública',$municipioNotaria,$row2['Pregunta']);
 		    	break;
 		    case '37':
-				revisar('37.- Número de escritura pública',$noEstrituraPublica,$I++);
+				revisar('37.- Número de escritura pública',$noEstrituraPublica,$row2['Pregunta']);
 		    	break;
 		    case '38':
-				revisar('38.- Volumen (escritura pública)',$volumenEstrituraPublica,$I++);
+				revisar('38.- Volumen (escritura pública)',$volumenEstrituraPublica,$row2['Pregunta']);
 		    	break;
 		    case '39':
-				revisar('39.- Fecha de estritura pública',$fechaEstritura,$I++);
+				revisar('39.- Fecha de estritura pública',$fechaEstritura,$row2['Pregunta']);
 		    	break;
 		    case '40':
-				revisar_Archivo('40.- RPP ICRESON',$ID_Selected,'file_rpp_icreson',$I++);
+				revisar_Archivo('40.- RPP ICRESON',$ID_Selected,'file_rpp_icreson',$row2['Pregunta']);
 		    	break;
 		    case '41':
-				revisar('41. Número de libro',$numeroLibro,$I++);
+				revisar('41. Número de libro',$numeroLibro,$row2['Pregunta']);
 		    	break;
 		    case '42':
-				revisar('42.- Número de inscrpción',$numeroInscripcion,$I++);
+				revisar('42.- Número de inscrpción',$numeroInscripcion,$row2['Pregunta']);
 		    	break;
 		    case '43':
-				revisar('43.- Volúmen ICRESON',$volumenICRESON,$I++);
+				revisar('43.- Volúmen ICRESON',$volumenICRESON,$row2['Pregunta']);
 		    	break;
 		    case '44':
-				revisar('44.- ¿Su organización ha tenido modificaciones a su acta constitutiva?',$existenModis,$I++);
+				revisar('44.- ¿Su organización ha tenido modificaciones a su acta constitutiva?',$existenModis,$row2['Pregunta']);
 		    	break;
 		    case '44a':
-				revisar_Archivo('44a.- Ultima acta modificatoria protocolizada',$ID_Selected,'file_ultima_acta',$I++);
+				revisar_Archivo('44a.- Ultima acta modificatoria protocolizada',$ID_Selected,'file_ultima_acta',$row2['Pregunta']);
 		    	break;
 		    case '44b':
-				revisar('44b.- Fecha de la última modificación del acta constitutiva',$ultimaModi,$I++);
+				revisar('44b.- Fecha de la última modificación del acta constitutiva',$ultimaModi,$row2['Pregunta']);
 		    	break;
 		    case '44c':
-				revisar_Archivo('44c.- RPP ICRESON de la última acta modificatoria actualizada',$ID_Selected,'file_rpp_ultima_acta',$I++);
+				revisar_Archivo('44c.- RPP ICRESON de la última acta modificatoria actualizada',$ID_Selected,'file_rpp_ultima_acta',$row2['Pregunta']);
 		    	break;
 		    case '44d':
-				revisar('44d.- Número de acta constitutiva',$numeroActaConsti,$I++);
+				revisar('44d.- Número de acta constitutiva',$numeroActaConsti,$row2['Pregunta']);
 		    	break;
 		    case '44e':
-				revisar('44e.- Volúmen de acta constitutiva',$volumenActaConsti,$I++);
+				revisar('44e.- Volúmen de acta constitutiva',$volumenActaConsti,$row2['Pregunta']);
 		    	break;	
 		    case '45':
-				revisar('45.- ¿Está autorizada para recibir donativos deducibles de impuestos?',$autorizadaDeducible,$I++);
+				revisar('45.- ¿Está autorizada para recibir donativos deducibles de impuestos?',$autorizadaDeducible,$row2['Pregunta']);
 		    	break;
 		    case '45a':
-				revisar_Archivo('45a.- Página del Diario Oficial de la Federación donde se publicó su autorización',$ID_Selected,'file_pagina_diario_Oficial',$I++);
+				revisar_Archivo('45a.- Página del Diario Oficial de la Federación donde se publicó su autorización',$ID_Selected,'file_pagina_diario_Oficial',$row2['Pregunta']);
 		    	break;
 		    case '45b':
-				revisar('45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil',$numeroDiario,$I++);
+				revisar('45b.- número de página donde se identifica a su Organizaciones de Sociedad Civil',$numeroDiario,$row2['Pregunta']);
 		    	break;
 		    case '45c':
-				revisar('45c.- Fecha de publicación en el Diario Oficial de la Federación',$fechaDiario,$I++);
+				revisar('45c.- Fecha de publicación en el Diario Oficial de la Federación',$fechaDiario,$row2['Pregunta']);
 		    	break;
 		    case '45d':
-				revisar('45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?',$detenidoAutorizado,$I++);
+				revisar('45d.- ¿El SAT ha detenido su autorización como donataria en algún momento?',$detenidoAutorizado,$row2['Pregunta']);
 		    	break;
 		    case '45e':
-				revisar('45e.- ¿Por qué detuvo el SAT su aturización?',$razonDetenido,$I++);
+				revisar('45e.- ¿Por qué detuvo el SAT su aturización?',$razonDetenido,$row2['Pregunta']);
 		    	break;	
 		    case '45f':
-				revisar('45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?',$fechaAutorizada,$I++);
+				revisar('45f.- ¿Desde que fecha está autorizada para recibir donativos deducibles de impuestos?',$fechaAutorizada,$row2['Pregunta']);
 		    	break;		    	
 		    case '46':
-				revisar('46.- Su organización se rige o es dirigida por',$digiridaPor,$I++);
+				revisar('46.- Su organización se rige o es dirigida por',$digiridaPor,$row2['Pregunta']);
 		    	break;
 		    case '47':
-				revisar('47.- Nombre del presidente',$nombrePresi,$I++);
+				revisar('47.- Nombre del presidente',$nombrePresi,$row2['Pregunta']);
 		    	break;
 		    case '48':
-				revisar('48.- Número de empleados',$numeroEmpleados,$I++);
+				revisar('48.- Número de empleados',$numeroEmpleados,$row2['Pregunta']);
 		    	break;
 		    case '49':
-				revisar('49.- Número de voluntarios',$numeroVoluntarios,$I++);
+				revisar('49.- Número de voluntarios',$numeroVoluntarios,$row2['Pregunta']);
 		    	break;		    
 		    case '50':
-				revisar('50.- Principales logros',$principalesLogros,$I++);
+				revisar('50.- Principales logros',$principalesLogros,$row2['Pregunta']);
 		    	break;
 		    case '51':
-				revisar('51.- Metas de la organización',$metasOrganizacion,$I++);
+				revisar('51.- Metas de la organización',$metasOrganizacion,$row2['Pregunta']);
 		    	break;
 		    case '52':
-				revisar('52.- Alianzas con las que cuenta',$principalesAlianzas,$I++);
+				revisar('52.- Alianzas con las que cuenta',$principalesAlianzas,$row2['Pregunta']);
 		    	break;
 		    case '53':
-				revisar('53.- Número de personas que benefició el año anterior',$numeroBeneficiados,$I++);
+				revisar('53.- Número de personas que benefició el año anterior',$numeroBeneficiados,$row2['Pregunta']);
 		    	break;
 		    case '54':
 
 
 				$poblacion_beneficiada = "poblacion de<br> 0 a 4: " . $poblacion_0_4 . "<br> 5 a 14: " . $poblacion_5_14 . "<br>15 a 29: " . $poblacion_15_29 . "<br>30 a 44: " . $poblacion_30_44 . "<br>45 a 64: " . $poblacion_45_64 . "<br>65 a mas: " . $poblacion_65_mas . "<br>";
 
-				revisar('54.- Numero de personas que veneficio en el úlitmo año',$poblacion_beneficiada,$I++);
+				revisar('54.- Numero de personas que veneficio en el úlitmo año',$poblacion_beneficiada,$row2['Pregunta']);
 
 
 		    	break;
 		    case '55':
-				revisar('55.- ¿Tiene observaciones en su 32 D?',$observaciones32D,$I++);
+				revisar('55.- ¿Tiene observaciones en su 32 D?',$observaciones32D,$row2['Pregunta']);
 		    	break;
 		    case '56':
-				revisar_Archivo('56.- 32D en positivo y con 30 días de expedición como máximo',$ID_Selected,'file_32_d',$I++);
+				revisar_Archivo('56.- 32D en positivo y con 30 días de expedición como máximo',$ID_Selected,'file_32_d',$row2['Pregunta']);
 		    	break;
 		    case '57':
-				revisar('57.- ¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?',$tiempoYforma,$I++);
+				revisar('57.- ¿Ha presentado en tiempo y forma la declaración por ejercicio, de impuestos federales?',$tiempoYforma,$row2['Pregunta']);
 		    	break;
 		    case '58':
-				revisar('58.- ¿Tiene adeudos fiscales a cargo, por impuestos federales?',$tieneAdeudos,$I++);
+				revisar('58.- ¿Tiene adeudos fiscales a cargo, por impuestos federales?',$tieneAdeudos,$row2['Pregunta']);
 		    	break;
 		    case '59':
-				revisar_Archivo('59.- F21, del presente año (PDF)',$ID_Selected,'file_f_21',$I++);
+				revisar_Archivo('59.- F21, del presente año (PDF)',$ID_Selected,'file_f_21',$row2['Pregunta']);
 		    	break;
 		    case '60':
-				revisar_Archivo('60.- Constancia de Situación Fiscal',$ID_Selected,'file_constancia_fiscal',$I++);
+				revisar_Archivo('60.- Constancia de Situación Fiscal',$ID_Selected,'file_constancia_fiscal',$row2['Pregunta']);
 		    	break;
 		    case '61':
-				revisar_Archivo('61.- Comprobante de cuenta bancaria',$ID_Selected,'file_comprobante_banco',$I++);
+				revisar_Archivo('61.- Comprobante de cuenta bancaria',$ID_Selected,'file_comprobante_banco',$row2['Pregunta']);
 		    	break;
 		    case '62':
-				revisar_Archivo('62.- Factura cancelada',$ID_Selected,'file_factura_cancelada',$I++);
+				revisar_Archivo('62.- Factura cancelada',$ID_Selected,'file_factura_cancelada',$row2['Pregunta']);
 		    	break;
 		    case '63':
-				revisar('63.- ¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?',$inscritaDNIAS,$I++);
+				revisar('63.- ¿Está inscrita en el Directorio Nacional de Instituciones de Asistencia Social?',$inscritaDNIAS,$row2['Pregunta']);
 		    	break;
 		    case '63a':
-				revisar_Archivo('63a.- DNIAS',$ID_Selected,'file_dnias',$I++);
+				revisar_Archivo('63a.- DNIAS',$ID_Selected,'file_dnias',$row2['Pregunta']);
 		    	break;
 		    case '64':
-				revisar('64.- ¿Ha manejado esquemas de recursos complementarios?',$esquemasRecursosComp,$I++);		
+				revisar('64.- ¿Ha manejado esquemas de recursos complementarios?',$esquemasRecursosComp,$row2['Pregunta']);		
 		    	break;
 		    case '64a':
-				revisar('64a.- Con qué organización ha manejado recursos complementarios',$organizacionManejoRecursos,'64a');
+				revisar('64a.- Con qué organización ha manejado recursos complementarios',$organizacionManejoRecursos,$row2['Pregunta']);
 		    	break;		
 		}
 	}
@@ -768,8 +768,8 @@ function revisar($P,$R,$I){?>
 		<div class="explication">(Respuesta)</div>
 		<p style="color: " ><?php echo $R; ?></p>
 		<div id="divComment<?php echo $I; ?>" class="hide" >
-	<textarea class="text_area_low" id="textarea<?php echo $I; ?>" placeholder="Comentario/Revisión" name="<?php echo $I; ?>"></textarea>
-	</div>
+			<textarea class="text_area_low" id="textarea<?php echo $I; ?>" placeholder="Comentario/Revisión" name="<?php echo $I; ?>"></textarea>
+		</div>
 	</div>
 	<br>
 

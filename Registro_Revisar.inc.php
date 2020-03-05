@@ -8,24 +8,9 @@ if (isset($_POST['Enviar_Revisión'])) {
 
 	$Registro_ID = $_POST['Registro'];
 	unset($_POST['Registro']);
-	unset($_POST['Enviar_Revisión']);
-	print_r($_POST);
 
-
-	$sql = "SELECT * FROM registro where ID_Registro=?;";
-	$stmt = mysqli_stmt_init($conn);
-	if (!mysqli_stmt_prepare($stmt, $sql)) {
-		////header("Location: ../login.php?error=sqlerror");
-		echo 'error';
-		exit();		
-	}else{
-		mysqli_stmt_bind_param($stmt, "i", $Registro_ID);
-		mysqli_stmt_execute($stmt);
-		$result = mysqli_stmt_get_result($stmt);
-		$row = mysqli_fetch_assoc($result);
-
-		$Num_Reviciones = $row['Num_Reviciones'];
-	}
+	$Num_Reviciones = $_POST['Num_Reviciones'];
+	unset($_POST['Num_Reviciones']);
 
 	unset($_POST['Enviar_Revisión']);
 
@@ -46,20 +31,15 @@ if ($Correcto == false) {
 	//Comienza transacion
 
 	if ($Num_Reviciones == 3) {
-		update_registro('No Revisado', $Registro_ID,$Num_Reviciones, $conn);
-	} else {		
-		update_registro('Revisado con Observaciones', $Registro_ID,$Num_Reviciones, $conn);
+
+		$_SESSION['Rechazado_Datos'] = $Registro_ID;
+
+	    header("Location: Justificar_Rechazo.php");
 	}
 
+	update_registro('Revisado con Observaciones', $Registro_ID,$Num_Reviciones, $conn);
 
-	$Identificador = 1;
-	$Tipo = 'Correccion: Registro';
-	$Mensaje = 'Hubieron correciones en su registro.';
-	    
-	notificaciones($Identificador,$Tipo,$Mensaje,$Registro_ID,$conn);
-	$FK_notificaciones = $conn->insert_id;
-
-	correcciones_registro($Registro_ID,$Revisor,$FK_notificaciones,'Si', $conn);
+	correcciones_registro($Registro_ID,$Revisor,'Si', $conn);
 	$ultimaID = $conn->insert_id;
 
 	    try{
@@ -272,29 +252,15 @@ if ($Correcto == false) {
 		    }
 
 
-			if ($Num_Reviciones == 0) {
 
-				$i = 1;
-			    foreach ($_POST as $row) {
-			    	if (!empty($row)) {
-			    		detalle_correcciones($ultimaID,$row,$i, $conn);
-			    	}
-			    	$i++;
-			    }
+			$i = 1;
+		    foreach ($_POST as $row) {
+		    	if (!empty($row)) {
+		    		detalle_correcciones($ultimaID,$row,$i, $conn);
+		    	}
+		    	$i++;
+		    }
 
-			}else{
-
-				for ($i=1; $i <= 64 ; $i++) { 
-					if (!empty($_POST[$i])) {
-						$Lala[$i] = $_POST[$i];
-
-						unset($_POST[$i]);
-						detalle_correcciones($ultimaID,$Lala[$i],$i, $conn);
-						echo $i ." ". $Lala[$i] ."<br>";						
-					}
-				}
-				print_r ($Lala);
-			}
 
 	    //Catch SQL error, rollback si hay alguna exepcion / commit si todas las transaciones fueron correctas
 		}catch( Exception $e ){
@@ -304,34 +270,32 @@ if ($Correcto == false) {
 
 		Delete_revisando($Registro_ID, $conn);
 
+
+		$Identificador = 1;
+	    $Tipo = 'Correccion: Registro';
+	    $Mensaje = 'Hubieron correciones en su registro.';
+	    
+		notificaciones($Identificador,$Tipo,$Mensaje,$Registro_ID,$conn);
+
+
 		$Mensaje_email = "Su registro a producido una serie de correciones que deben ser atendidas";
 		Mandar_Notificacion($Mensaje_email,$Registro_ID,$conn);
 
 
 	    $conn->commit();
-
-	    if ($Num_Reviciones == 3) {
-
-			$_SESSION['Rechazado_Datos'] = $Registro_ID;
-
-	    	header("Location: ../Justificar_Rechazo.php?id=$Registro_ID");
-		}else{
-			header("Location: ../Registro_Lista.php?succes=correciones");
-		}
+	    header("Location: ../Registro_Lista.php?succes=correciones");
     }else{
 		echo "Update: Registro Aceptado.";
+		correcciones_registro($Registro_ID,$Revisor,'No', $conn);
+		update_registro('Aceptado', $Registro_ID,$Num_Reviciones,$conn);
+		Delete_revisando($Registro_ID, $conn);
+		Revisado($Registro_ID,$Revisor,$conn);
 
 		$Identificador = 0;
 	    $Tipo = 'Aceptado: Registro';
 	    $Mensaje = 'Su registro fue aceptado';
-
+	    
 		notificaciones($Identificador,$Tipo,$Mensaje,$Registro_ID,$conn);
-		$FK_notificaciones = $conn->insert_id;
-
-		correcciones_registro($Registro_ID,$Revisor,$FK_notificaciones,'No', $conn);
-		update_registro('Aceptado', $Registro_ID,$Num_Reviciones,$conn);
-		Delete_revisando($Registro_ID, $conn);
-		Revisado($Registro_ID,$Revisor,$conn);
 
 	    $Mensaje_email = 'Su registro fue aceptado satisfactoriamente';
 		Mandar_Notificacion($Mensaje_email,$Registro_ID,$conn);
@@ -345,14 +309,15 @@ if ($Correcto == false) {
 
 function update_registro($Estado,$ID_Registro,$Num_Reviciones, $conn){
 
+	$Num_Reviciones++;
 
-	$sql = "UPDATE registro SET Estado = ?, Num_Reviciones = Num_Reviciones + 1 WHERE ID_Registro=?;";        
+	$sql = "UPDATE registro SET Estado = ?, Num_Reviciones = ? WHERE ID_Registro=?;";        
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-			throw new Exception('Error: SQL');
+		//header("Location: ../../index.php?SQL=Error_Update");
 		exit();
 	}else{
-		mysqli_stmt_bind_param($stmt, "si", $Estado,$ID_Registro);
+		mysqli_stmt_bind_param($stmt, "sii", $Estado,$Num_Reviciones,$ID_Registro);
 		if(!mysqli_stmt_execute($stmt)){
 			throw new Exception('Error: update_registro');
 		}
@@ -368,7 +333,7 @@ function detalle_correcciones($ultimaID,$Detalle,$Pregunta, $conn){
 	$sql = "INSERT INTO detalle_correcciones_registro (FK_Correcion_R, Detalle, Pregunta) VALUES (?, ?, ?)";        
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-			throw new Exception('Error: SQL');
+		//header("Location: ../../index.php?SQL=Error_Update");
 		exit();
 	}else{
 		mysqli_stmt_bind_param($stmt, "iss",$ultimaID ,$Detalle, $Pregunta);
@@ -384,7 +349,7 @@ function Delete_revisando($Registro_ID, $conn){
 	$sql = "DELETE FROM revisando WHERE FK_Registro=?";
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-			throw new Exception('Error: SQL');
+		//header("Location: ../../index.php?SQL=Error_Update");
 		exit();
 	}else{
 		mysqli_stmt_bind_param($stmt, "i",$Registro_ID);
@@ -394,15 +359,15 @@ function Delete_revisando($Registro_ID, $conn){
 	}
 }
 
-function correcciones_registro($Registro_ID,$Revisor,$FK_notificaciones,$correciones, $conn){
+function correcciones_registro($Registro_ID,$Revisor,$correciones, $conn){
 
-    $sql = "INSERT INTO correcciones_registro (FK_Registro, FK_Revisor, FK_Notificacion, correciones) VALUES (?,?,?,?)";        
+    $sql = "INSERT INTO correcciones_registro (FK_Registro, FK_Revisor, correciones) VALUES (?,?,?)";        
     $stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-			throw new Exception('Error: SQL');
+		//header("Location: ../../index.php?SQL=Error_Update");
 		exit();
 	}else{
-    	mysqli_stmt_bind_param($stmt, "isis",$Registro_ID,$Revisor,$FK_notificaciones,$correciones);
+    	mysqli_stmt_bind_param($stmt, "iss",$Registro_ID,$Revisor,$correciones);
 		if(!mysqli_stmt_execute($stmt)){
 			throw new Exception('error!');
 		}
@@ -414,7 +379,7 @@ function Revisor($Revisor_ID,$conn){
 	$sql = "SELECT * FROM empleados WHERE FK_Cuenta=?;";
     $stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-			throw new Exception('Error: SQL');
+		//header("Location: ../../index.php?SQL=Error_Update");
 		exit();
 	}else{
     	mysqli_stmt_bind_param($stmt, "i",$Revisor_ID);
@@ -433,7 +398,7 @@ function Revisado($Registro_ID,$Revisor,$conn){
 	$sql = "INSERT INTO revisado (FK_Registro,FK_Empleado) VALUES (?, ?)";  
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-			throw new Exception('Error: SQL');
+		//header("Location: ../../index.php?SQL=Error_Update");
 		exit();
 	}else{
 	    mysqli_stmt_bind_param($stmt, "ii",$Registro_ID,$Revisor);
@@ -449,7 +414,7 @@ function notificaciones($Identificador,$Tipo,$Mensaje,$Registro_ID,$conn){
 	$sql = "INSERT INTO notificaciones (Identificador,Tipo,Mensaje,FK_registro) VALUES (?, ?, ?, ?)";  
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-			throw new Exception('Error: SQL');
+		//header("Location: ../../index.php?SQL=Error_Update");
 		exit();
 	}else{
 		mysqli_stmt_bind_param($stmt, "sssi",$Identificador,$Tipo,$Mensaje,$Registro_ID);
@@ -464,7 +429,7 @@ function Mandar_Notificacion($Mensaje_email,$Registro_ID,$conn){
 	$sql = "SELECT * FROM datos_generales WHERE Id_Datos_G=?;";
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-			throw new Exception('Error: SQL');
+		//header("Location: ../../index.php?SQL=Error_Update");
 		exit();
 	}else{
 		mysqli_stmt_bind_param($stmt, "i",$Registro_ID);
@@ -482,14 +447,10 @@ function Mandar_Notificacion($Mensaje_email,$Registro_ID,$conn){
 
 	$message .= utf8_decode("<p>$Mensaje_email<p><br>");
 	$server = $_SERVER['SERVER_NAME'];
-
-	if ($server == "localhost") {
-		$server.=':8080';
-	}
-
-	$url = "http://$server/Fundacion-dar-mas/Notificaciones.php";
+	$url = "http://$server/Fundacion-dar-mas/login.php";
 
 	$message .= '<a href="'. $url .'">Ingresar</a><br>';
 
 	Enviar_Correo ($Email,$subject,$message);
+
 }

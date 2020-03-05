@@ -10,17 +10,6 @@ function Enviar_Correo ($Email,$subject,$message){
 	require_once '../PHPMailer/src/PHPMailer.php';
 	require_once '../PHPMailer/src/SMTP.php';
 
-	/*Set DB si se requiere...
-	//require_once 'dbh.inc.php';
-		$db_rute = 'dbh.inc.php';
-	if (file_exists($db_rute)) {
-			require 'dbh.inc.php';
-			//echo "existe";
-	} else {
-	    	require 'includes/dbh.inc.php';
-	    	//echo "Tambien existe, pero en otra ruta";
-	}*/
-
 	//Set Lenguaje
 	$mail = new PHPMailer();
 	$mail->setLanguage('es', '/optional/path/to/language/directory/');
@@ -35,8 +24,8 @@ function Enviar_Correo ($Email,$subject,$message){
 	$mail->isHTML();
 
 	//Set Correo y Contraseña
-	$mail->Username = 'registro@darmas.org.mx';                 
-	$mail->Password = 'Fundacion2020';
+	$mail->Username = 'darkkeioz@gmail.com';                 
+	$mail->Password = 'jahziel555';
 
 	//Set Headers
 	$headers = "FROM: Fundacion dar mas <registro@darmas.org.mx>\r\n";

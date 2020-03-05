@@ -12,9 +12,10 @@ if (empty($_GET["id"])){
 }else{
 	if (!empty($nombreOSC)) {	
 	echo "<main>";
-	    echo "<h1 style='background: steelblue; color: white; text-align:center'>".$nombreOSC."</h1>";
-	    echo "<p style='background: LIGHTSKYBLUE; color: white; text-align:center;'>
-	    Haz click en el archivo para verlo o click en <i class='fa fa-download'></i>  para descargarlo</p><br>";
+	    echo "<h1 style='background: steelblue; color: white; text-align:center'>Documentos</h1>";
+	   	echo "<p style='background: LIGHTSKYBLUE; color: white; text-align:center;'>".$nombreOSC."</p><br>";
+	    /*echo "<p style='background: LIGHTSKYBLUE; color: white; text-align:center;'>
+	    Haz click en el archivo para verlo o click en <i class='fa fa-download'></i>  para descargarlo</p><br>";*/
 
 	foreach ($result as $row2) {?>
 	<div class="Files_Container">
@@ -52,12 +53,7 @@ if (empty($_GET["id"])){
 		            <span class="detail -updated"><i class="fa fa-clock-o" aria-hidden="true"></i><?php echo $row2['Fecha'];?></span>
 		         </small>
 		      </div>
-		   </div>
-		   
-		   <button class="cell -action -download">
-		      <i class="fa fa-download" aria-hidden="true"></i>
-		      <span class="label">Download</span>
-		   </button>		   
+		   </div>		   
 		</div>
 	</div>
 	<?php }

@@ -436,7 +436,7 @@ if (empty($_GET["id"])){
 	echo "<a class='P_B' href='http:Registro_Lista.php' style='text-decoration: none; display: block;'>Regresar</a>";
 	exit();
 }else{?>
-		<h1 style='background: MEDIUMSEAGREEN; color: white; text-align:center'>Revision Registro</h1>
+		<h1 style='background: MEDIUMSEAGREEN; color: white; text-align:center'>Revisión del Registro</h1>
 		<p style='background: SEAGREEN; color: white; text-align:center;'>Organizacion: <?php echo $nombreOSC; ?></p><br>
 <?php
 }?>

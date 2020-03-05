@@ -85,7 +85,7 @@ if (isset($_POST['signup-submit'])) {
 							$token = random_bytes(32);
 
 							$url = "http://localhost:8080/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
-							//$url = "http://tacosalpastor.cf/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
+							//$url = "http://ejemplo.com/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
 
 							$sql = "INSERT INTO confirmar_cuenta (cuenta_Id, Selector, Token) VALUES (?, ?, ?);";
@@ -99,7 +99,7 @@ if (isset($_POST['signup-submit'])) {
 								mysqli_stmt_execute($stmt);
 
 
-								$url_consejos = 'http://tacosalpastor.cf/Fundacion-dar-mas/signup.php';
+								$url_consejos = 'http://tacosalpastor.cf/Fundacion-dar-mas/consejos.php';
 
 								$subject = utf8_decode("Creacion de cuenta, Fundacion dar mas");
 								$message = utf8_decode('<h2>Confirmacion de correo</h2>
@@ -108,7 +108,7 @@ if (isset($_POST['signup-submit'])) {
 								$message .= utf8_decode("<p>Aqui esta el link para confirmar tu cuenta:</p>");
 								$message .= '<a href="'. $url .'">Confirmar Cuenta</a><br>';
 
-								$message .= utf8_decode("<br>Si tienes cualquier pregunta, no dudes en comunicarte directamente al teléfono: (622)1477894");
+								$message .= utf8_decode("<br>Si tienes cualquier pregunta, no dudes en comunicarte directamente al teléfono: (662)XXX-XX-XX");
 
 								Enviar_Correo ($email,$subject,$message);
 

@@ -11,7 +11,7 @@
 ?>
 
 <main class="div_95">
-<h1 style='background: MEDIUMSEAGREEN; color: white; text-align:center'>Panel de Informacion</h1>
+<h1 style='background: MEDIUMSEAGREEN; color: white; text-align:center'>Panel de Información</h1>
 <p style='background: SEAGREEN; color: white; text-align:center;'>Registros </p><br>
 
 
@@ -20,10 +20,11 @@
       <select name="tipoCuenta" id="singleSelectValueDDJS" onchange="singleSelectChangeValue()" required> 
 		    	<option value="0">Por Folio</option>
 				<option value="1">Por Solicitante</option>
-				<option value="2">Por Revisor</option>
-				<option value="3">Por Fecha</option>
-				<option value="4">Por Numero de reviciones</option>
-				<option value="5">Por Estado</option>
+				<option value="2">Por Fecha Enviada</option>
+				<option value="3">Por Revisor</option>
+				<option value="4">Por Fecha Revisado</option>
+				<option value="5">Por Numero de reviciones</option>
+				<option value="6">Por Estado</option>
 			</select>
 		</div>
 		<input type="text" class="common" id="myInput" onkeyup="ymFunction()" placeholder="Search for names.." title="Type in a name">
@@ -95,12 +96,12 @@ function Tr_Solicitante($row){?>
 		<td><?php echo $row['Estado']; ?></td>
 		<td>
 			<form action="Pre_Registro_New_Ver.php" method="post">
-				<button class="Panel_Boton" name="Registro" style="background: #388e3c;" value="<?php echo $row['ID_Registro']; ?>"><span>Informacion Registro</span></button>
+				<button class="Panel_Boton" name="Registro" style="background: #388e3c;" value="<?php echo $row['ID_Registro']; ?>"><span>Información Registro</span></button>
 			</form>
 		<?php 
 		switch ($row['Estado']) {
 			case 'Revisado con Observaciones':
-				?><button class="Panel_Boton" style="background: #fbc02d;" ><a class='filename' href='Registro_Corregir.php?id=<?php Correciones($row['ID_Registro']); ?>'>Correciones</a></button><?php 
+				?><button class="Panel_Boton" style="background: #fbc02d;" ><a class='filename' href='Registro_Corregir.php?id=<?php Correciones($row['ID_Registro']); ?>'>Correcciones</a></button><?php 
 				break;
 
 			case 'Rechazado':

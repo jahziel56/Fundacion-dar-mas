@@ -92,8 +92,8 @@ if (empty($_GET["id"])){
 	echo "<a class='P_B' href='http:Registro_Lista.php' style='text-decoration: none; display: block;'>Regresar</a>";
 	exit();
 }else{?>
-		<h1 style='background: MEDIUMSEAGREEN; color: white; text-align:center'>Correcion Registro</h1>
-		<p style='background: SEAGREEN; color: white; text-align:center;'>Organizacion: <?php echo $nombreOSC; ?></p><br>
+		<h1 style='background: #fdd835 ; color: white; text-align:center'>Corrección Registro</h1>
+		<p style='background: #fbc02d  ; color: white; text-align:center;'>Organizacion: <?php echo $nombreOSC; ?></p><br>
 
 		<form action="corregido.php" method="post" enctype="multipart/form-data">
 <?php	

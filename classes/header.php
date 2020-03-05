@@ -91,15 +91,16 @@ session_start();
             <?php  
                 //Tipo de usuario: Admin
 				}elseif ($nivel == 3) {?>
-                    <a id='perfil_right2' class='' href='Panel_De_Control.php'>Panel De Control</a>
-                    <a id='perfil_right2' class='' href='Registro_Lista.php'>Registros</a>
+                    <a id='perfil_right2' class='' href='Empleado_Lista.php'>Empleado</a>
+                    <a id='perfil_right2' class='' href='Panel_Informacion.php'>Panel de Información</a>
 
                     <form action="includes/logout.inc.php" method="post">
                         <button id="log" class="" type="submit" name="logout-submit"><i class="fa fa-power-off" aria-hidden="true"> Salir</i></button>
                     </form>
 
-                    <a id='perfil_right1' class='' href='Panel_De_Control.php'>Panel De Control</a>
-                    <a id='perfil_right1' class='' href='Registro_Lista.php'>Registros</a>
+                    <a id='perfil_right1' class='' href='Panel_Informacion.php'>Panel de Información</a>
+                    <a id='perfil_right1' class='' href='Empleado_Lista.php'>Empleado</a>
+
             <?php  
                 }
 			}
