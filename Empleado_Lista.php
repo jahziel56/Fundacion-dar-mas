@@ -48,7 +48,7 @@
 					<td><?php echo $a['correoEmpleado']?></td>
 					<td>
 						<a class='' href='Empleado_Modificar_Detalle.php?id=<?php echo $a['EmpleadoID']?>'><i class='fa fa-pencil-square-o fa-2x'></i></a>
-						<a class='' href='Empleado_Lista.php?id=<?php echo $a['EmpleadoID']?>'><i class='fa fa-trash fa-2x'></i></a>
+						<a class='' href='Empleado_Eliminar.php?id=<?php echo $a['EmpleadoID']?>'><i class='fa fa-trash fa-2x'></i></a>
 
 					</td>
 
