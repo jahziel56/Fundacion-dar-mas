@@ -1,6 +1,7 @@
 <?php 
 if (isset($_POST['justificar'])) {
 	require"dbh.inc.php";
+	require 'send_mail.inc.php';
 	session_start();
 
 	//print_r($_POST);
@@ -128,6 +129,46 @@ if (isset($_POST['justificar'])) {
 		}
 
 
+
+
+		$sql = "SELECT * FROM datos_generales WHERE Id_Datos_G=?;";
+		$stmt = mysqli_stmt_init($conn);
+		if (!mysqli_stmt_prepare($stmt, $sql)) {
+				throw new Exception('Error: SQL');
+			exit();
+		}else{
+			mysqli_stmt_bind_param($stmt, "i",$ID_Registro);
+			if(!mysqli_stmt_execute($stmt)){
+				throw new Exception('Error: Select Datos generales');
+			}
+			$result = mysqli_stmt_get_result($stmt);
+			$row = mysqli_fetch_assoc($result);
+			$Email = $row['Correo_Organizacion'];
+		}
+
+		$Mensaje_email = "Su registro ha sido rechazado por la siguiente razón ";
+		$Mensaje_email .= "<br><p>".$Razon."</p>";
+
+		$subject = utf8_decode("Registro Fundacion dar mas");
+		$message = utf8_decode("<h1>Registro en el sistema Fundacion dar mas</h1><br>");
+
+		$message .= utf8_decode("<p>$Mensaje_email<p><br>");
+		$server = $_SERVER['SERVER_NAME'];
+
+		if ($server == "localhost") {
+			$server.=':8080';
+		}
+
+		$url = "http://$server/Fundacion-dar-mas/Notificaciones.php";
+		//$url = "http://tacosalpastor.cf/Fundacion-dar-mas/Notificaciones.php";
+
+		$style = 'target="_blank" style="font-family:Segoe UI Semibold,Segoe UI Bold,Segoe UI,Helvetica Neue Medium,Arial,sans-serif; font-size:22px; text-align:center; text-decoration:none; font-weight:600; color:#fff; background: MEDIUMSEAGREEN; padding: 12px 50px; border-radius: 6px;"';
+
+		$message .= '<a href="'. $url .'"  '.$style.'>Ingresar</a><br>';
+
+
+
+		Enviar_Correo ($Email,$subject,$message);
 
 
 	}catch( Exception $e ){

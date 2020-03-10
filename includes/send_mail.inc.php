@@ -14,6 +14,9 @@ function Enviar_Correo ($Email,$subject,$message){
 	$mail = new PHPMailer();
 	$mail->setLanguage('es', '/optional/path/to/language/directory/');
 
+	$Content = '<div style="background: #E6E6E6; width:; text-align:center; padding: 4px 12px; max-height: 500px; height: 300px; border-radius: 8px;  box-shadow: 0px 3px 6px 0px rgba(0,0,0,1);"><br>';
+	$Content .= "<p style='text-align: justify'>".$message."</p>";
+	$Content .= '</div>';
 
 	//Set Parameters
 	$mail->isSMTP();
@@ -39,7 +42,7 @@ function Enviar_Correo ($Email,$subject,$message){
 
     //Set Structure
 	$mail->Subject = $subject;
-	$mail->Body    = $message;
+	$mail->Body    = $Content;
 
 	$mail->addAddress($Email); 
 

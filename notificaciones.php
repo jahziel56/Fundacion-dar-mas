@@ -105,7 +105,7 @@
 
 		}	
 
-    		Notificacion($row['Mensaje'],$row1['Fecha'],$row['Tipo'],$row['Vista'],$row['ID_Notificacion'],$row['Identificador']);
+    		Notificacion($row['Mensaje'],$row1['Fecha'],$row['Tipo'],$row['Vista'],$row['ID_Notificacion'],$row['Identificador'],$ID_Selected);
 
 
     	}	
@@ -113,7 +113,7 @@
 
 
  
-function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador){
+function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador,$ID_Selected){
 	$Fecha = date( "Y-m-d H:i", strtotime( $Fecha ) );
 	if ($vista == 'si') {
 		$colorvista = 'NoVisto';
@@ -134,8 +134,7 @@ function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador){
 		      			echo "<a class='filename' href='Registro_Corregir.php?id=$ID'>".$Mensaje."</a>";
 		      			break;
 		      		case '0':
-		      			echo "<a class='filename' href='#' id='myBtn1' class='open_modal' onClick='abrirModal(this.id)'>".$Mensaje."</a>";
-
+		      			echo "<a class='filename' href='Aceptado.php?id=$ID_Selected'>".$Mensaje."</a>";
 		      			break;
 		      		case '2':
 		      			echo "<a class='filename' href='Rechazado.php?id=$ID'>".$Mensaje."</a>";
@@ -205,42 +204,3 @@ function Notificacion($Mensaje,$Fecha,$Tipo,$vista,$ID,$Identificador){
 
 /* el   header.php / index.php / footer.php   son en esencia una sola pagina php, se hace de esta forma para reutilizar codigo de forma facil y rapida */
 ?>
-
-
-
-
-
-<script>
-function abrirModal(buttonID){
-
-	var btn = document.getElementById(buttonID);
-
-	var modal = document.getElementById("myModal");
-
-	var span = document.getElementsByClassName("close")[0];
-
-	modal.style.display = "block";	  
-	
-
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
-	  modal.style.display = "none";
-	}
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
- 		if (event.target == modal) {
-	    	modal.style.display = "none";
-	    }
-	}
-
-	switch(btn){
-		case myBtn1:
-		    document.getElementById('textoHeader').innerHTML = "Titulo 1";
-		    break;
-		default:
-			document.getElementById('textoHeader').innerHTML = "Titulo";
-	}
-}
-</script>
-

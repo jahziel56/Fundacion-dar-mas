@@ -304,7 +304,7 @@ if ($Correcto == false) {
 
 		Delete_revisando($Registro_ID, $conn);
 
-		$Mensaje_email = "Su registro a producido una serie de correciones que deben ser atendidas";
+		$Mensaje_email = "Su registro ha producido una serie de correcciones que deben ser atendidas";
 		Mandar_Notificacion($Mensaje_email,$Registro_ID,$conn);
 
 
@@ -488,8 +488,12 @@ function Mandar_Notificacion($Mensaje_email,$Registro_ID,$conn){
 	}
 
 	$url = "http://$server/Fundacion-dar-mas/Notificaciones.php";
+	//$url = "http://tacosalpastor.cf/Fundacion-dar-mas/Notificaciones.php";
 
-	$message .= '<a href="'. $url .'">Ingresar</a><br>';
+	$style = 'target="_blank" style="font-family:Segoe UI Semibold,Segoe UI Bold,Segoe UI,Helvetica Neue Medium,Arial,sans-serif; font-size:22px; text-align:center; text-decoration:none; font-weight:600; color:#fff; background: MEDIUMSEAGREEN; padding: 12px 50px; border-radius: 6px;"';
+
+	$message .= '<a href="'. $url .'"  '.$style.'>Ingresar</a>';
+
 
 	Enviar_Correo ($Email,$subject,$message);
 }

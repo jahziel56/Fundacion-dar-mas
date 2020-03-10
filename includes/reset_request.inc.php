@@ -7,11 +7,17 @@ if (isset($_POST['reset_password_submit'])) {
 	$selector = bin2hex(random_bytes(8));
 	$token = random_bytes(32);
 
-	$url = "http://localhost:8080/Fundacion-dar-mas/create_new_password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+
+	$server = $_SERVER['SERVER_NAME'];
+
+	if ($server == "localhost") {
+		$server.=':8080';
+	}
+
+	$url = "http://$server/Fundacion-dar-mas/create_new_password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 	//$url = "http://tacosalpastor.cf/Fundacion-dar-mas/create_new_password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
-	$expires = date("U") + 3700;
-	
+	$expires = date("U") + 8000;	
 
 	$Email = $_POST["mail_reset_password"];
 
@@ -40,13 +46,15 @@ if (isset($_POST['reset_password_submit'])) {
 	mysqli_close($stmt);
 
 	$subject = utf8_decode("Reinicio de contraseña, Fundacion dar mas");
-	$message = utf8_decode("<h2>Solicitud de cambio de contraseña</h2><br>
-	<p>Recibimos una solicitud de cambio de contraseña para tu cuenta de Fundacion dar mas.</p><br>
+	$message = utf8_decode("<h1>Solicitud de cambio de contraseña</h1>
+	<p>Recibimos una solicitud de cambio de contraseña para tu cuenta de Fundacion dar mas.</p>
 	<p>Este enlace expirará en 1 horas. Si no solicitaste un cambio de contraseña, ignora este correo y no se harán cambios en tu cuenta. Es posible que otra persona haya ingresado tu correo por error, pero te recomendamos consultar nuestros consejos en Protección de cuenta si tienes alguna duda o inquietud.</p>");
 
 	$message .= utf8_decode("<p>Aqui esta el link para realizar el cambio de contraseña: <br>");
 
-	$message .= '<a href="'. $url .'">'. $url .'</a></p>';
+	$style = 'target="_blank" style="font-family:Segoe UI Semibold,Segoe UI Bold,Segoe UI,Helvetica Neue Medium,Arial,sans-serif; font-size: 16px; text-align:justify; text-decoration:none; font-weight:600; color:#fff; background: MEDIUMSEAGREEN; padding: 2px 2px; border-radius: 6px;"';
+
+	$message .= '<div style=" text-align:justify; background:lightgray; "><a href="'. $url .'" '.$style.'>'. $url .'</a></p></div>';
 
 	Enviar_Correo ($Email,$subject,$message);
 

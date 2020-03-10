@@ -99,6 +99,8 @@ function Delete_correcciones($Registro_ID, $conn){
 
 ?>
 
+
+
 <p style="text-align: center;"></p>
 <!DOCTYPE html>
 <html>
@@ -124,6 +126,7 @@ function Delete_correcciones($Registro_ID, $conn){
 	</div>
 </main>
 <main>
+
 
 <h1 style='background: MEDIUMSEAGREEN; color: white; text-align:center'>Revisar</h1>
 <p style='background: SEAGREEN; color: white; text-align:center;'>Registros </p>

@@ -63,6 +63,11 @@ main{
   color: white;
   margin: 10px 0 0 0;
 }
+.div_main_MEDIUMSEAGREEN{
+  background: MEDIUMSEAGREEN; 
+  color: white;
+  margin: 10px 0 0 0;
+}
 
 .div_container{
   width: 100%;

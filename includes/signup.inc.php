@@ -84,7 +84,15 @@ if (isset($_POST['signup-submit'])) {
 							$selector = bin2hex(random_bytes(8));
 							$token = random_bytes(32);
 
-							$url = "http://localhost:8080/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
+
+							$server = $_SERVER['SERVER_NAME'];
+
+							if ($server == "localhost") {
+								$server.=':8080';
+							}
+
+
+							$url = "http://$server/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
 							//$url = "http://ejemplo.com/Fundacion-dar-mas/includes/confirm_account.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
 
@@ -99,7 +107,10 @@ if (isset($_POST['signup-submit'])) {
 								mysqli_stmt_execute($stmt);
 
 
-								$url_consejos = 'http://tacosalpastor.cf/Fundacion-dar-mas/consejos.php';
+
+
+
+								$url_consejos = "http://$server/Fundacion-dar-mas/consejos.php";
 
 								$subject = utf8_decode("Creacion de cuenta, Fundacion dar mas");
 								$message = utf8_decode('<h2>Confirmacion de correo</h2>

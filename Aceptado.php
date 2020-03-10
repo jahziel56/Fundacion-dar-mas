@@ -26,7 +26,7 @@
     }
 
 
-	$sql = "SELECT * FROM rechazado WHERE FK_Registro=?;";
+	$sql = "SELECT * FROM datos_generales WHERE FK_Registro=?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo 'Error: SQL Conection.';
@@ -38,32 +38,21 @@
         $row = mysqli_fetch_assoc($result);
     }
 
-    $sql = "SELECT * FROM detalle_rechazados WHERE FK_Rechazo=?;";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        echo 'Error: SQL Conection.';
-        exit();     
-    }else{
-        mysqli_stmt_bind_param($stmt, "i" , $ID_Selected);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $row2 = mysqli_fetch_assoc($result);
-    }
 
     
     		
 ?>
 <main>
-<h1 style='background: #e53935 ; color: white; text-align:center'>El Registro de la organización </h1>
-<p style='background: #b71c1c ; color: white; text-align:center;'><?php echo $row2['Nombre_OSC']; ?></p><br>
+<h1 style='background: MEDIUMSEAGREEN ; color: white; text-align:center'>El Registro de la organización</h1>
+<p style='background: SEAGREEN ; color: white; text-align:center;'><?php echo $row['nombreOSC']; ?></p><br>
 
-    <div class="div_main div_main_Red">El Registro a sido rechazado por</div>
+    <div class="div_main div_main_MEDIUMSEAGREEN">El Registro ha sido Aceptado</div>
     <div class="div_container">
         <?php 
-        if (isset($row['Razon'])) {
-            echo $row['Razon'];
+        if (isset($row['nombreOSC'])) {
+            echo "Su registro ha sido aceptado satisfactoriamente";
         }else{
-            echo '<br><p style="color: red; text-align: center;">Error: Justificacion del rechazo no encontrado.</p>';
+            echo '<br><p style="color: red; text-align: center;">Error: Registro no encontrado</p>';
         }
         ?>
     <br><br>
