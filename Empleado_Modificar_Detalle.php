@@ -2,21 +2,13 @@
 	require 'includes/dbh.inc.php';
 	require"classes/header.php";
 
-		$id_Eliminar = $_GET['id'];
-
-
-		/*$sql = "SELECT * FROM empleados INNER JOIN rol on empleados.FK_Roles = rol.Id_Rol WHERE EmpleadoID=?;";
-		$stmt = mysqli_stmt_init($conn);
-		if (!mysqli_stmt_prepare($stmt, $sql)) {
-			header("Location: ../login.php?error=sqlerror");
-			exit();		
+		if (!isset ($_SESSION['Darmas_Empleado_Modificar'])) {
+			$_SESSION['Darmas_Empleado_Modificar'] = $_POST['id'];
+			$id = $_SESSION['Darmas_Empleado_Modificar'];
 		}else{
-			mysqli_stmt_bind_param($stmt, "i", $id_Eliminar);
-			mysqli_stmt_execute($stmt);
-			$result = mysqli_stmt_get_result($stmt);
-			if ($row = mysqli_fetch_assoc($result)){
-			}
-		}*/
+			$id = $_SESSION['Darmas_Empleado_Modificar'];			
+		}
+
 
 		$sql = "SELECT * FROM empleados WHERE EmpleadoID=?;";
 		$stmt = mysqli_stmt_init($conn);
@@ -24,10 +16,22 @@
 			echo 'Error: SQL Conection.';
 			exit();		
 		}else{
-			mysqli_stmt_bind_param($stmt, "i", $id_Eliminar);
+			mysqli_stmt_bind_param($stmt, "i", $id);
 			mysqli_stmt_execute($stmt);
 			$result = mysqli_stmt_get_result($stmt);
 			$row = mysqli_fetch_assoc($result);
+		}
+
+		$sql = "SELECT * FROM cuenta WHERE Id_Cuenta=?;";
+		$stmt = mysqli_stmt_init($conn);
+		if (!mysqli_stmt_prepare($stmt, $sql)) {
+			echo 'Error: SQL Conection.';
+			exit();		
+		}else{
+			mysqli_stmt_bind_param($stmt, "i", $row['FK_Cuenta']);
+			mysqli_stmt_execute($stmt);
+			$result = mysqli_stmt_get_result($stmt);
+			$row_C = mysqli_fetch_assoc($result);
 		}
 
 
@@ -40,27 +44,27 @@ $I = 1;
 		<p style='background: #E67E22; color: white; text-align:center;'>Registros </p><br>
 
 
-				<form action="includes/signup.inc.empleado.php" method="post" class="Signup" style="padding: 8px 12px">
+				<form action="includes/modificar_empleado.inc.php" method="post" class="Signup" style="padding: 8px 12px">
+				<label>Información de acceso </label>
+				<input class="common" type="text" name="usuario" placeholder="Nombre de usuario" value="<?php echo $row_C['Username']; ?>" required>
+				<input class="common" type="email" name="mail" placeholder="Correo" value="<?php echo $row_C['Email']; ?>" required>
 
-				<input class="common" type="text" name="nombreEmpleado" placeholder="Nombre de empleado" value="<?php echo $row['nombreEmpleado']; ?>" required>
-                <input class="common" type="text" name="apellidoEmpleado" placeholder="Apellido de empleado" value="<?php echo $row['apellidoEmpleado']; ?>" required>
-                <input class="common" type="email" name="mail" placeholder="Correo" value="<?php echo $row['correoEmpleado']; ?>" required>
 
             <div style="margin: auto;">
             <div style="display: flex;">
 
 				<div class="inputGroup inputGroup_F" style="width: 33%; margin: 10px 5px;">
-					<input id="option1" type="radio" name="Set_Reset_User" class="comentario" value="1" onClick="quitarComentario(this.id)"/>
+					<input id="option1" type="radio" name="Set_Reset_Password" class="comentario" value="1" onClick="quitarComentario(this.id)"/>
 					<label for="option1">Desea cambiar la antigua contraseña?</label>
 				</div>
 
 				<div class="inputGroup inputGroup_F" style="width: 43%; margin: 10px 5px;">
-					<input id="option2" type="radio" name="Set_Reset_User" class="comentario" value="2" onClick="quitarComentario(this.id)" checked="checked" required/>
+					<input id="option2" type="radio" name="Set_Reset_Password" class="comentario" value="2" onClick="quitarComentario(this.id)" checked="checked" required/>
 					<label for="option2">Que el empleado cambie la contraseña mediante un link de correo</label>
 				</div>
 
 				<div class="inputGroup inputGroup_F" style="width: 22%; margin: 10px 5px; background: ; ">
-					<input id="option3" type="radio" name="Set_Reset_User" class="comentario" value="3" onClick="quitarComentario(this.id)"/>
+					<input id="option3" type="radio" name="Set_Reset_Password" class="comentario" value="3" onClick="quitarComentario(this.id)"/>
 					<label for="option3">Mantener Contraseña</label>
 				</div>
 			</div>
@@ -70,7 +74,12 @@ $I = 1;
 			</div>
 			<br>
 
-			<button class="common" type="submit" name="signup-submit">Modificar</button>
+			<label>Información Personal </label>
+			<input class="common" type="text" name="nombreEmpleado" placeholder="Nombre de empleado" value="<?php echo $row['nombreEmpleado']; ?>" required>
+            <input class="common" type="text" name="apellidoEmpleado" placeholder="Apellido de empleado" value="<?php echo $row['apellidoEmpleado']; ?>" required>
+
+
+			<button class="common" type="submit" name="modificar_empleado">Modificar</button>
 			</form>
 	</main>
 

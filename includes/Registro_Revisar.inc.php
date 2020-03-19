@@ -340,6 +340,8 @@ if ($Correcto == false) {
 		$conn->commit();
 		header("Location: ../Registro_Lista.php?succes=revisando");
 	}
+}else{
+	header("Location: ../Registro_Lista.php");	
 }
 
 

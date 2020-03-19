@@ -768,16 +768,36 @@ a i:hover{
   color: #0B5583;
 }
 
-.r:visited i { 
+.r:visited{ 
   color: #D80000;
 }
 
-.r i:hover{
+.r:hover{
   color: #FF0000;
 }
 
-.r i{
+.r{
   color: #D80000;
+  background: none; 
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.b:visited{ 
+  color: #1083C8;
+}
+
+.b:hover{
+  color: #0B5583;
+}
+
+.b{
+  color: #139AEC;
+  background: none; 
+  border: none;
+  cursor: pointer;
+  outline: none;
 }
 
 /* Style the tab */

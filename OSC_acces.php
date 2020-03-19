@@ -43,7 +43,7 @@
 		<input class="common" type="text" name="RFC" placeholder="RFC Institucional" required>
 		<input class="common" type="password" name="Clave" placeholder="Clave" required>
 		<button class="common" type="submit" name="OSC_acces-submit">Acceder</button>		
-		<a style="text-decoration:;" href="" class="Link_Nonstyle">Olvido la Clave de su organisacion?</a>
+		<a style="text-decoration:;" href="reset_osc.php" class="Link_Nonstyle">Olvido la Clave de su organisacion?</a>
 	</form>
 </main>
 

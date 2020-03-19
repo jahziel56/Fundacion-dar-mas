@@ -2,7 +2,7 @@
 	require 'includes/dbh.inc.php';
 	require"classes/header.php";
 
-		$id_Eliminar = $_GET['id'];
+		$id = $_POST['id'];
 
 		$sql = "SELECT * FROM empleados WHERE EmpleadoID=?;";
 		$stmt = mysqli_stmt_init($conn);
@@ -26,7 +26,7 @@ $I = 1;
 		<p style='background: #e53935 ; color: white; text-align:center;'>Seguro Que desea Eliminar esta cuenta? </p><br>
 
 
-				<form action="includes/Eliminar_empleado.php" method="post" class="Signup" style="padding: 8px 12px">
+				<form action="includes/Eliminar_empleado.inc.php" method="post" class="Signup" style="padding: 8px 12px">
 
 				<input class="common" type="text" name="nombreEmpleado" placeholder="Nombre de empleado" value="<?php echo $row['nombreEmpleado']; ?>" disabled>
                 <input class="common" type="text" name="apellidoEmpleado" placeholder="Apellido de empleado" value="<?php echo $row['apellidoEmpleado']; ?>" disabled>
